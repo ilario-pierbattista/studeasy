@@ -1,8 +1,9 @@
 package org.oop;
 
+import org.oop.view.Layout;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Messaggio di prova main");
+        Layout mainlayout = new Layout();
     }
 }
