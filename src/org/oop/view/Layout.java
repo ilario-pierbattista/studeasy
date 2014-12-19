@@ -21,20 +21,18 @@ public class Layout {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
 
-        mainbutton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                counter++;
-                mainbutton.setText("Clicked # " + counter);
-            }
-        });
-        exitbutton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                System.exit(0);
-            }
-        });
+    public JButton getMainButton() {
+        return mainbutton;
+    }
+
+    public void addMainButtonListener(ActionListener listener) {
+        mainbutton.addActionListener(listener);
+    }
+
+    public void addExitButtonListener(ActionListener listener) {
+        exitbutton.addActionListener(listener);
     }
 }
 
