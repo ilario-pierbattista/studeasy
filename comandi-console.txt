@@ -1,0 +1,21 @@
+# Git
+
+Allinearsi con il repository
+    git pull origin master
+
+Pushare una modifica
+    git add -A
+    git commit -m "Messaggio sensato"
+    git push origin master
+
+Quando dopo una commit si impanica la shell e ti chiede di scrivere un commento dal quale non si riesce ad usire digitare:
+    :q!
+
+Cancellare la cache di git:
+    git rm -r --cached .
+    git add .
+
+Resettare lo stato local del repository (DISTRUZIONE DELLE MODIFICHE LOCALI PRIMA DELL'ULTIMA COMMIT)
+    git fetch origin master
+    git reset --hard FETCH_HEAD
+    git clean -df
