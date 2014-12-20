@@ -13,7 +13,7 @@ public class Mainframe {
         final JFrame frame = new JFrame("Studeasy");
         frame.setContentPane(mainpanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800,500);
+        frame.setSize(1000,650);
         // Posiziona la finestra al centro dello schermo
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

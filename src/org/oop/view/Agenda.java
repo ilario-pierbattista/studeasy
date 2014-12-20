@@ -17,12 +17,15 @@ public class Agenda {
     private JPanel activitypanel;
     private JLabel insegnamentolabel;
     private JLabel durataciclolabel;
-    private JPanel activitieslist;
+    private JPanel buttonspanel;
     private JButton lezioneButton;
     private JButton laboratorioButton;
     private JButton esameButton;
+    private JPanel activity1;
+    private JPanel activitiespanel;
 
     public Agenda() {
         splitpane.setDividerLocation(200 + splitpane.getInsets().left);
+        activitiespanel.add()
     }
 }
