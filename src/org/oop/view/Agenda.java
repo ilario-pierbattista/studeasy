@@ -8,12 +8,13 @@ import java.awt.*;
  */
 public class Agenda {
     public JPanel agendapanel;
+
     private JScrollPane sidebarpanel;
     private JScrollPane activitypanel;
-    Dimension minimumsize = new Dimension(200,-1);
+    private JSplitPane splitpane;
 
     public Agenda() {
         super();
-        sidebarpanel.setMinimumSize(minimumsize);
+        splitpane.setDividerLocation(200 + splitpane.getInsets().left);
     }
 }
