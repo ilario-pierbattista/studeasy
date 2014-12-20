@@ -34,5 +34,9 @@ public class Layout {
     public void addExitButtonListener(ActionListener listener) {
         exitbutton.addActionListener(listener);
     }
+
+    public JButton getExitbutton() {
+        return exitbutton;
+    }
 }
 
