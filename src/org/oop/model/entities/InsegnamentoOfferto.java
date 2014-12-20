@@ -23,6 +23,8 @@ public class InsegnamentoOfferto {
         docente = teacher;
     }
 
+
+
     public String getNome() {
         return nome;
     }
