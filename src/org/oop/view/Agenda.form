@@ -8,14 +8,34 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="767f0" class="javax.swing.JLabel" binding="text">
+      <splitpane id="e6c03">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Ho aperto il pannello agenda"/>
+          <dividerLocation value="17"/>
+          <dividerSize value="0"/>
         </properties>
-      </component>
+        <border type="none"/>
+        <children>
+          <scrollpane id="62701" binding="sidebarpanel">
+            <constraints>
+              <splitpane position="left"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </scrollpane>
+          <scrollpane id="51304" binding="activitypanel">
+            <constraints>
+              <splitpane position="right"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </scrollpane>
+        </children>
+      </splitpane>
     </children>
   </grid>
 </form>
