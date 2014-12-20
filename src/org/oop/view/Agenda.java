@@ -1,16 +1,14 @@
 package org.oop.view;
 
+import com.sun.tools.example.debug.gui.ApplicationTool;
+
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by toioski on 20/12/14.
- */
 public class Agenda {
     public JPanel agendapanel;
 
     private JScrollPane sidebarpane;
-    private JScrollPane activitypane;
     private JSplitPane splitpane;
     private JButton addinsbutton;
     private JPanel sidebarpanel;
@@ -21,11 +19,22 @@ public class Agenda {
     private JButton lezioneButton;
     private JButton laboratorioButton;
     private JButton esameButton;
-    private JPanel activity1;
     private JPanel activitiespanel;
 
     public Agenda() {
+        //Setta la larghezza della sidebar
         splitpane.setDividerLocation(200 + splitpane.getInsets().left);
-        activitiespanel.add()
+        //Elimina i bordi
+        splitpane.setBorder(null);
+        sidebarpane.setBorder(null);
+        //Imposta il layout a 2 colonne
+        activitiespanel.setLayout(new GridLayout(0, 2, 20, 20));
+        activitiespanel.add(new Attivita("Lezione pratica", "Lucio Demeio").activity);
+        activitiespanel.add(new Attivita("Lezione pratica", "Lucio Demeio").activity);
+        activitiespanel.add(new Attivita("Lezione pratica","Lucio Demeio").activity);
+        activitiespanel.add(new Attivita("Lezione pratica","Lucio Demeio").activity);
+        activitiespanel.add(new Attivita("Lezione pratica","Lucio Demeio").activity);
+        activitiespanel.add(new Attivita("Lezione pratica","Lucio Demeio").activity);
+        activitiespanel.add(new Attivita("Lezione pratica","Lucio Demeio").activity);
     }
 }
