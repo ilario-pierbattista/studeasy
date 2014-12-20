@@ -9,12 +9,20 @@ import java.awt.*;
 public class Agenda {
     public JPanel agendapanel;
 
-    private JScrollPane sidebarpanel;
-    private JScrollPane activitypanel;
+    private JScrollPane sidebarpane;
+    private JScrollPane activitypane;
     private JSplitPane splitpane;
+    private JButton addinsbutton;
+    private JPanel sidebarpanel;
+    private JPanel activitypanel;
+    private JLabel insegnamentolabel;
+    private JLabel durataciclolabel;
+    private JPanel activitieslist;
+    private JButton lezioneButton;
+    private JButton laboratorioButton;
+    private JButton esameButton;
 
     public Agenda() {
-        super();
         splitpane.setDividerLocation(200 + splitpane.getInsets().left);
     }
 }
