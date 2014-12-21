@@ -21,15 +21,17 @@ public class AttivitaEvento extends Attivita {
         return id;
     }
 
-    public void setId(int id) {
+    public AttivitaEvento setId(int id) {
         this.id = id;
+        return this;
     }
 
     public Date getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public AttivitaEvento setData(Date data) {
         this.data = data;
+        return this;
     }
 }

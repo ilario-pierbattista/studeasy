@@ -22,15 +22,17 @@ public class Esame extends AttivitaEvento {
         return id;
     }
 
-    public void setId(int id) {
+    public Esame setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getTipologiaProva() {
         return tipologiaProva;
     }
 
-    public void setTipologiaProva(String tipologiaProva) {
+    public Esame setTipologiaProva(String tipologiaProva) {
         this.tipologiaProva = tipologiaProva;
+        return this;
     }
 }

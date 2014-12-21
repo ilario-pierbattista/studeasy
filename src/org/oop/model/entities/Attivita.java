@@ -33,55 +33,62 @@ public class Attivita {
         return id;
     }
 
-    public void setId(int id) {
+    public Attivita setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getAula() {
         return aula;
     }
 
-    public void setAula(String aula) {
+    public Attivita setAula(String aula) {
         this.aula = aula;
+        return this;
     }
 
     public Time getOraInizio() {
         return oraInizio;
     }
 
-    public void setOraInizio(Time oraInizio) {
+    public Attivita setOraInizio(Time oraInizio) {
         this.oraInizio = oraInizio;
+        return this;
     }
 
     public Time getOraFine() {
         return oraFine;
     }
 
-    public void setOraFine(Time oraFine) {
+    public Attivita setOraFine(Time oraFine) {
         this.oraFine = oraFine;
+        return this;
     }
 
     public Docente getDocente() {
         return docente;
     }
 
-    public void setDocente(Docente docente) {
+    public Attivita setDocente(Docente docente) {
         this.docente = docente;
+        return this;
     }
 
     public String getRuoloDocente() {
         return ruoloDocente;
     }
 
-    public void setRuoloDocente(String ruoloDocente) {
+    public Attivita setRuoloDocente(String ruoloDocente) {
         this.ruoloDocente = ruoloDocente;
+        return this;
     }
 
     public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public Attivita setCategoria(String categoria) {
         this.categoria = categoria;
+        return this;
     }
 }

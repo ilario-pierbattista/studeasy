@@ -27,39 +27,44 @@ public class Ciclo {
         return id;
     }
 
-    public void setId(int id) {
+    public Ciclo setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getLabel() {
         return label;
     }
 
-    public void setLabel(String label) {
+    public Ciclo setLabel(String label) {
         this.label = label;
+        return this;
     }
 
     public Date getInizio() {
         return inizio;
     }
 
-    public void setInizio(Date inizio) {
+    public Ciclo setInizio(Date inizio) {
         this.inizio = inizio;
+        return this;
     }
 
     public Date getFine() {
         return fine;
     }
 
-    public void setFine(Date fine) {
+    public Ciclo setFine(Date fine) {
         this.fine = fine;
+        return this;
     }
 
     public ArrayList<Insegnamento> getInsegnamenti() {
         return insegnamenti;
     }
 
-    public void setInsegnamenti(ArrayList<Insegnamento> insegnamenti) {
+    public Ciclo setInsegnamenti(ArrayList<Insegnamento> insegnamenti) {
         this.insegnamenti = insegnamenti;
+        return this;
     }
 }

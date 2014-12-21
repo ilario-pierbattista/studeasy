@@ -21,31 +21,35 @@ public class Docente {
         return id;
     }
 
-    public void setId(int id) {
+    public Docente setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public Docente setNome(String nome) {
         this.nome = nome;
+        return this;
     }
 
     public String getCognome() {
         return cognome;
     }
 
-    public void setCognome(String cognome) {
+    public Docente setCognome(String cognome) {
         this.cognome = cognome;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public Docente setEmail(String email) {
         this.email = email;
+        return this;
     }
 }

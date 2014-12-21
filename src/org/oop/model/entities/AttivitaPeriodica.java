@@ -23,15 +23,17 @@ public class AttivitaPeriodica extends Attivita {
         return id;
     }
 
-    public void setId(int id) {
+    public AttivitaPeriodica setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getGiorno() {
         return giorno;
     }
 
-    public void setGiorno(String giorno) {
+    public AttivitaPeriodica setGiorno(String giorno) {
         this.giorno = giorno;
+        return this;
     }
 }
