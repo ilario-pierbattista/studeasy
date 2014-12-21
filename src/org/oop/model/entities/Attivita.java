@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class Attivita {
 
+    private int id;
     private String aula;
     private Time oraInizio;
     private Time oraFine;
@@ -28,6 +29,13 @@ public class Attivita {
     }
 
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getAula() {
         return aula;

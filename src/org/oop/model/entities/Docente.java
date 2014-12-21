@@ -8,14 +8,22 @@ public class Docente {
     private String nome;
     private String cognome;
     private String email;
+    private int id;
 
 
-    public Docente(String name,String surname,String mail) {
+    public Docente(String name, String surname, String mail) {
         nome = name;
         cognome = surname;
         email = mail;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;

@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class Esame extends AttivitaEvento {
 
+    private int id;
     //da decidere se il seguente attributo sarà una stringa o meno
     private String tipologiaProva;
 
@@ -17,6 +18,13 @@ public class Esame extends AttivitaEvento {
         this.tipologiaProva = tipologiaProva;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTipologiaProva() {
         return tipologiaProva;

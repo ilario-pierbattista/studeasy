@@ -9,6 +9,7 @@ import java.util.Date;
 public class Ciclo {
 
     /* Dichiarazione degli attributi */
+    private int id;
     private String label;
     private Date inizio;
     private Date fine;
@@ -20,6 +21,14 @@ public class Ciclo {
         this.inizio = inizio;
         this.fine = fine;
         this.insegnamenti = insegnamenti;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLabel() {
