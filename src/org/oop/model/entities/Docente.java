@@ -1,21 +1,12 @@
-/**
- * Created by Lvns on 12/20/14.
- */
 package org.oop.model.entities;
 
 public class Docente {
 
+    private int id;
     private String nome;
     private String cognome;
     private String email;
-    private int id;
 
-
-    public Docente(String name, String surname, String mail) {
-        nome = name;
-        cognome = surname;
-        email = mail;
-    }
 
     public int getId() {
         return id;
@@ -51,5 +42,15 @@ public class Docente {
     public Docente setEmail(String email) {
         this.email = email;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Docente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

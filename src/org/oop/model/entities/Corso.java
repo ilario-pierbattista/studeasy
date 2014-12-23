@@ -15,14 +15,6 @@ public class Corso {
     private int totaleCfu;
     private ArrayList<InsegnamentoOfferto> insegnamentiOfferti;
 
-    /* Metodo Costruttore */
-    public Corso(String nome, int livello, int totaleCfu, ArrayList<InsegnamentoOfferto> insegnamentiOfferti) {
-        this.nome = nome;
-        this.livello = livello;
-        this.totaleCfu = totaleCfu;
-        this.insegnamentiOfferti = insegnamentiOfferti;
-    }
-
 
     /**
      * Il metodo getInsegnamentiObbligatori restituisce un ArrayList i cui elementi sono oggetti della Classe
@@ -101,5 +93,27 @@ public class Corso {
         return this;
     }
 
+    public Corso addInsegnamentoOfferto(InsegnamentoOfferto insegnamentoOfferto) {
+        insegnamentiOfferti.add(insegnamentoOfferto);
+        return this;
+    }
 
+    public boolean hasInsegnamentoOfferto(InsegnamentoOfferto insegnamentoOfferto) {
+        boolean found = false;
+        for (int i = 0; i < insegnamentiOfferti.size() && !found; i++) {
+            found = insegnamentiOfferti.get(i).equals(insegnamentoOfferto);
+        }
+        return found;
+    }
+
+    @Override
+    public String toString() {
+        return "Corso{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", livello=" + livello +
+                ", totaleCfu=" + totaleCfu +
+                ", insegnamentiOfferti=" + insegnamentiOfferti +
+                '}';
+    }
 }
