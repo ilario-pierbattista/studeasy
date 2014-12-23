@@ -10,7 +10,7 @@
       <enabled value="false"/>
     </properties>
     <border type="line">
-      <color color="-16777216"/>
+      <color color="-13421773"/>
     </border>
     <children>
       <component id="d157" class="javax.swing.JLabel" binding="activityname">

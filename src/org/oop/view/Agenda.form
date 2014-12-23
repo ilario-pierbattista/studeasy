@@ -5,7 +5,9 @@
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-1907998"/>
+    </properties>
     <border type="none"/>
     <children>
       <splitpane id="e6c03" binding="splitpane">
@@ -13,6 +15,8 @@
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-1907998"/>
+          <continuousLayout value="false"/>
           <dividerLocation value="104"/>
           <dividerSize value="2"/>
         </properties>
@@ -79,14 +83,16 @@
                 </properties>
               </component>
               <grid id="567ed" binding="buttonspanel" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="5" left="5" bottom="5" right="5"/>
+                <margin top="10" left="10" bottom="10" right="10"/>
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-6710887"/>
                 </properties>
-                <border type="none"/>
+                <border type="none">
+                  <title-color color="-16777216"/>
+                </border>
                 <children>
                   <component id="e8363" class="javax.swing.JButton" binding="lezioneButton" default-binding="true">
                     <constraints>
