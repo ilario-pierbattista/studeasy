@@ -94,20 +94,30 @@
                   <title-color color="-16777216"/>
                 </border>
                 <children>
+                  <scrollpane id="88d31">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <grid id="a7332" binding="activitiespanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                        <margin top="40" left="40" bottom="40" right="40"/>
+                        <constraints/>
+                        <properties>
+                          <background color="-6710887"/>
+                        </properties>
+                        <border type="none"/>
+                        <children/>
+                      </grid>
+                    </children>
+                  </scrollpane>
                   <component id="e8363" class="javax.swing.JButton" binding="lezioneButton" default-binding="true">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="+ Lezione"/>
-                    </properties>
-                  </component>
-                  <component id="d0472" class="javax.swing.JButton" binding="laboratorioButton" default-binding="true">
-                    <constraints>
-                      <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="+ Laboratorio"/>
                     </properties>
                   </component>
                   <component id="49c5b" class="javax.swing.JButton" binding="esameButton" default-binding="true">
@@ -118,17 +128,14 @@
                       <text value="+ Esame"/>
                     </properties>
                   </component>
-                  <grid id="a7332" binding="activitiespanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                    <margin top="40" left="40" bottom="40" right="40"/>
+                  <component id="d0472" class="javax.swing.JButton" binding="laboratorioButton" default-binding="true">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-6710887"/>
+                      <text value="+ Laboratorio"/>
                     </properties>
-                    <border type="none"/>
-                    <children/>
-                  </grid>
+                  </component>
                 </children>
               </grid>
             </children>

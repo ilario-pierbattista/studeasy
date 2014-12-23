@@ -7,7 +7,7 @@ import javax.swing.text.StringContent;
  * Created by toioski on 20/12/14.
  */
 public class Attivita {
-    public JPanel activity;
+    public JPanel activitypanel;
 
     private JLabel activityname;
     private JLabel teachername;

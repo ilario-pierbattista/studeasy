@@ -1,5 +1,7 @@
 package org.oop;
 
+import org.oop.controller.AgendaController;
+import org.oop.controller.MainController;
 import org.oop.db.DatabaseConfig;
 import org.oop.model.dao.CorsoDAO;
 import org.oop.model.dao.DocenteDAO;
@@ -27,6 +29,7 @@ public class Main {
         //testDatabase();
 
         Mainframe mainframe = new Mainframe();
+        new AgendaController(mainframe.agenda);
     }
 
     private static void testDatabase() {

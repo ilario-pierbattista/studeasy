@@ -8,6 +8,10 @@ import javax.swing.*;
 public class Mainframe {
     private JPanel mainpanel;
     private JTabbedPane maintabpane;
+    public Agenda agenda = new Agenda();
+    public Profilo profilo = new Profilo();
+    public Segreteria segreteria = new Segreteria();
+
 
     public Mainframe() {
         final JFrame frame = new JFrame("Studeasy");
@@ -17,9 +21,9 @@ public class Mainframe {
         // Posiziona la finestra al centro dello schermo
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        maintabpane.addTab("Agenda", new Agenda().agendapanel);
-        maintabpane.addTab("Profilo", new Profilo().profilopanel);
-        maintabpane.addTab("Segreteria", new Segreteria().segreteriapanel);
+        maintabpane.addTab("Agenda", agenda.agendapanel);
+        maintabpane.addTab("Profilo", profilo.profilopanel);
+        maintabpane.addTab("Segreteria", segreteria.segreteriapanel);
 
     }
 

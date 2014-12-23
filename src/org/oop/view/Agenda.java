@@ -1,9 +1,8 @@
 package org.oop.view;
 
-import com.sun.tools.example.debug.gui.ApplicationTool;
-
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class Agenda {
     public JPanel agendapanel;
@@ -29,12 +28,43 @@ public class Agenda {
         sidebarpane.setBorder(null);
         //Imposta il layout a 2 colonne
         activitiespanel.setLayout(new GridLayout(0, 2, 20, 20));
-        activitiespanel.add(new Attivita("Lezione pratica", "Lucio Demeio").activity);
-        activitiespanel.add(new Attivita("Lezione pratica", "Lucio Demeio").activity);
-        activitiespanel.add(new Attivita("Lezione pratica","Lucio Demeio").activity);
-        activitiespanel.add(new Attivita("Lezione pratica","Lucio Demeio").activity);
-        activitiespanel.add(new Attivita("Lezione pratica","Lucio Demeio").activity);
-        activitiespanel.add(new Attivita("Lezione pratica","Lucio Demeio").activity);
-        activitiespanel.add(new Attivita("Lezione pratica","Lucio Demeio").activity);
+
     }
+
+    public void addLezione(Attivita attivita){
+        activitiespanel.add(attivita.activitypanel);
+    }
+
+    /* Getters */
+    public JButton getAddinsbutton() {
+        return addinsbutton;
+    }
+
+    public JLabel getInsegnamentolabel() {
+        return insegnamentolabel;
+    }
+
+    public JLabel getDurataciclolabel() {
+        return durataciclolabel;
+    }
+
+    public JButton getLezioneButton() {
+        return lezioneButton;
+    }
+
+    public JButton getLaboratorioButton() {
+        return laboratorioButton;
+    }
+
+    public JButton getEsameButton() {
+        return esameButton;
+    }
+
+    /* Listeners setters */
+    public void addLezioneButtonListener (ActionListener listener){
+        lezioneButton.addActionListener(listener);
+    }
+
+
+
 }
