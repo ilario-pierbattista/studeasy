@@ -2,7 +2,7 @@ package org.oop.controller;
 
 import org.oop.view.Agenda;
 import org.oop.view.Attivita;
-import org.oop.view.Layout;
+import org.oop.view.Mainframe;
 
 import java.awt.event.ActionEvent;
 
@@ -21,6 +21,7 @@ public class AgendaController{
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             view.addLezione(new Attivita("Prova", "docente"));
+            Mainframe.refreshView();
         }
     }
 }
