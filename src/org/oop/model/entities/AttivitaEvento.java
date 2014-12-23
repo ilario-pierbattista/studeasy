@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class AttivitaEvento extends Attivita {
 
+    private int id;
     private Date data;
 
     //il costruttore della classe figlia amplia quello della classe padre inizializzando i campi non inizializzati
@@ -16,12 +17,21 @@ public class AttivitaEvento extends Attivita {
         this.data = data;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public AttivitaEvento setId(int id) {
+        this.id = id;
+        return this;
+    }
 
     public Date getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public AttivitaEvento setData(Date data) {
         this.data = data;
+        return this;
     }
 }

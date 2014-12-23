@@ -30,48 +30,54 @@ public class Utente {
         return matricola;
     }
 
-    public void setMatricola(int matricola) {
+    public Utente setMatricola(int matricola) {
         this.matricola = matricola;
+        return this;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public Utente setNome(String nome) {
         this.nome = nome;
+        return this;
     }
 
     public String getCognome() {
         return cognome;
     }
 
-    public void setCognome(String cognome) {
+    public Utente setCognome(String cognome) {
         this.cognome = cognome;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public Utente setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public Agenda getAgenda() {
         return agenda;
     }
 
-    public void setAgenda(Agenda agenda) {
+    public Utente setAgenda(Agenda agenda) {
         this.agenda = agenda;
+        return this;
     }
 
     public Libretto getLibretto() {
         return libretto;
     }
 
-    public void setLibretto(Libretto libretto) {
+    public Utente setLibretto(Libretto libretto) {
         this.libretto = libretto;
+        return this;
     }
 
 

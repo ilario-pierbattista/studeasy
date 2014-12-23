@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class AttivitaPeriodica extends Attivita {
 
+    private int id;
     //da decidere se il seguente attributo sarà una stringa
     private String giorno;
 
@@ -18,12 +19,21 @@ public class AttivitaPeriodica extends Attivita {
         this.giorno = giorno;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public AttivitaPeriodica setId(int id) {
+        this.id = id;
+        return this;
+    }
 
     public String getGiorno() {
         return giorno;
     }
 
-    public void setGiorno(String giorno) {
+    public AttivitaPeriodica setGiorno(String giorno) {
         this.giorno = giorno;
+        return this;
     }
 }

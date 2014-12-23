@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Corso {
 
     /* Dichiarazione degli attributi */
+    private int id;
     private String nome;
     private int livello;
     private int totaleCfu;
@@ -55,36 +56,49 @@ public class Corso {
         return insegnamentiOpzionali;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public Corso setId(int id) {
+        this.id = id;
+        return this;
+    }
+
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public Corso setNome(String nome) {
         this.nome = nome;
+        return this;
     }
 
     public int getLivello() {
         return livello;
     }
 
-    public void setLivello(int livello) {
+    public Corso setLivello(int livello) {
         this.livello = livello;
+        return this;
     }
 
     public int getTotaleCfu() {
         return totaleCfu;
     }
 
-    public void setTotaleCfu(int totaleCfu) {
+    public Corso setTotaleCfu(int totaleCfu) {
         this.totaleCfu = totaleCfu;
+        return this;
     }
 
     public ArrayList<InsegnamentoOfferto> getInsegnamentiOfferti() {
         return insegnamentiOfferti;
     }
 
-    public void setInsegnamentiOfferti(ArrayList<InsegnamentoOfferto> insegnamentiOfferti) {
+    public Corso setInsegnamentiOfferti(ArrayList<InsegnamentoOfferto> insegnamentiOfferti) {
         this.insegnamentiOfferti = insegnamentiOfferti;
+        return this;
     }
 
 
