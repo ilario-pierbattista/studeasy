@@ -7,13 +7,12 @@ import org.oop.view.Mainframe;
 import java.awt.event.ActionEvent;
 
 
-public class AgendaController{
+public class AgendaController {
     private Agenda view;
 
     public AgendaController(Agenda view) {
         this.view = view;
         view.addLezioneButtonListener(new AddLezioneAction());
-
     }
 
 

@@ -35,6 +35,7 @@ public class Agenda {
         activitiespanel.add(attivita.activitypanel);
     }
 
+
     /* Getters */
     public JButton getAddinsbutton() {
         return addinsbutton;
@@ -61,9 +62,9 @@ public class Agenda {
     }
 
     /* Listeners setters */
-    public void addLezioneButtonListener (ActionListener listener){
-        lezioneButton.addActionListener(listener);
+    public void addLezioneButtonListener (ActionListener listener){lezioneButton.addActionListener(listener);
     }
+
 
 
 
