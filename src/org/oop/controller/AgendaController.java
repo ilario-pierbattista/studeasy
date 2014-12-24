@@ -1,7 +1,7 @@
 package org.oop.controller;
 
 import org.oop.view.Agenda;
-import org.oop.view.Attivita;
+import org.oop.view.AttivitaView;
 import org.oop.view.FormAttivita;
 import org.oop.view.Mainframe;
 
@@ -27,11 +27,11 @@ public class AgendaController{
     class AddAttivitaAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            Attivita attivita = new Attivita("Lezione");
+            AttivitaView attivitaview = new AttivitaView("Lezione");
 
-            AttivitaController attivitacontroller = new AttivitaController(attivita);
+            AttivitaController attivitacontroller = new AttivitaController(attivitaview);
 
-            view.addAttivita(attivita);
+            view.addAttivita(attivitaview);
             Mainframe.refreshView();
         }
     }
@@ -42,7 +42,7 @@ public class AgendaController{
     class AddEsameAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            view.addAttivita(new Attivita("Esame"));
+            view.addAttivita(new AttivitaView("Esame"));
             Mainframe.refreshView();
 
             FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(),"esame");
@@ -57,7 +57,7 @@ public class AgendaController{
     class AddLaboratorioAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            view.addAttivita(new Attivita("Laboratorio"));
+            view.addAttivita(new AttivitaView("Laboratorio"));
             Mainframe.refreshView();
 
             FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(),"laboratorio");
@@ -71,7 +71,7 @@ public class AgendaController{
     class AddProgettoAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            view.addAttivita(new Attivita("Progetto"));
+            view.addAttivita(new AttivitaView("Progetto"));
             Mainframe.refreshView();
 
             FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(),"progetto");
@@ -85,7 +85,7 @@ public class AgendaController{
     class AddSeminarioAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            view.addAttivita(new Attivita("Seminario"));
+            view.addAttivita(new AttivitaView("Seminario"));
             Mainframe.refreshView();
 
             FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(),"seminario");

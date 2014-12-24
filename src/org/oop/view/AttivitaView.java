@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by toioski on 20/12/14.
  */
-public class Attivita {
+public class AttivitaView {
     public JPanel activitypanel;
 
     private JLabel activityname;
@@ -17,7 +17,7 @@ public class Attivita {
     private JLabel hour;
 
 
-    public Attivita(String nomeattivita) {
+    public AttivitaView(String nomeattivita) {
         activityname.setText(nomeattivita);
         teacher.setText("Docente non definito");
         aula.setText("Aula non definita");
@@ -25,7 +25,7 @@ public class Attivita {
         hour.setText("Orario non definito");
     }
 
-    public Attivita(String nomeattivita, String nomeprofessore, String a, String h, String d) {
+    public AttivitaView(String nomeattivita, String nomeprofessore, String a, String h, String d) {
         activityname.setText(nomeattivita);
         teacher.setText(nomeprofessore);
         aula.setText(a);

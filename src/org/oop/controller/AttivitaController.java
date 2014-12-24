@@ -1,6 +1,7 @@
 package org.oop.controller;
 
-import org.oop.view.Attivita;
+import org.oop.model.entities.Attivita;
+import org.oop.view.AttivitaView;
 import org.oop.view.FormAttivita;
 
 import java.awt.event.ActionEvent;
@@ -9,9 +10,9 @@ import java.awt.event.ActionEvent;
  * Created by toioski on 24/12/14.
  */
 public class AttivitaController {
-    private Attivita view;
+    private AttivitaView view;
 
-    public AttivitaController(Attivita view){
+    public AttivitaController(AttivitaView view){
         this.view = view;
         FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(),"lezione");
         view.addEditButtonListener(new EditButtonAction());

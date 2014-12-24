@@ -35,7 +35,7 @@ public class Agenda {
 
     }
 
-    public void addAttivita(Attivita attivita){
+    public void addAttivita(AttivitaView attivita){
         activitiespanel.add(attivita.activitypanel);
     }
 
