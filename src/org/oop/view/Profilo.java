@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Created by toioski on 20/12/14.
  */
-public class Profilo {
+public class Profilo extends AbstractView<Mainframe> {
     public JPanel profilopanel;
     private JPanel sidebarpanel;
     private JSplitPane splitpane;

@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by toioski on 23/12/14.
  */
-public class FormAttivita {
+public class FormAttivita extends AbstractView<Mainframe> {
     public static  JFrame frame = new JFrame("Crea Attività");
     private JPanel panel1;
     private JTextField namefield;
