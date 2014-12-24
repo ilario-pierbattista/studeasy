@@ -5,7 +5,7 @@ import javax.swing.*;
 /**
  * Created by toioski on 20/12/14.
  */
-public class Mainframe {
+public class Mainframe extends AbstractView<Mainframe> {
     final static JFrame frame = new JFrame("Studeasy");
     private JPanel mainpanel;
     private JTabbedPane maintabpane;
@@ -30,6 +30,5 @@ public class Mainframe {
     public static void refreshView(){
         frame.repaint();
     }
-
 
 }

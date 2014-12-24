@@ -8,22 +8,6 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="84ae7" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Nome attività:"/>
-        </properties>
-      </component>
-      <component id="ac5c6" class="javax.swing.JTextField" binding="namefield">
-        <constraints>
-          <grid row="0" column="1" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
       <component id="1ea7" class="javax.swing.JLabel">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -64,7 +48,7 @@
           <text value="Data:"/>
         </properties>
       </component>
-      <component id="468f5" class="javax.swing.JFormattedTextField" binding="formattedTextField1" default-binding="true">
+      <component id="468f5" class="javax.swing.JFormattedTextField" binding="datafield">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -72,7 +56,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="c7e1b" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
+      <component id="c7e1b" class="javax.swing.JTextArea" binding="descriptionfield">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="6" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
@@ -102,6 +86,17 @@
         </constraints>
         <properties>
           <text value="Annulla"/>
+        </properties>
+      </component>
+      <component id="84ae7" class="javax.swing.JLabel" binding="activityname">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="7" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font size="14" style="1"/>
+          <horizontalAlignment value="0"/>
+          <horizontalTextPosition value="11"/>
+          <text value="Nome attivita"/>
         </properties>
       </component>
     </children>

@@ -1,12 +1,11 @@
 package org.oop.view;
 
-
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class Agenda extends JPanel{
+public class Agenda extends AbstractView<Mainframe> {
     public JPanel agendapanel;
 
     private JScrollPane sidebarpane;
@@ -22,10 +21,15 @@ public class Agenda extends JPanel{
     private JButton esameButton;
     private JPanel activitiespanel;
     private JLabel sidebartitle;
+
     private JPanel listciclipanel;
     private DefaultListModel listaModelCicli;
     private JList listaCicli;
     private int contatorecicli=1;
+
+    private JButton progettobutton;
+    private JButton seminariobutton;
+
     public Agenda() {
         //Setta la larghezza della sidebar
         splitpane.setDividerLocation(200 + splitpane.getInsets().left);
@@ -36,16 +40,22 @@ public class Agenda extends JPanel{
         //Imposta il layout a 2 colonne
         activitiespanel.setLayout(new GridLayout(0, 2, 20, 20));
 
+        //Parametri per la creazione e gestione della lista dei cicli
         listaModelCicli = new DefaultListModel();
         listaCicli=new JList(listaModelCicli);
         listciclipanel.add(listaCicli);
         listaCicli.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
-    public void addLezione(AttivitaView attivita){
+
+    public void addAttivita(AttivitaView attivita){
         activitiespanel.add(attivita.activitypanel);
     }
 
+    /**
+     * Metodo che permette di aggiungere un elemento alla lista dei cicli ogni volta che si preme
+     * il bottone addinsbutton
+     */
     public void addCiclo ()
     {
         listaModelCicli.addElement("elemento"+contatorecicli);
@@ -77,6 +87,15 @@ public class Agenda extends JPanel{
         return esameButton;
     }
 
+    public JButton getProgettobutton() {
+        return progettobutton;
+    }
+
+    public JButton getSeminariobutton() {
+
+        return seminariobutton;
+    }
+
     /* Listeners setters */
     public void addLezioneButtonListener (ActionListener listener){
         lezioneButton.addActionListener(listener);
@@ -89,6 +108,7 @@ public class Agenda extends JPanel{
     public void addLaboratorioButtonListener (ActionListener listener){
         laboratorioButton.addActionListener(listener);
     }
+
     public void addInsButtonListener (ActionListener listener)
     {
         addinsbutton.addActionListener(listener);
@@ -100,5 +120,12 @@ public class Agenda extends JPanel{
 
     }
 
+    public void addProgettoButtonListener (ActionListener listener){
+        progettobutton.addActionListener(listener);
+    }
+
+    public void addSeminarioButtonListener (ActionListener listener){
+        seminariobutton.addActionListener(listener);
+    }
 
 }

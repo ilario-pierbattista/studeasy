@@ -10,6 +10,16 @@ public class Insegnamento extends InsegnamentoOfferto {
     private boolean lode;
     private Date data;
 
+    public Insegnamento(String name, int credits, int year, int semester, boolean optional, Docente teacher, int voto, boolean lode, Date data) {
+        super(name, credits, year, semester, optional, teacher);
+        this.voto = voto;
+        this.lode = lode;
+        this.data = data;
+    }
+
+    //il seguente è il costruttore che inizializza i dati di deafult
+    public Insegnamento() {}
+
     public int getVoto() {
         return voto;
     }

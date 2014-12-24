@@ -26,6 +26,8 @@ public class Utente {
         this.libretto = libretto;
     }
 
+    //il seguente è il costruttore che inizializza i dati di deafult
+    public Utente() {}
     public int getMatricola() {
         return matricola;
     }
