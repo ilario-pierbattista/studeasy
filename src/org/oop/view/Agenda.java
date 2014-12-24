@@ -5,7 +5,7 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class Agenda extends AbstractView<Mainframe> {
+public class Agenda extends AbstractView<Agenda> {
     public JPanel agendapanel;
 
     private JScrollPane sidebarpane;
