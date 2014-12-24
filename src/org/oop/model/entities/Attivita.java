@@ -28,7 +28,6 @@ public class Attivita {
         this.categoria = categoria;
     }
 
-
     public int getId() {
         return id;
     }

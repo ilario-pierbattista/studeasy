@@ -12,10 +12,11 @@ public class FormAttivita {
     private JTextField namefield;
     private JTextField teacherfield;
     private JTextField aulafield;
-    private JFormattedTextField formattedTextField1;
-    private JTextArea textArea1;
+    private JFormattedTextField datafield;
+    private JTextArea descriptionfield;
     private JButton submitbutton;
     private JButton cancelbutton;
+    private JLabel activityname;
 
     public FormAttivita() {
         frame.setContentPane(panel1);
@@ -34,6 +35,11 @@ public class FormAttivita {
     }
 
     /* Getters */
+
+    public JLabel getActivityname() {
+        return activityname;
+    }
+
     public JButton getSubmitbutton() {
         return submitbutton;
     }
@@ -42,6 +48,28 @@ public class FormAttivita {
         return cancelbutton;
     }
 
+    public JTextField getTeacherfield() {
+        return teacherfield;
+    }
+
+    public JTextArea getDescriptionfield() {
+        return descriptionfield;
+    }
+
+    public JFormattedTextField getDatafield() {
+
+        return datafield;
+    }
+
+    public JTextField getAulafield() {
+
+        return aulafield;
+    }
+
+    public JTextField getNamefield() {
+
+        return namefield;
+    }
 
     public static void closeFrame(){
         frame.dispose();

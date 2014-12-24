@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="agendapanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="30" y="19" width="713" height="480"/>
+      <xy x="30" y="19" width="1018" height="579"/>
     </constraints>
     <properties>
       <background color="-1907998"/>
@@ -17,7 +17,7 @@
         <properties>
           <background color="-1907998"/>
           <continuousLayout value="false"/>
-          <dividerLocation value="104"/>
+          <dividerLocation value="200"/>
           <dividerSize value="2"/>
         </properties>
         <border type="none"/>
@@ -94,7 +94,7 @@
                   <text value="Periodo ciclo"/>
                 </properties>
               </component>
-              <grid id="567ed" binding="buttonspanel" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="567ed" binding="buttonspanel" layout-manager="GridLayoutManager" row-count="2" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="10" left="10" bottom="10" right="10"/>
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -108,7 +108,7 @@
                 <children>
                   <scrollpane id="88d31">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="5" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties/>
                     <border type="none"/>
@@ -134,7 +134,7 @@
                   </component>
                   <component id="49c5b" class="javax.swing.JButton" binding="esameButton" default-binding="true">
                     <constraints>
-                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="+ Esame"/>
@@ -142,10 +142,26 @@
                   </component>
                   <component id="d0472" class="javax.swing.JButton" binding="laboratorioButton" default-binding="true">
                     <constraints>
-                      <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="+ Laboratorio"/>
+                    </properties>
+                  </component>
+                  <component id="e387d" class="javax.swing.JButton" binding="progettobutton">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="+ Progetto"/>
+                    </properties>
+                  </component>
+                  <component id="887c7" class="javax.swing.JButton" binding="seminariobutton">
+                    <constraints>
+                      <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="+ Seminario"/>
                     </properties>
                   </component>
                 </children>

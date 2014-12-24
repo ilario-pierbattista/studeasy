@@ -20,6 +20,8 @@ public class Agenda {
     private JButton esameButton;
     private JPanel activitiespanel;
     private JLabel sidebartitle;
+    private JButton progettobutton;
+    private JButton seminariobutton;
 
     public Agenda() {
         //Setta la larghezza della sidebar
@@ -33,7 +35,7 @@ public class Agenda {
 
     }
 
-    public void addLezione(Attivita attivita){
+    public void addAttivita(Attivita attivita){
         activitiespanel.add(attivita.activitypanel);
     }
 
@@ -62,6 +64,15 @@ public class Agenda {
         return esameButton;
     }
 
+    public JButton getProgettobutton() {
+        return progettobutton;
+    }
+
+    public JButton getSeminariobutton() {
+
+        return seminariobutton;
+    }
+
     /* Listeners setters */
     public void addLezioneButtonListener (ActionListener listener){
         lezioneButton.addActionListener(listener);
@@ -73,5 +84,13 @@ public class Agenda {
 
     public void addLaboratorioButtonListener (ActionListener listener){
         laboratorioButton.addActionListener(listener);
+    }
+
+    public void addProgettoButtonListener (ActionListener listener){
+        progettobutton.addActionListener(listener);
+    }
+
+    public void addSeminarioButtonListener (ActionListener listener){
+        seminariobutton.addActionListener(listener);
     }
 }
