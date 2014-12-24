@@ -1,10 +1,12 @@
 package org.oop.view;
 
+
 import javax.swing.*;
+import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class Agenda {
+public class Agenda extends JPanel{
     public JPanel agendapanel;
 
     private JScrollPane sidebarpane;
@@ -19,23 +21,37 @@ public class Agenda {
     private JButton laboratorioButton;
     private JButton esameButton;
     private JPanel activitiespanel;
-
+    private JLabel sidebartitle;
+    private JPanel listciclipanel;
+    private DefaultListModel listaModelCicli;
+    private JList listaCicli;
+    private int contatorecicli=1;
     public Agenda() {
         //Setta la larghezza della sidebar
         splitpane.setDividerLocation(200 + splitpane.getInsets().left);
         //Elimina i bordi
         splitpane.setBorder(null);
-        sidebarpane.setBorder(null);
+        sidebarpane.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(126,126,126)));
+
         //Imposta il layout a 2 colonne
         activitiespanel.setLayout(new GridLayout(0, 2, 20, 20));
 
+        listaModelCicli = new DefaultListModel();
+        listaCicli=new JList(listaModelCicli);
+        listciclipanel.add(listaCicli);
+        listaCicli.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
-    public void addLezione(Attivita attivita){
+    public void addLezione(AttivitaView attivita){
         activitiespanel.add(attivita.activitypanel);
     }
 
+    public void addCiclo ()
+    {
+        listaModelCicli.addElement("elemento"+contatorecicli);
+        contatorecicli++;
 
+    }
     /* Getters */
     public JButton getAddinsbutton() {
         return addinsbutton;
@@ -62,10 +78,27 @@ public class Agenda {
     }
 
     /* Listeners setters */
-    public void addLezioneButtonListener (ActionListener listener){lezioneButton.addActionListener(listener);
+    public void addLezioneButtonListener (ActionListener listener){
+        lezioneButton.addActionListener(listener);
     }
 
+    public void addEsameButtonListener (ActionListener listener){
+        esameButton.addActionListener(listener);
+    }
 
+    public void addLaboratorioButtonListener (ActionListener listener){
+        laboratorioButton.addActionListener(listener);
+    }
+    public void addInsButtonListener (ActionListener listener)
+    {
+        addinsbutton.addActionListener(listener);
+    }
+
+    public void addListListener (ListSelectionListener listener)
+    {
+        listaCicli.addListSelectionListener(listener);
+
+    }
 
 
 }
