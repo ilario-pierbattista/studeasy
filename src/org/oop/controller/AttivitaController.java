@@ -18,7 +18,7 @@ public class AttivitaController {
         view.addEditButtonListener(new EditButtonAction());
     }
 
-    class EditButtonAction extends AbstractAction{
+    class EditButtonAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
             //Attenzione, il tipo dell'attivita ovviamente dovrà essere preso dal model, questo è solo un esempio statico

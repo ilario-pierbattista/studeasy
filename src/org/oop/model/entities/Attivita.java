@@ -28,13 +28,11 @@ public class Attivita {
         this.categoria = categoria;
     }
 
-<<<<<<< HEAD
-=======
+
     //il seguente è il costruttore che inizializza i dati di deafult
     public Attivita() {}
 
 
->>>>>>> de08e09c33d6de3fed78ed1ed40f69777d479f50
     public int getId() {
         return id;
     }
