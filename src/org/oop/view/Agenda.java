@@ -19,13 +19,15 @@ public class Agenda {
     private JButton laboratorioButton;
     private JButton esameButton;
     private JPanel activitiespanel;
+    private JLabel sidebartitle;
 
     public Agenda() {
         //Setta la larghezza della sidebar
         splitpane.setDividerLocation(200 + splitpane.getInsets().left);
         //Elimina i bordi
         splitpane.setBorder(null);
-        sidebarpane.setBorder(null);
+        sidebarpane.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(126,126,126)));
+
         //Imposta il layout a 2 colonne
         activitiespanel.setLayout(new GridLayout(0, 2, 20, 20));
 
@@ -65,6 +67,11 @@ public class Agenda {
         lezioneButton.addActionListener(listener);
     }
 
+    public void addEsameButtonListener (ActionListener listener){
+        esameButton.addActionListener(listener);
+    }
 
-
+    public void addLaboratorioButtonListener (ActionListener listener){
+        laboratorioButton.addActionListener(listener);
+    }
 }
