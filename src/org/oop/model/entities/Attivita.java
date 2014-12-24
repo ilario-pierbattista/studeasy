@@ -28,6 +28,9 @@ public class Attivita {
         this.categoria = categoria;
     }
 
+    //il seguente è il costruttore che inizializza i dati di deafult
+    public Attivita() {}
+
 
     public int getId() {
         return id;

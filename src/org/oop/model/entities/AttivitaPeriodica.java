@@ -36,4 +36,7 @@ public class AttivitaPeriodica extends Attivita {
         this.giorno = giorno;
         return this;
     }
+
+    //il seguente è il costruttore che inizializza i dati di deafult
+    public AttivitaPeriodica() {}
 }

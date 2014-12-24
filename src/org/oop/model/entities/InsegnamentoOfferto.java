@@ -10,6 +10,7 @@ public class InsegnamentoOfferto {
     private boolean opzionale;
     private Docente docente;
 
+    //il seguente è il costruttore che inizializza i dati di deafult
     public InsegnamentoOfferto() {
     }
 

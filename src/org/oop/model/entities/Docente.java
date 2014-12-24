@@ -8,6 +8,18 @@ public class Docente {
     private String email;
 
 
+    public Docente(int id, String nome, String cognome, String email) {
+        this.id = id;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.email = email;
+    }
+
+
+    //il seguente è il costruttore che inizializza i dati di deafult
+    public Docente() {}
+
+
     public int getId() {
         return id;
     }
