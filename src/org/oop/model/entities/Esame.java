@@ -18,6 +18,10 @@ public class Esame extends AttivitaEvento {
         this.tipologiaProva = tipologiaProva;
     }
 
+
+    //il seguente è il costruttore che inizializza i dati di deafult
+    public Esame() {}
+
     public int getId() {
         return id;
     }

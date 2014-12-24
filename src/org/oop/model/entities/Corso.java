@@ -1,5 +1,6 @@
 package org.oop.model.entities;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -14,6 +15,22 @@ public class Corso {
     private int livello;
     private int totaleCfu;
     private ArrayList<InsegnamentoOfferto> insegnamentiOfferti;
+
+
+    public Corso(int id, String nome, int livello, int totaleCfu, ArrayList<InsegnamentoOfferto> insegnamentiOfferti) {
+        this.id = id;
+        this.nome = nome;
+        this.livello = livello;
+        this.totaleCfu = totaleCfu;
+        this.insegnamentiOfferti = insegnamentiOfferti;
+    }
+
+
+    //il seguente è il costruttore che inizializza i dati di deafult
+    public Corso () {
+        ArrayList<InsegnamentoOfferto> insegnamentiOfferti = new ArrayList<InsegnamentoOfferto>(1);
+    }
+
 
 
     /**

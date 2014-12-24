@@ -26,6 +26,11 @@ public class AttivitaEvento extends Attivita {
         return this;
     }
 
+
+    //il seguente è il costruttore che inizializza i dati di deafult
+    public AttivitaEvento() {}
+
+
     public Date getData() {
         return data;
     }
