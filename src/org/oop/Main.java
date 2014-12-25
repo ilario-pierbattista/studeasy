@@ -26,7 +26,7 @@ public class Main {
 
         new Controller(mainlayout);*/
 
-        testDatabase();
+        //testDatabase();
 
         Mainframe mainframe = new Mainframe();
         new AgendaController(mainframe.agenda);
