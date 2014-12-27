@@ -2,6 +2,7 @@ package org.oop;
 
 import org.oop.controller.AgendaController;
 import org.oop.controller.MainController;
+import org.oop.controller.SegreteriaController;
 import org.oop.db.DatabaseConfig;
 import org.oop.model.dao.CorsoDAO;
 import org.oop.model.dao.DocenteDAO;
@@ -12,10 +13,13 @@ import org.oop.model.entities.InsegnamentoOfferto;
 import org.oop.services.Importatore;
 import org.oop.test.db.DatabaseManagerTest;
 import org.oop.view.Mainframe;
+import org.oop.view.Segreteria;
 
 import javax.swing.*;
 import java.io.BufferedInputStream;
 import java.net.URL;
+
+import static org.oop.general.Utils.inputDateControl;
 
 public class Main {
     public static void main(String[] args) {
@@ -34,6 +38,7 @@ public class Main {
 
         Mainframe mainframe = new Mainframe();
         new AgendaController(mainframe.agenda);
+        new SegreteriaController(mainframe.segreteria);
     }
 
     private static void testDatabase() {

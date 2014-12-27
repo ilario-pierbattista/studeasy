@@ -3,6 +3,8 @@ package org.oop.general;
 
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Utils {
 
@@ -29,5 +31,17 @@ public class Utils {
             sb.append(parts.get(i));
         }
         return sb.toString();
+    }
+
+    /**
+     * Metodi per il controllo dell'input ("espressioni regolari")
+     */
+
+    //controlla che il flusso di input sia una data
+    public static boolean inputDateControl(String s) {
+        //controllo se nella stringa s ci sono solo 4 numeri fra 0 e 9
+        Pattern p = Pattern.compile( "[0-9]{4}" );
+        Matcher m = p.matcher(s);
+        return m.matches();
     }
 }

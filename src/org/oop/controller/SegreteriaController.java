@@ -1,7 +1,10 @@
 package org.oop.controller;
 
+import org.oop.view.FormModuli;
 import org.oop.view.Mainframe;
 import org.oop.view.Segreteria;
+
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 
@@ -12,48 +15,28 @@ public class SegreteriaController {
     public SegreteriaController(Segreteria view) {
         this.view = view;
 
-        view.insFormButtonListener(new InsertFormAction() );
+        view.insFormButtonListener(new FormAction() );
+
 
     }
 
 
     /**
-     * action per completare il form di registrazione utente
+     * action per aprire il form di registrazione
      */
-    class InsertFormAction extends AbstractAction {
+    class FormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            //il comando seguente è una sorta di esempio, i dati da inserire nel form dovranno essere immessi da tastiera
-            //poi passati come parametri al costruttore nella view di Segreteria
-            //Segreteria formprofilo = new Segreteria(...);
-
-            //per inserire la schermata di riempimento form:
-            //formprofilo.addInsForm();
+            //apro il form in un'altra finestra
+            FormModuli form = new FormModuli();
+            FormModuliController formcontroller = new FormModuliController(form);
 
             Mainframe.refreshView();
         }
     }
 
-    /**
-     * Action per annullare l'immissione del form
-     */
-    class quitFormAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
 
-        }
-    }
-
-    /**
-     * Action per confermare l'immissione del form
-     */
-    class submitFormAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-        }
-    }
 
 
 }
