@@ -9,10 +9,13 @@ import org.oop.model.dao.InsegnamentoOffertoDAO;
 import org.oop.model.entities.Corso;
 import org.oop.model.entities.Docente;
 import org.oop.model.entities.InsegnamentoOfferto;
+import org.oop.services.Importatore;
 import org.oop.test.db.DatabaseManagerTest;
 import org.oop.view.Mainframe;
 
 import javax.swing.*;
+import java.io.BufferedInputStream;
+import java.net.URL;
 
 public class Main {
     public static void main(String[] args) {
@@ -27,6 +30,7 @@ public class Main {
         new Controller(mainlayout);*/
 
         //testDatabase();
+        testImportatore();
 
         Mainframe mainframe = new Mainframe();
         new AgendaController(mainframe.agenda);
@@ -75,6 +79,10 @@ public class Main {
         System.out.println("Insegnamento aggiornato " + ins.toString());
     }
 
+    private static void testImportatore() {
+        Importatore importatore = new Importatore();
+    }
+
     /**
      * Carica le configurazioni di base
      */
@@ -92,7 +100,7 @@ public class Main {
             ee.printStackTrace();
             test_failed = true;
         } finally {
-            if(test_failed) {
+            if (test_failed) {
                 System.exit(0);
             }
         }
