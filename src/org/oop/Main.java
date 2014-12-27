@@ -16,6 +16,8 @@ import org.oop.view.Segreteria;
 
 import javax.swing.*;
 
+import static org.oop.general.Utils.inputDateControl;
+
 public class Main {
     public static void main(String[] args) {
         try {
