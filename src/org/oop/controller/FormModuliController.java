@@ -2,8 +2,11 @@ package org.oop.controller;
 
 import org.oop.view.FormModuli;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
+
+import static org.oop.general.Utils.inputYearControl;
 
 
 public class FormModuliController {
@@ -15,6 +18,8 @@ public class FormModuliController {
         view.addSubmitFormButtonListener(new submitFormAction());
         view.addQuitFormButtonListener(new quitFormAction());
     }
+
+
 
     /**
      * Action per annullare l'immissione del form
@@ -33,6 +38,14 @@ public class FormModuliController {
         @Override
         public void actionPerformed(ActionEvent e) {
 
+            //la funzione di controllo anno va implementqta diversamente
+            String annoacc = view.getAnnoaccademico().getText();
+            if (inputYearControl(annoacc)) {
+                //buttalo nel model e nel database
+                //System.out.println(annoacc);
+            } else {
+                JOptionPane.showMessageDialog(null,"Anno non Valido");
+            }
         }
     }
 }

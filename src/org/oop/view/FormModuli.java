@@ -8,11 +8,11 @@ public class FormModuli extends AbstractView<Agenda> {
     private JPanel panel1;
     private JTextField annocorso;
     private JTextField corsolaurea;
-    private JTextArea statoesami;
-    private JTextArea cfuottenuti;
     private JTextField annoaccademico;
     private JButton Submit;
     private JButton Quit;
+    private JTextField cfuottenuti;
+    private JTextField statoesami;
 
     public FormModuli () {
         frame.setContentPane(panel1);
@@ -31,5 +31,25 @@ public class FormModuli extends AbstractView<Agenda> {
 
     public void addQuitFormButtonListener(ActionListener l) {
         Quit.addActionListener(l);
+    }
+
+    public JTextField getAnnocorso() {
+        return annocorso;
+    }
+
+    public JTextField getCorsolaurea() {
+        return corsolaurea;
+    }
+
+    public JTextField getAnnoaccademico() {
+        return annoaccademico;
+    }
+
+    public JTextField getCfuottenuti() {
+        return cfuottenuti;
+    }
+
+    public JTextField getStatoesami() {
+        return statoesami;
     }
 }
