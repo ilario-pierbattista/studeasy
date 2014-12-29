@@ -14,13 +14,13 @@ public class Profilo extends AbstractView<Mainframe> {
     private JSplitPane splitpane;
     private JPanel librettopanel;
     private JLabel sidebartitle;
-    private JTable table1;
+    private JTable instable;
     private JButton addriga;
     private JButton deleteriga;
     private JScrollPane scrolpanetable;
 
     //Colums e data servono per costruire il model della tabella
-    private String[] colums = new String[]{"Insegnamento", "Ciclo", "CFU", "Data"};
+    private String[] colums = new String[]{"Insegnamento", "Ciclo", "CFU", "Data","Voto"};
     private Object[][] data = new Object[0][3];
     private DefaultTableModel model = new DefaultTableModel(data, colums);
     private int contarighe = 1;
@@ -33,7 +33,7 @@ public class Profilo extends AbstractView<Mainframe> {
         splitpane.setBorder(null);
         sidebarpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(126, 126, 126)));
         //Setta il modello alla tabella
-        table1.setModel(model);
+        instable.setModel(model);
     }
 
     /**
@@ -58,7 +58,7 @@ public class Profilo extends AbstractView<Mainframe> {
      * Metodo che permette di inserire una nuova riga nella tabella
      */
     public void addElementTable() {
-        Object[] appoggio = new Object[]{"Insegnamento" + contarighe, "Ciclo" + contarighe, "CFU" + contarighe, "data" + contarighe};
+        Object[] appoggio = new Object[]{"Insegnamento" + contarighe, "Ciclo" + contarighe, "CFU" + contarighe, "data" + contarighe, "voto" + contarighe};
         model.addRow(appoggio);
         contarighe++;
     }
@@ -68,10 +68,10 @@ public class Profilo extends AbstractView<Mainframe> {
      */
     public void DeleteElementTable() {
 
-        if (table1.getSelectedRow() == -1) {
+        if (instable.getSelectedRow() == -1) {
             System.out.println("Non hai selezionato nessun elemento da eliminare");
         } else {
-            model.removeRow(table1.getSelectedRow());
+            model.removeRow(instable.getSelectedRow());
         }
     }
 }

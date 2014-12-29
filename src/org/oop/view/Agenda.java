@@ -43,7 +43,6 @@ public class Agenda extends AbstractView<Agenda> {
         //Parametri per la creazione e gestione della lista dei cicli
         listaModelCicli = new DefaultListModel();
         list1.setModel(listaModelCicli);
-        //listciclipanel.add(listaModelCicli);
         list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
