@@ -14,6 +14,7 @@ public class ProfiloController {
         this.view = view;
         view.addTableListener(new addTableElementAction());
         view.addDeletetableListener(new addDeleteElementAction());
+        view.insFormButtonListener(new FormAction() );
     }
 
     class addTableElementAction extends AbstractAction{
@@ -27,6 +28,22 @@ public class ProfiloController {
             view.DeleteElementTable();
         }
     }
+
+    /**
+     * action per aprire il form di registrazione
+     */
+    class FormAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            //apro il form in un'altra finestra
+            FormRegistrazione form = new FormRegistrazione();
+            FormRegistrazioneController formcontroller = new FormRegistrazioneController(form);
+
+            Mainframe.refreshView();
+        }
+    }
+
 
 
 
