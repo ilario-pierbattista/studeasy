@@ -20,6 +20,7 @@ import javax.swing.*;
 import java.io.BufferedInputStream;
 import java.net.URL;
 
+import static org.oop.general.Utils.inputCfuControl;
 import static org.oop.general.Utils.inputDateControl;
 import static org.oop.general.Utils.inputMailControl;
 

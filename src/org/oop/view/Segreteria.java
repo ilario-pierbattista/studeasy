@@ -9,19 +9,13 @@ import java.awt.event.ActionListener;
  */
 public class Segreteria extends AbstractView<Segreteria> {
     public JPanel segreteriapanel;
-
-    private JButton aggiungiform;
+    private JTabbedPane maintabpane;
+    private Immatricolazione immatricolazione = new Immatricolazione();
 
     public Segreteria() {
         super();
+
+        maintabpane.addTab("Immatricolazione", immatricolazione.immatricolazionepanel);
     }
 
-
-
-    public void insFormButtonListener(ActionListener l) {
-        aggiungiform.addActionListener(l);
-    }
-
-
-    public JButton getAggiungiform() { return aggiungiform;}
 }
