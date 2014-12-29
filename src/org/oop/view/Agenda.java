@@ -22,33 +22,32 @@ public class Agenda extends AbstractView<Agenda> {
     private JPanel activitiespanel;
     private JLabel sidebartitle;
 
-    private JPanel listciclipanel;
     private DefaultListModel listaModelCicli;
-    private JList listaCicli;
-    private int contatorecicli=1;
+    private int contatorecicli = 1;
+    private JList list1;
 
     private JButton progettobutton;
     private JButton seminariobutton;
+    private JButton deleteelement;
 
     public Agenda() {
         //Setta la larghezza della sidebar
         splitpane.setDividerLocation(200 + splitpane.getInsets().left);
         //Elimina i bordi
         splitpane.setBorder(null);
-        sidebarpane.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(126,126,126)));
+        sidebarpane.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(126, 126, 126)));
 
         //Imposta il layout a 2 colonne
         activitiespanel.setLayout(new GridLayout(0, 2, 20, 20));
 
         //Parametri per la creazione e gestione della lista dei cicli
         listaModelCicli = new DefaultListModel();
-        listaCicli=new JList(listaModelCicli);
-        listciclipanel.add(listaCicli);
-        listaCicli.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list1.setModel(listaModelCicli);
+        //listciclipanel.add(listaModelCicli);
+        list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
-
-    public void addAttivita(AttivitaView attivita){
+    public void addAttivita(AttivitaView attivita) {
         activitiespanel.add(attivita.activitypanel);
     }
 
@@ -56,12 +55,22 @@ public class Agenda extends AbstractView<Agenda> {
      * Metodo che permette di aggiungere un elemento alla lista dei cicli ogni volta che si preme
      * il bottone addinsbutton
      */
-    public void addCiclo ()
-    {
-        listaModelCicli.addElement("elemento"+contatorecicli);
+    public void addCiclo() {
+        listaModelCicli.addElement("elemento" + contatorecicli);
         contatorecicli++;
-
     }
+
+    /**
+     * Metodo che permette di eleiminare un elemento dalla lista
+     */
+    public void deleteCiclo() {
+        if (list1.getSelectedIndex() == -1) {
+            System.out.println("Non hai selezionato nessun ciclo");
+        } else {
+            listaModelCicli.remove(list1.getSelectedIndex());
+        }
+    }
+
     /* Getters */
     public JButton getAddinsbutton() {
         return addinsbutton;
@@ -97,35 +106,38 @@ public class Agenda extends AbstractView<Agenda> {
     }
 
     /* Listeners setters */
-    public void addLezioneButtonListener (ActionListener listener){
+    public void addLezioneButtonListener(ActionListener listener) {
         lezioneButton.addActionListener(listener);
     }
 
-    public void addEsameButtonListener (ActionListener listener){
+    public void addEsameButtonListener(ActionListener listener) {
         esameButton.addActionListener(listener);
     }
 
-    public void addLaboratorioButtonListener (ActionListener listener){
+    public void addLaboratorioButtonListener(ActionListener listener) {
         laboratorioButton.addActionListener(listener);
     }
 
-    public void addInsButtonListener (ActionListener listener)
-    {
+    public void addInsButtonListener(ActionListener listener) {
         addinsbutton.addActionListener(listener);
     }
 
-    public void addListListener (ListSelectionListener listener)
-    {
-        listaCicli.addListSelectionListener(listener);
+    /*
+    public void addListListener(ListSelectionListener listener) {
+        list1.addListSelectionListener(listener);
 
-    }
+    }*/
 
-    public void addProgettoButtonListener (ActionListener listener){
+    public void addProgettoButtonListener(ActionListener listener) {
         progettobutton.addActionListener(listener);
     }
 
-    public void addSeminarioButtonListener (ActionListener listener){
+    public void addSeminarioButtonListener(ActionListener listener) {
         seminariobutton.addActionListener(listener);
+    }
+
+    public void deleteListElementListener(ActionListener listener) {
+        deleteelement.addActionListener(listener);
     }
 
 }

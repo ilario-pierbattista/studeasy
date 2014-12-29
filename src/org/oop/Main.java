@@ -2,6 +2,7 @@ package org.oop;
 
 import org.oop.controller.AgendaController;
 import org.oop.controller.MainController;
+import org.oop.controller.ProfiloController;
 import org.oop.controller.SegreteriaController;
 import org.oop.db.DatabaseConfig;
 import org.oop.model.dao.CorsoDAO;
@@ -20,6 +21,7 @@ import java.io.BufferedInputStream;
 import java.net.URL;
 
 import static org.oop.general.Utils.inputDateControl;
+import static org.oop.general.Utils.inputMailControl;
 
 public class Main {
     public static void main(String[] args) {
@@ -43,6 +45,7 @@ public class Main {
 
         Mainframe mainframe = new Mainframe();
         new AgendaController(mainframe.agenda);
+        new ProfiloController(mainframe.profilo);
         new SegreteriaController(mainframe.segreteria);
     }
 
