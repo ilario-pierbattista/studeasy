@@ -3,16 +3,11 @@ package org.oop.db;
 
 import org.oop.general.Utils;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
 import java.sql.*;
-import java.util.Map;
 
 /**
  * Incapsula l'accesso alla connessione, mettendo a disposizione
  * i metodi necessari per effettuare chiamate al database
- *
- * @TODO impostare l'autocommit a false per gli inserimenti per aumentare le performance
  */
 public class DatabaseManager {
 
@@ -20,12 +15,25 @@ public class DatabaseManager {
     private String sql;
     private Connection connection;
     private Statement statement;
+    private static DatabaseManager instance;
 
     /**
      * Configurazione del manager
      */
     public DatabaseManager() {
         config = DatabaseConfig.getInstance();
+        instance = this;
+    }
+
+    /**
+     * Ritorna l'istanza attiva della classe
+     * @return Istanza di DatabaseManager
+     */
+    public static DatabaseManager getInstance() {
+        if(instance == null) {
+            new DatabaseManager();
+        }
+        return instance;
     }
 
     /**
@@ -56,9 +64,9 @@ public class DatabaseManager {
      * @param params Map chiave-valore di nomi di parametri e valore
      * @return
      */
-    public DatabaseManager setParameters(Map<String, Object> params) {
+    public DatabaseManager setParameters(SQLParameters params) {
         String replace = null, regex;
-        for (Map.Entry<String, Object> param : params.entrySet()) {
+        for (SQLParameters.Entry<String, Object> param : params.entrySet()) {
             // Conversione dei valori dei parametri in stringhe adatte a query sql
             if (param.getValue() instanceof Integer ||
                     param.getValue() instanceof Double ||
@@ -92,7 +100,9 @@ public class DatabaseManager {
     public ResultSet getResult() {
         ResultSet rs = null;
         try {
-            openConnection();
+            if(connection == null || connection.isClosed()) {
+                openConnection(false);
+            }
             rs = statement.executeQuery(sql);
         } catch (SQLException ee) {
             ee.printStackTrace();
@@ -100,6 +110,10 @@ public class DatabaseManager {
         return rs;
     }
 
+    /**
+     * Esegue un comando DML
+     * @return
+     */
     public int executeUpdate() {
         int auto_generated_key = 0;
         try {
@@ -134,6 +148,9 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Esegue una commit
+     */
     public void commit() {
         try {
             connection.commit();
@@ -144,6 +161,9 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Esegue il rollback
+     */
     public void rollback() {
         try {
             connection.rollback();
@@ -155,7 +175,7 @@ public class DatabaseManager {
     }
 
     /**
-     * Apre la connessione con il database
+     * Apre la connessione con il database con Auto-Commit abilitato
      *
      * @throws SQLException
      */
@@ -169,6 +189,7 @@ public class DatabaseManager {
      * @throws SQLException
      */
     private void openConnection(boolean autoCommit) throws SQLException {
+        System.out.println("NEW CONNECTION");
         try {
             Class.forName(config.jdbc_driver);
             connection = DriverManager.getConnection(config.db_url, config.user, config.pass);
