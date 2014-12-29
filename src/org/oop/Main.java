@@ -17,6 +17,7 @@ import org.oop.view.Segreteria;
 
 import javax.swing.*;
 
+import static org.oop.general.Utils.inputCfuControl;
 import static org.oop.general.Utils.inputDateControl;
 import static org.oop.general.Utils.inputMailControl;
 

@@ -17,6 +17,7 @@ public class Profilo extends AbstractView<Mainframe> {
     private JTable instable;
     private JButton addriga;
     private JButton deleteriga;
+    private JButton aggiungiprofilo;
     private JScrollPane scrolpanetable;
 
     //Colums e data servono per costruire il model della tabella
@@ -74,6 +75,17 @@ public class Profilo extends AbstractView<Mainframe> {
             model.removeRow(instable.getSelectedRow());
         }
     }
+
+    /**
+     * aggiunge il listener per il bottone inserisci form
+     * @param l
+     */
+    public void insFormButtonListener(ActionListener l) {
+        aggiungiprofilo.addActionListener(l);
+    }
+
+
+    public JButton getAggiungiform() { return aggiungiprofilo;}
 }
 
 

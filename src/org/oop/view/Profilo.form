@@ -40,11 +40,14 @@
                   <text value="Riepilogo informazioni"/>
                 </properties>
               </component>
-              <vspacer id="465ef">
+              <component id="8775e" class="javax.swing.JButton" binding="aggiungiprofilo">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
-              </vspacer>
+                <properties>
+                  <text value="+Profilo"/>
+                </properties>
+              </component>
             </children>
           </grid>
           <grid id="2b50f" binding="librettopanel" layout-manager="GridLayoutManager" row-count="3" column-count="11" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
