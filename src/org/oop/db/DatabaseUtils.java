@@ -6,22 +6,42 @@ import org.oop.general.exceptions.RisorsaNonTrovata;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class DatabaseUtils {
 
     /**
-     * Genera una stringa di condizioni AND per una chiamata SQL in base alle coppie
-     * parametro-valore passate.
+     * Questa roba deve essere documentata alla perfezione
      * @param parameters
      * @return
      */
-    public static String generateAndCondition(SQLParameters parameters) {
-        ArrayList<String> conditions = new ArrayList<String>(3);
+    public static String generateCondition(SQLParameters parameters) {
+        ArrayList<String> condizioniAnd = new ArrayList<String>(3);
+        ArrayList<String> chiaviDaEliminare = new ArrayList<String>(1);
+        SQLParameters parametriAusiliari = new SQLParameters();
+        String chiaveParametro;
+
         for(SQLParameters.Entry<String, Object> param : parameters.entrySet()) {
-            conditions.add(param.getKey().concat(" = :".concat(param.getKey())));
+            if(param.getValue() instanceof ArrayList) {
+                chiaviDaEliminare.add(param.getKey());
+                ArrayList<String> condizioniOr = new ArrayList<String>(3);
+                ArrayList valori = (ArrayList) param.getValue();
+                for (int i = 0; i < valori.size(); i++) {
+                    chiaveParametro = param.getKey().concat("_").concat(Integer.toString(i));
+                    parametriAusiliari.add(chiaveParametro, valori.get(i));
+                    condizioniOr.add(param.getKey().concat(" = :").concat(chiaveParametro));
+                }
+                condizioniAnd.add("(".concat(Utils.stringJoin(condizioniOr, " OR ")).concat(")"));
+            } else {
+                condizioniAnd.add(param.getKey().concat(" = :".concat(param.getKey())));
+            }
         }
-        return Utils.stringJoin(conditions, " AND ");
+
+        for (String chiave : chiaviDaEliminare) {
+            parameters.remove(chiave);
+        }
+        parameters.merge(parametriAusiliari);
+
+        return Utils.stringJoin(condizioniAnd, " AND ");
     }
 
     /**

@@ -1,14 +1,15 @@
 package org.oop.model.dao;
 
 
+import org.oop.db.DatabaseUtils;
 import org.oop.db.SQLParameters;
+import org.oop.general.Utils;
 import org.oop.model.entities.Corso;
 import org.oop.model.entities.InsegnamentoOfferto;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class CorsoDAO extends AbstractDAO<Corso> {
     @Override
@@ -25,8 +26,6 @@ public class CorsoDAO extends AbstractDAO<Corso> {
             }
         } catch (SQLException ee) {
             ee.printStackTrace();
-        } finally {
-            db.closeConnection();
         }
         return corso;
     }
@@ -51,6 +50,18 @@ public class CorsoDAO extends AbstractDAO<Corso> {
         int id = db.createSqlStatement("INSERT INTO corso (nome, livello, totale_cfu) VALUES (:nome, :livello, :totale_cfu)")
                 .setParameters(parameters).executeUpdate();
         entity.setId(id);
+
+        SQLParameters idInsegnamenti = new SQLParameters(), sqlParameters = new SQLParameters();
+        ArrayList<Integer> ids = new ArrayList<Integer>(entity.getInsegnamentiOfferti().size());
+        for (InsegnamentoOfferto ins : entity.getInsegnamentiOfferti()) {
+            ids.add(ins.getId());
+        }
+        idInsegnamenti.add("id", ids);
+        db.createSqlStatement("UPDATE insegnamento SET corso = :id_corso WHERE ".concat(DatabaseUtils.generateCondition(idInsegnamenti)));
+        sqlParameters.add("id_corso", id)
+                .merge(idInsegnamenti);
+        db.setParameters(sqlParameters)
+                .executeUpdate();
     }
 
     @Override

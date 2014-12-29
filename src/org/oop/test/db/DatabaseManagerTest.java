@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class DatabaseManagerTest {
 
     public void testSetParameters() throws TestFallito {
-        DatabaseManager db = new DatabaseManager();
+        DatabaseManager db = DatabaseManager.getInstance();
         SQLParameters params = new SQLParameters();
         ArrayList<String> result_expected = new ArrayList<String>(3);
         ArrayList<String> output = new ArrayList<String>(3);

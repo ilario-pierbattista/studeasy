@@ -2,7 +2,6 @@ package org.oop.model.dao;
 
 
 import org.oop.db.DatabaseManager;
-import org.oop.model.entities.InsegnamentoOfferto;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,9 +11,15 @@ public abstract class AbstractDAO<T> implements DAOInterface<T> {
     protected DatabaseManager db;
 
     public AbstractDAO() {
-        db = new DatabaseManager();
+        db = DatabaseManager.getInstance();
     }
 
+    /**
+     * Genera un ArrayList di entità a partire dal un oggetto
+     * ResultSet di un query
+     * @param rs Risultato di una query
+     * @return Array di entità
+     */
     protected ArrayList<T> generaArrayEntita(ResultSet rs) {
         ArrayList<T> entita = new ArrayList<T>(100);
         try {
@@ -23,8 +28,6 @@ public abstract class AbstractDAO<T> implements DAOInterface<T> {
             }
         } catch (SQLException ee) {
             ee.printStackTrace();
-        } finally {
-            db.closeConnection();
         }
         return entita;
     }
@@ -35,4 +38,7 @@ public abstract class AbstractDAO<T> implements DAOInterface<T> {
         db.commit();
     }
 
+    public void undo() {
+        db.rollback();
+    }
 }

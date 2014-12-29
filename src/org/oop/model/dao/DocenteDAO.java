@@ -24,8 +24,6 @@ public class DocenteDAO extends AbstractDAO<Docente> {
             }
         } catch (SQLException ee) {
             ee.printStackTrace();
-        } finally {
-            db.closeConnection();
         }
         return docente;
     }
@@ -40,7 +38,7 @@ public class DocenteDAO extends AbstractDAO<Docente> {
     @Override
     public ArrayList<Docente> findBy(SQLParameters params) {
         String sql = "SELECT * FROM docente " +
-                "WHERE ".concat(DatabaseUtils.generateAndCondition(params));
+                "WHERE ".concat(DatabaseUtils.generateCondition(params));
         ResultSet rs = db.createSqlStatement(sql).setParameters(params).getResult();
         return generaArrayEntita(rs);
     }

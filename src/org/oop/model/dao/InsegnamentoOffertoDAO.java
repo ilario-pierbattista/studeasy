@@ -29,8 +29,6 @@ public class InsegnamentoOffertoDAO extends AbstractDAO<InsegnamentoOfferto> {
             }
         } catch (SQLException ee) {
             ee.printStackTrace();
-        } finally {
-            db.closeConnection();
         }
         return ins;
     }
@@ -45,7 +43,7 @@ public class InsegnamentoOffertoDAO extends AbstractDAO<InsegnamentoOfferto> {
     @Override
     public ArrayList<InsegnamentoOfferto> findBy(SQLParameters params) {
         String sql = "SELECT * FROM insegnamento " +
-                "WHERE ".concat(DatabaseUtils.generateAndCondition(params));
+                "WHERE ".concat(DatabaseUtils.generateCondition(params));
         ResultSet rs = db.createSqlStatement(sql).setParameters(params).getResult();
         return generaArrayEntita(rs);
     }
@@ -64,15 +62,10 @@ public class InsegnamentoOffertoDAO extends AbstractDAO<InsegnamentoOfferto> {
             params.add("docente", null);
         }
 
-        /**
         int id = db.createSqlStatement("INSERT INTO insegnamento (nome,cfu,anno,semestre,opzionale,docente) " +
                 "VALUES (:nome, :cfu, :anno, :semestre, :opzionale, :docente)")
                 .setParameters(params)
-                .executeUpdate();*/
-        db.createSqlStatement("INSERT INTO insegnamento (nome,cfu,anno,semestre,opzionale,docente) " +
-                "VALUES (:nome, :cfu, :anno, :semestre, :opzionale, :docente)")
-                .setParameters(params);
-        int id = db.executeUpdate();
+                .executeUpdate();
 
         ins.setId(id);
     }

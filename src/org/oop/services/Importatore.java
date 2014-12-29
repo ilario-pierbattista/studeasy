@@ -2,7 +2,6 @@ package org.oop.services;
 
 
 import org.oop.db.DatabaseConfig;
-import org.oop.db.DatabaseManager;
 import org.oop.db.DatabaseUtils;
 import org.oop.general.Utils;
 import org.oop.general.exceptions.RisorsaNonTrovata;
@@ -12,10 +11,7 @@ import org.oop.model.dao.InsegnamentoOffertoDAO;
 import org.oop.model.entities.Corso;
 import org.oop.model.entities.Docente;
 import org.oop.model.entities.InsegnamentoOfferto;
-import org.oop.services.exceptions.importatore.DatiNonTrovati;
 
-import javax.print.Doc;
-import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -145,36 +141,23 @@ public class Importatore {
         InsegnamentoOffertoDAO insegnamentoOffertoDAO = new InsegnamentoOffertoDAO();
         DocenteDAO docenteDAO = new DocenteDAO();
 
-        /** Soluzione con gli indici
-        for (int i = 0; i < corsi.size(); i++) {
-            ArrayList<InsegnamentoOfferto> insegnamenti = corsi.get(i).getInsegnamentiOfferti();
-            for (int j = 0; j < insegnamenti.size(); j++) {
-                docenteDAO.persist(insegnamenti.get(j).getDocente());
-                insegnamentoOffertoDAO.persist(insegnamenti.get(j));
-            }
-            corsoDAO.persist(corsi.get(i));
-        } */
-
         int i = 0;
         for (Corso corso : corsi) {
             for (InsegnamentoOfferto insegnamento : corso.getInsegnamentiOfferti()) {
-                System.out.println("inserimento docente");
-                docenteDAO.persist(insegnamento.getDocente());
-                docenteDAO.flush();
+                Docente docente = insegnamento.getDocente();
+                // Controllo che il docente non sia già stato inserito nel database
+                if(docente.getId() == 0 || docenteDAO.find(docente.getId()) == null) {
+                    docenteDAO.persist(docente);
+                }
 
-                System.out.println(insegnamento.getDocente().toString());
-                System.out.println("inserimento insegnamento");
                 insegnamentoOffertoDAO.persist(insegnamento);
-
-                insegnamentoOffertoDAO.flush();
             }
             corsoDAO.persist(corso);
+
+            /* @TODO Sono messaggi random, valutare se lasciarli */
             i++;
             System.out.println("Corsi importati " + i + " su " + corsi.size());
         }
-
-        docenteDAO.flush();
-        insegnamentoOffertoDAO.flush();
         corsoDAO.flush();
     }
 
@@ -218,7 +201,7 @@ public class Importatore {
         insegnamentoOfferto.setAnno(Integer.parseInt(row.get("insegnamento_anno")));
         insegnamentoOfferto.setSemestre(Integer.parseInt(row.get("insegnamento_semestre")));
         insegnamentoOfferto.setCfu(Integer.parseInt(row.get("insegnamento_cfu")));
-        insegnamentoOfferto.setOpzionale(Boolean.parseBoolean(row.get("insegnamento_opzionale")));
+        insegnamentoOfferto.setOpzionale(row.get("insegnamento_opzionale").equals("1"));
         return insegnamentoOfferto;
     }
 

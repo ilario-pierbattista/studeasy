@@ -1,6 +1,5 @@
 package org.oop.controller;
 
-import org.oop.model.entities.Attivita;
 import org.oop.view.FormAttivita;
 
 import java.awt.event.ActionEvent;
