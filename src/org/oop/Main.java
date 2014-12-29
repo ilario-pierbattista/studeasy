@@ -35,6 +35,9 @@ public class Main {
         new SegreteriaController(mainframe.segreteria);
     }
 
+    /**
+     * Test per l'importazione dei dati
+     */
     private static void testImportatore() {
         tests();
         try {
@@ -45,6 +48,9 @@ public class Main {
         }
     }
 
+    /**
+     * Test degli altri metodi
+     */
     private static void tests() {
         boolean test_failed = false;
         DatabaseManagerTest dbt = new DatabaseManagerTest();

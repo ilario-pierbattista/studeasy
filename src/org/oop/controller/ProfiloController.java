@@ -1,12 +1,12 @@
 package org.oop.controller;
 
+import org.oop.view.FormRegistrazione;
+import org.oop.view.Mainframe;
 import org.oop.view.Profilo;
 
 import java.awt.event.ActionEvent;
 
-/**
- * Created by MelvinMancini on 27/12/14.
- */
+
 public class ProfiloController {
     private Profilo view;
 
@@ -14,7 +14,7 @@ public class ProfiloController {
         this.view = view;
         view.addTableListener(new addTableElementAction());
         view.addDeletetableListener(new addDeleteElementAction());
-        view.insFormButtonListener(new FormAction() );
+        view.insFormButtonListener(new FormAction());
     }
 
     class addTableElementAction extends AbstractAction{
@@ -43,8 +43,4 @@ public class ProfiloController {
             Mainframe.refreshView();
         }
     }
-
-
-
-
 }
