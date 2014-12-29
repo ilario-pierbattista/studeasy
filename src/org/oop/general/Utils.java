@@ -1,6 +1,12 @@
 package org.oop.general;
 
 
+import org.oop.general.exceptions.RisorsaNonTrovata;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -31,6 +37,38 @@ public class Utils {
             sb.append(parts.get(i));
         }
         return sb.toString();
+    }
+
+    /**
+     * Legge le righe di un file
+     * @param path
+     * @return
+     * @throws RisorsaNonTrovata
+     */
+    public static ArrayList<String> readFileLines(String path) throws RisorsaNonTrovata {
+        ArrayList<String> records = new ArrayList<String>(10);
+        InputStream is = Utils.class.getClassLoader().getResourceAsStream(path);
+        if(is == null) {
+            throw new RisorsaNonTrovata(path);
+        }
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        String line;
+        try {
+            while ((line = reader.readLine()) != null) {
+                records.add(line);
+            }
+        } catch (IOException ee) {
+            ee.printStackTrace();
+        }
+        return records;
+    }
+
+    public static <T> void arraySearch(T ago, ArrayList<T> pagliaio) {
+        boolean found = false;
+        T obj = null;
+        for (int i = 0; i < pagliaio.size() && !found; i++) {
+
+        }
     }
 
     /**

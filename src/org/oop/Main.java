@@ -23,6 +23,11 @@ import static org.oop.general.Utils.inputDateControl;
 
 public class Main {
     public static void main(String[] args) {
+        /** @TODO Eliminare questi messaggi, servono solo per rendersi conto
+         * della velocità di esecuzione del programma
+         */
+        System.out.println("Programma avviato");
+
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception ee) {
@@ -42,7 +47,6 @@ public class Main {
     }
 
     private static void testDatabase() {
-        loadConfig();
         tests();
 
         InsegnamentoOffertoDAO insDao = new InsegnamentoOffertoDAO();
@@ -85,16 +89,13 @@ public class Main {
     }
 
     private static void testImportatore() {
-        Importatore importatore = new Importatore();
+        try {
+            //Importatore importatore = new Importatore(true); Sovrascrive lo schema ogni volta
+            Importatore importatore = new Importatore();
+        } catch (Exception ee) {
+            ee.printStackTrace();
+        }
     }
-
-    /**
-     * Carica le configurazioni di base
-     */
-    private static void loadConfig() {
-        new DatabaseConfig();
-    }
-
 
     private static void tests() {
         boolean test_failed = false;

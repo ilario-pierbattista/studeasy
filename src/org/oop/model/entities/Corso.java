@@ -124,6 +124,20 @@ public class Corso {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Corso)) return false;
+
+        Corso corso = (Corso) o;
+
+        if (livello != corso.livello) return false;
+        if (totaleCfu != corso.totaleCfu) return false;
+        if (nome != null ? !nome.equals(corso.nome) : corso.nome != null) return false;
+
+        return true;
+    }
+
+    @Override
     public String toString() {
         return "Corso{" +
                 "id=" + id +

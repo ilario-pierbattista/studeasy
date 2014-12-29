@@ -1,6 +1,7 @@
 Drop database if exists oop_db;
 
 Create database oop_db;
+
 Use oop_db;
 
 Create table corso(
