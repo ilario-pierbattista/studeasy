@@ -11,7 +11,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 
 
-public class AgendaController{
+public class AgendaController {
     private Agenda view;
 
     public AgendaController(Agenda view) {
@@ -21,10 +21,11 @@ public class AgendaController{
         view.addLaboratorioButtonListener(new AddLaboratorioAction());
 
         view.addInsButtonListener(new AddInsButtonAction());
-        view.addListListener(new SelectionListener());
+        //view.addListListener(new SelectionListener());
 
         view.addSeminarioButtonListener(new AddSeminarioAction());
         view.addProgettoButtonListener(new AddProgettoAction());
+        view.deleteListElementListener(new DeleteListElementAction());
 
 
     }
@@ -35,12 +36,8 @@ public class AgendaController{
     class AddAttivitaAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-
-
             AttivitaView attivitaview = new AttivitaView("Lezione");
-
             AttivitaController attivitacontroller = new AttivitaController(attivitaview);
-
             view.addAttivita(attivitaview);
             Mainframe.refreshView();
         }
@@ -56,7 +53,7 @@ public class AgendaController{
             view.addAttivita(new AttivitaView("Esame"));
             Mainframe.refreshView();
 
-            FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(),"esame");
+            FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(), "esame");
 
         }
     }
@@ -71,7 +68,7 @@ public class AgendaController{
             view.addAttivita(new AttivitaView("Laboratorio"));
             Mainframe.refreshView();
 
-            FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(),"laboratorio");
+            FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(), "laboratorio");
 
         }
     }
@@ -85,7 +82,7 @@ public class AgendaController{
             view.addAttivita(new AttivitaView("Progetto"));
             Mainframe.refreshView();
 
-            FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(),"progetto");
+            FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(), "progetto");
 
         }
     }
@@ -99,7 +96,7 @@ public class AgendaController{
             view.addAttivita(new AttivitaView("Seminario"));
             Mainframe.refreshView();
 
-            FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(),"seminario");
+            FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(), "seminario");
 
         }
     }
@@ -107,7 +104,7 @@ public class AgendaController{
     /**
      * Action per aggiungere la lista dei cicli nella sidebar dell'Agenda
      */
-    class AddInsButtonAction extends AbstractAction{
+    class AddInsButtonAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
 
@@ -120,7 +117,7 @@ public class AgendaController{
      * Listener che permette di selezionare un elemento dalla lista della sidebar dell'Agenda. Una volta selezionato
      * stampa in output la stringa "Ciao a tutti" e l'elemento selezionato
      */
-    class SelectionListener implements ListSelectionListener {
+    /*class SelectionListener implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent e) {
             if(!e.getValueIsAdjusting()) {
                 JList list = (JList)e.getSource();
@@ -129,6 +126,17 @@ public class AgendaController{
                 for(int i=0;i<selectedItems.length;i++)
                     System.out.println(selectedItems[i].toString() + "\n");
             }
+        }
+    }*/
+
+    /**
+     * Metodo che gestisce il click del bottone elemina nella sidebar del form Agenda. Richiama il metodo deleteCiclo()
+     * della classe Agenda
+     */
+    class DeleteListElementAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.deleteCiclo();
         }
     }
 
