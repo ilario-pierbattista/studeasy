@@ -34,10 +34,17 @@ public class Utils {
     }
 
     /**
-     * Metodi per il controllo dell'input ("espressioni regolari")
+     * scrive la stringa passata come parametro con la lettera maiuscola
+     */
+    public static String stringToCapital(String s) {
+        char first = s.charAt(0);
+        char fupper = Character.toUpperCase(first);
+        return fupper+s.substring(1,s.length());
+    }
+    /**
+     *  controlla che il flusso di input sia un anno
      */
 
-    //controlla che il flusso di input sia un anno
     public static boolean inputYearControl(String s) {
         //controllo se nella stringa s ci sono solo 4 numeri fra 0 e 9
         Pattern p = Pattern.compile( "[0-9]{4}" );
@@ -45,16 +52,65 @@ public class Utils {
         return m.matches();
     }
 
-    //controlla che la stringa passata sia una mail
+    /**
+     * controlla che la stringa passata sia una mail
+     * @param s
+     * @return
+     */
     public static boolean inputMailControl (String s) {
         Pattern p = Pattern.compile("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}");
         Matcher m = p.matcher(s);
         return m.matches();
     }
 
-    //controlla che la stringa sia una data in formato dd/mm/aaaa
+    /**
+     * controlla che la stringa passata sia una data nel formato xx/xx/xxxx
+     * @param s
+     * @return
+     */
     public static boolean inputDateControl(String s) {
         Pattern p = Pattern.compile("\\d{2}+/+\\d{2}+/+\\d{4}");
+        Matcher m = p.matcher(s);
+        return m.matches();
+    }
+
+    /**
+     * controlla che la stringa passata sia un numero a 3 cifre massimo (cfu)
+     */
+
+    public static boolean inputCfuControl(String s) {
+        Pattern p = Pattern.compile("\\d{1,3}");
+        Matcher m = p.matcher(s);
+        return m.matches();
+    }
+
+    /**
+     * controlla che la stringa passata sia di sole lettere
+     */
+
+    public static boolean inputNameControl(String s) {
+        Pattern p = Pattern.compile("([a-zA-Z]){1,}");
+        Matcher m = p.matcher(s);
+        return m.matches();
+    }
+
+    /**
+     * controlla che la matricola sia scritta in modo corretto:
+     * di soli numeri
+     */
+
+    public static boolean inputMatricolaControl(String s) {
+        Pattern p = Pattern.compile("\\d{1,}");
+        Matcher m = p.matcher(s);
+        return m.matches();
+    }
+
+    /**
+     * controlla che nella stringa passata ci siano solo lettere
+     */
+
+    public static boolean inputCorsoLaureaControl(String s) {
+        Pattern p = Pattern.compile("[a-zA-Z ]+");
         Matcher m = p.matcher(s);
         return m.matches();
     }
