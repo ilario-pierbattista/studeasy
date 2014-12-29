@@ -65,7 +65,7 @@ public class DatabaseManager {
                     param.getValue() instanceof Float) {
                 replace = param.getValue().toString();
             } else if (param.getValue() instanceof String) {
-                replace = Utils.singleQuotesToString((String) param.getValue());
+                replace = Utils.singleQuotesToString(Utils.escapeSql((String) param.getValue()));
             } else if (param.getValue() instanceof Boolean) {
                 replace = (Boolean) param.getValue() ? "TRUE" : "FALSE";
             } else if (param.getValue() == null) {
@@ -103,16 +103,17 @@ public class DatabaseManager {
     public int executeUpdate() {
         int auto_generated_key = 0;
         try {
-            openConnection();
+            if(connection == null || connection.isClosed() || connection.getAutoCommit()) {
+                openConnection(false);
+            }
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if(generatedKeys.first()) {
                 auto_generated_key = generatedKeys.getInt("GENERATED_KEY");
             }
         } catch (SQLException ee) {
+            System.out.println(sql);
             ee.printStackTrace();
-        } finally {
-            closeConnection();
         }
         return auto_generated_key;
     }
@@ -133,15 +134,45 @@ public class DatabaseManager {
         }
     }
 
+    public void commit() {
+        try {
+            connection.commit();
+        } catch (SQLException ee) {
+            ee.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
+    public void rollback() {
+        try {
+            connection.rollback();
+        } catch (SQLException ee) {
+            ee.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
     /**
      * Apre la connessione con il database
      *
      * @throws SQLException
      */
     private void openConnection() throws SQLException {
+        openConnection(true);
+    }
+
+    /**
+     * Apre la connessione con il database permettendo di specificare lo stato di Auto-Commit
+     * @param autoCommit
+     * @throws SQLException
+     */
+    private void openConnection(boolean autoCommit) throws SQLException {
         try {
             Class.forName(config.jdbc_driver);
             connection = DriverManager.getConnection(config.db_url, config.user, config.pass);
+            connection.setAutoCommit(autoCommit);
             statement = connection.createStatement();
         } catch (ClassNotFoundException ee) {
             ee.printStackTrace();

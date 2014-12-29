@@ -24,6 +24,16 @@ public class Utils {
     }
 
     /**
+     * Sostituisce i caratteri speciali in una stringa in sequenze escape
+     * adeguate per una chiamata sql
+     * @param string
+     * @return
+     */
+    public static String escapeSql(String string) {
+        return string.replaceAll("'", "''");
+    }
+
+    /**
      * Incolla le parti di un ArrayList di stringhe
      * @param parts
      * @param glue
@@ -63,12 +73,23 @@ public class Utils {
         return records;
     }
 
-    public static <T> void arraySearch(T ago, ArrayList<T> pagliaio) {
+    /**
+     * Cerca nell'array
+     * @param ago
+     * @param pagliaio
+     * @param <T>
+     * @return
+     */
+    public static <T> T arraySearch(T ago, ArrayList<T> pagliaio) {
         boolean found = false;
         T obj = null;
         for (int i = 0; i < pagliaio.size() && !found; i++) {
-
+            if(pagliaio.get(i).equals(ago)) {
+                obj = pagliaio.get(i);
+                found = true;
+            }
         }
+        return obj;
     }
 
     /**
@@ -78,7 +99,7 @@ public class Utils {
     //controlla che il flusso di input sia un anno
     public static boolean inputYearControl(String s) {
         //controllo se nella stringa s ci sono solo 4 numeri fra 0 e 9
-        Pattern p = Pattern.compile( "[0-9]{4}" );
+        Pattern p = Pattern.compile("[0-9]{4}");
         Matcher m = p.matcher(s);
         return m.matches();
     }

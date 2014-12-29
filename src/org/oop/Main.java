@@ -93,8 +93,8 @@ public class Main {
 
     private static void testImportatore() {
         try {
-            //Importatore importatore = new Importatore(true); Sovrascrive lo schema ogni volta
-            Importatore importatore = new Importatore();
+            Importatore importatore = new Importatore(true);
+            //Importatore importatore = new Importatore();
         } catch (Exception ee) {
             ee.printStackTrace();
         }

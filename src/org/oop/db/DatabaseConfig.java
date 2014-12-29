@@ -14,7 +14,7 @@ public class DatabaseConfig {
         jdbc_driver = "com.mysql.jdbc.Driver";
         host_url = "jdbc:mysql://localhost";
         db_name = "oop_db";
-        db_url = host_url.concat("/").concat(host_url);
+        db_url = host_url.concat("/").concat(db_name);
         user = "root";
         pass = "pass";
         instance = this;

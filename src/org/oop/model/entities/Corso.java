@@ -26,9 +26,11 @@ public class Corso {
     }
 
 
-    //il seguente è il costruttore che inizializza i dati di deafult
+    /**
+     * Costruttore base
+     */
     public Corso () {
-        ArrayList<InsegnamentoOfferto> insegnamentiOfferti = new ArrayList<InsegnamentoOfferto>(1);
+        insegnamentiOfferti = new ArrayList<InsegnamentoOfferto>(20);
     }
 
 
@@ -42,7 +44,7 @@ public class Corso {
     public ArrayList<InsegnamentoOfferto> getInsegnamentiObbligatori() {
         ArrayList<InsegnamentoOfferto> insegnamentiObbligatori = new ArrayList<InsegnamentoOfferto>(10);
         for (InsegnamentoOfferto insegnamento : insegnamentiOfferti) {
-            if (insegnamento.isOpzionale() == false) {
+            if (!insegnamento.isOpzionale()) {
                 insegnamentiObbligatori.add(insegnamento);
             }
         }
@@ -58,7 +60,7 @@ public class Corso {
     public ArrayList<InsegnamentoOfferto> getInsegnamentiOpzionali() {
         ArrayList<InsegnamentoOfferto> insegnamentiOpzionali = new ArrayList<InsegnamentoOfferto>(10);
         for (InsegnamentoOfferto insegnamento : insegnamentiOfferti) {
-            if (insegnamento.isOpzionale() == true) {
+            if (insegnamento.isOpzionale()) {
                 insegnamentiOpzionali.add(insegnamento);
             }
         }

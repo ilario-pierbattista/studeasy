@@ -60,11 +60,20 @@ public class InsegnamentoOffertoDAO extends AbstractDAO<InsegnamentoOfferto> {
                 .add("opzionale", ins.isOpzionale());
         if (ins.getDocente() != null) {
             params.add("docente", ins.getDocente().getId());
+        } else {
+            params.add("docente", null);
         }
-        int id = db.createSqlStatement("INSERT INTO insegnamento (nome,cfu,anno,semestre,opzionale,docente)" +
+
+        /**
+        int id = db.createSqlStatement("INSERT INTO insegnamento (nome,cfu,anno,semestre,opzionale,docente) " +
                 "VALUES (:nome, :cfu, :anno, :semestre, :opzionale, :docente)")
                 .setParameters(params)
-                .executeUpdate();
+                .executeUpdate();*/
+        db.createSqlStatement("INSERT INTO insegnamento (nome,cfu,anno,semestre,opzionale,docente) " +
+                "VALUES (:nome, :cfu, :anno, :semestre, :opzionale, :docente)")
+                .setParameters(params);
+        int id = db.executeUpdate();
+
         ins.setId(id);
     }
 

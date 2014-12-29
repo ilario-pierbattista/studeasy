@@ -6,6 +6,9 @@ import org.oop.db.DatabaseManager;
 import org.oop.db.DatabaseUtils;
 import org.oop.general.Utils;
 import org.oop.general.exceptions.RisorsaNonTrovata;
+import org.oop.model.dao.CorsoDAO;
+import org.oop.model.dao.DocenteDAO;
+import org.oop.model.dao.InsegnamentoOffertoDAO;
 import org.oop.model.entities.Corso;
 import org.oop.model.entities.Docente;
 import org.oop.model.entities.InsegnamentoOfferto;
@@ -30,7 +33,7 @@ public class Importatore {
     private String DATA_PATH = "data/data.csv";
     private ArrayList<String> records;
     private ArrayList<String> header;
-    private ArrayList<Map<String, Object>> data;
+    private ArrayList<Map<String, String>> data;
     private ArrayList<Corso> corsi;
 
     public Importatore(boolean overrideSchema) {
@@ -44,9 +47,9 @@ public class Importatore {
             records = Utils.readFileLines(DATA_PATH);
             header = parseLine(records.get(0));
             records.remove(0);
-            System.out.println(header.toString());
             data = parseData();
-            System.out.println(data.toString());
+            corsi = generateObjectStructure();
+            saveObjects();
         } catch (RisorsaNonTrovata ee) {
             ee.printStackTrace();
         }
@@ -75,33 +78,104 @@ public class Importatore {
         }
     }
 
-    public ArrayList<Map<String, Object>> parseData() {
-        ArrayList<Map<String, Object>> data = new ArrayList<Map<String, Object>>(10);
+    /**
+     * Parsa i dati dal file csv
+     * @return
+     */
+    public ArrayList<Map<String, String>> parseData() {
+        ArrayList<Map<String, String>> data = new ArrayList<Map<String, String>>(10);
         for (String line : records) {
             ArrayList<String> values = parseLine(line);
+            Map<String, String> row = new HashMap<String, String>(10);
             for(int i = 0; i < header.size(); i++) {
-                Map<String, Object> row = new HashMap<String, Object>(9);
                 String key = header.get(i);
                 if(values.get(i).equals("\\N")) {
-                    // Rappresentazione dei valori null
+                    // Rappresentazione dei valori nulli
                     row.put(key, null);
-                } else if(key.equals("corso_livello") || key.equals("insegnamento_cfu") ||
-                        key.equals("insegnamento_anno") || key.equals("insegnamento_semestre")) {
-                    // Questi valori devono essere interi
-                    row.put(key, Integer.parseInt(values.get(i)));
                 } else {
                     row.put(key, values.get(i));
                 }
-                data.add(row);
             }
+            data.add(row);
         }
         return data;
     }
 
-    public ArrayList<Corso> createCorsi() {
+    /**
+     * Genera gli oggetti entities da salvare nel database
+     * @return
+     */
+    public ArrayList<Corso> generateObjectStructure() {
         ArrayList<Corso> corsi = new ArrayList<Corso>(16);
+        ArrayList<Docente> docenti = new ArrayList<Docente>(100);
+        Corso corso, corsoEsistente;
+        InsegnamentoOfferto insegnamento;
+        Docente docente, docenteEsistente;
+
+        /* Creazione dei corsi, degli insegnamenti e dei docenti
+         * e mappatura degli stessi
+         */
+        for(Map<String, String> row : data) {
+            corso = createCorsoFromRow(row);
+            corsoEsistente = Utils.arraySearch(corso, corsi);
+            if(corsoEsistente == null) {
+                corsi.add(corso);
+            } else {
+                corso = corsoEsistente;
+            }
+
+            docente = createDocenteFromRow(row);
+            docenteEsistente = Utils.arraySearch(docente, docenti);
+            if(docenteEsistente == null) {
+                docenti.add(docente);
+            } else {
+                docente = docenteEsistente;
+            }
+
+            insegnamento = createInsegnamentoFromRow(row);
+            insegnamento.setDocente(docente);
+            corso.addInsegnamentoOfferto(insegnamento);
+        }
 
         return corsi;
+    }
+
+    public void saveObjects() {
+        CorsoDAO corsoDAO = new CorsoDAO();
+        InsegnamentoOffertoDAO insegnamentoOffertoDAO = new InsegnamentoOffertoDAO();
+        DocenteDAO docenteDAO = new DocenteDAO();
+
+        /** Soluzione con gli indici
+        for (int i = 0; i < corsi.size(); i++) {
+            ArrayList<InsegnamentoOfferto> insegnamenti = corsi.get(i).getInsegnamentiOfferti();
+            for (int j = 0; j < insegnamenti.size(); j++) {
+                docenteDAO.persist(insegnamenti.get(j).getDocente());
+                insegnamentoOffertoDAO.persist(insegnamenti.get(j));
+            }
+            corsoDAO.persist(corsi.get(i));
+        } */
+
+        int i = 0;
+        for (Corso corso : corsi) {
+            for (InsegnamentoOfferto insegnamento : corso.getInsegnamentiOfferti()) {
+                System.out.println("inserimento docente");
+                docenteDAO.persist(insegnamento.getDocente());
+                docenteDAO.flush();
+
+                System.out.println(insegnamento.getDocente().toString());
+                System.out.println("inserimento insegnamento");
+                insegnamentoOffertoDAO.persist(insegnamento);
+
+                insegnamentoOffertoDAO.flush();
+            }
+            corsoDAO.persist(corso);
+            i++;
+            System.out.println("Corsi importati " + i + " su " + corsi.size());
+        }
+
+        docenteDAO.flush();
+        insegnamentoOffertoDAO.flush();
+        corsoDAO.flush();
     }
 
     /**
@@ -119,39 +193,64 @@ public class Importatore {
         return valori;
     }
 
-    private Corso searchCorso(ArrayList<Corso> pagliaio, Corso ago) {
-        boolean found = false;
-        Corso corso = null;
-        for (int i = 0; i < pagliaio.size() && !found; i++) {
-            if(pagliaio.get(i).equals(ago)) {
-                found = true;
-                corso = pagliaio.get(i);
-            }
-        }
+    /**
+     * Crea un oggetto corso da una riga di dati
+     * @param row
+     * @return
+     */
+    private Corso createCorsoFromRow(Map<String, String> row) {
+        Corso corso = new Corso();
+        corso.setNome(row.get("corso_nome"));
+        int livelloCorso = Integer.parseInt(row.get("corso_livello"));
+        corso.setLivello(livelloCorso);
+        corso.setTotaleCfu(calcolaCfuTotali(livelloCorso));
         return corso;
     }
 
-    private InsegnamentoOfferto searchInsegnamento(ArrayList<InsegnamentoOfferto> pagliaio, InsegnamentoOfferto ago) {
-        boolean found = false;
-        InsegnamentoOfferto insegnamentoOfferto = null;
-        for (int i = 0; i < pagliaio.size() && !found; i++) {
-            if(pagliaio.get(i).equals(ago)) {
-                found = true;
-                insegnamentoOfferto = pagliaio.get(i);
-            }
-        }
+    /**
+     * Crea un oggetto insegnamento offerto da una riga di dati
+     * @param row
+     * @return
+     */
+    private InsegnamentoOfferto createInsegnamentoFromRow(Map<String, String> row) {
+        InsegnamentoOfferto insegnamentoOfferto = new InsegnamentoOfferto();
+        insegnamentoOfferto.setNome(row.get("insegnamento_nome"));
+        insegnamentoOfferto.setAnno(Integer.parseInt(row.get("insegnamento_anno")));
+        insegnamentoOfferto.setSemestre(Integer.parseInt(row.get("insegnamento_semestre")));
+        insegnamentoOfferto.setCfu(Integer.parseInt(row.get("insegnamento_cfu")));
+        insegnamentoOfferto.setOpzionale(Boolean.parseBoolean(row.get("insegnamento_opzionale")));
         return insegnamentoOfferto;
     }
 
-    private Docente searchDocente(ArrayList<Docente> pagliaio, Docente ago) {
-        boolean found = false;
-        Docente docente = null;
-        for (int i = 0; i < pagliaio.size() && !found; i++) {
-            if(pagliaio.get(i).equals(ago)) {
-                found = true;
-                docente = pagliaio.get(i);
-            }
-        }
+    /**
+     * Crea un oggetto docente da una riga di dati
+     * @param row
+     * @return
+     */
+    private Docente createDocenteFromRow(Map<String, String> row) {
+        Docente docente = new Docente();
+        docente.setNome(row.get("docente_nome"));
+        docente.setCognome(row.get("docente_cognome"));
+        docente.setEmail(row.get("docente_email"));
         return docente;
+    }
+
+    /**
+     * Calcola i cfu totali di un corso di laurea.
+     * In generale non è molto accurato, ma per la realtà di nostro interesse
+     * va più che bene.
+     * @param livello Livello del corso di laurea.
+     * @return Cfu totali per conseguire la laurea.
+     */
+    private int calcolaCfuTotali(int livello) {
+        int totale;
+        if(livello == 1) {
+            totale = 180;
+        } else if(livello == 2) {
+            totale = 120;
+        } else {
+            totale = 300;
+        }
+        return totale;
     }
 }

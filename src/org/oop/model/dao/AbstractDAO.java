@@ -31,4 +31,8 @@ public abstract class AbstractDAO<T> implements DAOInterface<T> {
 
     protected abstract T generaEntita(ResultSet rs);
 
+    public void flush() {
+        db.commit();
+    }
+
 }

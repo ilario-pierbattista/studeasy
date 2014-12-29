@@ -51,7 +51,7 @@ public class DocenteDAO extends AbstractDAO<Docente> {
         parameters.add("nome", entity.getNome())
                 .add("cognome", entity.getCognome())
                 .add("email", entity.getEmail());
-        int key = db.createSqlStatement("INSERT INTO docente (nome,cognome,email)" +
+        int key = db.createSqlStatement("INSERT INTO docente (nome,cognome,email) " +
                 "VALUES (:nome,:cognome,:email)")
                 .setParameters(parameters)
                 .executeUpdate();
