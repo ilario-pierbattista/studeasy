@@ -3,6 +3,7 @@ package org.oop;
 import org.oop.controller.AgendaController;
 import org.oop.controller.MainController;
 import org.oop.controller.ProfiloController;
+import org.oop.controller.SegreteriaController;
 import org.oop.db.DatabaseConfig;
 import org.oop.model.dao.CorsoDAO;
 import org.oop.model.dao.DocenteDAO;
@@ -12,8 +13,12 @@ import org.oop.model.entities.Docente;
 import org.oop.model.entities.InsegnamentoOfferto;
 import org.oop.test.db.DatabaseManagerTest;
 import org.oop.view.Mainframe;
+import org.oop.view.Segreteria;
 
 import javax.swing.*;
+
+import static org.oop.general.Utils.inputDateControl;
+import static org.oop.general.Utils.inputMailControl;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,6 +37,7 @@ public class Main {
         Mainframe mainframe = new Mainframe();
         new AgendaController(mainframe.agenda);
         new ProfiloController(mainframe.profilo);
+        new SegreteriaController(mainframe.segreteria);
     }
 
     private static void testDatabase() {
@@ -94,7 +100,7 @@ public class Main {
             ee.printStackTrace();
             test_failed = true;
         } finally {
-            if(test_failed) {
+            if (test_failed) {
                 System.exit(0);
             }
         }
