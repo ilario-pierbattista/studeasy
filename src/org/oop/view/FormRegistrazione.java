@@ -16,7 +16,7 @@ public class FormRegistrazione extends AbstractView<Agenda> {
 
     public FormRegistrazione() {
         frame.setContentPane(panel1);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+       // frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.pack();
