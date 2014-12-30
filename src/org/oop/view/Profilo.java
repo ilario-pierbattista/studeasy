@@ -22,7 +22,7 @@ public class Profilo extends AbstractView<Mainframe> {
 
     //Colums e data servono per costruire il model della tabella
     private String[] colums = new String[]{"Insegnamento", "Ciclo", "CFU", "Data"};
-    private Object[][] data = new Object[0][3];
+    private Object[][] data;
     private DefaultTableModel model = new DefaultTableModel(data, colums);
     private int contarighe = 1;
 
