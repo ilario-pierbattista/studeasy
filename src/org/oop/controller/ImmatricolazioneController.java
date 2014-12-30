@@ -11,7 +11,7 @@ public class ImmatricolazioneController {
         this.view = view;
 
         view.insSubmitFormButtonListener(new SubmitFormAction());
-        view.insSubmitFormButtonListener(new QuitFormAction());
+        view.insQuitFormButtonListener(new QuitFormAction());
     }
 
     class SubmitFormAction extends AbstractAction {
