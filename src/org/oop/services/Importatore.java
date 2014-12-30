@@ -34,40 +34,27 @@ public class Importatore {
 
     public Importatore(boolean overrideSchema) {
         this.overrideSchema = overrideSchema;
-        records = new ArrayList<String>(10);
-        // Creazione del database
-        initSchema();
-        System.out.println("Inizializzazione completata\nLeggendo i dati");
-        // Importazione dei dati
-        try {
-            records = Utils.readFileLines(DATA_PATH);
-            header = parseLine(records.get(0));
-            records.remove(0);
-            data = parseData();
-            corsi = generateObjectStructure();
-            saveObjects();
-        } catch (RisorsaNonTrovata ee) {
-            ee.printStackTrace();
-        }
     }
 
     public Importatore() {
         this(false);
     }
 
-    /**
-     * Se il database non è presente oppure è stata specificata la sua sovrascrittura,
-     * allora lo crea
-     */
-    public void initSchema() {
-        DatabaseConfig config = DatabaseConfig.getInstance();
-        if(DatabaseUtils.databaseExists() && !overrideSchema) {
-            System.out.println("Il database esiste");
-        } else {
-            System.out.println("Il database non esiste, oppure è stata forzata la ricrezione dello stesso.\n" +
-                    "Inizializzazione del database in corso");
+    public void importaDati() {
+        if(!DatabaseUtils.databaseExists() || overrideSchema) {
             try {
+                // Creazione dello schema
                 DatabaseUtils.execSQLScript(SCHEMA_PATH);
+                // Lettura delle righe del file dei dati
+                records = Utils.readFileLines(DATA_PATH);
+                // Parsing dell'header del file csv
+                header = parseHeader();
+                // Parsing dei dati del file csv
+                data = parseData();
+                // Generazione degli oggetti da importare
+                corsi = generateObjectStructure();
+                // Salvataggio nel database
+                saveObjects();
             } catch (RisorsaNonTrovata ee) {
                 ee.printStackTrace();
             }
@@ -75,17 +62,28 @@ public class Importatore {
     }
 
     /**
-     * Parsa i dati dal file csv
+     * Prende l'header del file csv
      * @return
      */
-    public ArrayList<Map<String, String>> parseData() {
+    private ArrayList<String> parseHeader() {
+        ArrayList<String> header = parseLine(records.get(0));
+        records.remove(0);
+        return header;
+    }
+
+    /**
+     * Parsa i dati dal file csv
+     *
+     * @return
+     */
+    private ArrayList<Map<String, String>> parseData() {
         ArrayList<Map<String, String>> data = new ArrayList<Map<String, String>>(10);
         for (String line : records) {
             ArrayList<String> values = parseLine(line);
             Map<String, String> row = new HashMap<String, String>(10);
-            for(int i = 0; i < header.size(); i++) {
+            for (int i = 0; i < header.size(); i++) {
                 String key = header.get(i);
-                if(values.get(i).equals("\\N")) {
+                if (values.get(i).equals("\\N")) {
                     // Rappresentazione dei valori nulli
                     row.put(key, null);
                 } else {
@@ -99,9 +97,10 @@ public class Importatore {
 
     /**
      * Genera gli oggetti entities da salvare nel database
+     *
      * @return
      */
-    public ArrayList<Corso> generateObjectStructure() {
+    private ArrayList<Corso> generateObjectStructure() {
         ArrayList<Corso> corsi = new ArrayList<Corso>(16);
         ArrayList<Docente> docenti = new ArrayList<Docente>(100);
         Corso corso, corsoEsistente;
@@ -111,10 +110,10 @@ public class Importatore {
         /* Creazione dei corsi, degli insegnamenti e dei docenti
          * e mappatura degli stessi
          */
-        for(Map<String, String> row : data) {
+        for (Map<String, String> row : data) {
             corso = createCorsoFromRow(row);
             corsoEsistente = Utils.arraySearch(corso, corsi);
-            if(corsoEsistente == null) {
+            if (corsoEsistente == null) {
                 corsi.add(corso);
             } else {
                 corso = corsoEsistente;
@@ -122,7 +121,7 @@ public class Importatore {
 
             docente = createDocenteFromRow(row);
             docenteEsistente = Utils.arraySearch(docente, docenti);
-            if(docenteEsistente == null) {
+            if (docenteEsistente == null) {
                 docenti.add(docente);
             } else {
                 docente = docenteEsistente;
@@ -136,7 +135,7 @@ public class Importatore {
         return corsi;
     }
 
-    public void saveObjects() {
+    private void saveObjects() {
         CorsoDAO corsoDAO = new CorsoDAO();
         InsegnamentoOffertoDAO insegnamentoOffertoDAO = new InsegnamentoOffertoDAO();
         DocenteDAO docenteDAO = new DocenteDAO();
@@ -146,7 +145,7 @@ public class Importatore {
             for (InsegnamentoOfferto insegnamento : corso.getInsegnamentiOfferti()) {
                 Docente docente = insegnamento.getDocente();
                 // Controllo che il docente non sia già stato inserito nel database
-                if(docente.getId() == 0 || docenteDAO.find(docente.getId()) == null) {
+                if (docente.getId() == 0 || docenteDAO.find(docente.getId()) == null) {
                     docenteDAO.persist(docente);
                 }
 
@@ -178,6 +177,7 @@ public class Importatore {
 
     /**
      * Crea un oggetto corso da una riga di dati
+     *
      * @param row
      * @return
      */
@@ -192,6 +192,7 @@ public class Importatore {
 
     /**
      * Crea un oggetto insegnamento offerto da una riga di dati
+     *
      * @param row
      * @return
      */
@@ -207,6 +208,7 @@ public class Importatore {
 
     /**
      * Crea un oggetto docente da una riga di dati
+     *
      * @param row
      * @return
      */
@@ -222,14 +224,15 @@ public class Importatore {
      * Calcola i cfu totali di un corso di laurea.
      * In generale non è molto accurato, ma per la realtà di nostro interesse
      * va più che bene.
+     *
      * @param livello Livello del corso di laurea.
      * @return Cfu totali per conseguire la laurea.
      */
     private int calcolaCfuTotali(int livello) {
         int totale;
-        if(livello == 1) {
+        if (livello == 1) {
             totale = 180;
-        } else if(livello == 2) {
+        } else if (livello == 2) {
             totale = 120;
         } else {
             totale = 300;

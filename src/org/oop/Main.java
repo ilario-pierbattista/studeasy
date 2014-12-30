@@ -27,7 +27,7 @@ public class Main {
 
         new Controller(mainlayout);*/
 
-        //testImportatore();
+        testImportatore();
 
         Mainframe mainframe = new Mainframe();
         new AgendaController(mainframe.agenda);
@@ -41,8 +41,9 @@ public class Main {
     private static void testImportatore() {
         tests();
         try {
-            Importatore importatore = new Importatore(true);
-            //Importatore importatore = new Importatore();
+            //Importatore importatore = new Importatore(true);
+            Importatore importatore = new Importatore();
+            importatore.importaDati();
         } catch (Exception ee) {
             ee.printStackTrace();
         }
