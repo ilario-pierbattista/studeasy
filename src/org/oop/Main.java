@@ -27,7 +27,7 @@ public class Main {
 
         new Controller(mainlayout);*/
 
-        testImportatore();
+        //testImportatore();
 
         Mainframe mainframe = new Mainframe();
         new AgendaController(mainframe.agenda);
