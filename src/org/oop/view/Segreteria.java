@@ -10,11 +10,16 @@ public class Segreteria extends AbstractView<Segreteria> {
     public JPanel segreteriapanel;
     private JTabbedPane maintabpane;
     private Immatricolazione immatricolazione = new Immatricolazione();
+    private Tirocinio tirocinio = new Tirocinio();
+    private Tesi tesi = new Tesi();
 
     public Segreteria() {
         super();
 
         maintabpane.addTab("Immatricolazione", immatricolazione.immatricolazionepanel);
+        maintabpane.addTab("Tirocinio",tirocinio.tirociniopanel);
+        maintabpane.addTab("Tesi", tesi.tesipanel);
+
     }
 
 }
