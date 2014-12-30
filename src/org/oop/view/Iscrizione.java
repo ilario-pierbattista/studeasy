@@ -20,6 +20,7 @@ public class Iscrizione {
         tabellaiscrizione.setModel(model);
         Object[] appoggio = {"2","2013/2014","ING","20","160" };
         model.addRow(appoggio);
+
     }
 
 
