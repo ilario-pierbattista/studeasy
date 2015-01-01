@@ -2,6 +2,7 @@ package org.oop.model.dao;
 
 
 import org.oop.db.DatabaseManager;
+import org.oop.db.SQLParameters;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,6 +32,8 @@ public abstract class AbstractDAO<T> implements DAOInterface<T> {
         }
         return entita;
     }
+
+    protected abstract SQLParameters generaSQLParams(T e);
 
     protected abstract T generaEntita(ResultSet rs);
 

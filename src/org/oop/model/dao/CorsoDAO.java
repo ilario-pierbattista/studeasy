@@ -43,10 +43,7 @@ public class CorsoDAO extends AbstractDAO<Corso> {
 
     @Override
     public void persist(Corso entity) {
-        SQLParameters parameters = new SQLParameters();
-        parameters.add("nome", entity.getNome())
-                .add("livello", entity.getLivello())
-                .add("totale_cfu", entity.getTotaleCfu());
+        SQLParameters parameters = generaSQLParams(entity);
         int id = db.createSqlStatement("INSERT INTO corso (nome, livello, totale_cfu) VALUES (:nome, :livello, :totale_cfu)")
                 .setParameters(parameters).executeUpdate();
         entity.setId(id);
@@ -66,12 +63,21 @@ public class CorsoDAO extends AbstractDAO<Corso> {
 
     @Override
     public void update(Corso entity) {
-
+        SQLParameters parameters = generaSQLParams(entity);
+        db.createSqlStatement("UPDATE corso " +
+                "SET nome = :nome, livello = :livello, totale_cfu = :totale_cfu " +
+                "WHERE id = :id")
+                .setParameters(parameters)
+                .executeUpdate();
     }
 
     @Override
     public void remove(Corso entity) {
-
+        SQLParameters parameters = new SQLParameters();
+        parameters.add("id", entity.getId());
+        db.createSqlStatement("DELETE FROM corso WHERE id = :id")
+                .setParameters(parameters)
+                .executeUpdate();
     }
 
     @Override
@@ -91,5 +97,15 @@ public class CorsoDAO extends AbstractDAO<Corso> {
             ee.printStackTrace();
         }
         return corso;
+    }
+
+    @Override
+    protected SQLParameters generaSQLParams(Corso e) {
+        SQLParameters parameters = new SQLParameters();
+        parameters.add("id", e.getId())
+                .add("nome", e.getNome())
+                .add("livello", e.getLivello())
+                .add("totale_cfu", e.getTotaleCfu());
+        return parameters;
     }
 }

@@ -4,6 +4,7 @@ package org.oop.db;
 import org.oop.general.Utils;
 
 import java.sql.*;
+import java.util.Stack;
 
 /**
  * Incapsula l'accesso alla connessione, mettendo a disposizione
@@ -15,12 +16,16 @@ public class DatabaseManager {
     private String sql;
     private Connection connection;
     private Statement statement;
+    private Stack<Connection> auxiliaryConnection;
+    private Stack<Statement> auxiliaryStatement;
     private static DatabaseManager instance;
 
     /**
      * Configurazione del manager
      */
     public DatabaseManager() {
+        auxiliaryConnection = new Stack<Connection>();
+        auxiliaryStatement = new Stack<Statement>();
         config = DatabaseConfig.getInstance();
         instance = this;
     }
@@ -97,17 +102,25 @@ public class DatabaseManager {
      *
      * @return
      */
-    public ResultSet getResult() {
+    public ResultSet getResult(boolean auxiliaryConnectionRequired) {
         ResultSet rs = null;
         try {
-            if(connection == null || connection.isClosed()) {
+            Statement stmt = statement;
+            if((connection == null || connection.isClosed()) && !auxiliaryConnectionRequired) {
                 openConnection(false);
+            } else if(auxiliaryConnectionRequired) {
+                openAuxiliaryConnection();
+                stmt = auxiliaryStatement.peek();
             }
-            rs = statement.executeQuery(sql);
+            rs = stmt.executeQuery(sql);
         } catch (SQLException ee) {
             ee.printStackTrace();
         }
         return rs;
+    }
+
+    public ResultSet getResult() {
+        return getResult(false);
     }
 
     /**
@@ -196,6 +209,35 @@ public class DatabaseManager {
             connection.setAutoCommit(autoCommit);
             statement = connection.createStatement();
         } catch (ClassNotFoundException ee) {
+            ee.printStackTrace();
+        }
+    }
+
+    private void openAuxiliaryConnection() throws SQLException {
+        System.out.println("OPENING AUXILIARY CONNECTION #"+auxiliaryConnection.size());
+        try {
+            Class.forName(config.jdbc_driver);
+            Connection conn = DriverManager.getConnection(config.db_url, config.user, config.pass);
+            Statement stmt = conn.createStatement();
+            auxiliaryConnection.push(conn);
+            auxiliaryStatement.push(stmt);
+        } catch (ClassNotFoundException ee) {
+            ee.printStackTrace();
+        }
+    }
+
+    public void closeAuxiliaryConnection() throws SQLException {
+        System.out.println("CLOSING AUXILIARY CONNECTION #"+auxiliaryConnection.size());
+        try {
+            Connection conn = auxiliaryConnection.pop();
+            Statement stmt = auxiliaryStatement.pop();
+            if(stmt != null) {
+                stmt.close();
+            }
+            if(conn != null) {
+                conn.close();
+            }
+        } catch (SQLException ee) {
             ee.printStackTrace();
         }
     }

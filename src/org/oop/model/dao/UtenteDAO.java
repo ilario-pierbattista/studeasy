@@ -27,15 +27,26 @@ public class UtenteDAO extends AbstractDAO<Utente> {
     }
 
     @Override
-    public Utente find(int id) {
+    protected SQLParameters generaSQLParams(Utente e) {
+        SQLParameters parameters = new SQLParameters();
+        parameters.add("matricola", e.getMatricola())
+                .add("nome", e.getNome())
+                .add("cognome", e.getCognome())
+                .add("email", e.getEmail())
+                .add("corso", e.getLibretto().getCorso().getId());
+        return parameters;
+    }
+
+    @Override
+    public Utente find(int matricola) {
         Utente utente = null;
         SQLParameters parameters = new SQLParameters();
-        parameters.add("id", id);
-        ResultSet rs = db.createSqlStatement("SELECT * FROM utente WHERE id = :id")
+        parameters.add("matricola", matricola);
+        ResultSet rs = db.createSqlStatement("SELECT * FROM utente WHERE matricola = :matricola")
                 .setParameters(parameters)
                 .getResult();
         try {
-            if(rs.next()) {
+            if (rs.next()) {
                 utente = generaEntita(rs);
             }
         } catch (SQLException ee) {

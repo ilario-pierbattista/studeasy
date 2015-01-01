@@ -36,8 +36,10 @@ Create table insegnamento(
 	opzionale boolean default false,
 	corso int default null,
 	docente int default null,
-	foreign key (corso) references corso(id),
+	foreign key (corso) references corso(id)
+		on delete cascade,
 	foreign key (docente) references docente(id)
+		on delete set null
 );
 
 Create table insegnamento_utente(

@@ -1,14 +1,19 @@
 package org.oop;
 
 import org.oop.controller.AgendaController;
+import org.oop.controller.FormRegistrazioneController;
 import org.oop.controller.ProfiloController;
 import org.oop.controller.SegreteriaController;
+import org.oop.model.dao.CorsoDAO;
+import org.oop.model.entities.Corso;
 import org.oop.services.Importatore;
 import org.oop.test.db.DatabaseManagerTest;
 import org.oop.test.db.DatabaseUtilsTest;
+import org.oop.view.FormRegistrazione;
 import org.oop.view.Mainframe;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -27,21 +32,29 @@ public class Main {
 
         new Controller(mainlayout);*/
 
-        //testImportatore();
+        mainInitProcedure();
 
+        CorsoDAO corsoDAO = new CorsoDAO();
+        ArrayList<Corso> corsi = corsoDAO.findAll();
+        System.out.println(corsi.toString());
+
+        /*
+        FormRegistrazione registrazione = new FormRegistrazione();
+        FormRegistrazioneController regCtrl = new FormRegistrazioneController(registrazione);
+        */
+
+        /*
         Mainframe mainframe = new Mainframe();
         new AgendaController(mainframe.agenda);
         new ProfiloController(mainframe.profilo);
-        new SegreteriaController(mainframe.segreteria);
+        new SegreteriaController(mainframe.segreteria); */
     }
 
-    /**
-     * Test per l'importazione dei dati
-     */
-    private static void testImportatore() {
+    private static void mainInitProcedure() {
         tests();
         try {
             //Importatore importatore = new Importatore(true);
+            // Se il database esiste, non viene ricreato
             Importatore importatore = new Importatore();
             importatore.importaDati();
         } catch (Exception ee) {
