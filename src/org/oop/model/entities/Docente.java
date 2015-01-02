@@ -65,4 +65,18 @@ public class Docente {
                 ", email='" + email + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Docente)) return false;
+
+        Docente docente = (Docente) o;
+
+        if (cognome != null ? !cognome.equals(docente.cognome) : docente.cognome != null) return false;
+        if (email != null ? !email.equals(docente.email) : docente.email != null) return false;
+        if (nome != null ? !nome.equals(docente.nome) : docente.nome != null) return false;
+
+        return true;
+    }
 }

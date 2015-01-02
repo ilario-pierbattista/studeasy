@@ -109,7 +109,6 @@ public class InsegnamentoOfferto {
 
         if (anno != that.anno) return false;
         if (cfu != that.cfu) return false;
-        if (id != that.id) return false;
         if (opzionale != that.opzionale) return false;
         if (semestre != that.semestre) return false;
         if (!nome.equals(that.nome)) return false;

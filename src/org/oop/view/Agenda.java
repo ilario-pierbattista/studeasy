@@ -1,7 +1,6 @@
 package org.oop.view;
 
 import javax.swing.*;
-import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -63,7 +62,7 @@ public class Agenda extends AbstractView<Agenda> {
     }
 
     /**
-     * Metodo che permette di eleiminare un elemento dalla lista
+     * Metodo che permette di eliminare un elemento dalla lista
      */
     public void deleteCiclo() {
         if (list1.getSelectedIndex() == -1) {

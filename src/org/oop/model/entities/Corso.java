@@ -1,6 +1,5 @@
 package org.oop.model.entities;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -26,9 +25,11 @@ public class Corso {
     }
 
 
-    //il seguente è il costruttore che inizializza i dati di deafult
+    /**
+     * Costruttore base
+     */
     public Corso () {
-        ArrayList<InsegnamentoOfferto> insegnamentiOfferti = new ArrayList<InsegnamentoOfferto>(1);
+        insegnamentiOfferti = new ArrayList<InsegnamentoOfferto>(20);
     }
 
 
@@ -42,7 +43,7 @@ public class Corso {
     public ArrayList<InsegnamentoOfferto> getInsegnamentiObbligatori() {
         ArrayList<InsegnamentoOfferto> insegnamentiObbligatori = new ArrayList<InsegnamentoOfferto>(10);
         for (InsegnamentoOfferto insegnamento : insegnamentiOfferti) {
-            if (insegnamento.isOpzionale() == false) {
+            if (!insegnamento.isOpzionale()) {
                 insegnamentiObbligatori.add(insegnamento);
             }
         }
@@ -58,7 +59,7 @@ public class Corso {
     public ArrayList<InsegnamentoOfferto> getInsegnamentiOpzionali() {
         ArrayList<InsegnamentoOfferto> insegnamentiOpzionali = new ArrayList<InsegnamentoOfferto>(10);
         for (InsegnamentoOfferto insegnamento : insegnamentiOfferti) {
-            if (insegnamento.isOpzionale() == true) {
+            if (insegnamento.isOpzionale()) {
                 insegnamentiOpzionali.add(insegnamento);
             }
         }
@@ -92,6 +93,18 @@ public class Corso {
         return this;
     }
 
+    public String getNomeLivello() {
+        String nome;
+        if(livello == 1) {
+            nome = "Triennale";
+        } else if(livello == 2) {
+            nome = "Magistrale";
+        } else {
+            nome = "Ciclo Unico";
+        }
+        return nome;
+    }
+
     public int getTotaleCfu() {
         return totaleCfu;
     }
@@ -121,6 +134,20 @@ public class Corso {
             found = insegnamentiOfferti.get(i).equals(insegnamentoOfferto);
         }
         return found;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Corso)) return false;
+
+        Corso corso = (Corso) o;
+
+        if (livello != corso.livello) return false;
+        if (totaleCfu != corso.totaleCfu) return false;
+        if (nome != null ? !nome.equals(corso.nome) : corso.nome != null) return false;
+
+        return true;
     }
 
     @Override

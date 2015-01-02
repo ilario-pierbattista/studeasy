@@ -19,13 +19,12 @@ public class DocenteDAO extends AbstractDAO<Docente> {
         ResultSet rs = db.createSqlStatement("SELECT * FROM docente WHERE id = :id")
                 .setParameters(parameters).getResult();
         try {
-            if(rs.first()) {
+            if (rs.first()) {
                 docente = generaEntita(rs);
             }
+            rs.close();
         } catch (SQLException ee) {
             ee.printStackTrace();
-        } finally {
-            db.closeConnection();
         }
         return docente;
     }
@@ -40,18 +39,15 @@ public class DocenteDAO extends AbstractDAO<Docente> {
     @Override
     public ArrayList<Docente> findBy(SQLParameters params) {
         String sql = "SELECT * FROM docente " +
-                "WHERE ".concat(DatabaseUtils.generateAndCondition(params));
+                "WHERE ".concat(DatabaseUtils.generateCondition(params));
         ResultSet rs = db.createSqlStatement(sql).setParameters(params).getResult();
         return generaArrayEntita(rs);
     }
 
     @Override
     public void persist(Docente entity) {
-        SQLParameters parameters = new SQLParameters();
-        parameters.add("nome", entity.getNome())
-                .add("cognome", entity.getCognome())
-                .add("email", entity.getEmail());
-        int key = db.createSqlStatement("INSERT INTO docente (nome,cognome,email)" +
+        SQLParameters parameters = generaSQLParams(entity);
+        int key = db.createSqlStatement("INSERT INTO docente (nome,cognome,email) " +
                 "VALUES (:nome,:cognome,:email)")
                 .setParameters(parameters)
                 .executeUpdate();
@@ -60,12 +56,21 @@ public class DocenteDAO extends AbstractDAO<Docente> {
 
     @Override
     public void update(Docente entity) {
-
+        SQLParameters parameters = generaSQLParams(entity);
+        db.createSqlStatement("UPDATE docente " +
+                "SET nome = :nome, cognome = :cognome, email = :email " +
+                "WHERE id = :id")
+                .setParameters(parameters)
+                .executeUpdate();
     }
 
     @Override
     public void remove(Docente entity) {
-
+        SQLParameters parameters = new SQLParameters();
+        parameters.add("id", entity.getId());
+        db.createSqlStatement("DELETE FROM docente WHERE id = :id")
+                .setParameters(parameters)
+                .executeUpdate();
     }
 
     @Override
@@ -80,5 +85,15 @@ public class DocenteDAO extends AbstractDAO<Docente> {
             ee.printStackTrace();
         }
         return docente;
+    }
+
+    @Override
+    protected SQLParameters generaSQLParams(Docente e) {
+        SQLParameters parameters = new SQLParameters();
+        parameters.add("id", e.getId())
+                .add("nome", e.getNome())
+                .add("cognome", e.getCognome())
+                .add("email", e.getEmail());
+        return parameters;
     }
 }

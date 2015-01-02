@@ -4,7 +4,6 @@ package org.oop.model.dao;
 import org.oop.db.SQLParameters;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public interface DAOInterface<T> {
 

@@ -3,9 +3,7 @@ package org.oop.model.entities;
 import org.oop.model.Agenda;
 import org.oop.model.Libretto;
 
-/**
- * Created by MelvinMancini on 20/12/14.
- */
+
 public class Utente {
 
     /* Dichiarazione degli attributi */
@@ -27,7 +25,9 @@ public class Utente {
     }
 
     //il seguente è il costruttore che inizializza i dati di deafult
-    public Utente() {}
+    public Utente() {
+    }
+
     public int getMatricola() {
         return matricola;
     }
@@ -81,6 +81,4 @@ public class Utente {
         this.libretto = libretto;
         return this;
     }
-
-
 }

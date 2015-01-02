@@ -27,10 +27,9 @@ public class InsegnamentoOffertoDAO extends AbstractDAO<InsegnamentoOfferto> {
             if (rs.first()) {
                 ins = generaEntita(rs);
             }
+            rs.close();
         } catch (SQLException ee) {
             ee.printStackTrace();
-        } finally {
-            db.closeConnection();
         }
         return ins;
     }
@@ -45,48 +44,47 @@ public class InsegnamentoOffertoDAO extends AbstractDAO<InsegnamentoOfferto> {
     @Override
     public ArrayList<InsegnamentoOfferto> findBy(SQLParameters params) {
         String sql = "SELECT * FROM insegnamento " +
-                "WHERE ".concat(DatabaseUtils.generateAndCondition(params));
+                "WHERE ".concat(DatabaseUtils.generateCondition(params));
         ResultSet rs = db.createSqlStatement(sql).setParameters(params).getResult();
         return generaArrayEntita(rs);
     }
 
     @Override
     public void persist(InsegnamentoOfferto ins) {
-        SQLParameters params = new SQLParameters();
-        params.add("nome", ins.getNome())
-                .add("cfu", ins.getCfu())
-                .add("anno", ins.getAnno())
-                .add("semestre", ins.getSemestre())
-                .add("opzionale", ins.isOpzionale());
-        if (ins.getDocente() != null) {
-            params.add("docente", ins.getDocente().getId());
-        }
-        int id = db.createSqlStatement("INSERT INTO insegnamento (nome,cfu,anno,semestre,opzionale,docente)" +
+        SQLParameters params = generaSQLParams(ins);
+        int id = db.createSqlStatement("INSERT INTO insegnamento (nome,cfu,anno,semestre,opzionale,docente) " +
                 "VALUES (:nome, :cfu, :anno, :semestre, :opzionale, :docente)")
                 .setParameters(params)
                 .executeUpdate();
+
         ins.setId(id);
     }
 
     @Override
     public void update(InsegnamentoOfferto entity) {
-        SQLParameters parameters = new SQLParameters();
-        parameters.add("id", entity.getId())
-                .add("nome", entity.getNome())
-                .add("cfu", entity.getCfu())
-                .add("anno", entity.getAnno())
-                .add("semestre", entity.getSemestre())
-                .add("opzionale", entity.isOpzionale());
-        if(entity.getDocente() != null) {
-            parameters.add("docente", entity.getDocente().getId());
-        } else {
-            parameters.add("docente", null);
-        }
+        SQLParameters parameters = generaSQLParams(entity);
         db.createSqlStatement("UPDATE insegnamento " +
                 "SET nome = :nome, cfu = :cfu, anno = :anno, semestre = :semestre, " +
                 "opzionale = :opzionale, docente = :docente WHERE id = :id")
                 .setParameters(parameters)
                 .executeUpdate();
+    }
+
+    @Override
+    protected SQLParameters generaSQLParams(InsegnamentoOfferto e) {
+        SQLParameters parameters = new SQLParameters();
+        parameters.add("id", e.getId())
+                .add("nome", e.getNome())
+                .add("cfu", e.getCfu())
+                .add("anno", e.getAnno())
+                .add("semestre", e.getSemestre())
+                .add("opzionale", e.isOpzionale());
+        if (e.getDocente() != null) {
+            parameters.add("docente", e.getDocente().getId());
+        } else {
+            parameters.add("docente", null);
+        }
+        return parameters;
     }
 
     @Override

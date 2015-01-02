@@ -4,7 +4,6 @@
 package org.oop.model.entities;
 
 import java.sql.Time;
-import java.util.Date;
 
 public class AttivitaPeriodica extends Attivita {
 
