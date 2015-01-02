@@ -17,7 +17,8 @@ import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
-        /** @TODO Eliminare questi messaggi, servono solo per rendersi conto
+        /** @TODO
+         * Eliminare questi messaggi, servono solo per rendersi conto
          * della velocità di esecuzione del programma
          */
         System.out.println("Programma avviato");

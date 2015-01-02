@@ -183,4 +183,22 @@ public class Utils {
         String[] array = s.split(" ");
         return array[i].toLowerCase();
     }
+
+    /**
+     * controlla che il codice fiscale passato sia scritto in maniera corretta
+     */
+
+    public static boolean inputCodiceFiscaleControl(String s) {
+        Pattern p = Pattern.compile("[a-zA-Z]{6}\\d\\d[a-zA-Z]\\d\\d[a-zA-Z]\\d\\d\\d[a-zA-Z]");
+        Matcher m = p.matcher(s);
+        return m.matches();
+    }
+    /**
+     * controlla che la stringa passata sia di due letttere (Provincia)
+     */
+    public static boolean inputProvinciaControl(String s) {
+        Pattern p = Pattern.compile("[a-zA-Z]{2}");
+        Matcher m = p.matcher(s);
+        return m.matches();
+    }
 }

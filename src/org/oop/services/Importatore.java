@@ -76,6 +76,8 @@ public class Importatore {
      *
      * @return
      */
+
+    //file csv = file scritto per importare o esportare una tabella
     private ArrayList<Map<String, String>> parseData() {
         ArrayList<Map<String, String>> data = new ArrayList<Map<String, String>>(10);
         for (String line : records) {

@@ -55,6 +55,7 @@ public class DatabaseUtils {
         DatabaseConfig config = DatabaseConfig.getInstance();
         Connection connection = null;
         Statement statement = null;
+        //oggetto che permette di recuperare le info ottenute con una query (ResultSet)
         ResultSet rs;
         try {
             Class.forName(config.jdbc_driver);

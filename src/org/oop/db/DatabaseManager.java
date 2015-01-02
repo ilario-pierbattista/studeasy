@@ -22,6 +22,7 @@ public class DatabaseManager {
      * Configurazione del manager
      */
     public DatabaseManager() {
+        //il metodo getInstance() restituisce l'unica istanza della classe a cui è riferito
         config = DatabaseConfig.getInstance();
         instance = this;
     }
@@ -43,6 +44,7 @@ public class DatabaseManager {
      * @param sql
      * @return
      */
+    //lo statement è una sorta di connessione che si occupa di inviare le istruzioni al database(?)
     public DatabaseManager createSqlStatement(String sql) {
         this.sql = sql;
         return this;
@@ -123,6 +125,7 @@ public class DatabaseManager {
     public int executeUpdate() {
         int auto_generated_key = 0;
         try {
+            //l'autocommit è di default impostata. (una commit-promessa- serve a terminare "l'azione" col database)
             if(connection == null || connection.isClosed() || connection.getAutoCommit()) {
                 openConnection(false);
             }
@@ -169,6 +172,7 @@ public class DatabaseManager {
     /**
      * Esegue il rollback
      */
+    //torna indietro all'ultimo salvataggio
     public void rollback() {
         try {
             connection.rollback();
