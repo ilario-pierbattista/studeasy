@@ -58,7 +58,7 @@ Create table ciclo(
 	label varchar(250) not null,
 	inizio date not null,
 	fine date not null,
-	utente int not null,
+	utente int,
 	foreign key (utente) references utente(matricola)
 );
 

@@ -4,7 +4,8 @@ package org.oop.db;
 import org.oop.general.Utils;
 
 import java.sql.*;
-import java.util.Stack;
+import java.sql.Date;
+import java.util.*;
 
 /**
  * Incapsula l'accesso alla connessione, mettendo a disposizione
@@ -78,6 +79,9 @@ public class DatabaseManager {
                 replace = Utils.singleQuotesToString(Utils.escapeSql((String) param.getValue()));
             } else if (param.getValue() instanceof Boolean) {
                 replace = (Boolean) param.getValue() ? "TRUE" : "FALSE";
+            } else if (param.getValue() instanceof java.util.Date) {
+                String dateString = DatabaseUtils.getDateStringForSQL((java.util.Date) param.getValue());
+                replace = Utils.singleQuotesToString(dateString);
             } else if (param.getValue() == null) {
                 replace = "NULL";
             }

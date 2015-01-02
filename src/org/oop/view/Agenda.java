@@ -1,16 +1,17 @@
 package org.oop.view;
 
+import org.oop.model.entities.Ciclo;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Agenda extends AbstractView<Agenda> {
     private static Agenda instance;
     public JPanel agendapanel;
 
-    private JScrollPane sidebarpane;
     private JSplitPane splitpane;
-    private JButton addinsbutton;
     private JPanel sidebarpanel;
     private JPanel activitypanel;
     private JLabel insegnamentolabel;
@@ -20,63 +21,47 @@ public class Agenda extends AbstractView<Agenda> {
     private JButton laboratorioButton;
     private JButton esameButton;
     private JPanel activitiespanel;
-    private JLabel sidebartitle;
-
-    private DefaultListModel listaModelCicli;
-    private int contatorecicli = 1;
-    private JList list1;
-
     private JButton progettobutton;
     private JButton seminariobutton;
-    private JButton deleteelement;
+    private JLabel sidebartitle;
+    private JLabel sidebardescription;
+    private JScrollPane cicliscrollpane;
+    private JScrollPane insegnamentiscrollpane;
+    private JSplitPane insidesplitpane;
+    private JList<Ciclo> ciclilist;
+    private JList insegnamentilist;
+    private JButton addciclobutton;
+    private JButton removeciclobutton;
 
     public Agenda() {
         //Setto istance a questa instanza in modo da rendere statica la vista
         instance = this;
         //Setta la larghezza della sidebar
-        splitpane.setDividerLocation(200 + splitpane.getInsets().left);
+        splitpane.setDividerLocation(230 + splitpane.getInsets().left);
         //Elimina i bordi
         splitpane.setBorder(null);
-        sidebarpane.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(126, 126, 126)));
+        sidebarpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(126, 126, 126)));
+
+        insidesplitpane.setDividerLocation(60 + insidesplitpane.getInsets().top);
+        insidesplitpane.setBorder(null);
 
         //Imposta il layout a 2 colonne
         activitiespanel.setLayout(new GridLayout(0, 2, 20, 20));
-
-        //Parametri per la creazione e gestione della lista dei cicli
-        listaModelCicli = new DefaultListModel();
-        list1.setModel(listaModelCicli);
-        list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     public void addAttivita(AttivitaView attivita) {
         activitiespanel.add(attivita.activitypanel);
     }
 
-    /**
-     * Metodo che permette di aggiungere un elemento alla lista dei cicli ogni volta che si preme
-     * il bottone addinsbutton
-     */
-    public void addCiclo() {
-        listaModelCicli.addElement("elemento" + contatorecicli);
-        contatorecicli++;
-    }
-
-    /**
-     * Metodo che permette di eliminare un elemento dalla lista
-     */
-    public void deleteCiclo() {
-        if (list1.getSelectedIndex() == -1) {
-            System.out.println("Non hai selezionato nessun ciclo");
-        } else {
-            listaModelCicli.remove(list1.getSelectedIndex());
+    public void setListaCicli(ArrayList<Ciclo> list) {
+        DefaultListModel<Ciclo> cicliListModel = new DefaultListModel<Ciclo>();
+        for (Ciclo ciclo : list) {
+            cicliListModel.addElement(ciclo);
         }
+        ciclilist.setModel(cicliListModel);
     }
 
     /* Getters */
-    public JButton getAddinsbutton() {
-        return addinsbutton;
-    }
-
     public JLabel getInsegnamentolabel() {
         return insegnamentolabel;
     }
@@ -102,11 +87,30 @@ public class Agenda extends AbstractView<Agenda> {
     }
 
     public JButton getSeminariobutton() {
-
         return seminariobutton;
     }
 
+    public JList getCiclilist() {
+        return ciclilist;
+    }
+
+    public JButton getRemoveciclobutton() {
+        return removeciclobutton;
+    }
+
+    public JButton getAddciclobutton() {
+        return addciclobutton;
+    }
+
     /* Listeners setters */
+    public void addCicloButtonListener(ActionListener listener) {
+        addciclobutton.addActionListener(listener);
+    }
+
+    public void addRemoveCicloButtonListener(ActionListener listener) {
+        removeciclobutton.addActionListener(listener);
+    }
+
     public void addLezioneButtonListener(ActionListener listener) {
         lezioneButton.addActionListener(listener);
     }
@@ -119,10 +123,6 @@ public class Agenda extends AbstractView<Agenda> {
         laboratorioButton.addActionListener(listener);
     }
 
-    public void addInsButtonListener(ActionListener listener) {
-        addinsbutton.addActionListener(listener);
-    }
-
     public void addProgettoButtonListener(ActionListener listener) {
         progettobutton.addActionListener(listener);
     }
@@ -131,11 +131,8 @@ public class Agenda extends AbstractView<Agenda> {
         seminariobutton.addActionListener(listener);
     }
 
-    public void deleteListElementListener(ActionListener listener) {
-        deleteelement.addActionListener(listener);
-    }
 
-    public static Agenda getInstance(){
+    public static Agenda getInstance() {
         return instance;
     }
 

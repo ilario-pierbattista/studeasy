@@ -36,7 +36,7 @@ public class FormRegistrazioneController {
     }
 
     /**
-     * Ricerca nel database se esistegià un utente registrato.
+     * Ricerca nel database se esiste già un utente registrato.
      * Nel caso esistesse già un utente registrato, imposta il form
      * per la modifica dei dati.
      * Nel caso in cui non esistesse alcun utente registrato, imposta
