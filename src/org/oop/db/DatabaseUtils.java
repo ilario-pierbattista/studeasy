@@ -5,7 +5,9 @@ import org.oop.general.Utils;
 import org.oop.general.exceptions.RisorsaNonTrovata;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class DatabaseUtils {
 
@@ -131,5 +133,16 @@ public class DatabaseUtils {
                 ee.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Crea, da un oggetto java.util.Date, una stringa adatta
+     * ad una chiamata SQL
+     * @param date
+     * @return
+     */
+    protected static String getDateStringForSQL(java.util.Date date) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(date);
     }
 }
