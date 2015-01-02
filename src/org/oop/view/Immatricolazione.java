@@ -3,7 +3,7 @@ package org.oop.view;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class Immatricolazione {
+public class Immatricolazione extends AbstractView  {
     public JPanel immatricolazionepanel;
     private JButton submit;
     private JButton quit;
@@ -28,10 +28,11 @@ public class Immatricolazione {
 
     public Immatricolazione() {
         super();
-
     }
 
-
+    private void createUIComponents() {
+        datanascita = new JFormattedTextField(dateformat);
+    }
     public void insSubmitFormButtonListener (ActionListener l) {
         submit.addActionListener(l);
     }
