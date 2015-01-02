@@ -1,11 +1,9 @@
 package org.oop.controller;
 
 import org.oop.general.Utils;
-import org.oop.view.Agenda;
-import org.oop.view.AttivitaView;
-import org.oop.view.FormAttivita;
-import org.oop.view.Mainframe;
+import org.oop.view.*;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 
@@ -19,13 +17,27 @@ public class AgendaController {
         view.addLaboratorioButtonListener(new AddAttivitaAction());
         view.addSeminarioButtonListener(new AddAttivitaAction());
         view.addProgettoButtonListener(new AddAttivitaAction());
+        view.addCicloButtonListener(new AddCicloButton());
+        view.addRemoveCicloButtonListener(new RemoveCicloButton());
 
-        view.addInsButtonListener(new AddInsButtonAction());
-        view.deleteListElementListener(new DeleteListElementAction());
-
+        setListaCicliModel();
 
     }
 
+    /**
+     * Metodo che setta il model della lista dei cicli
+     */
+    public void setListaCicliModel(){
+        //Dovra essere preso dal db
+        view.setListaCicli(new DefaultListModel());
+    }
+
+    /**
+     * Metodo che aggiunge un ciclo alla lista dei cicli
+     */
+    public void addCiclo(Object el){
+        // modelListacicli.addElement(el);
+    }
 
     /**
      * Action per aggiungere un'attività di tipo lezione
@@ -98,41 +110,23 @@ public class AgendaController {
     }
 
     /**
-     * Action per aggiungere la lista dei cicli nella sidebar dell'Agenda
+     * Action per aprire il form di aggiunta ciclo
      */
-    class AddInsButtonAction extends AbstractAction {
+    class AddCicloButton extends AbstractAction {
         @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-
-            view.addCiclo();
-            Mainframe.refreshView();
+        public void actionPerformed(ActionEvent e) {
+            FormCiclo cicloview = new FormCiclo();
+            FormCicloController controllerciclo = new FormCicloController(cicloview);
         }
     }
 
     /**
-     * Listener che permette di selezionare un elemento dalla lista della sidebar dell'Agenda. Una volta selezionato
-     * stampa in output la stringa "Ciao a tutti" e l'elemento selezionato
+     * Action per rimuovere un ciclo
      */
-    /*class SelectionListener implements ListSelectionListener {
-        public void valueChanged(ListSelectionEvent e) {
-            if(!e.getValueIsAdjusting()) {
-                JList list = (JList)e.getSource();
-                System.out.println("cioa a tutti");
-                Object[] selectedItems = list.getSelectedValues();
-                for(int i=0;i<selectedItems.length;i++)
-                    System.out.println(selectedItems[i].toString() + "\n");
-            }
-        }
-    }*/
-
-    /**
-     * Metodo che gestisce il click del bottone elemina nella sidebar del form Agenda. Richiama il metodo deleteCiclo()
-     * della classe Agenda
-     */
-    class DeleteListElementAction extends AbstractAction {
+    class RemoveCicloButton extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.deleteCiclo();
+
         }
     }
 

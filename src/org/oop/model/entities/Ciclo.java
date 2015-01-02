@@ -72,4 +72,10 @@ public class Ciclo {
         this.insegnamenti = insegnamenti;
         return this;
     }
+
+    @Override
+    public String toString(){
+        return this.label;
+    }
+
 }
