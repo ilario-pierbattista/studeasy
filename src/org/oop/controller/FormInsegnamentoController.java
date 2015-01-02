@@ -2,6 +2,7 @@ package org.oop.controller;
 
 import org.oop.db.SQLParameters;
 import org.oop.view.FormInsegnamento;
+import org.oop.view.Profilo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,9 +13,11 @@ import java.awt.event.ActionListener;
  */
 public class FormInsegnamentoController {
     private FormInsegnamento view;
+    private Profilo profiloView;
 
-    public FormInsegnamentoController(FormInsegnamento view) {
+    public FormInsegnamentoController(FormInsegnamento view, Profilo profiloView) {
         this.view = view;
+        this.profiloView=profiloView;
         view.addConfermaButtonListener(new ConfermaButtonAction());
         view.addAnnullaButtonListener(new AnnullaButtonAction());
         view.addRadioListener(new RadioAction());
@@ -30,7 +33,8 @@ public class FormInsegnamentoController {
             String cicloinsegnamento = view.getFormattedTextFieldCiclo().getText();
             String datainsegnamento = view.getFormattedTextFieldData().getText();
             String votoinsegnamento = view.getFormattedTextFieldVoto().getText();
-
+            profiloView.addElementTable(nomeinsegnamento,cicloinsegnamento,cfuinsegnamento,datainsegnamento,votoinsegnamento);
+            view.frame.dispose();
             //verificare che i campi siano corretti e inviarli al metodo oppurtuno in modo tale da inserire una riga nella JTable del form profilo
         }
     }

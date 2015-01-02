@@ -23,9 +23,9 @@ public class ProfiloController {
         public void actionPerformed(ActionEvent e) {
            // view.addElementTable();
             FormInsegnamento forminsegnamento = new FormInsegnamento();
-            FormInsegnamentoController forminsegnamentocontroller = new FormInsegnamentoController(forminsegnamento);
+            FormInsegnamentoController forminsegnamentocontroller = new FormInsegnamentoController(forminsegnamento,view);
             Mainframe.refreshView();
-            view.addElementTable();
+            //view.addElementTable();
         }
     }
     class addDeleteElementAction extends AbstractAction{

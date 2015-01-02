@@ -29,8 +29,7 @@ public class Profilo extends AbstractView<Mainframe> {
             //all cells false
             return false;
         }
-    };;
-    private int contarighe = 1;
+    };
 
     public Profilo() {
         super();
@@ -66,11 +65,11 @@ public class Profilo extends AbstractView<Mainframe> {
     /**
      * Metodo che permette di inserire una nuova riga nella tabella
      */
-    public void addElementTable() {
+    public void addElementTable(String insegnamento, String ciclo, String cfu, String data, String voto) {
 
-        Object[] appoggio = new Object[]{"Insegnamento" + contarighe, "Ciclo" + contarighe, "CFU" + contarighe, "data" + contarighe, "voto" + contarighe};
+        Object[] appoggio = new Object[]{insegnamento , ciclo , cfu , data , voto };
         model.addRow(appoggio);
-        contarighe++;
+
         //Nel momento in cui si aggiunge una riga alla tabella si rende il bottone elimina accessibile.
         deleteriga.setEnabled(true);
     }

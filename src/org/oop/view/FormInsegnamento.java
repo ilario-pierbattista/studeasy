@@ -27,8 +27,6 @@ public class FormInsegnamento {
     private JScrollPane scrollpaneinsegnamenti;
     private JTextField textFieldnomeinsegnamento;
 
-
-
     public FormInsegnamento(){
         DefaultTableModel modellist = new DefaultTableModel();
 //        listainsegnamenti.setModel((ListModel) modellist);
@@ -38,11 +36,14 @@ public class FormInsegnamento {
         frame.setLocationRelativeTo(null);
         frame.pack();
         textFieldnomeinsegnamento.setEditable(false);
+        textFieldnomeinsegnamento.setText("Ciaooooooo");
 
     }
+
     public void setVisible(boolean visible) {
         frame.setVisible(visible);
     }
+
     public void setInsegnamentiList(ArrayList<Insegnamento> insegnamenti) {
         ArrayList<String> labels = new ArrayList<String>(insegnamenti.size());
         for (Insegnamento insegnamento : insegnamenti) {
