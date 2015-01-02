@@ -56,7 +56,6 @@ public class InsegnamentoOffertoDAO extends AbstractDAO<InsegnamentoOfferto> {
                 "VALUES (:nome, :cfu, :anno, :semestre, :opzionale, :docente)")
                 .setParameters(params)
                 .executeUpdate();
-
         ins.setId(id);
     }
 
@@ -68,23 +67,6 @@ public class InsegnamentoOffertoDAO extends AbstractDAO<InsegnamentoOfferto> {
                 "opzionale = :opzionale, docente = :docente WHERE id = :id")
                 .setParameters(parameters)
                 .executeUpdate();
-    }
-
-    @Override
-    protected SQLParameters generaSQLParams(InsegnamentoOfferto e) {
-        SQLParameters parameters = new SQLParameters();
-        parameters.add("id", e.getId())
-                .add("nome", e.getNome())
-                .add("cfu", e.getCfu())
-                .add("anno", e.getAnno())
-                .add("semestre", e.getSemestre())
-                .add("opzionale", e.isOpzionale());
-        if (e.getDocente() != null) {
-            parameters.add("docente", e.getDocente().getId());
-        } else {
-            parameters.add("docente", null);
-        }
-        return parameters;
     }
 
     @Override
@@ -114,5 +96,22 @@ public class InsegnamentoOffertoDAO extends AbstractDAO<InsegnamentoOfferto> {
             ee.printStackTrace();
         }
         return ins;
+    }
+
+    @Override
+    protected SQLParameters generaSQLParams(InsegnamentoOfferto e) {
+        SQLParameters parameters = new SQLParameters();
+        parameters.add("id", e.getId())
+                .add("nome", e.getNome())
+                .add("cfu", e.getCfu())
+                .add("anno", e.getAnno())
+                .add("semestre", e.getSemestre())
+                .add("opzionale", e.isOpzionale());
+        if (e.getDocente() != null) {
+            parameters.add("docente", e.getDocente().getId());
+        } else {
+            parameters.add("docente", null);
+        }
+        return parameters;
     }
 }

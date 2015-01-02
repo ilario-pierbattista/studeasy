@@ -9,9 +9,7 @@ import org.oop.view.Mainframe;
 
 import java.awt.event.ActionEvent;
 
-/**
- * Created by toioski on 24/12/14.
- */
+
 public class FormAttivitaController {
     private FormAttivita view;
     private String type;
