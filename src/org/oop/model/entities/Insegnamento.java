@@ -20,6 +20,29 @@ public class Insegnamento extends InsegnamentoOfferto {
     //il seguente è il costruttore che inizializza i dati di deafult
     public Insegnamento() {}
 
+    /* @TODO pensare di includere l'insegnamentoOfferto come attributo piuttosto che
+    come classe genitore
+     */
+    public Insegnamento(InsegnamentoOfferto insegnamentoOfferto) {
+        super();
+        super.id = insegnamentoOfferto.id;
+        nome = insegnamentoOfferto.nome;
+        anno = insegnamentoOfferto.anno;
+        semestre = insegnamentoOfferto.semestre;
+        cfu = insegnamentoOfferto.cfu;
+        opzionale = insegnamentoOfferto.opzionale;
+        docente = insegnamentoOfferto.docente;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Insegnamento setId(int id) {
+        this.id = id;
+        return this;
+    }
+
     public int getVoto() {
         return voto;
     }
@@ -44,6 +67,15 @@ public class Insegnamento extends InsegnamentoOfferto {
 
     public Insegnamento setData(Date data) {
         this.data = data;
+        return this;
+    }
+
+    public int getInsegnamentoOffertoId() {
+        return super.id;
+    }
+
+    public Insegnamento setInsegnamentoOffertoId(int id) {
+        super.id = id;
         return this;
     }
 }

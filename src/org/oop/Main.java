@@ -1,14 +1,19 @@
 package org.oop;
 
 import org.oop.controller.AgendaController;
+import org.oop.controller.FormRegistrazioneController;
 import org.oop.controller.ProfiloController;
 import org.oop.controller.SegreteriaController;
+import org.oop.model.dao.CicloDAO;
+import org.oop.model.entities.Ciclo;
 import org.oop.services.Importatore;
 import org.oop.test.db.DatabaseManagerTest;
 import org.oop.test.db.DatabaseUtilsTest;
+import org.oop.view.FormRegistrazione;
 import org.oop.view.Mainframe;
 
 import javax.swing.*;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
@@ -25,25 +30,32 @@ public class Main {
 
 
         /*
-        mainInitProcedure();
         FormRegistrazione registrazione = new FormRegistrazione();
         FormRegistrazioneController regCtrl = new FormRegistrazioneController(registrazione);
         */
 
-
+        /*
+        mainInitProcedure();
+        Ciclo ciclo = new Ciclo();
+        ciclo.setLabel("ciclo 1")
+                .setInizio(new Date())
+                .setFine(new Date());
+        CicloDAO cicloDAO = new CicloDAO();
+        cicloDAO.persist(ciclo);
+        cicloDAO.flush();
+        */
 
         Mainframe mainframe = new Mainframe();
         new AgendaController(mainframe.agenda);
         new ProfiloController(mainframe.profilo);
         new SegreteriaController(mainframe.segreteria);
+
     }
 
     private static void mainInitProcedure() {
         tests();
         try {
-            //Importatore importatore = new Importatore(true);
-            // Se il database esiste, non viene ricreato
-            Importatore importatore = new Importatore(false);
+            Importatore importatore = new Importatore(true);
             importatore.importaDati();
         } catch (Exception ee) {
             ee.printStackTrace();
