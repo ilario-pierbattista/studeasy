@@ -24,6 +24,7 @@ public class CorsoDAO extends AbstractDAO<Corso> {
             if (rs.first()) {
                 corso = generaEntita(rs);
             }
+            rs.close();
         } catch (SQLException ee) {
             ee.printStackTrace();
         }
@@ -38,7 +39,9 @@ public class CorsoDAO extends AbstractDAO<Corso> {
 
     @Override
     public ArrayList<Corso> findBy(SQLParameters params) {
-        return null;
+        String sql = "SELECT * FROM corso WHERE ".concat(DatabaseUtils.generateCondition(params));
+        ResultSet rs = db.createSqlStatement(sql).setParameters(params).getResult();
+        return generaArrayEntita(rs);
     }
 
     @Override

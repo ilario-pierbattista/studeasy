@@ -27,6 +27,7 @@ public class InsegnamentoOffertoDAO extends AbstractDAO<InsegnamentoOfferto> {
             if (rs.first()) {
                 ins = generaEntita(rs);
             }
+            rs.close();
         } catch (SQLException ee) {
             ee.printStackTrace();
         }

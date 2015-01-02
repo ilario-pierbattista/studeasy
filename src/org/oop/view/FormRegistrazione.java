@@ -32,6 +32,14 @@ public class FormRegistrazione extends AbstractView<Agenda> {
         frame.setVisible(visible);
     }
 
+    public void setCorsiList(ArrayList<Corso> corsi) {
+        ArrayList<String> labels = new ArrayList<String>(corsi.size());
+        for (Corso corso : corsi) {
+            labels.add(corso.getNome());
+        }
+        corsiList.setListData(labels.toArray());
+    }
+
    /*listeners adders*/
     public void addSubmitFormButtonListener(ActionListener l) {
         Submit.addActionListener(l);

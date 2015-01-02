@@ -22,6 +22,7 @@ public class DocenteDAO extends AbstractDAO<Docente> {
             if (rs.first()) {
                 docente = generaEntita(rs);
             }
+            rs.close();
         } catch (SQLException ee) {
             ee.printStackTrace();
         }

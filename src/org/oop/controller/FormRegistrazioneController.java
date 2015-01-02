@@ -1,5 +1,6 @@
 package org.oop.controller;
 
+import org.oop.db.SQLParameters;
 import org.oop.model.dao.CorsoDAO;
 import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Corso;
@@ -18,17 +19,18 @@ public class FormRegistrazioneController {
 
     private FormRegistrazione view;
     private Utente utente;
+    private CorsoDAO corsoDAO;
     private boolean primoAvvio;
 
     public FormRegistrazioneController(FormRegistrazione view) {
+        corsoDAO = new CorsoDAO();
+
         this.view = view;
         view.addSubmitFormButtonListener(new submitFormAction());
         view.addQuitFormButtonListener(new quitFormAction());
         view.addLivelloRadiusButtonsListener(new changeLivelloAction());
         utente = cercaUtente();
-
-        //CorsoDAO corsoDAO = new CorsoDAO();
-        //ArrayList<Corso> corsi = corsoDAO.findAll();
+        initInfo();
 
         view.setVisible(true);
     }
@@ -53,11 +55,18 @@ public class FormRegistrazioneController {
         return utente;
     }
 
+    private void initInfo() {
+        /* @TODO aggiornare le informazioni iniziali del form con i dati giò
+           salvati
+         */
+    }
+
     class changeLivelloAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
             AbstractButton ab = (AbstractButton) e.getSource();
-            System.out.println(ab.getText());
+
+            SQLParameters parameters = new SQLParameters();
 
             view.getTriennaleRadioButton().setSelected(false);
             view.getMagistraleRadioButton().setSelected(false);
@@ -65,11 +74,15 @@ public class FormRegistrazioneController {
 
             if(ab.getText().equals("Triennale")) {
                 view.getTriennaleRadioButton().setSelected(true);
+                parameters.add("livello", 1);
             } else if (ab.getText().equals("Magistrale")) {
                 view.getMagistraleRadioButton().setSelected(true);
+                parameters.add("livello", 2);
             } else {
                 view.getCicloUnicoRadioButton().setSelected(true);
+                parameters.add("livello", 0);
             }
+            view.setCorsiList(corsoDAO.findBy(parameters));
         }
     }
 

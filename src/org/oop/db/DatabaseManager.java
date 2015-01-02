@@ -15,17 +15,12 @@ public class DatabaseManager {
     private DatabaseConfig config;
     private String sql;
     private Connection connection;
-    private Statement statement;
-    private Stack<Connection> auxiliaryConnection;
-    private Stack<Statement> auxiliaryStatement;
     private static DatabaseManager instance;
 
     /**
      * Configurazione del manager
      */
     public DatabaseManager() {
-        auxiliaryConnection = new Stack<Connection>();
-        auxiliaryStatement = new Stack<Statement>();
         config = DatabaseConfig.getInstance();
         instance = this;
     }
@@ -102,25 +97,19 @@ public class DatabaseManager {
      *
      * @return
      */
-    public ResultSet getResult(boolean auxiliaryConnectionRequired) {
+    public ResultSet getResult() {
         ResultSet rs = null;
         try {
-            Statement stmt = statement;
-            if((connection == null || connection.isClosed()) && !auxiliaryConnectionRequired) {
+            if(connection == null || connection.isClosed()) {
                 openConnection(false);
-            } else if(auxiliaryConnectionRequired) {
-                openAuxiliaryConnection();
-                stmt = auxiliaryStatement.peek();
             }
-            rs = stmt.executeQuery(sql);
+            Statement statement = connection.createStatement();
+            statement.closeOnCompletion();
+            rs = statement.executeQuery(sql);
         } catch (SQLException ee) {
             ee.printStackTrace();
         }
         return rs;
-    }
-
-    public ResultSet getResult() {
-        return getResult(false);
     }
 
     /**
@@ -133,6 +122,8 @@ public class DatabaseManager {
             if(connection == null || connection.isClosed() || connection.getAutoCommit()) {
                 openConnection(false);
             }
+            Statement statement = connection.createStatement();
+            statement.closeOnCompletion();
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if(generatedKeys.first()) {
@@ -150,9 +141,6 @@ public class DatabaseManager {
      */
     public void closeConnection() {
         try {
-            if (statement != null) {
-                statement.close();
-            }
             if (connection != null) {
                 connection.close();
             }
@@ -188,15 +176,6 @@ public class DatabaseManager {
     }
 
     /**
-     * Apre la connessione con il database con Auto-Commit abilitato
-     *
-     * @throws SQLException
-     */
-    private void openConnection() throws SQLException {
-        openConnection(true);
-    }
-
-    /**
      * Apre la connessione con il database permettendo di specificare lo stato di Auto-Commit
      * @param autoCommit
      * @throws SQLException
@@ -207,37 +186,7 @@ public class DatabaseManager {
             Class.forName(config.jdbc_driver);
             connection = DriverManager.getConnection(config.db_url, config.user, config.pass);
             connection.setAutoCommit(autoCommit);
-            statement = connection.createStatement();
         } catch (ClassNotFoundException ee) {
-            ee.printStackTrace();
-        }
-    }
-
-    private void openAuxiliaryConnection() throws SQLException {
-        System.out.println("OPENING AUXILIARY CONNECTION #"+auxiliaryConnection.size());
-        try {
-            Class.forName(config.jdbc_driver);
-            Connection conn = DriverManager.getConnection(config.db_url, config.user, config.pass);
-            Statement stmt = conn.createStatement();
-            auxiliaryConnection.push(conn);
-            auxiliaryStatement.push(stmt);
-        } catch (ClassNotFoundException ee) {
-            ee.printStackTrace();
-        }
-    }
-
-    public void closeAuxiliaryConnection() throws SQLException {
-        System.out.println("CLOSING AUXILIARY CONNECTION #"+auxiliaryConnection.size());
-        try {
-            Connection conn = auxiliaryConnection.pop();
-            Statement stmt = auxiliaryStatement.pop();
-            if(stmt != null) {
-                stmt.close();
-            }
-            if(conn != null) {
-                conn.close();
-            }
-        } catch (SQLException ee) {
             ee.printStackTrace();
         }
     }

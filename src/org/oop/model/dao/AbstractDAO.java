@@ -27,6 +27,7 @@ public abstract class AbstractDAO<T> implements DAOInterface<T> {
             while (rs.next()) {
                 entita.add(generaEntita(rs));
             }
+            rs.close();
         } catch (SQLException ee) {
             ee.printStackTrace();
         }

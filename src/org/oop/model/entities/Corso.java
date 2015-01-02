@@ -93,6 +93,18 @@ public class Corso {
         return this;
     }
 
+    public String getNomeLivello() {
+        String nome;
+        if(livello == 1) {
+            nome = "Triennale";
+        } else if(livello == 2) {
+            nome = "Magistrale";
+        } else {
+            nome = "Ciclo Unico";
+        }
+        return nome;
+    }
+
     public int getTotaleCfu() {
         return totaleCfu;
     }

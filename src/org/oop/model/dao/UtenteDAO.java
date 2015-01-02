@@ -49,6 +49,7 @@ public class UtenteDAO extends AbstractDAO<Utente> {
             if (rs.next()) {
                 utente = generaEntita(rs);
             }
+            rs.close();
         } catch (SQLException ee) {
             ee.printStackTrace();
         }
