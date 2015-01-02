@@ -16,12 +16,19 @@ public class Tasse {
 
     private String[] colonne = {"Anno Accademico", "Corso di Laurea", "Importo", "Stato"};
     private Object[][] data;
-    private DefaultTableModel model = new DefaultTableModel(data, colonne);
+    private DefaultTableModel model = new DefaultTableModel(data, colonne){
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            //all cells false
+            return false;
+        }
+    };
     int contarighe = 1;
 
     public Tasse(){
         super();
         tabellatasse.setModel(model);
+        eliminaButton.setEnabled(false);
     }
 
     //Metodi che settano i listener ai bottoni
@@ -42,16 +49,24 @@ public class Tasse {
 
     public void addTassa ()
     {
+
         Object[] appoggio = new Object[]{"Anno Accademico " + contarighe, "Corso " + contarighe, "Importo " + contarighe, "Stato"+ contarighe};
         model.addRow(appoggio);
         contarighe++;
+        eliminaButton.setEnabled(true);
     }
     public void eliminaTassa()
     {
         if (tabellatasse.getSelectedRow() == -1) {
             System.out.println("Non hai selezionato nessun elemento da eliminare");
+            JOptionPane.showMessageDialog(tassepanel, "Selezionare un elemento per eliminarlo");
         } else {
             model.removeRow(tabellatasse.getSelectedRow());
+        }
+        int size = model.getRowCount();
+        if(size==0)
+        {
+            eliminaButton.setEnabled(false);
         }
     }
 

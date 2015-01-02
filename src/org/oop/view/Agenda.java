@@ -46,6 +46,7 @@ public class Agenda extends AbstractView<Agenda> {
         listaModelCicli = new DefaultListModel();
         list1.setModel(listaModelCicli);
         list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        deleteelement.setEnabled(false);
     }
 
     public void addAttivita(AttivitaView attivita) {
@@ -57,6 +58,7 @@ public class Agenda extends AbstractView<Agenda> {
      * il bottone addinsbutton
      */
     public void addCiclo() {
+        deleteelement.setEnabled(true);
         listaModelCicli.addElement("elemento" + contatorecicli);
         contatorecicli++;
     }
@@ -67,8 +69,14 @@ public class Agenda extends AbstractView<Agenda> {
     public void deleteCiclo() {
         if (list1.getSelectedIndex() == -1) {
             System.out.println("Non hai selezionato nessun ciclo");
+            JOptionPane.showMessageDialog(agendapanel, "Selezionare un Ciclo per eliminarlo");
         } else {
             listaModelCicli.remove(list1.getSelectedIndex());
+        }
+
+        int size = listaModelCicli.getSize();
+        if (size == 0) { //Nobody's left, disable firing.
+            deleteelement.setEnabled(false);
         }
     }
 
@@ -135,7 +143,7 @@ public class Agenda extends AbstractView<Agenda> {
         deleteelement.addActionListener(listener);
     }
 
-    public static Agenda getInstance(){
+    public static Agenda getInstance() {
         return instance;
     }
 

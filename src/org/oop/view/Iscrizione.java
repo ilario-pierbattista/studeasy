@@ -1,6 +1,8 @@
 package org.oop.view;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 
@@ -17,14 +19,19 @@ public class Iscrizione {
 
     private String[] columnHeaders = {"Anno", "Anno Accademico", "Corso di Laurea", "Esami Superati", "CFU"};
     private Object[][] data;
-    private DefaultTableModel model = new DefaultTableModel(data, columnHeaders);
+    private DefaultTableModel model = new DefaultTableModel(data, columnHeaders) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            //all cells false
+            return false;
+        }
+    };
     int contarighe = 1;
 
     public Iscrizione() {
         super();
         tabellaiscrizione.setModel(model);
-
-
+        eliminarigabutton.setEnabled(false);
     }
 
     //Metodi che settano gli ascoltatori ai bottoni
@@ -43,9 +50,11 @@ public class Iscrizione {
      */
     public void addRiga()
     {
+
         Object[] appoggio = new Object[]{"Anno " + contarighe, "Anno Accademico " + contarighe, "Corso " + contarighe, "Esami " + contarighe, "CFU"+ contarighe};
         model.addRow(appoggio);
         contarighe++;
+        eliminarigabutton.setEnabled(true);
     }
 
     /**
@@ -55,8 +64,14 @@ public class Iscrizione {
     {
         if (tabellaiscrizione.getSelectedRow() == -1) {
             System.out.println("Non hai selezionato nessun elemento da eliminare");
+            JOptionPane.showMessageDialog(iscrizionepanel, "Selezionare un anno per eliminarlo");
         } else {
             model.removeRow(tabellaiscrizione.getSelectedRow());
+        }
+        int size = model.getRowCount();
+        if(size == 0)
+        {
+            eliminarigabutton.setEnabled(false);
         }
 
     }
