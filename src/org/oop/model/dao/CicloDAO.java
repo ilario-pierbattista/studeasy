@@ -30,9 +30,6 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
                     .setLabel(rs.getString("label"))
                     .setInizio(rs.getDate("inizio"))
                     .setFine(rs.getDate("fine"));
-            SQLParameters parameters = new SQLParameters();
-            parameters.add("ciclo", ciclo.getId());
-            ciclo.setInsegnamenti(insegnamentoDAO.findBy(parameters));
         } catch (SQLException ee) {
             ee.printStackTrace();
         }

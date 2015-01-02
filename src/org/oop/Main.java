@@ -30,15 +30,16 @@ public class Main {
 
         mainInitProcedure(args);
 
+        /*
         FormRegistrazione registrazione = new FormRegistrazione();
         FormRegistrazioneController regCtrl = new FormRegistrazioneController(registrazione);
+        */
 
-        /*
         Mainframe mainframe = new Mainframe();
         new AgendaController(mainframe.agenda);
         new ProfiloController(mainframe.profilo);
         new SegreteriaController(mainframe.segreteria);
-        */
+
     }
 
     private static void mainInitProcedure(String args[]) {
