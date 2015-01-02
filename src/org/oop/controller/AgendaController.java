@@ -1,5 +1,6 @@
 package org.oop.controller;
 
+import org.oop.general.Utils;
 import org.oop.view.Agenda;
 import org.oop.view.AttivitaView;
 import org.oop.view.FormAttivita;
@@ -17,18 +18,17 @@ public class AgendaController {
     public AgendaController(Agenda view) {
         this.view = view;
         view.addLezioneButtonListener(new AddAttivitaAction());
-        view.addEsameButtonListener(new AddEsameAction());
-        view.addLaboratorioButtonListener(new AddLaboratorioAction());
+        view.addEsameButtonListener(new AddAttivitaAction());
+        view.addLaboratorioButtonListener(new AddAttivitaAction());
+        view.addSeminarioButtonListener(new AddAttivitaAction());
+        view.addProgettoButtonListener(new AddAttivitaAction());
 
         view.addInsButtonListener(new AddInsButtonAction());
-        //view.addListListener(new SelectionListener());
-
-        view.addSeminarioButtonListener(new AddSeminarioAction());
-        view.addProgettoButtonListener(new AddProgettoAction());
         view.deleteListElementListener(new DeleteListElementAction());
 
 
     }
+
 
     /**
      * Action per aggiungere un'attività di tipo lezione
@@ -36,10 +36,9 @@ public class AgendaController {
     class AddAttivitaAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            AttivitaView attivitaview = new AttivitaView("Lezione");
+            String activitytype = Utils.explodeStringForSpace(actionEvent.getActionCommand(),1);
+            AttivitaView attivitaview = new AttivitaView(activitytype);
             AttivitaController attivitacontroller = new AttivitaController(attivitaview);
-            view.addAttivita(attivitaview);
-            Mainframe.refreshView();
         }
     }
 

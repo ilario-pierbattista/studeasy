@@ -1,7 +1,10 @@
 package org.oop.controller;
 
 import org.oop.model.entities.Attivita;
+import org.oop.view.Agenda;
+import org.oop.view.AttivitaView;
 import org.oop.view.FormAttivita;
+import org.oop.view.Mainframe;
 
 import java.awt.event.ActionEvent;
 
@@ -16,6 +19,7 @@ public class FormAttivitaController {
         this.view = view;
         this.type = type;
         view.addCancelButtonListener(new CloseFormAction());
+        view.addSubmitButtonListener(new SubmitFormAction());
         setAttivitaType();
     }
 
@@ -36,6 +40,14 @@ public class FormAttivitaController {
     class SubmitFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
+            String docente = view.getActivityname().getText();
+            String aula = view.getAulafield().getText();
+            String date = view.getDatafield().getText();
+            String description = view.getDescriptionfield().getText();
+
+            Agenda.getInstance().addAttivita(new AttivitaView(type, docente, aula, date, description));
+            Mainframe.refreshView();
+            FormAttivita.closeFrame();
 
         }
     }

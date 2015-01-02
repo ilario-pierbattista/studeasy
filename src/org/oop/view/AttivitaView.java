@@ -27,7 +27,6 @@ public class AttivitaView extends AbstractView<Mainframe> {
     }
 
     public AttivitaView(String nomeattivita, String nomeprofessore, String a, String h, String d) {
-
         activityname.setText(nomeattivita);
         teacher.setText(nomeprofessore);
         aula.setText(a);

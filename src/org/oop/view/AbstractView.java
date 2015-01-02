@@ -1,13 +1,8 @@
 package org.oop.view;
 
-import org.oop.controller.ProfiloController;
-
 /**
- * Created by toioski on 24/12/14.
+ * @TODO non serve ad un cazzo per adesso
  */
 public class AbstractView<T> {
-    private T instance;
 
-    public T getInstance() {
-        return this.instance; }
 }

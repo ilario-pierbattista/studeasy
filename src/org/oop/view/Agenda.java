@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class Agenda extends AbstractView<Agenda> {
+    private static Agenda instance;
     public JPanel agendapanel;
 
     private JScrollPane sidebarpane;
@@ -31,6 +32,8 @@ public class Agenda extends AbstractView<Agenda> {
     private JButton deleteelement;
 
     public Agenda() {
+        //Setto istance a questa instanza in modo da rendere statica la vista
+        instance = this;
         //Setta la larghezza della sidebar
         splitpane.setDividerLocation(200 + splitpane.getInsets().left);
         //Elimina i bordi
@@ -121,12 +124,6 @@ public class Agenda extends AbstractView<Agenda> {
         addinsbutton.addActionListener(listener);
     }
 
-    /*
-    public void addListListener(ListSelectionListener listener) {
-        list1.addListSelectionListener(listener);
-
-    }*/
-
     public void addProgettoButtonListener(ActionListener listener) {
         progettobutton.addActionListener(listener);
     }
@@ -137,6 +134,10 @@ public class Agenda extends AbstractView<Agenda> {
 
     public void deleteListElementListener(ActionListener listener) {
         deleteelement.addActionListener(listener);
+    }
+
+    public static Agenda getInstance(){
+        return instance;
     }
 
 }

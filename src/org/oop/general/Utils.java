@@ -34,7 +34,7 @@ public class Utils {
     }
 
     /**
-     * scrive la stringa passata come parametro con la lettera maiuscola
+     * Scrive la stringa passata come parametro con la lettera maiuscola
      */
     public static String stringToCapital(String s) {
         char first = s.charAt(0);
@@ -42,7 +42,7 @@ public class Utils {
         return fupper+s.substring(1,s.length());
     }
     /**
-     *  controlla che il flusso di input sia un anno
+     * Controlla che il flusso di input sia un anno
      */
 
     public static boolean inputYearControl(String s) {
@@ -53,7 +53,7 @@ public class Utils {
     }
 
     /**
-     * controlla che la stringa passata sia una mail
+     * Controlla che la stringa passata sia una mail
      * @param s
      * @return
      */
@@ -64,7 +64,7 @@ public class Utils {
     }
 
     /**
-     * controlla che la stringa passata sia una data nel formato xx/xx/xxxx
+     * Controlla che la stringa passata sia una data nel formato xx/xx/xxxx
      * @param s
      * @return
      */
@@ -75,7 +75,7 @@ public class Utils {
     }
 
     /**
-     * controlla che la stringa passata sia un numero a 3 cifre massimo (cfu)
+     * Controlla che la stringa passata sia un numero a 3 cifre massimo (cfu)
      */
 
     public static boolean inputCfuControl(String s) {
@@ -85,7 +85,7 @@ public class Utils {
     }
 
     /**
-     * controlla che la stringa passata sia di sole lettere
+     * Controlla che la stringa passata sia di sole lettere
      */
 
     public static boolean inputNameControl(String s) {
@@ -95,7 +95,7 @@ public class Utils {
     }
 
     /**
-     * controlla che la matricola sia scritta in modo corretto:
+     * Controlla che la matricola sia scritta in modo corretto:
      * di soli numeri
      */
 
@@ -106,12 +106,21 @@ public class Utils {
     }
 
     /**
-     * controlla che nella stringa passata ci siano solo lettere
+     * Controlla che nella stringa passata ci siano solo lettere
      */
 
     public static boolean inputCorsoLaureaControl(String s) {
         Pattern p = Pattern.compile("[a-zA-Z ]+");
         Matcher m = p.matcher(s);
         return m.matches();
+    }
+
+    /**
+     * Esplode la stringa per spazi, e lo mette in un array.
+     * Ritorna il valore dell'array all'indice passatogli dopo averlo messo in lowercase.
+     */
+    public static String explodeStringForSpace(String s, int i) {
+        String[] array = s.split(" ");
+        return array[i].toLowerCase();
     }
 }
