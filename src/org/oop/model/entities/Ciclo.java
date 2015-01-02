@@ -78,4 +78,13 @@ public class Ciclo {
         return this.label;
     }
 
+    public String toString(boolean flag) {
+        return "Ciclo{" +
+                "id=" + id +
+                ", label='" + label + '\'' +
+                ", inizio=" + inizio +
+                ", fine=" + fine +
+                ", insegnamenti=" + insegnamenti +
+                '}';
+    }
 }

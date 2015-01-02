@@ -1,8 +1,11 @@
 package org.oop.view;
 
+import org.oop.model.entities.Ciclo;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Agenda extends AbstractView<Agenda> {
     private static Agenda instance;
@@ -30,6 +33,8 @@ public class Agenda extends AbstractView<Agenda> {
     private JButton addciclobutton;
     private JButton removeciclobutton;
 
+    private DefaultListModel ciclilistmodel;
+
 
     public Agenda() {
         //Setto istance a questa instanza in modo da rendere statica la vista
@@ -46,7 +51,7 @@ public class Agenda extends AbstractView<Agenda> {
         //Imposta il layout a 2 colonne
         activitiespanel.setLayout(new GridLayout(0, 2, 20, 20));
 
-
+        ciclilistmodel = new DefaultListModel();
 
     }
 
@@ -54,8 +59,11 @@ public class Agenda extends AbstractView<Agenda> {
         activitiespanel.add(attivita.activitypanel);
     }
 
-    public void setListaCicli(DefaultListModel model){
-        ciclilist.setModel(model);
+    public void setListaCicli(ArrayList<Ciclo> list){
+        for (Ciclo ciclo : list){
+            ciclilistmodel.addElement(ciclo);
+        }
+        ciclilist.setModel(ciclilistmodel);
     }
 
 

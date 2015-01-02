@@ -1,6 +1,9 @@
 package org.oop.controller;
 
 import org.oop.general.Utils;
+import org.oop.model.dao.CicloDAO;
+import org.oop.model.dao.CorsoDAO;
+import org.oop.model.entities.Ciclo;
 import org.oop.view.*;
 
 import javax.swing.*;
@@ -9,35 +12,30 @@ import java.awt.event.ActionEvent;
 
 public class AgendaController {
     private Agenda view;
+    private FormCiclo formcicloview;
+    private CicloDAO cicloDAO;
 
     public AgendaController(Agenda view) {
         this.view = view;
+        cicloDAO = new CicloDAO();
+
         view.addLezioneButtonListener(new AddAttivitaAction());
         view.addEsameButtonListener(new AddAttivitaAction());
         view.addLaboratorioButtonListener(new AddAttivitaAction());
         view.addSeminarioButtonListener(new AddAttivitaAction());
         view.addProgettoButtonListener(new AddAttivitaAction());
         view.addCicloButtonListener(new AddCicloButton());
-        view.addRemoveCicloButtonListener(new RemoveCicloButton());
 
-        setListaCicliModel();
+        updateView();
 
     }
 
     /**
-     * Metodo che setta il model della lista dei cicli
+     * Metodo che passa il model alla vista
      */
-    public void setListaCicliModel(){
-        //Dovra essere preso dal db
-        view.setListaCicli(new DefaultListModel());
-    }
-
-    /**
-     * Metodo che aggiunge un ciclo alla lista dei cicli
-     */
-    public void addCiclo(Object el){
-        // modelListacicli.addElement(el);
-    }
+     public void updateView(){
+         view.setListaCicli(cicloDAO.findAll());
+     }
 
     /**
      * Action per aggiungere un'attività di tipo lezione
@@ -115,18 +113,36 @@ public class AgendaController {
     class AddCicloButton extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            FormCiclo cicloview = new FormCiclo();
-            FormCicloController controllerciclo = new FormCicloController(cicloview);
+            formcicloview = new FormCiclo();
+            formcicloview.addSubmitButtonListener(new SubmitCicloFormAction());
+            formcicloview.addCancelButtonListener(new CloseCicloFormAction());
         }
     }
 
     /**
-     * Action per rimuovere un ciclo
+     * Action per aggiungere un nuovo ciclo
      */
-    class RemoveCicloButton extends AbstractAction {
+    class SubmitCicloFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
+            Ciclo ciclo = formcicloview.getNuovoCiclo();
+            CicloDAO cicloDAO = new CicloDAO();
 
+            cicloDAO.persist(ciclo);
+            cicloDAO.flush();
+
+            updateView();
+            formcicloview.closeFrame();
+        }
+    }
+
+    /**
+     * Action per chiudere la finestra di aggiunta di un nuovo ciclo
+     */
+    class CloseCicloFormAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            formcicloview.closeFrame();
         }
     }
 

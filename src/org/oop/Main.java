@@ -34,16 +34,7 @@ public class Main {
         FormRegistrazioneController regCtrl = new FormRegistrazioneController(registrazione);
         */
 
-        /*
         mainInitProcedure();
-        Ciclo ciclo = new Ciclo();
-        ciclo.setLabel("ciclo 1")
-                .setInizio(new Date())
-                .setFine(new Date());
-        CicloDAO cicloDAO = new CicloDAO();
-        cicloDAO.persist(ciclo);
-        cicloDAO.flush();
-        */
 
         Mainframe mainframe = new Mainframe();
         new AgendaController(mainframe.agenda);

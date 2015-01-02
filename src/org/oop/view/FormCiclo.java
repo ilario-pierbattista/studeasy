@@ -1,7 +1,10 @@
 package org.oop.view;
 
+import org.oop.model.entities.Ciclo;
+
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 /**
  * Created by toioski on 02/01/15.
@@ -22,6 +25,24 @@ public class FormCiclo extends AbstractView<FormCiclo> {
         frame.setLocationRelativeTo(null);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    public Ciclo getNuovoCiclo(){
+        Ciclo ciclo = new Ciclo();
+
+        ciclo.setLabel(ciclonamefield.getText())
+                .setInizio((Date) ciclostartfield.getValue())
+                .setFine((Date) cicloendfield.getValue());
+        System.out.println(ciclo.toString(true));
+        return ciclo;
+    }
+
+    public void closeFrame(){
+        frame.dispose();
+    }
+
+    private void createUIComponents() {
+        ciclostartfield = new JFormattedTextField(dateformat);
     }
 
     /* Getters */
@@ -55,12 +76,4 @@ public class FormCiclo extends AbstractView<FormCiclo> {
         cancelbutton.addActionListener(listener);
     }
 
-
-    public static void closeFrame(){
-        frame.dispose();
-    }
-
-    private void createUIComponents() {
-        ciclostartfield = new JFormattedTextField(dateformat);
-    }
 }
