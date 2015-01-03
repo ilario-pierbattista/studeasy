@@ -1,6 +1,5 @@
 package org.oop.controller;
 
-import org.oop.model.entities.Attivita;
 import org.oop.view.Agenda;
 import org.oop.view.AttivitaView;
 import org.oop.view.FormAttivita;

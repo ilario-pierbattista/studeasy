@@ -13,18 +13,20 @@ public class TirocinioController {
     public TirocinioController (Tirocinio view) {
 
         this.view = view;
-        view.insQuitFormButtonListener(new SubmitFormAction());
-        view.insSubmitButtonListener(new QuitFormAction() );
+        view.insQuitFormButtonListener(new QuitFormAction());
+        view.insSubmitButtonListener(new SubmitFormAction() );
     }
 
     class SubmitFormAction extends AbstractAction {
         @Override
         public void actionPerformed (ActionEvent e) {
             //controlla che ci siano 120 crediti
-            //butta tutto nel database
+
+
             JFormattedTextField datanascita = view.getDatanascita();
             JFormattedTextField cap = view.getCap();
             JFormattedTextField cfu = view.getCfu();
+            int crediti = Integer.parseInt(cfu.getText());
 
             String nome = view.getNome().getText();
             String cognome = view.getCognome().getText();
@@ -36,7 +38,7 @@ public class TirocinioController {
             String codicefiscale = view.getCodicefiscale().getText();
 
 
-            if ( inputNameControl(nome) && inputNameControl(cognome) && inputMatricolaControl(matricola) && inputCorsoLaureaControl(luogonascita) && inputCorsoLaureaControl(residenza) && inputProvinciaControl(provincia) && inputCodiceFiscaleControl(codicefiscale) ) {
+            if ( inputNameControl(nome) && (crediti >=120) && inputNameControl(cognome) && inputMatricolaControl(matricola) && inputSentenceControl(luogonascita) && inputSentenceControl(residenza) && inputSentenceControl(via) && inputProvinciaControl(provincia) && inputCodiceFiscaleControl(codicefiscale) ) {
                 String name = stringToCapital(nome);
                 String surname = stringToCapital(cognome);
                 //butta tutto nel modulo
@@ -46,14 +48,18 @@ public class TirocinioController {
                 JOptionPane.showMessageDialog(null,"Cognome Errato!");
             } else if (!inputMatricolaControl(matricola)) {
                 JOptionPane.showMessageDialog(null,"Matricola Errata!");
-            } else if (!inputCorsoLaureaControl(luogonascita)) {
+            } else if (!inputSentenceControl(luogonascita)) {
                 JOptionPane.showMessageDialog(null,"Luogo Di Nascita Errato!");
-            } else if (!inputCorsoLaureaControl(residenza)) {
+            } else if (!inputSentenceControl(residenza)) {
                 JOptionPane.showMessageDialog(null,"Residenza Errata!");
             } else if (!inputProvinciaControl(provincia)) {
                 JOptionPane.showMessageDialog(null,"Provincia Errata!");
             } else if (!inputCodiceFiscaleControl(codicefiscale)) {
                 JOptionPane.showMessageDialog(null,"Codice Fiscale Errato!");
+            } else if (!inputSentenceControl(via)) {
+                JOptionPane.showMessageDialog(null,"Via Errata");
+            } else if (crediti<120) {
+                JOptionPane.showMessageDialog(null,"Non hai abbastanza crediti!");
             }
         }
     }
@@ -61,7 +67,17 @@ public class TirocinioController {
     class QuitFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //cancella tutti i campi
+            view.getDatanascita().setText("");
+            view.getCap().setText("");
+            view.getCfu().setText("");
+            view.getNome().setText("");
+            view.getCognome().setText("");
+            view.getMatricola().setText("");
+            view.getLuogonascita().setText("");
+            view.getResidenza().setText("");
+            view.getProvincia().setText("");
+            view.getVia().setText("");
+            view.getCodicefiscale().setText("");
         }
     }
 }

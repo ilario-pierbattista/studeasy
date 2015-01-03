@@ -114,4 +114,5 @@ public class InsegnamentoOffertoDAO extends AbstractDAO<InsegnamentoOfferto> {
         }
         return parameters;
     }
+
 }

@@ -3,7 +3,6 @@ package org.oop.view;
 import org.oop.controller.*;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
 
 /**
  * Created by toioski on 20/12/14.

@@ -1,6 +1,5 @@
 package org.oop.controller;
 
-import org.oop.view.AbstractView;
 import org.oop.view.Immatricolazione;
 
 import javax.swing.*;
@@ -35,7 +34,7 @@ public class ImmatricolazioneController {
             String luogonascita = view.getLuogonascita().getText();
             String diploma = view.getDiploma().getText();
 
-            if ( (inputCodiceFiscaleControl(codicefiscale)) && (inputMatricolaControl(matricola) ) && ( (voto<=100) || (voto>=60) ) && (inputNameControl(nome)) && (inputNameControl(cognome)) && inputCorsoLaureaControl(luogonascita) && inputCorsoLaureaControl(diploma) && inputYearControl(anno) ) {
+            if ( (inputCodiceFiscaleControl(codicefiscale)) && (inputMatricolaControl(matricola) ) && ( (voto<=100) || (voto>=60) ) && (inputNameControl(nome)) && (inputNameControl(cognome)) && inputSentenceControl(luogonascita) && inputSentenceControl(diploma) && inputYearControl(anno) ) {
                 String name = stringToCapital(nome);
                 String surname = stringToCapital(cognome);
                 //butta tutto nel modulo
@@ -50,9 +49,9 @@ public class ImmatricolazioneController {
                 JOptionPane.showMessageDialog(null,"Nome Errato!");
             } else if (!inputNameControl(cognome)) {
                 JOptionPane.showMessageDialog(null,"Cognome Errato!");
-            } else if (!inputCorsoLaureaControl(luogonascita)) {
+            } else if (!inputSentenceControl(luogonascita)) {
                 JOptionPane.showMessageDialog(null,"Luogo Di Nascita Errato!");
-            } else if (!inputCorsoLaureaControl(diploma)) {
+            } else if (!inputSentenceControl(diploma)) {
                 JOptionPane.showMessageDialog(null,"Diploma Errato!");
             } else {
                 if (!inputYearControl(anno)) {

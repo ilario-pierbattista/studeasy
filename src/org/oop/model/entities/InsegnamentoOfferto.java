@@ -87,18 +87,6 @@ public class InsegnamentoOfferto {
         return this;
     }
 
-    @Override
-    public String toString() {
-        return "InsegnamentoOfferto{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", cfu=" + cfu +
-                ", anno=" + anno +
-                ", semestre=" + semestre +
-                ", opzionale=" + opzionale +
-                ", docente=" + docente +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -114,5 +102,12 @@ public class InsegnamentoOfferto {
         if (!nome.equals(that.nome)) return false;
 
         return true;
+    }
+
+
+    @Override
+    //@TODO: da definire meglio
+    public String toString(){
+        return this.nome;
     }
 }

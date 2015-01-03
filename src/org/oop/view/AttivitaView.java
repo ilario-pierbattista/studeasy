@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
  * Created by toioski on 20/12/14.
  */
 
-public class AttivitaView extends AbstractView<Mainframe> {
+public class AttivitaView extends AbstractView<AttivitaView> {
     public JPanel activitypanel;
 
     private JLabel activityname;

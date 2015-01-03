@@ -31,9 +31,6 @@ public class FormCiclo extends AbstractView<FormCiclo> {
         ciclo.setLabel(ciclonamefield.getText())
                 .setInizio((Date) cicloStartField.getValue())
                 .setFine((Date) cicloEndField.getValue());
-        System.out.println(cicloStartField.getValue());
-        System.out.println(cicloEndField.getValue());
-        System.out.println(ciclo.toString(true));
         return ciclo;
     }
 

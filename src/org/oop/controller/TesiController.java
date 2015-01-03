@@ -2,7 +2,11 @@ package org.oop.controller;
 
 import org.oop.view.Tesi;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.util.Date;
+
+import static org.oop.general.Utils.*;
 
 public class TesiController {
 
@@ -17,7 +21,27 @@ public class TesiController {
     class SubmitFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //butta nel database
+            Date datanascita = (Date) view.getDataNascita().getValue();
+            String nome = view.getNome().getText();
+            String cognome = view.getCognome().getText();
+            String luogo = view.getLuogoNascita().getText();
+            String email = view.getEmail().getText();
+            String year = view.getAnnoCorso().getText();
+            if ((inputNameControl(nome)) && ( inputNameControl(cognome) ) && ( inputSentenceControl(luogo) ) && (inputMailControl(email) ) && inputYearControl(year) ) {
+                String name = stringToCapital(nome);
+                String surname = stringToCapital(cognome);
+                //butta tutto nel modulo
+            } else if (!inputNameControl(nome)) {
+                JOptionPane.showMessageDialog(null,"Nome Non Valido!");
+             } else if (!inputNameControl(cognome)) {
+                JOptionPane.showMessageDialog(null,"Cognome Non Valido!");
+            } else if (!inputSentenceControl(luogo)) {
+                JOptionPane.showMessageDialog(null,"Luogo Non Valido!");
+            } else if (!inputMailControl(email)) {
+                JOptionPane.showMessageDialog(null,"Email non valida");
+            } else if (!inputYearControl(year)) {
+                JOptionPane.showMessageDialog(null,"Anno non Valido");
+            }
         }
     }
 
@@ -25,6 +49,12 @@ public class TesiController {
         @Override
         public void actionPerformed(ActionEvent e) {
             //cancella tutti i campi
+            view.getDataNascita().setText("");
+            view.getNome().setText("");
+            view.getCognome().setText("");
+            view.getLuogoNascita().setText("");
+            view.getEmail().setText("");
+            view.getAnnoCorso().setText("");
         }
     }
 }
