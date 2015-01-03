@@ -1,6 +1,4 @@
-package org.oop.view.agenda;
-
-import org.oop.view.AbstractView;
+package org.oop.view;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;

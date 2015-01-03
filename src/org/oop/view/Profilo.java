@@ -1,6 +1,4 @@
-package org.oop.view.profilo;
-
-import org.oop.view.AbstractView;
+package org.oop.view;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

@@ -1,7 +1,6 @@
 package org.oop.view;
 
 import org.oop.model.entities.Corso;
-import org.oop.view.agenda.Agenda;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;

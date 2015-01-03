@@ -82,4 +82,5 @@ public class Insegnamento extends InsegnamentoOfferto {
         super.id = id;
         return this;
     }
+
 }

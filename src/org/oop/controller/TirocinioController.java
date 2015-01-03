@@ -1,6 +1,6 @@
 package org.oop.controller;
 
-import org.oop.view.segreteria.Tirocinio;
+import org.oop.view.Tirocinio;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

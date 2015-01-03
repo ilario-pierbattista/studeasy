@@ -2,10 +2,12 @@ package org.oop.controller;
 
 import org.oop.general.Utils;
 import org.oop.model.dao.CicloDAO;
+import org.oop.model.dao.InsegnamentoOffertoDAO;
 import org.oop.model.entities.Ciclo;
-import org.oop.view.agenda.Agenda;
-import org.oop.view.agenda.AttivitaView;
-import org.oop.view.agenda.FormCiclo;
+import org.oop.view.Agenda;
+import org.oop.view.AttivitaView;
+import org.oop.view.FormCiclo;
+import org.oop.view.ModalAddInsegnamento;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -16,6 +18,7 @@ import java.awt.event.ActionEvent;
 public class AgendaController {
     private Agenda view;
     private FormCiclo formcicloview;
+    private ModalAddInsegnamento modalAddInsegnamento;
     private CicloDAO cicloDAO;
 
     public AgendaController(Agenda view) {
@@ -29,6 +32,7 @@ public class AgendaController {
         view.addProgettoButtonListener(new AddAttivitaAction());
         view.addCicloButtonListener(new AddCicloAction());
         view.addRemoveCicloButtonListener(new RemoveCicloAction());
+        view.addInsegnamentoButtonListener(new addInsegnamentoAction());
 
         view.getCiclilist().getSelectionModel().addListSelectionListener(new listaCicliSelectionAction());
 
@@ -152,4 +156,38 @@ public class AgendaController {
         }
     }
 
+    /**
+     * Action che apre la finestra per aggiungere un insegnamento ad un ciclo
+     */
+    class addInsegnamentoAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            modalAddInsegnamento = new ModalAddInsegnamento();
+            modalAddInsegnamento.addAnnullaButtonListener(new closeModalInsegnamento());
+            modalAddInsegnamento.addConfermaButtonListener(new submitModalInsegnamento());
+
+            InsegnamentoOffertoDAO insegnamentoOffertoDAO = new InsegnamentoOffertoDAO();
+            modalAddInsegnamento.setListaInsegnamenti(insegnamentoOffertoDAO.findAll());
+        }
+    }
+
+    /**
+     * Action che passa la lista di insegnamenti alla vista che ne permette la aggiunta
+     */
+    class submitModalInsegnamento extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    /**
+     * Action per chiudere il modal di aggiunta di un insegnamento
+     */
+    class closeModalInsegnamento extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            modalAddInsegnamento.closeFrame();
+        }
+    }
 }

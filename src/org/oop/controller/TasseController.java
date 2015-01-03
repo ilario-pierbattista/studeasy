@@ -1,6 +1,6 @@
 package org.oop.controller;
 
-import org.oop.view.segreteria.Tasse;
+import org.oop.view.Tasse;
 
 import java.awt.event.ActionEvent;
 
