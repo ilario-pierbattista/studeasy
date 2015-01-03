@@ -1,5 +1,6 @@
 package org.oop.controller;
 
+import org.oop.view.FormInsegnamento;
 import org.oop.view.FormRegistrazione;
 import org.oop.view.Mainframe;
 import org.oop.view.Profilo;
@@ -20,7 +21,11 @@ public class ProfiloController {
     class addTableElementAction extends AbstractAction{
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.addElementTable();
+           // view.addElementTable();
+            FormInsegnamento forminsegnamento = new FormInsegnamento();
+            FormInsegnamentoController forminsegnamentocontroller = new FormInsegnamentoController(forminsegnamento,view);
+            Mainframe.refreshView();
+            //view.addElementTable();
         }
     }
     class addDeleteElementAction extends AbstractAction{

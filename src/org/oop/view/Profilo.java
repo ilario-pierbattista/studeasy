@@ -14,17 +14,26 @@ public class Profilo extends AbstractView<Profilo> {
     private JSplitPane splitpane;
     private JPanel librettopanel;
     private JLabel sidebartitle;
-    private JTable instable;
+    private JTable insegnamentotable;
     private JButton addriga;
     private JButton deleteriga;
     private JButton aggiungiprofilo;
     private JScrollPane scrolpanetable;
 
     //Colums e data servono per costruire il model della tabella
-    private String[] colums = new String[]{"Insegnamento", "Ciclo", "CFU", "Data","Voto"};
-    private Object[][] data = new Object[0][3];
-    private DefaultTableModel model = new DefaultTableModel(data, colums);
-    private int contarighe = 1;
+    //private String[] colums = new String[]{"Insegnamento", "Ciclo", "CFU", "Data","Voto"};
+    //private Object[][] data = new Object[0][3];
+    /*private DefaultTableModel model = new DefaultTableModel(data, colums){
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            //all cells false
+            return false;
+        }
+    };*/
+    //private Object[][] data;
+    CustomTableModel model = new CustomTableModel("Insegnamento", "Ciclo", "CFU", "Data","Voto" );
+
+
 
     public Profilo() {
         super();
@@ -34,7 +43,10 @@ public class Profilo extends AbstractView<Profilo> {
         splitpane.setBorder(null);
         sidebarpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(126, 126, 126)));
         //Setta il modello alla tabella
-        instable.setModel(model);
+        insegnamentotable.setModel(model);
+        insegnamentotable.setRowHeight(30);
+        //inizialmente quando la tabella è vuota rendo il bottone elimina non accessibile
+        deleteriga.setEnabled(false);
     }
 
     /**
@@ -58,21 +70,34 @@ public class Profilo extends AbstractView<Profilo> {
     /**
      * Metodo che permette di inserire una nuova riga nella tabella
      */
-    public void addElementTable() {
-        Object[] appoggio = new Object[]{"Insegnamento" + contarighe, "Ciclo" + contarighe, "CFU" + contarighe, "data" + contarighe, "voto" + contarighe};
+    public void addElementTable(String insegnamento, String ciclo, String cfu, String data, String voto) {
+
+        Object[] appoggio = new Object[]{insegnamento , ciclo , cfu , data , voto };
         model.addRow(appoggio);
-        contarighe++;
+
+        //Nel momento in cui si aggiunge una riga alla tabella si rende il bottone elimina accessibile.
+        deleteriga.setEnabled(true);
     }
 
     /**
      * Permette di eliminare un elemento dalla tabella
      */
     public void DeleteElementTable() {
-
-        if (instable.getSelectedRow() == -1) {
+        int n = insegnamentotable.getSelectedRow();
+        //Controllo se è stata selezionata una riga. Se non è stata selezionata nessuna riga compare un messaggio di errore
+        if (insegnamentotable.getSelectedRow() == -1) {
             System.out.println("Non hai selezionato nessun elemento da eliminare");
+            JOptionPane.showMessageDialog(profilopanel, "Selezionare un Insegnamento per eliminarlo");
         } else {
-            model.removeRow(instable.getSelectedRow());
+            model.deleteRow(insegnamentotable.getSelectedRow());
+            n--;
+            insegnamentotable.changeSelection(n,0,false,false);
+        }
+        //Controllo quanti elementi ci sono nella tabella. Se non c'è nessun elemento rendo il bottone elimina non visibile
+        int size = model.getRowCount();
+        if(size==0)
+        {
+            deleteriga.setEnabled(false);
         }
     }
 
