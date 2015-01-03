@@ -166,6 +166,7 @@ public class AgendaController {
             modalAddInsegnamento.addAnnullaButtonListener(new closeModalInsegnamento());
             modalAddInsegnamento.addConfermaButtonListener(new submitModalInsegnamento());
 
+            //Manda gli insegnamenti alla vista
             InsegnamentoOffertoDAO insegnamentoOffertoDAO = new InsegnamentoOffertoDAO();
             modalAddInsegnamento.setListaInsegnamenti(insegnamentoOffertoDAO.findAll());
         }
