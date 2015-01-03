@@ -18,6 +18,7 @@ public class Profilo extends AbstractView<Profilo> {
     private JButton addriga;
     private JButton deleteriga;
     private JButton aggiungiprofilo;
+    private JButton modificaButton;
     private JScrollPane scrolpanetable;
 
     //Colums e data servono per costruire il model della tabella

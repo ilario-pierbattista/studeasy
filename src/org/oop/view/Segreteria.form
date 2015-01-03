@@ -33,7 +33,9 @@
             <preferred-size width="200" height="200"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <tabPlacement value="1"/>
+        </properties>
         <border type="none"/>
         <children/>
       </tabbedpane>
