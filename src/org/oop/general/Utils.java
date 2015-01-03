@@ -169,7 +169,7 @@ public class Utils {
      * Controlla che nella stringa passata ci siano solo lettere
      */
 
-    public static boolean inputCorsoLaureaControl(String s) {
+    public static boolean inputSentenceControl(String s) {
         Pattern p = Pattern.compile("[a-zA-Z ]+");
         Matcher m = p.matcher(s);
         return m.matches();

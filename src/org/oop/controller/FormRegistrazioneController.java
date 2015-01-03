@@ -3,7 +3,6 @@ package org.oop.controller;
 import org.oop.db.SQLParameters;
 import org.oop.model.dao.CorsoDAO;
 import org.oop.model.dao.UtenteDAO;
-import org.oop.model.entities.Corso;
 import org.oop.model.entities.Utente;
 import org.oop.view.FormRegistrazione;
 
@@ -11,7 +10,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-import static javax.xml.bind.DatatypeConverter.parseInt;
 import static org.oop.general.Utils.*;
 
 
@@ -108,7 +106,7 @@ public class FormRegistrazioneController {
             String mail = view.getEmail().getText();
             String corso = view.getCorsolaurea().getText();
 
-            if ((inputNameControl(nome)) && (inputNameControl(cognome)) && (inputMatricolaControl(matricola)) && (inputMailControl(mail)) && (inputCorsoLaureaControl(corso))) {
+            if ((inputNameControl(nome)) && (inputNameControl(cognome)) && (inputMatricolaControl(matricola)) && (inputMailControl(mail)) && (inputSentenceControl(corso))) {
 
                 String name = stringToCapital(nome);
                 String surname = stringToCapital(cognome);
@@ -122,7 +120,7 @@ public class FormRegistrazioneController {
                 JOptionPane.showMessageDialog(null, "Matricola non valida");
             } else if (!inputMailControl(mail)) {
                 JOptionPane.showMessageDialog(null, "Email Non Valida");
-            } else if (!inputCorsoLaureaControl(corso)) {
+            } else if (!inputSentenceControl(corso)) {
                 JOptionPane.showMessageDialog(null, "Corso non Valido");
             }
         }

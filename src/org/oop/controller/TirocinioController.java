@@ -36,7 +36,7 @@ public class TirocinioController {
             String codicefiscale = view.getCodicefiscale().getText();
 
 
-            if ( inputNameControl(nome) && inputNameControl(cognome) && inputMatricolaControl(matricola) && inputCorsoLaureaControl(luogonascita) && inputCorsoLaureaControl(residenza) && inputProvinciaControl(provincia) && inputCodiceFiscaleControl(codicefiscale) ) {
+            if ( inputNameControl(nome) && inputNameControl(cognome) && inputMatricolaControl(matricola) && inputSentenceControl(luogonascita) && inputSentenceControl(residenza) && inputProvinciaControl(provincia) && inputCodiceFiscaleControl(codicefiscale) ) {
                 String name = stringToCapital(nome);
                 String surname = stringToCapital(cognome);
                 //butta tutto nel modulo
@@ -46,9 +46,9 @@ public class TirocinioController {
                 JOptionPane.showMessageDialog(null,"Cognome Errato!");
             } else if (!inputMatricolaControl(matricola)) {
                 JOptionPane.showMessageDialog(null,"Matricola Errata!");
-            } else if (!inputCorsoLaureaControl(luogonascita)) {
+            } else if (!inputSentenceControl(luogonascita)) {
                 JOptionPane.showMessageDialog(null,"Luogo Di Nascita Errato!");
-            } else if (!inputCorsoLaureaControl(residenza)) {
+            } else if (!inputSentenceControl(residenza)) {
                 JOptionPane.showMessageDialog(null,"Residenza Errata!");
             } else if (!inputProvinciaControl(provincia)) {
                 JOptionPane.showMessageDialog(null,"Provincia Errata!");
