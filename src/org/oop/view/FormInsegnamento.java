@@ -27,7 +27,7 @@ public class FormInsegnamento {
     private JScrollPane scrollpaneinsegnamenti;
     private JTextField textFieldnomeinsegnamento;
 
-    public FormInsegnamento(){
+    public FormInsegnamento() {
         DefaultTableModel modellist = new DefaultTableModel();
 //        listainsegnamenti.setModel((ListModel) modellist);
         listainsegnamenti.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -54,24 +54,16 @@ public class FormInsegnamento {
 
     /**
      * Metodi che permettono di associare ai bottoni i rispettivi listener
+     *
      * @param listener
      */
-    public void addConfermaButtonListener(ActionListener listener){
+    public void addConfermaButtonListener(ActionListener listener) {
         confermaButton.addActionListener(listener);
     }
-    public void addAnnullaButtonListener(ActionListener listener){
+
+    public void addAnnullaButtonListener(ActionListener listener) {
         annullaButton.addActionListener(listener);
     }
-
-    public void addRadioListener(ActionListener listener)
-    {
-        triennaleRadioButton.addActionListener(listener);
-        magistraleRadioButton.addActionListener(listener);
-        cicloUnicoRadioButton.addActionListener(listener);
-    }
-
-
-
 
 
     /**
@@ -136,7 +128,6 @@ public class FormInsegnamento {
     public JScrollPane getScrollpaneinsegnamenti() {
         return scrollpaneinsegnamenti;
     }
-
 
 
 }

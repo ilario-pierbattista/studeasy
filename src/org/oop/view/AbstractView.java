@@ -8,4 +8,5 @@ import java.text.SimpleDateFormat;
  */
 public abstract class AbstractView<T> {
     public DateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
+
 }
