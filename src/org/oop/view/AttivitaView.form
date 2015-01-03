@@ -45,7 +45,7 @@
           <text value="Modifica"/>
         </properties>
       </component>
-      <component id="19ce8" class="javax.swing.JLabel" binding="aula">
+      <component id="19ce8" class="javax.swing.JLabel" binding="luogo">
         <constraints>
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>

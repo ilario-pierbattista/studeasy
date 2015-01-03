@@ -1,6 +1,3 @@
-/**
- * Created by Lvns on 12/20/14.
- */
 package org.oop.model.entities;
 
 import java.sql.Time;

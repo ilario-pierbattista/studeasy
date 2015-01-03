@@ -12,6 +12,7 @@ public class Insegnamento extends InsegnamentoOfferto {
     private Date data;
     private ArrayList<Attivita> attivita;
 
+    /* @TODO Eliminare se non serve */
     public Insegnamento(String name, int credits, int year, int semester, boolean optional, Docente teacher, int voto, boolean lode, Date data) {
         super(name, credits, year, semester, optional, teacher);
         this.voto = voto;

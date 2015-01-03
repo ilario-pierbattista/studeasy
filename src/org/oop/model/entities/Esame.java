@@ -1,12 +1,13 @@
-/**
- * Created by Lvns on 12/20/14.
- */
 package org.oop.model.entities;
 
 import java.sql.Time;
 import java.util.Date;
 
 public class Esame extends AttivitaEvento {
+
+    public static final String TIPOLOGIA_ORALE = "orale";
+    public static final String TIPOLOGIA_SCRITTO = "scritto";
+    public static final String TIPOLOGIA_LABORATORIO = "laboratorio";
 
     private int id;
     //da decidere se il seguente attributo sarà una stringa o meno

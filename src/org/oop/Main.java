@@ -44,9 +44,20 @@ public class Main {
     }
 
     private static void mainInitProcedure(String args[]) {
-        tests();
+        boolean executeTests = false;
+        boolean overrideDatabase = false;
+        for (String arg : args) {
+            if(arg.equals("--override-db")) {
+                overrideDatabase = true;
+            } else if (arg.equals("--test")) {
+                executeTests = true;
+            }
+        }
+        if(executeTests) {
+            tests();
+        }
         try {
-            Importatore importatore = new Importatore(false);
+            Importatore importatore = new Importatore(overrideDatabase);
             importatore.importaDati();
         } catch (Exception ee) {
             ee.printStackTrace();

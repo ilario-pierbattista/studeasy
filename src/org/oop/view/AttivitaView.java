@@ -13,7 +13,7 @@ public class AttivitaView extends AbstractView<Mainframe> {
     private JLabel activityname;
     private JLabel teacher;
     private JButton editbutton;
-    private JLabel aula;
+    private JLabel luogo;
     private JLabel description;
     private JLabel hour;
 
@@ -21,7 +21,7 @@ public class AttivitaView extends AbstractView<Mainframe> {
     public AttivitaView(String nomeattivita) {
         activityname.setText(nomeattivita);
         teacher.setText("Docente non definito");
-        aula.setText("Aula non definita");
+        luogo.setText("Aula non definita");
         description.setText("Descrizione non definita");
         hour.setText("Orario non definito");
     }
@@ -29,7 +29,7 @@ public class AttivitaView extends AbstractView<Mainframe> {
     public AttivitaView(String nomeattivita, String nomeprofessore, String a, String h, String d) {
         activityname.setText(nomeattivita);
         teacher.setText(nomeprofessore);
-        aula.setText(a);
+        luogo.setText(a);
         hour.setText(h);
         description.setText(d);
     }
