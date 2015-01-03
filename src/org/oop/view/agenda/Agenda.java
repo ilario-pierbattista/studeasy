@@ -1,6 +1,7 @@
-package org.oop.view;
+package org.oop.view.agenda;
 
 import org.oop.model.entities.Ciclo;
+import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,16 +53,52 @@ public class Agenda extends AbstractView<Agenda> {
         activitiespanel.setLayout(new GridLayout(0, 2, 20, 20));
     }
 
+    /**
+     * Metodo che aggiunge l'attività che gli viene passata nel JPanel
+     * @param attivita
+     */
     public void addAttivita(AttivitaView attivita) {
         activitiespanel.add(attivita.activitypanel);
     }
 
+    /**
+     * Metodo che aggiunge ogni Ciclo dell'Arraylist che gli si passa alla lista dei cicli
+     * @param list
+     */
     public void setListaCicli(ArrayList<Ciclo> list) {
         DefaultListModel<Ciclo> cicliListModel = new DefaultListModel<Ciclo>();
         for (Ciclo ciclo : list) {
             cicliListModel.addElement(ciclo);
         }
         ciclilist.setModel(cicliListModel);
+    }
+
+    /**
+     * Metodo che aggiorna la lista dei cicli
+     */
+    public void updateListaCicli(){
+        if (ciclilist.getModel().getSize() <= 0)  {
+            removeciclobutton.setEnabled(false);
+        } else {
+            removeciclobutton.setEnabled(true);
+            ciclilist.setSelectedIndex(0);
+        }
+    }
+
+    /**@TODO riguardare meglio sta funzione **/
+    public void updateListaCicli(int index){
+        DefaultListModel<Ciclo> listmodel = (DefaultListModel<Ciclo>) ciclilist.getModel();
+
+        if (listmodel.getSize() <= 0)  {
+            removeciclobutton.setEnabled(false);
+        } else {
+            removeciclobutton.setEnabled(true);
+            if (index == listmodel.getSize() ) {
+                index--;
+                ciclilist.setSelectedIndex(index);
+                ciclilist.ensureIndexIsVisible(index);
+            }
+        }
     }
 
     /* Getters */
@@ -103,6 +140,10 @@ public class Agenda extends AbstractView<Agenda> {
 
     public JButton getAddciclobutton() {
         return addciclobutton;
+    }
+
+    public JLabel getListaInsegnamentiTitle() {
+        return listaInsegnamentiTitle;
     }
 
 

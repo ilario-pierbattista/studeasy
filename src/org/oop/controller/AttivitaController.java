@@ -1,7 +1,7 @@
 package org.oop.controller;
 
-import org.oop.view.AttivitaView;
-import org.oop.view.FormAttivita;
+import org.oop.view.agenda.AttivitaView;
+import org.oop.view.agenda.FormAttivita;
 
 import java.awt.event.ActionEvent;
 

@@ -2,9 +2,10 @@ package org.oop.controller;
 
 import org.oop.general.Utils;
 import org.oop.model.dao.CicloDAO;
-import org.oop.model.dao.CorsoDAO;
 import org.oop.model.entities.Ciclo;
-import org.oop.view.*;
+import org.oop.view.agenda.Agenda;
+import org.oop.view.agenda.AttivitaView;
+import org.oop.view.agenda.FormCiclo;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -35,20 +36,42 @@ public class AgendaController {
 
     }
 
+    /**
+     * Action che aggiorna la lista degli insegnamenti in base al ciclo selezionato
+     * dalla lista dei cicli
+     */
     class listaCicliSelectionAction implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent e) {
             ListSelectionModel lsm = (ListSelectionModel)e.getSource();
 
+            if (!lsm.isSelectionEmpty()){
+                int index = lsm.getMinSelectionIndex();
+                Ciclo ciclo = (Ciclo) view.getCiclilist().getModel().getElementAt(index);
+                view.getListaInsegnamentiTitle().setText("Insegnamenti di " + ciclo.getLabel());
+            }
         }
     }
 
     /**
-     * Metodo che passa il model alla vista
+     * Metodo che passa il model alla vista e la mantiene aggiornata
      */
      public void updateView(){
          view.setListaCicli(cicloDAO.findAll());
-         view.getCiclilist().setSelectedIndex(0);
+         view.updateListaCicli();
+
      }
+
+    /**
+     * Metodo che passa il model alla vista e la mantiene aggiornata.
+     * L'indice permette il fallback della selezione nelle liste.
+     * @param index
+     */
+    /**@TODO riguardare meglio sta funzione **/
+    public void updateView(int index){
+        view.setListaCicli(cicloDAO.findAll());
+        view.updateListaCicli(index);
+
+    }
 
     /**
      * Action per aggiungere un'attività di tipo lezione
@@ -95,18 +118,7 @@ public class AgendaController {
 
                 listModel.remove(index);
 
-                if (size == 0) { //Se non ci sono più cicli, disabilita il bottone
-                    view.getRemoveciclobutton().setEnabled(false);
-
-                } else { //Seleziona un indice.
-                    if (index == listModel.getSize()) {
-                        //rimuove l'elemento nell'ultima posizione
-                        index--;
-                    }
-
-                    list.setSelectedIndex(index);
-                    list.ensureIndexIsVisible(index);
-                }
+                updateView(index);
             }
 
         }

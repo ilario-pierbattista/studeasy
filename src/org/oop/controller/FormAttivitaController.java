@@ -1,9 +1,8 @@
 package org.oop.controller;
 
-import org.oop.model.entities.Attivita;
-import org.oop.view.Agenda;
-import org.oop.view.AttivitaView;
-import org.oop.view.FormAttivita;
+import org.oop.view.agenda.Agenda;
+import org.oop.view.agenda.AttivitaView;
+import org.oop.view.agenda.FormAttivita;
 import org.oop.view.Mainframe;
 
 
