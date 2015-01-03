@@ -1,6 +1,6 @@
 package org.oop.controller;
 
-import org.oop.view.segreteria.Tesi;
+import org.oop.view.Tesi;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

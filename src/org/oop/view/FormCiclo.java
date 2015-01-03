@@ -1,7 +1,6 @@
-package org.oop.view.agenda;
+package org.oop.view;
 
 import org.oop.model.entities.Ciclo;
-import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;

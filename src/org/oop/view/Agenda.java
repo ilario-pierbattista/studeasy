@@ -1,7 +1,6 @@
-package org.oop.view.agenda;
+package org.oop.view;
 
 import org.oop.model.entities.Ciclo;
-import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -101,6 +100,14 @@ public class Agenda extends AbstractView<Agenda> {
         }
     }
 
+    /**
+     * Metodo che ritorna l'istanza della vista
+     * @return
+     */
+    public static Agenda getInstance() {
+        return instance;
+    }
+
     /* Getters */
     public JLabel getInsegnamentolabel() {
         return insegnamentolabel;
@@ -146,6 +153,13 @@ public class Agenda extends AbstractView<Agenda> {
         return listaInsegnamentiTitle;
     }
 
+    public JButton getAddInsegnamentoButton() {
+        return addInsegnamentoButton;
+    }
+
+    public JButton getRemoveInsegnamentoButton() {
+        return removeInsegnamentoButton;
+    }
 
     /* Listeners setters */
     public void addCicloButtonListener(ActionListener listener) {
@@ -176,9 +190,14 @@ public class Agenda extends AbstractView<Agenda> {
         seminariobutton.addActionListener(listener);
     }
 
-
-    public static Agenda getInstance() {
-        return instance;
+    public void addInsegnamentoButtonListener(ActionListener listener){
+        addInsegnamentoButton.addActionListener(listener);
     }
+
+    public void addRemoveInsegnamentoButtonListener(ActionListener listener){
+        removeInsegnamentoButton.addActionListener(listener);
+    }
+
+
 
 }

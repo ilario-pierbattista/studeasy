@@ -1,6 +1,6 @@
 package org.oop.controller;
 
-import org.oop.view.segreteria.Iscrizione;
+import org.oop.view.Iscrizione;
 
 import java.awt.event.ActionEvent;
 
