@@ -1,4 +1,4 @@
-package org.oop.view;
+package org.oop.view.segreteria;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;

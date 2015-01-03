@@ -1,4 +1,6 @@
-package org.oop.view;
+package org.oop.view.agenda;
+
+import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -7,7 +9,7 @@ import java.awt.event.ActionListener;
  * Created by toioski on 20/12/14.
  */
 
-public class AttivitaView extends AbstractView<Mainframe> {
+public class AttivitaView extends AbstractView<AttivitaView> {
     public JPanel activitypanel;
 
     private JLabel activityname;

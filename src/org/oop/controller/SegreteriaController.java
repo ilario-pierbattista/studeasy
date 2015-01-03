@@ -1,10 +1,6 @@
 package org.oop.controller;
 
-import org.oop.view.FormRegistrazione;
-import org.oop.view.Mainframe;
-import org.oop.view.Segreteria;
-
-import java.awt.event.ActionEvent;
+import org.oop.view.segreteria.Segreteria;
 
 
 public class SegreteriaController {

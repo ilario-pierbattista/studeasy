@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.oop.view.Agenda">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.oop.view.agenda.Agenda">
   <grid id="27dc6" binding="agendapanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
@@ -22,7 +22,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <grid id="de1a0" binding="sidebarpanel" layout-manager="GridLayoutManager" row-count="4" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="de1a0" binding="sidebarpanel" layout-manager="GridLayoutManager" row-count="2" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="15" left="7" bottom="14" right="5"/>
             <constraints>
               <splitpane position="left"/>
@@ -37,56 +37,131 @@
             <children>
               <splitpane id="168a5" binding="insidesplitpane">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="9" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                  <grid row="1" column="0" row-span="1" col-span="9" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="200" height="200"/>
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-395273"/>
+                  <background color="-1907998"/>
                   <dividerSize value="0"/>
                   <orientation value="0"/>
                 </properties>
                 <border type="none"/>
                 <children>
-                  <scrollpane id="3ce38" binding="cicliscrollpane">
-                    <constraints>
-                      <splitpane position="left"/>
-                    </constraints>
-                    <properties>
-                      <background color="-395273"/>
-                    </properties>
-                    <border type="none"/>
-                    <children>
-                      <component id="7731a" class="javax.swing.JList" binding="ciclilist">
-                        <constraints/>
-                        <properties>
-                          <background color="-395273"/>
-                          <model/>
-                        </properties>
-                      </component>
-                    </children>
-                  </scrollpane>
-                  <scrollpane id="49bfb" binding="insegnamentiscrollpane">
+                  <grid id="a8a08" layout-manager="GridLayoutManager" row-count="4" column-count="8" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="10" left="0" bottom="10" right="0"/>
                     <constraints>
                       <splitpane position="right"/>
                     </constraints>
                     <properties>
-                      <background color="-395273"/>
+                      <background color="-1907998"/>
                     </properties>
                     <border type="none"/>
                     <children>
-                      <component id="ad04" class="javax.swing.JList" binding="insegnamentilist">
-                        <constraints/>
+                      <scrollpane id="49bfb" binding="insegnamentiscrollpane">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="8" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                        </constraints>
                         <properties>
                           <background color="-395273"/>
-                          <model>
-                            <item value="Tecnologie per le telecomunicazioni"/>
-                            <item value="Programmazione ad Oggetti"/>
-                          </model>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="ad04" class="javax.swing.JList" binding="insegnamentilist">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <model/>
+                            </properties>
+                          </component>
+                        </children>
+                      </scrollpane>
+                      <component id="14779" class="javax.swing.JLabel" binding="listaInsegnamentiTitle">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="8" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <foreground color="-16777216"/>
+                          <text value="Insegnamenti di Nomeciclo"/>
+                        </properties>
+                      </component>
+                      <component id="5ad55" class="javax.swing.JButton" binding="addInsegnamentoButton">
+                        <constraints>
+                          <grid row="3" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Aggiungi"/>
+                        </properties>
+                      </component>
+                      <component id="2f1e" class="javax.swing.JButton" binding="removeInsegnamentoButton">
+                        <constraints>
+                          <grid row="3" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Rimuovi"/>
+                        </properties>
+                      </component>
+                      <component id="46df7" class="javax.swing.JButton" binding="removeciclobutton">
+                        <constraints>
+                          <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Rimuovi"/>
+                        </properties>
+                      </component>
+                      <component id="3d5e2" class="javax.swing.JButton" binding="addciclobutton">
+                        <constraints>
+                          <grid row="0" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false">
+                            <preferred-size width="20" height="32"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <horizontalAlignment value="0"/>
+                          <horizontalTextPosition value="4"/>
+                          <text value="Aggiungi"/>
                         </properties>
                       </component>
                     </children>
-                  </scrollpane>
+                  </grid>
+                  <grid id="62951" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="5" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <splitpane position="left"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1907998"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <scrollpane id="3ce38" binding="cicliscrollpane">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-395273"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="7731a" class="javax.swing.JList" binding="ciclilist">
+                            <constraints/>
+                            <properties>
+                              <background color="-1"/>
+                              <model/>
+                            </properties>
+                          </component>
+                        </children>
+                      </scrollpane>
+                      <component id="34a3" class="javax.swing.JLabel" binding="sidebardescription">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <foreground color="-16777216"/>
+                          <text value="Aggiungi o rimuovi un ciclo"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
                 </children>
               </splitpane>
               <component id="fc333" class="javax.swing.JLabel" binding="sidebartitle">
@@ -97,35 +172,6 @@
                   <font size="14" style="1"/>
                   <foreground color="-13421773"/>
                   <text value="Cicli e insegnamenti"/>
-                </properties>
-              </component>
-              <component id="34a3" class="javax.swing.JLabel" binding="sidebardescription">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="9" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <foreground color="-5461077"/>
-                  <text value="Aggiungi cicli e insegnamenti"/>
-                </properties>
-              </component>
-              <component id="3d5e2" class="javax.swing.JButton" binding="addciclobutton">
-                <constraints>
-                  <grid row="3" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false">
-                    <preferred-size width="20" height="32"/>
-                  </grid>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="0"/>
-                  <horizontalTextPosition value="4"/>
-                  <text value="+ Ciclo"/>
-                </properties>
-              </component>
-              <component id="46df7" class="javax.swing.JButton" binding="removeciclobutton">
-                <constraints>
-                  <grid row="3" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="- Ciclo"/>
                 </properties>
               </component>
             </children>

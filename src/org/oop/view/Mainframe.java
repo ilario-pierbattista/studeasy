@@ -1,5 +1,9 @@
 package org.oop.view;
 
+import org.oop.view.agenda.Agenda;
+import org.oop.view.profilo.Profilo;
+import org.oop.view.segreteria.Segreteria;
+
 import javax.swing.*;
 
 /**

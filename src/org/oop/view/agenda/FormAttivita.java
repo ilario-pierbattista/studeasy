@@ -1,4 +1,6 @@
-package org.oop.view;
+package org.oop.view.agenda;
+
+import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -6,7 +8,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by toioski on 23/12/14.
  */
-public class FormAttivita extends AbstractView<Mainframe> {
+public class FormAttivita extends AbstractView<AttivitaView> {
     public static  JFrame frame = new JFrame("Crea Attività");
     private JPanel panel1;
     private JTextField namefield;

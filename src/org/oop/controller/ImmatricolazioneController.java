@@ -1,6 +1,6 @@
 package org.oop.controller;
 
-import org.oop.view.Immatricolazione;
+import org.oop.view.segreteria.Immatricolazione;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,4 +1,6 @@
-package org.oop.view;
+package org.oop.view.profilo;
+
+import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -8,7 +10,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by toioski on 20/12/14.
  */
-public class Profilo extends AbstractView<Mainframe> {
+public class Profilo extends AbstractView<Profilo> {
     public JPanel profilopanel;
     private JPanel sidebarpanel;
     private JSplitPane splitpane;
