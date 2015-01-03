@@ -7,6 +7,8 @@ import org.oop.model.entities.Ciclo;
 import org.oop.view.*;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 
 
@@ -24,10 +26,20 @@ public class AgendaController {
         view.addLaboratorioButtonListener(new AddAttivitaAction());
         view.addSeminarioButtonListener(new AddAttivitaAction());
         view.addProgettoButtonListener(new AddAttivitaAction());
-        view.addCicloButtonListener(new AddCicloButton());
+        view.addCicloButtonListener(new AddCicloAction());
+        view.addRemoveCicloButtonListener(new RemoveCicloAction());
+
+        view.getCiclilist().getSelectionModel().addListSelectionListener(new listaCicliSelectionAction());
 
         updateView();
 
+    }
+
+    class listaCicliSelectionAction implements ListSelectionListener {
+        public void valueChanged(ListSelectionEvent e) {
+            ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+
+        }
     }
 
     /**
@@ -35,6 +47,7 @@ public class AgendaController {
      */
      public void updateView(){
          view.setListaCicli(cicloDAO.findAll());
+         view.getCiclilist().setSelectedIndex(0);
      }
 
     /**
@@ -49,74 +62,55 @@ public class AgendaController {
         }
     }
 
-    /**
-     * Action per aggiungere un'attività di tipo esame
-     */
-    class AddEsameAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-
-            view.addAttivita(new AttivitaView("Esame"));
-            Mainframe.refreshView();
-
-            FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(), "esame");
-
-        }
-    }
-
-
-    /**
-     * Action per aggiungere un'attività di tipo laboratorio
-     */
-    class AddLaboratorioAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            view.addAttivita(new AttivitaView("Laboratorio"));
-            Mainframe.refreshView();
-
-            FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(), "laboratorio");
-
-        }
-    }
-
-    /**
-     * Action per aggiungere un'attività di tipo progetto
-     */
-    class AddProgettoAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            view.addAttivita(new AttivitaView("Progetto"));
-            Mainframe.refreshView();
-
-            FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(), "progetto");
-
-        }
-    }
-
-    /**
-     * Action per aggiungere un'attività di tipo seminario
-     */
-    class AddSeminarioAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            view.addAttivita(new AttivitaView("Seminario"));
-            Mainframe.refreshView();
-
-            FormAttivitaController formcontroller = new FormAttivitaController(new FormAttivita(), "seminario");
-
-        }
-    }
 
     /**
      * Action per aprire il form di aggiunta ciclo
      */
-    class AddCicloButton extends AbstractAction {
+    class AddCicloAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
             formcicloview = new FormCiclo();
             formcicloview.addSubmitButtonListener(new SubmitCicloFormAction());
             formcicloview.addCancelButtonListener(new CloseCicloFormAction());
         }
+    }
+
+    /**
+     * Action per rimuovere un ciclo dalla lista dei cicli
+     */
+    class RemoveCicloAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int index = view.getCiclilist().getSelectedIndex();
+            JList list = view.getCiclilist();
+            DefaultListModel<Ciclo> listModel = (DefaultListModel<Ciclo>) list.getModel();
+            int size = listModel.getSize();
+
+            if (index == -1) { //Se non è selezionato niente
+                JOptionPane.showMessageDialog(null, "Seleziona un ciclo per eliminarlo!");
+            } else {
+                CicloDAO cicloDAO = new CicloDAO();
+                cicloDAO.remove(listModel.getElementAt(index));
+                cicloDAO.flush();
+
+                listModel.remove(index);
+
+                if (size == 0) { //Se non ci sono più cicli, disabilita il bottone
+                    view.getRemoveciclobutton().setEnabled(false);
+
+                } else { //Seleziona un indice.
+                    if (index == listModel.getSize()) {
+                        //rimuove l'elemento nell'ultima posizione
+                        index--;
+                    }
+
+                    list.setSelectedIndex(index);
+                    list.ensureIndexIsVisible(index);
+                }
+            }
+
+        }
+
     }
 
     /**

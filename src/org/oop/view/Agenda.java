@@ -32,6 +32,9 @@ public class Agenda extends AbstractView<Agenda> {
     private JList insegnamentilist;
     private JButton addciclobutton;
     private JButton removeciclobutton;
+    private JButton addInsegnamentoButton;
+    private JButton removeInsegnamentoButton;
+    private JLabel listaInsegnamentiTitle;
 
     public Agenda() {
         //Setto istance a questa instanza in modo da rendere statica la vista
@@ -42,7 +45,7 @@ public class Agenda extends AbstractView<Agenda> {
         splitpane.setBorder(null);
         sidebarpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(126, 126, 126)));
 
-        insidesplitpane.setDividerLocation(60 + insidesplitpane.getInsets().top);
+        insidesplitpane.setDividerLocation(80 + insidesplitpane.getInsets().top);
         insidesplitpane.setBorder(null);
 
         //Imposta il layout a 2 colonne
@@ -101,6 +104,7 @@ public class Agenda extends AbstractView<Agenda> {
     public JButton getAddciclobutton() {
         return addciclobutton;
     }
+
 
     /* Listeners setters */
     public void addCicloButtonListener(ActionListener listener) {
