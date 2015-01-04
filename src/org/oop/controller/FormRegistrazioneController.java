@@ -4,6 +4,7 @@ import org.oop.db.SQLParameters;
 import org.oop.model.dao.CorsoDAO;
 import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Utente;
+import org.oop.view.Mainframe;
 import org.oop.view.profilo.FormRegistrazione;
 
 import javax.swing.*;
@@ -46,7 +47,7 @@ public class FormRegistrazioneController {
         ArrayList<Utente> utenti = utenteDAO.findAll();
         primoAvvio = utenti.isEmpty();
         if(primoAvvio) {
-            utente = new Utente();
+            utente = null;
         } else {
             utente = utenti.get(0);
         }
@@ -100,29 +101,18 @@ public class FormRegistrazioneController {
     class submitFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String nome = view.getNome().getText();
-            String cognome = view.getCognome().getText();
-            String matricola = view.getMatricola().getText();
-            String mail = view.getEmail().getText();
-            String corso = view.getCorsolaurea().getText();
-
-            if ((inputNameControl(nome)) && (inputNameControl(cognome)) && (inputMatricolaControl(matricola)) && (inputMailControl(mail)) && (inputSentenceControl(corso))) {
-
-                String name = stringToCapital(nome);
-                String surname = stringToCapital(cognome);
-                //butta tutto  nel model e poi nel database
-
-            } else if (!inputNameControl(nome)) {
-                JOptionPane.showMessageDialog(null, "Nome non valido");
-            } else if (!inputNameControl(cognome)) {
-                JOptionPane.showMessageDialog(null, "Cognome non Valido");
-            } else if (!inputMatricolaControl(matricola)) {
-                JOptionPane.showMessageDialog(null, "Matricola non valida");
-            } else if (!inputMailControl(mail)) {
-                JOptionPane.showMessageDialog(null, "Email Non Valida");
-            } else if (!inputSentenceControl(corso)) {
-                JOptionPane.showMessageDialog(null, "Corso non Valido");
+            if(view.isValid()) {
+                UtenteDAO utenteDAO = new UtenteDAO();
+                Utente nuoviDati = view.getUtente();
+                if(primoAvvio) {
+                    utenteDAO.persist(nuoviDati);
+                } else {
+                    /** @TODO gestire l'aggiornamento dei dati dell'utente */
+                }
+                utenteDAO.flush();
             }
+            view.frame.dispose();
+            Mainframe.setVisible(true);
         }
     }
 }
