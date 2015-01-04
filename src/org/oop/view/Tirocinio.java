@@ -3,7 +3,7 @@ package org.oop.view;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class Tirocinio {
+public class Tirocinio extends AbstractView {
 
     public JPanel tirociniopanel;
     private JButton quit;
@@ -199,5 +199,9 @@ public class Tirocinio {
     }
     public JFormattedTextField getCfu() {
         return cfu;
+    }
+
+    private void createUIComponents() {
+        datanascita = new JFormattedTextField(dateformat);
     }
 }

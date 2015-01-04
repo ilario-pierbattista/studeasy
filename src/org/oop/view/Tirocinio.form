@@ -80,7 +80,7 @@
           <text value="Matricola"/>
         </properties>
       </component>
-      <component id="f2b70" class="javax.swing.JFormattedTextField" binding="datanascita">
+      <component id="f2b70" class="javax.swing.JFormattedTextField" binding="datanascita" custom-create="true">
         <constraints>
           <grid row="4" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="250" height="20"/>
