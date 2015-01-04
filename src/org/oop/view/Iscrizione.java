@@ -26,6 +26,7 @@ public class Iscrizione {
             return false;
         }
     };*/
+    //
     private CustomTableModel model = new CustomTableModel("Anno", "Anno Accademico", "Corso di Laurea", "Esami Superati", "CFU");
     int contarighe = 1;
 
