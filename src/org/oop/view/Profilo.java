@@ -42,7 +42,6 @@ public class Profilo extends AbstractView<Profilo> {
         splitpane.setDividerLocation(200 + splitpane.getInsets().left);
         //Elimina i bordi
         splitpane.setBorder(null);
-        sidebarpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(126, 126, 126)));
         //Setta il modello alla tabella
         insegnamentotable.setModel(model);
         insegnamentotable.setRowHeight(30);
