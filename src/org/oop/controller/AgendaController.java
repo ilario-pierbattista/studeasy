@@ -83,7 +83,7 @@ public class AgendaController {
     class AddAttivitaAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            String activitytype = Utils.explodeStringForSpace(actionEvent.getActionCommand(),1);
+            String activitytype = Utils.explodeStringForSpace(actionEvent.getActionCommand(), 1);
             AttivitaView attivitaview = new AttivitaView(activitytype);
             AttivitaController attivitacontroller = new AttivitaController(attivitaview);
         }
@@ -166,6 +166,7 @@ public class AgendaController {
             modalAddInsegnamento.addAnnullaButtonListener(new closeModalInsegnamento());
             modalAddInsegnamento.addConfermaButtonListener(new submitModalInsegnamento());
 
+            //Manda gli insegnamenti alla vista
             InsegnamentoOffertoDAO insegnamentoOffertoDAO = new InsegnamentoOffertoDAO();
             modalAddInsegnamento.setListaInsegnamenti(insegnamentoOffertoDAO.findAll());
         }
