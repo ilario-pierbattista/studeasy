@@ -1,19 +1,14 @@
 package org.oop;
 
 import org.oop.controller.AgendaController;
-import org.oop.controller.FormRegistrazioneController;
 import org.oop.controller.ProfiloController;
 import org.oop.controller.SegreteriaController;
-import org.oop.model.dao.CicloDAO;
-import org.oop.model.entities.Ciclo;
 import org.oop.services.Importatore;
 import org.oop.test.db.DatabaseManagerTest;
 import org.oop.test.db.DatabaseUtilsTest;
-import org.oop.view.FormRegistrazione;
 import org.oop.view.Mainframe;
 
 import javax.swing.*;
-import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {

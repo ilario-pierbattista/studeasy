@@ -1,6 +1,8 @@
-package org.oop.view;
+package org.oop.view.profilo;
 
 import org.oop.model.entities.Corso;
+import org.oop.view.AbstractView;
+import org.oop.view.agenda.Agenda;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;

@@ -9,7 +9,7 @@ import java.util.Vector;
  * Created by MelvinMancini on 03/01/15.
  */
 
-class CustomTableModel extends DefaultTableModel {
+public class CustomTableModel extends DefaultTableModel {
 
     Object[][] data = {};
     String[] columnNames;

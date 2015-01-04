@@ -1,12 +1,9 @@
 package org.oop.controller;
 
-import org.oop.db.SQLParameters;
-import org.oop.view.FormInsegnamento;
-import org.oop.view.Profilo;
+import org.oop.view.agenda.FormInsegnamento;
+import org.oop.view.profilo.Profilo;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by MelvinMancini on 02/01/15.

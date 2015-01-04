@@ -1,6 +1,6 @@
 package org.oop.controller;
 
-import org.oop.view.Segreteria;
+import org.oop.view.segreteria.Segreteria;
 
 
 public class SegreteriaController {
