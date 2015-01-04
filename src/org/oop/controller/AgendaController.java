@@ -4,6 +4,7 @@ import org.oop.general.Utils;
 import org.oop.model.dao.CicloDAO;
 import org.oop.model.dao.InsegnamentoOffertoDAO;
 import org.oop.model.entities.Ciclo;
+import org.oop.model.entities.InsegnamentoOfferto;
 import org.oop.view.Agenda;
 import org.oop.view.AttivitaView;
 import org.oop.view.FormCiclo;
@@ -35,6 +36,7 @@ public class AgendaController {
         view.addInsegnamentoButtonListener(new addInsegnamentoAction());
 
         view.getCiclilist().getSelectionModel().addListSelectionListener(new listaCicliSelectionAction());
+        view.getInsegnamentilist().getSelectionModel().addListSelectionListener(new listaInsegnamentiSelectionAction());
 
         updateView();
 
@@ -173,12 +175,33 @@ public class AgendaController {
     }
 
     /**
-     * Action che passa la lista di insegnamenti alla vista che ne permette la aggiunta
+     * Action che mostra tutte le attività relative all'insegnamento selezionato
+     * dalla lista degli insegnamenti
+     */
+    class listaInsegnamentiSelectionAction implements ListSelectionListener {
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+
+            if (!lsm.isSelectionEmpty()) {
+                int index = lsm.getMinSelectionIndex();
+                InsegnamentoOfferto insegnamentoOfferto = (InsegnamentoOfferto) view.getInsegnamentilist().getModel().getElementAt(index);
+
+                view.updateElencoAttivita(insegnamentoOfferto);
+            }
+        }
+    }
+
+    /**
+     * Action aggiunge l'insegnamento selezionato nel modal alla lista degli insegnamenti
+     * nella Agenda
      */
     class submitModalInsegnamento extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            int index = modalAddInsegnamento.getListInsegnamenti().getSelectedIndex();
+            InsegnamentoOfferto ins = (InsegnamentoOfferto) modalAddInsegnamento.getListInsegnamenti().getModel().getElementAt(index);
+            view.addInsegnamentoToList(ins);
         }
     }
 
