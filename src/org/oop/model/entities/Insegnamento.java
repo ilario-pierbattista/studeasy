@@ -1,6 +1,3 @@
-/**
- * Created by Lvns on 12/20/14.
- */
 package org.oop.model.entities;
 
 import java.util.ArrayList;
@@ -18,6 +15,7 @@ public class Insegnamento extends InsegnamentoOfferto {
         this.voto = voto;
         this.lode = lode;
         this.data = data;
+        attivita = new ArrayList<Attivita>(3);
     }
 
     //il seguente è il costruttore che inizializza i dati di deafult
@@ -84,4 +82,17 @@ public class Insegnamento extends InsegnamentoOfferto {
         return this;
     }
 
+    public ArrayList<Attivita> getAttivita() {
+        return attivita;
+    }
+
+    public Insegnamento setAttivita(ArrayList<Attivita> attivita) {
+        this.attivita = attivita;
+        return this;
+    }
+
+    public Insegnamento addAttivita(Attivita nuova) {
+        attivita.add(nuova);
+        return this;
+    }
 }

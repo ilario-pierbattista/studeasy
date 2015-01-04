@@ -69,7 +69,7 @@ Create table attivita(
 	luogo varchar(150) not null,
 	categoria enum('lezione', 'laboratorio', 'progetto', 'esame', 'seminario'),
 	ripetizione_settimanale boolean not null,
-	giorno enum('lun', 'mar', 'mer', 'gio', 'ven', 'sab'),
+	giorno int,
 	data date,
 	tipologia_prova enum('scritto', 'orale', 'laboratorio'),
 	docente int,
@@ -87,6 +87,15 @@ Create table iu_ciclo(
 	foreign key (ciclo) references ciclo(id),
 	foreign key (insegnamento_utente) references insegnamento_utente(id),
 	primary key(ciclo, insegnamento_utente)
+);
+
+Create table ui_attivita_ciclo(
+	ciclo int not null,
+	insegnamento_utente int not null,
+	attivita int not null,
+	foreign key (ciclo) references ciclo(id),
+	foreign key (insegnamento_utente) references insegnamento_utente(id),
+	foreign key (attivita) references attivita(id)
 );
 
 Create table tassa(

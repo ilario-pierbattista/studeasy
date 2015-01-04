@@ -4,31 +4,23 @@ import java.sql.Time;
 
 public class AttivitaPeriodica extends Attivita {
 
-    private int id;
-    //da decidere se il seguente attributo sarà una stringa
-    private String giorno;
-
+    /**
+     * Rappresenta un giorno della settimana. Assume uno dei valori possibili per
+     * DAY_OF_WEEK di java.util.Calendar
+     */
+    private int giorno;
 
     //il costruttore della classe figlia "amplia" quello della classe padre assegnando i valori non inizializzati
-    public AttivitaPeriodica(String aula, Time oraInizio, Time oraFine, Docente docente, String ruoloDocente, String categoria, String giorno) {
+    public AttivitaPeriodica(String aula, Time oraInizio, Time oraFine, Docente docente, String ruoloDocente, String categoria, int giorno) {
         super(aula, oraInizio, oraFine, docente, ruoloDocente, categoria);
         this.giorno = giorno;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public AttivitaPeriodica setId(int id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getGiorno() {
+    public int getGiorno() {
         return giorno;
     }
 
-    public AttivitaPeriodica setGiorno(String giorno) {
+    public AttivitaPeriodica setGiorno(int giorno) {
         this.giorno = giorno;
         return this;
     }

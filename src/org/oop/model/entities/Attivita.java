@@ -3,13 +3,23 @@ package org.oop.model.entities;
 import java.sql.Time;
 
 public class Attivita {
+    /**
+     * Valori assumibili dall'attributo categoria
+     */
     public static final String CATEGORIA_LEZIONE = "lezione";
     public static final String CATEGORIA_LABORATORIO = "laboratorio";
     public static final String CATEGORIA_PROGETTO = "progetto";
     public static final String CATEGORIA_ESAME = "esame";
     public static final String CATEGORIA_SEMINARIO = "seminario";
 
-    private int id;
+    /**
+     * Valori assumibili dall'attributo ruoloDocente
+     */
+    public static final String DOCENTE = "docente";
+    public static final String ASSISTENTE = "assistente";
+    public static final String TUTOR = "tutor";
+
+    protected int id;
     private String luogo;
     private Time oraInizio;
     private Time oraFine;

@@ -9,8 +9,6 @@ public class Esame extends AttivitaEvento {
     public static final String TIPOLOGIA_SCRITTO = "scritto";
     public static final String TIPOLOGIA_LABORATORIO = "laboratorio";
 
-    private int id;
-    //da decidere se il seguente attributo sarà una stringa o meno
     private String tipologiaProva;
 
     //viene usato il this nel costruttore per sopperire all'eventuale possibile confusione creata dall'elevato numero di parametri
@@ -19,18 +17,8 @@ public class Esame extends AttivitaEvento {
         this.tipologiaProva = tipologiaProva;
     }
 
-
     //il seguente è il costruttore che inizializza i dati di deafult
     public Esame() {}
-
-    public int getId() {
-        return id;
-    }
-
-    public Esame setId(int id) {
-        this.id = id;
-        return this;
-    }
 
     public String getTipologiaProva() {
         return tipologiaProva;
