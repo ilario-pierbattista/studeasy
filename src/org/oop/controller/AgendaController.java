@@ -202,6 +202,7 @@ public class AgendaController {
             int index = modalAddInsegnamento.getListInsegnamenti().getSelectedIndex();
             InsegnamentoOfferto ins = (InsegnamentoOfferto) modalAddInsegnamento.getListInsegnamenti().getModel().getElementAt(index);
             view.addInsegnamentoToList(ins);
+            view.getInsegnamentilist().setSelectedIndex(0);
         }
     }
 
