@@ -1,240 +1,265 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.oop.view.Tirocinio">
-  <grid id="27dc6" binding="tirociniopanel" layout-manager="GridLayoutManager" row-count="14" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="tirociniopanel" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="40" left="15" bottom="40" right="15"/>
     <constraints>
-      <xy x="20" y="20" width="712" height="581"/>
+      <xy x="20" y="20" width="748" height="581"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <component id="99f01" class="javax.swing.JLabel" binding="nomelabel">
-        <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Nome"/>
-        </properties>
-      </component>
-      <component id="6d824" class="javax.swing.JLabel" binding="codicefiscalelabel">
-        <constraints>
-          <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Codice Fiscale"/>
-        </properties>
-      </component>
-      <component id="b96f9" class="javax.swing.JLabel" binding="vialabel">
-        <constraints>
-          <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Via"/>
-        </properties>
-      </component>
-      <component id="4a709" class="javax.swing.JLabel" binding="residenzalabel">
-        <constraints>
-          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Residenza"/>
-        </properties>
-      </component>
-      <component id="76594" class="javax.swing.JLabel" binding="caplabel">
-        <constraints>
-          <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="CAP"/>
-        </properties>
-      </component>
-      <component id="e287f" class="javax.swing.JLabel" binding="provincialabel">
-        <constraints>
-          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Provincia"/>
-        </properties>
-      </component>
-      <component id="f6579" class="javax.swing.JLabel" binding="luogonascitalabel">
-        <constraints>
-          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Luogo Di Nascita"/>
-        </properties>
-      </component>
-      <component id="72073" class="javax.swing.JLabel" binding="datanascitalabel">
-        <constraints>
-          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Data Di Nascita"/>
-        </properties>
-      </component>
-      <component id="6d4a2" class="javax.swing.JLabel" binding="matricolalabel">
-        <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Matricola"/>
-        </properties>
-      </component>
-      <component id="f2b70" class="javax.swing.JFormattedTextField" binding="datanascita">
-        <constraints>
-          <grid row="4" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="250" height="20"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="ba165" class="javax.swing.JFormattedTextField" binding="nome">
-        <constraints>
-          <grid row="1" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="250" height="20"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="3d03b" class="javax.swing.JFormattedTextField" binding="matricola">
-        <constraints>
-          <grid row="3" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="250" height="20"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="99ec7" class="javax.swing.JFormattedTextField" binding="luogonascita">
-        <constraints>
-          <grid row="6" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="250" height="20"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="9a6b3" class="javax.swing.JFormattedTextField" binding="residenza">
-        <constraints>
-          <grid row="7" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="250" height="20"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="3e46f" class="javax.swing.JFormattedTextField" binding="provincia">
-        <constraints>
-          <grid row="8" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="250" height="20"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="9910" class="javax.swing.JFormattedTextField" binding="cap">
-        <constraints>
-          <grid row="9" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="250" height="20"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="db838" class="javax.swing.JFormattedTextField" binding="via">
-        <constraints>
-          <grid row="10" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="250" height="20"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="93ada" class="javax.swing.JFormattedTextField" binding="codicefiscale">
-        <constraints>
-          <grid row="11" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="250" height="20"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="a2e37" class="javax.swing.JLabel" binding="cognomelabel">
-        <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Cognome"/>
-        </properties>
-      </component>
-      <component id="c140b" class="javax.swing.JFormattedTextField" binding="cognome">
-        <constraints>
-          <grid row="2" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="250" height="20"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="ba780" class="javax.swing.JLabel" binding="cfulabel">
-        <constraints>
-          <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Cfu"/>
-        </properties>
-      </component>
-      <component id="e4284" class="javax.swing.JFormattedTextField" binding="cfu">
-        <constraints>
-          <grid row="12" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="250" height="20"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
       <hspacer id="7058b">
         <constraints>
-          <grid row="1" column="0" row-span="13" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+          <grid row="1" column="0" row-span="2" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
       </hspacer>
       <hspacer id="a6c44">
         <constraints>
-          <grid row="1" column="4" row-span="13" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+          <grid row="1" column="2" row-span="2" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
       </hspacer>
-      <component id="2a928" class="javax.swing.JButton" binding="submit">
-        <constraints>
-          <grid row="13" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="10" height="32"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="Conferma"/>
-        </properties>
-      </component>
-      <component id="342b9" class="javax.swing.JButton" binding="quit">
-        <constraints>
-          <grid row="13" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="10" height="32"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="Cancella Campi"/>
-        </properties>
-      </component>
-      <component id="739a9" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="5" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="(la data deve essere nel formato gg-mm-aaaa)"/>
-        </properties>
-      </component>
       <component id="668b" class="javax.swing.JLabel">
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <enabled value="false"/>
           <text value="Compila il form per stampare il modulo di tirocinio"/>
         </properties>
       </component>
+      <grid id="2f918" layout-manager="GridLayoutManager" row-count="12" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="99f01" class="javax.swing.JLabel" binding="nomelabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Nome:"/>
+            </properties>
+          </component>
+          <component id="6d824" class="javax.swing.JLabel" binding="codicefiscalelabel">
+            <constraints>
+              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Codice fiscale:"/>
+            </properties>
+          </component>
+          <component id="b96f9" class="javax.swing.JLabel" binding="vialabel">
+            <constraints>
+              <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Via:"/>
+            </properties>
+          </component>
+          <component id="4a709" class="javax.swing.JLabel" binding="residenzalabel">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Residenza:"/>
+            </properties>
+          </component>
+          <component id="76594" class="javax.swing.JLabel" binding="caplabel">
+            <constraints>
+              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="CAP:"/>
+            </properties>
+          </component>
+          <component id="e287f" class="javax.swing.JLabel" binding="provincialabel">
+            <constraints>
+              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Provincia:"/>
+            </properties>
+          </component>
+          <component id="f6579" class="javax.swing.JLabel" binding="luogonascitalabel">
+            <constraints>
+              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Luogo di nascita:"/>
+            </properties>
+          </component>
+          <component id="72073" class="javax.swing.JLabel" binding="datanascitalabel">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Data di nascita:"/>
+            </properties>
+          </component>
+          <component id="6d4a2" class="javax.swing.JLabel" binding="matricolalabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Matricola:"/>
+            </properties>
+          </component>
+          <component id="f2b70" class="javax.swing.JFormattedTextField" binding="datanascita">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="250" height="20"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="ba165" class="javax.swing.JFormattedTextField" binding="nome">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="250" height="20"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="3d03b" class="javax.swing.JFormattedTextField" binding="matricola">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="250" height="20"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="99ec7" class="javax.swing.JFormattedTextField" binding="luogonascita">
+            <constraints>
+              <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="250" height="20"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="9a6b3" class="javax.swing.JFormattedTextField" binding="residenza">
+            <constraints>
+              <grid row="6" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="250" height="20"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="3e46f" class="javax.swing.JFormattedTextField" binding="provincia">
+            <constraints>
+              <grid row="7" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="250" height="20"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="9910" class="javax.swing.JFormattedTextField" binding="cap">
+            <constraints>
+              <grid row="8" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="250" height="20"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="db838" class="javax.swing.JFormattedTextField" binding="via">
+            <constraints>
+              <grid row="9" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="250" height="20"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="93ada" class="javax.swing.JFormattedTextField" binding="codicefiscale">
+            <constraints>
+              <grid row="10" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="250" height="20"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="a2e37" class="javax.swing.JLabel" binding="cognomelabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Cognome:"/>
+            </properties>
+          </component>
+          <component id="c140b" class="javax.swing.JFormattedTextField" binding="cognome">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="250" height="20"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="ba780" class="javax.swing.JLabel" binding="cfulabel">
+            <constraints>
+              <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="CFU:"/>
+            </properties>
+          </component>
+          <component id="e4284" class="javax.swing.JFormattedTextField" binding="cfu">
+            <constraints>
+              <grid row="11" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="250" height="20"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="739a9" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="(la data deve essere nel formato gg-mm-aaaa)"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="a9cc" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="2a928" class="javax.swing.JButton" binding="submit">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="10" height="32"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="Conferma"/>
+            </properties>
+          </component>
+          <hspacer id="1857b">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
+          <component id="342b9" class="javax.swing.JButton" binding="quit">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="10" height="32"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="Cancella Campi"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
     </children>
   </grid>
 </form>

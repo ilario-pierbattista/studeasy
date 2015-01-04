@@ -25,26 +25,26 @@ public class FormInsegnamento {
     private JRadioButton cicloUnicoRadioButton;
     private JList listainsegnamenti;
     private JScrollPane scrollpaneinsegnamenti;
-    private JTextField textFieldnomeinsegnamento;
+    private JTextField TextFieldnomeinsegnamento;
 
     public FormInsegnamento() {
-        DefaultTableModel modellist = new DefaultTableModel();
-//        listainsegnamenti.setModel((ListModel) modellist);
         listainsegnamenti.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         frame.setContentPane(forminsegnamentopanel);
-        // frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.pack();
-        textFieldnomeinsegnamento.setEditable(false);
-        textFieldnomeinsegnamento.setText("Ciaooooooo");
-
     }
 
     public void setVisible(boolean visible) {
         frame.setVisible(visible);
     }
 
+    /**
+     * Metodo che aggiunge al model della lista di insegnamenti l'arraylist di
+     * insegnamenti che gli è stata passata
+     * @param insegnamenti
+     */
     public void setInsegnamentiList(ArrayList<Insegnamento> insegnamenti) {
+        //Attenzione, probabilmente non riceve un arraylist di Insegnamento, ma di InsegnamentoOfferto
         ArrayList<String> labels = new ArrayList<String>(insegnamenti.size());
         for (Insegnamento insegnamento : insegnamenti) {
             labels.add(insegnamento.getNome());
@@ -53,10 +53,16 @@ public class FormInsegnamento {
     }
 
     /**
-     * Metodi che permettono di associare ai bottoni i rispettivi listener
-     *
-     * @param listener
+     * Metodo che restituisce l'insegnamento selezionato dalla lista
      */
+    public Insegnamento getInsegnamentoSelected(){
+        int index = listainsegnamenti.getSelectedIndex();
+        Insegnamento insegnamento = (Insegnamento) listainsegnamenti.getModel().getElementAt(index);
+
+        return insegnamento;
+    }
+
+    /* Listener setters */
     public void addConfermaButtonListener(ActionListener listener) {
         confermaButton.addActionListener(listener);
     }
@@ -66,15 +72,13 @@ public class FormInsegnamento {
     }
 
 
-    /**
-     * Getter dei componenti del frame FormInsegnamento
-     */
-    public JTextField getTextFieldnomeinsegnamento() {
-        return textFieldnomeinsegnamento;
-    }
-
+    /* Getters */
     public JFrame getFrame() {
         return frame;
+    }
+
+    public JTextField getTextFieldnomeinsegnamento() {
+        return TextFieldnomeinsegnamento;
     }
 
     public JPanel getForminsegnamentopanel() {
