@@ -5,10 +5,10 @@ import org.oop.model.dao.CicloDAO;
 import org.oop.model.dao.InsegnamentoOffertoDAO;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.InsegnamentoOfferto;
-import org.oop.view.Agenda;
-import org.oop.view.AttivitaView;
-import org.oop.view.FormCiclo;
-import org.oop.view.ModalAddInsegnamento;
+import org.oop.view.agenda.Agenda;
+import org.oop.view.agenda.AttivitaView;
+import org.oop.view.agenda.FormCiclo;
+import org.oop.view.agenda.ModalAddInsegnamento;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;

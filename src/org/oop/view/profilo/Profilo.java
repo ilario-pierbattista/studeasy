@@ -1,8 +1,9 @@
-package org.oop.view;
+package org.oop.view.profilo;
+
+import org.oop.view.AbstractView;
+import org.oop.view.CustomTableModel;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**

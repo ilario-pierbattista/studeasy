@@ -1,4 +1,4 @@
-package org.oop.view;
+package org.oop.view.agenda;
 
 import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.InsegnamentoOfferto;

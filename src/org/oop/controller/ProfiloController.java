@@ -1,9 +1,9 @@
 package org.oop.controller;
 
-import org.oop.view.FormInsegnamento;
-import org.oop.view.FormRegistrazione;
+import org.oop.view.agenda.FormInsegnamento;
+import org.oop.view.profilo.FormRegistrazione;
 import org.oop.view.Mainframe;
-import org.oop.view.Profilo;
+import org.oop.view.profilo.Profilo;
 
 import java.awt.event.ActionEvent;
 

@@ -4,7 +4,7 @@ import org.oop.db.SQLParameters;
 import org.oop.model.dao.CorsoDAO;
 import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Utente;
-import org.oop.view.FormRegistrazione;
+import org.oop.view.profilo.FormRegistrazione;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
