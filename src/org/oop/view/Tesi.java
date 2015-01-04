@@ -3,7 +3,7 @@ package org.oop.view;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class Tesi {
+public class Tesi extends AbstractView {
     public JPanel tesipanel;
     private JButton submit;
     private JButton quit;
@@ -33,6 +33,9 @@ public class Tesi {
         quit.addActionListener(l);
     }
 
+    private void createUIComponents() {
+        dataNascita = new JFormattedTextField(dateformat);
+    }
     public JFormattedTextField getNome() {
         return nome;
     }
