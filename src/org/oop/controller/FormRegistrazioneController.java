@@ -130,6 +130,7 @@ public class FormRegistrazioneController {
                 Utente nuoviDati = view.getUtente();
                 if (primoAvvio) {
                     utenteDAO.persist(nuoviDati);
+                    MainController.setUtenteCorrente(nuoviDati);
                 } else {
                     /** @TODO gestire l'aggiornamento dei dati dell'utente */
                 }
