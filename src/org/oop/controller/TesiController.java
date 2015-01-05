@@ -1,9 +1,12 @@
 package org.oop.controller;
 
+import com.lowagie.text.DocumentException;
+import org.oop.services.PdfGenerator;
 import org.oop.view.segreteria.Tesi;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.Date;
 
 import static org.oop.general.Utils.*;
@@ -42,6 +45,16 @@ public class TesiController {
             } else if (!inputYearControl(year)) {
                 JOptionPane.showMessageDialog(null,"Anno non Valido");
             }
+
+            PdfGenerator pdfGeneratorCreate = new PdfGenerator("templateTesiPDF.pdf","provaTesi.pdf");
+            try {
+                pdfGeneratorCreate.generatePdfTesi(view);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (DocumentException e1) {
+                e1.printStackTrace();
+            }
+
         }
     }
 

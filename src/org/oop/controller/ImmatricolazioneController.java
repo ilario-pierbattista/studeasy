@@ -1,9 +1,12 @@
 package org.oop.controller;
 
+import com.lowagie.text.DocumentException;
+import org.oop.services.PdfGenerator;
 import org.oop.view.segreteria.Immatricolazione;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.Date;
 
 import static org.oop.general.Utils.*;
@@ -61,6 +64,14 @@ public class ImmatricolazioneController {
                 }
             }
 
+            PdfGenerator pdfGeneratorCreate = new PdfGenerator("templateTesiPDF.pdf","provaTesi.pdf");
+            try {
+                pdfGeneratorCreate.generatePdfImmatricolazione(view);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (DocumentException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
