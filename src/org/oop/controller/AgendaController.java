@@ -86,9 +86,9 @@ public class AgendaController {
     class AddAttivitaAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            String activitytype = Utils.explodeStringForSpace(actionEvent.getActionCommand(), 1);
-            AttivitaView attivitaview = new AttivitaView(activitytype);
-            AttivitaController attivitacontroller = new AttivitaController(attivitaview);
+            String activityType = Utils.explodeStringForSpace(actionEvent.getActionCommand(), 1);
+            AttivitaView attivitaview = new AttivitaView(activityType);
+            AttivitaController attivitacontroller = new AttivitaController(attivitaview,activityType);
         }
     }
 
