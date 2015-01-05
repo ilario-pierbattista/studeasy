@@ -47,7 +47,7 @@ public class Agenda extends AbstractView<Agenda> {
         splitpane.setBorder(null);
         sidebarpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(126, 126, 126)));
 
-        insidesplitpane.setDividerLocation(80 + insidesplitpane.getInsets().top);
+        insidesplitpane.setDividerLocation(150 + insidesplitpane.getInsets().top);
         insidesplitpane.setBorder(null);
 
         //Imposta il layout a 2 colonne

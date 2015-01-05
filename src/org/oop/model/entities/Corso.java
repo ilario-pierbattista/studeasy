@@ -3,9 +3,6 @@ package org.oop.model.entities;
 import java.util.ArrayList;
 
 
-/**
- * Created by MelvinMancini on 20/12/14.
- */
 public class Corso {
 
     /* Dichiarazione degli attributi */
@@ -150,14 +147,24 @@ public class Corso {
         return true;
     }
 
+    public String toString(boolean debugMode) {
+        String str;
+        if(debugMode) {
+            str = "Corso{" +
+                    "id=" + id +
+                    ", nome='" + nome + '\'' +
+                    ", livello=" + livello +
+                    ", totaleCfu=" + totaleCfu +
+                    ", insegnamentiOfferti=" + insegnamentiOfferti +
+                    '}';
+        } else {
+            str = nome;
+        }
+        return str;
+    }
+
     @Override
     public String toString() {
-        return "Corso{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", livello=" + livello +
-                ", totaleCfu=" + totaleCfu +
-                ", insegnamentiOfferti=" + insegnamentiOfferti +
-                '}';
+        return toString(false);
     }
 }

@@ -1,8 +1,6 @@
 package org.oop;
 
-import org.oop.controller.AgendaController;
-import org.oop.controller.ProfiloController;
-import org.oop.controller.SegreteriaController;
+import org.oop.controller.MainController;
 import org.oop.services.Importatore;
 import org.oop.test.db.DatabaseManagerTest;
 import org.oop.test.db.DatabaseUtilsTest;
@@ -26,22 +24,25 @@ public class Main {
 
         mainInitProcedure(args);
 
-        /*
-        FormRegistrazione registrazione = new FormRegistrazione();
-        FormRegistrazioneController regCtrl = new FormRegistrazioneController(registrazione);
-        */
-
         Mainframe mainframe = new Mainframe();
-        new AgendaController(mainframe.agenda);
-        new ProfiloController(mainframe.profilo);
-        new SegreteriaController(mainframe.segreteria);
-
+        new MainController(mainframe);
     }
 
     private static void mainInitProcedure(String args[]) {
-        tests();
+        boolean executeTests = false;
+        boolean overrideDatabase = false;
+        for (String arg : args) {
+            if (arg.equals("--override-db")) {
+                overrideDatabase = true;
+            } else if (arg.equals("--test")) {
+                executeTests = true;
+            }
+        }
+        if (executeTests) {
+            tests();
+        }
         try {
-            Importatore importatore = new Importatore(false);
+            Importatore importatore = new Importatore(overrideDatabase);
             importatore.importaDati();
         } catch (Exception ee) {
             ee.printStackTrace();

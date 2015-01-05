@@ -14,6 +14,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
+import java.util.Date;
 
 
 public class AgendaController {
@@ -137,13 +138,15 @@ public class AgendaController {
     class SubmitCicloFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Ciclo ciclo = formcicloview.getNuovoCiclo();
-            CicloDAO cicloDAO = new CicloDAO();
+            if (formcicloview.isValid()){
+                Ciclo ciclo = formcicloview.getNuovoCiclo();
+                CicloDAO cicloDAO = new CicloDAO();
 
-            cicloDAO.persist(ciclo);
-            cicloDAO.flush();
+                cicloDAO.persist(ciclo);
+                cicloDAO.flush();
+                updateView();
+            }
 
-            updateView();
             formcicloview.closeFrame();
         }
     }

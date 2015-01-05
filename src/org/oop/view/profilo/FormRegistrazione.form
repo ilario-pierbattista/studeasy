@@ -132,7 +132,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="5d1a5" class="javax.swing.JList" binding="corsiList">
+              <component id="5d1a5" class="javax.swing.JList" binding="corsiList" custom-create="true">
                 <constraints/>
                 <properties/>
               </component>

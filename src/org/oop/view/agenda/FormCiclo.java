@@ -1,6 +1,7 @@
 package org.oop.view.agenda;
 
 import org.oop.general.Utils;
+import org.oop.general.Validator;
 import org.oop.model.entities.Ciclo;
 import org.oop.view.AbstractView;
 
@@ -33,17 +34,11 @@ public class FormCiclo extends AbstractView<FormCiclo> {
      * @return
      */
     public Ciclo getNuovoCiclo() {
-        boolean flag = false;
         Ciclo ciclo = new Ciclo();
 
-        while(flag){
-            if (isFormValid()) {
-                ciclo.setLabel(ciclonamefield.getText())
-                        .setInizio((Date) cicloStartField.getValue())
-                        .setFine((Date) cicloEndField.getValue());
-                flag = true;
-            }
-        }
+        ciclo.setLabel(ciclonamefield.getText())
+                .setInizio((Date) cicloStartField.getValue())
+                .setFine((Date) cicloEndField.getValue());
 
         return ciclo;
 
@@ -54,20 +49,15 @@ public class FormCiclo extends AbstractView<FormCiclo> {
      * correttamente
      * @return
      */
-    private boolean isFormValid(){
+    public boolean isValid(){
         boolean flag;
         Date start = (Date) cicloStartField.getValue();
         Date end = (Date) cicloEndField.getValue();
 
-        if (end.after(start) && Utils.isTextFieldFilled(ciclonamefield)){
+        if (Validator.isDateGreater(start,end) && Validator.isTextFieldFilled(ciclonamefield)){
             flag = true;
-        } else if (!end.after(start)){
-            JOptionPane.showMessageDialog(null, "La data di fine deve essere successiva a quella di inizio!");
-            flag = false;
         } else {
-            JOptionPane.showMessageDialog(null, "Devi inserire un nome per il ciclo!");
             flag = false;
-
         }
 
         return flag;

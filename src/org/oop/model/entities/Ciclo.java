@@ -3,9 +3,7 @@ package org.oop.model.entities;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created by MelvinMancini on 20/12/14.
- */
+
 public class Ciclo {
 
     /* Dichiarazione degli attributi */

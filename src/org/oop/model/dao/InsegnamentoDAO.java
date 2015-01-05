@@ -3,6 +3,7 @@ package org.oop.model.dao;
 
 import org.oop.db.DatabaseUtils;
 import org.oop.db.SQLParameters;
+import org.oop.model.entities.Attivita;
 import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.InsegnamentoOfferto;
 

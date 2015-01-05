@@ -1,45 +1,103 @@
 package org.oop.view.profilo;
 
+import org.oop.general.Utils;
+import org.oop.general.Validator;
 import org.oop.model.entities.Corso;
+import org.oop.model.entities.Utente;
 import org.oop.view.AbstractView;
 import org.oop.view.agenda.Agenda;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static org.oop.general.Utils.inputMailControl;
+import static org.oop.general.Utils.inputMatricolaControl;
+import static org.oop.general.Utils.inputNameControl;
 
 public class FormRegistrazione extends AbstractView<Agenda> {
     public JFrame frame = new JFrame("Registrazione");
     private JPanel panel1;
     private JTextField nome;
-    private JTextField corsodilaurea;
     private JTextField cognome;
     private JButton Submit;
     private JButton Quit;
     private JTextField matricola;
     private JTextField email;
-    private JList corsiList;
+    private JList<Corso> corsiList;
+    private DefaultListModel<Corso> listaCorsiModel;
     private JRadioButton triennaleRadioButton;
     private JRadioButton magistraleRadioButton;
     private JRadioButton cicloUnicoRadioButton;
 
     public FormRegistrazione() {
         frame.setContentPane(panel1);
-        // frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
+        Utils.centerJFrame(frame);
     }
 
+    /**
+     * Rende visibile la finestra
+     * @param visible
+     */
     public void setVisible(boolean visible) {
         frame.setVisible(visible);
     }
 
+    /**
+     * Imposta la lista dei corsi opzionabili
+     * @param corsi
+     */
     public void setCorsiList(ArrayList<Corso> corsi) {
-        ArrayList<String> labels = new ArrayList<String>(corsi.size());
-        for (Corso corso : corsi) {
-            labels.add(corso.getNome());
+        corsiList.setEnabled(true);
+        listaCorsiModel.clear();
+        for(Corso corso : corsi) {
+            listaCorsiModel.addElement(corso);
         }
-        corsiList.setListData(labels.toArray());
+    }
+
+    /**
+     * Convalida gli attributi del form ed apre una finestra d'errore
+     * nel caso qualcosa non vada bene
+     * @return
+     */
+    public boolean isValid() {
+        boolean valid = true;
+
+        if(!inputNameControl(nome.getText())) {
+            JOptionPane.showMessageDialog(null, "Nome non valido");
+            valid = false;
+        } else if(!inputNameControl(cognome.getText())) {
+            JOptionPane.showMessageDialog(null, "Cognome non valido");
+            valid = false;
+        } else if(!Validator.email(email.getText())) {
+            JOptionPane.showMessageDialog(null, "Email non valida");
+            valid = false;
+        } else if(!inputMatricolaControl(matricola.getText())) {
+            JOptionPane.showMessageDialog(null, "Matricola non valida");
+            valid = false;
+        } else if(corsiList.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(null, "Nessun corso selezionato");
+            valid = false;
+        }
+        return valid;
+    }
+
+    /**
+     * Restituisce un oggetto utente dai campi del form
+     * @return
+     */
+    public Utente getUtente() {
+        Utente utente = new Utente();
+        utente.setNome(nome.getText())
+                .setCognome(cognome.getText())
+                .setMatricola(Integer.parseInt(matricola.getText()))
+                .setEmail(email.getText())
+                .getLibretto().setCorso(corsiList.getSelectedValue());
+        return utente;
     }
 
    /*listeners adders*/
@@ -60,10 +118,6 @@ public class FormRegistrazione extends AbstractView<Agenda> {
     /** GETTER @TODO ottimizzarli, togliere quelli che non servono */
     public JTextField getNome() {
         return nome;
-    }
-
-    public JTextField getCorsolaurea() {
-        return corsodilaurea;
     }
 
     public JTextField getCognome() {
@@ -96,5 +150,12 @@ public class FormRegistrazione extends AbstractView<Agenda> {
 
     public JRadioButton getCicloUnicoRadioButton() {
         return cicloUnicoRadioButton;
+    }
+
+    private void createUIComponents() {
+        listaCorsiModel = new DefaultListModel<Corso>();
+        listaCorsiModel.addElement(new Corso().setNome("Selezionare il livello di laurea"));
+        corsiList = new JList<Corso>(listaCorsiModel);
+        corsiList.setEnabled(false);
     }
 }
