@@ -65,14 +65,7 @@ public class TirocinioController {
                 JOptionPane.showMessageDialog(null,"Non hai abbastanza crediti!");
             }
 
-            PdfGenerator pdfGeneratorCreate = new PdfGenerator("templateTesiPDF.pdf","provaTesi.pdf");
-            try {
-                pdfGeneratorCreate.generatePdfTirocinio(view);
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            } catch (DocumentException e1) {
-                e1.printStackTrace();
-            }
+
         }
     }
 

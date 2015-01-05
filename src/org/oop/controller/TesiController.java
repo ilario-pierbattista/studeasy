@@ -40,9 +40,9 @@ public class TesiController {
                     String path= c.getCurrentDirectory().toString().replace("\\","\\\\");
                     String fileName = c.getSelectedFile().getName();
 
-                    PdfGenerator pdfGeneratorCreate = new PdfGenerator("templateTesiPDF.pdf","provaTesi.pdf");
                     try {
-                        pdfGeneratorCreate.generatePdfTesi(view,path,fileName);
+                        PdfGenerator pdfGeneratorCreate = new PdfGenerator("templateTesiPDF.pdf",fileName);
+                        pdfGeneratorCreate.generatePdfTesi(view,path);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     } catch (DocumentException e1) {
