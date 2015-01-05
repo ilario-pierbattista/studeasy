@@ -21,17 +21,34 @@ public class Validator {
     }
 
     /**
-     * Metodo che ritorna true solo se sul JTextField è stato scritto qualcosa
+     * Ritorna true solo se il JTextField è vuoto
      * @param field JTextfield
      * @return
      */
-    public static boolean isTextFieldFilled(JTextField field) {
+    public static boolean isTextFieldEmpty(JTextField field) {
         boolean flag;
 
         if (field.getText().equals("") || field.getText() == null) {
-            flag = false;
-        } else {
             flag = true;
+        } else {
+            flag = false;
+        }
+
+        return flag;
+    }
+
+    /**
+     * Ritorna true solo se il JFormattedTextField è vuoto
+     * @param field JFormattedTextField
+     * @return
+     */
+    public static boolean isFormattedFieldEmpty(JFormattedTextField field){
+        boolean flag;
+
+        if (field.getText().equals("") || field.getText() == null){
+            flag = true;
+        } else {
+            flag = false;
         }
 
         return flag;
@@ -46,7 +63,7 @@ public class Validator {
     public static boolean isDateGreater(Date start, Date end){
         boolean flag;
 
-        if (end.after(start) || start != null){
+        if (end.after(start)){
             flag = true;
         } else {
             JOptionPane.showMessageDialog(null, "La data di fine deve essere successiva a quella di inizio!");
