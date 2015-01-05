@@ -22,10 +22,12 @@ public class AgendaController {
     private FormCiclo formcicloview;
     private ModalAddInsegnamento modalAddInsegnamento;
     private CicloDAO cicloDAO;
+    private org.oop.model.Agenda agenda;
 
     public AgendaController(Agenda view) {
         this.view = view;
         cicloDAO = new CicloDAO();
+        agenda = BaseController.getUtenteCorrente().getAgenda();
 
         view.addLezioneButtonListener(new AddAttivitaAction());
         view.addEsameButtonListener(new AddAttivitaAction());
@@ -63,7 +65,7 @@ public class AgendaController {
      * Metodo che passa il model alla vista e la mantiene aggiornata
      */
      public void updateView(){
-         view.setListaCicli(cicloDAO.findAll());
+         view.setListaCicli(agenda.getCicli());
          view.updateListaCicli();
 
      }
@@ -75,7 +77,7 @@ public class AgendaController {
      */
     /**@TODO riguardare meglio sta funzione **/
     public void updateView(int index){
-        view.setListaCicli(cicloDAO.findAll());
+        view.setListaCicli(agenda.getCicli());
         view.updateListaCicli(index);
 
     }

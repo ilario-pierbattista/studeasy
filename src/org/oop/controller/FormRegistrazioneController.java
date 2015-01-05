@@ -13,8 +13,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-import static org.oop.general.Utils.*;
-
 
 public class FormRegistrazioneController {
 
@@ -130,9 +128,10 @@ public class FormRegistrazioneController {
                 Utente nuoviDati = view.getUtente();
                 if (primoAvvio) {
                     utenteDAO.persist(nuoviDati);
-                    MainController.setUtenteCorrente(nuoviDati);
+                    BaseController.setUtenteCorrente(nuoviDati);
                 } else {
                     /** @TODO gestire l'aggiornamento dei dati dell'utente */
+                    BaseController.startController();
                 }
                 utenteDAO.flush();
             }
