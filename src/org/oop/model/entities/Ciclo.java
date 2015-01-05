@@ -71,6 +71,11 @@ public class Ciclo {
         return this;
     }
 
+    public Ciclo addInsegnamento(Insegnamento insegnamento) {
+        insegnamenti.add(insegnamento);
+        return this;
+    }
+
     @Override
     public String toString(){
         return this.label;

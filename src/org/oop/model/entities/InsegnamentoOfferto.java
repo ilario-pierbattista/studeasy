@@ -2,13 +2,13 @@ package org.oop.model.entities;
 
 public class InsegnamentoOfferto {
 
-    protected int id;
-    protected String nome;
-    protected int cfu;
-    protected int anno;
-    protected int semestre;
-    protected boolean opzionale;
-    protected Docente docente;
+    private int id;
+    private String nome;
+    private int cfu;
+    private int anno;
+    private int semestre;
+    private boolean opzionale;
+    private Docente docente;
 
     //il seguente è il costruttore che inizializza i dati di deafult
     public InsegnamentoOfferto() {

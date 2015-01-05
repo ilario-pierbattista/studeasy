@@ -44,7 +44,7 @@ Create table insegnamento(
 
 Create table insegnamento_utente(
 	id int not null primary key auto_increment,
-	utente int not null, 
+	utente int,
 	insegnamento int not null,
 	voto int,
 	lode boolean default false,

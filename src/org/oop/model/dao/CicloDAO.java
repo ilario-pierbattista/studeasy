@@ -78,9 +78,9 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
                 "VALUES (:label, :inizio, :fine)")
                 .setParameters(parameters)
                 .executeUpdate();
+        entity.setId(id);
         updateInsegnamentiRelationship(entity);
         updateAttivitaRelationship(entity);
-        entity.setId(id);
     }
 
     @Override
@@ -118,7 +118,9 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
                 idInsegnamenti.add(rs.getInt("insegnamento_utente"));
             }
             rs.close();
-            insegnamenti = insegnamentoDAO.findBy(new SQLParameters().add("id", idInsegnamenti));
+            if(!idInsegnamenti.isEmpty()) {
+                insegnamenti = insegnamentoDAO.findBy(new SQLParameters().add("id", idInsegnamenti));
+            }
         } catch (SQLException ee) {
             ee.printStackTrace();
         }

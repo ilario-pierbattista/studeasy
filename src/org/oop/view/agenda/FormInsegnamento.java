@@ -47,7 +47,7 @@ public class FormInsegnamento {
         //Attenzione, probabilmente non riceve un arraylist di Insegnamento, ma di InsegnamentoOfferto
         ArrayList<String> labels = new ArrayList<String>(insegnamenti.size());
         for (Insegnamento insegnamento : insegnamenti) {
-            labels.add(insegnamento.getNome());
+            labels.add(insegnamento.getInsegnamentoOfferto().getNome());
         }
         listainsegnamenti.setListData(labels.toArray());
     }
