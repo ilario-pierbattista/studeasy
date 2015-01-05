@@ -21,6 +21,8 @@ public class FormAttivita extends AbstractView<AttivitaView> {
     private JButton cancelbutton;
     private JLabel activityname;
 
+    private String activityType;
+
     public FormAttivita() {
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -48,6 +50,25 @@ public class FormAttivita extends AbstractView<AttivitaView> {
         }
 
         return flag;
+    }
+
+    /**
+     * Setta il tipo dell'attività in base al bottone che è stato cliccato
+     */
+    public void setType(String type){
+        activityType = type;
+
+        if(activityType.equals("lezione")){
+            activityname.setText("Lezione");
+        } else if (activityType.equals("laboratorio")){
+            activityname.setText("Laboratorio");
+        } else if (activityType.equals("progetto")){
+            activityname.setText("Progetto");
+        } else if (activityType.equals("esame")){
+            activityname.setText("Esame");
+        } else if (activityType.equals("seminario")){
+            activityname.setText("Seminario");
+        }
     }
 
     /**
