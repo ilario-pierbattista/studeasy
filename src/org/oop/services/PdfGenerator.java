@@ -18,20 +18,19 @@ public class PdfGenerator {
     private String template;
     private String nomeFile;
 
-    public PdfGenerator(String nomeTemplate, String file)
+    public PdfGenerator(String nomeTemplate,String nome)
     {
         template=nomeTemplate;
-        nomeFile=file;
-
-
+        nomeFile = nome;
     }
 
-    public void generatePdfTesi(Tesi tesiView) throws IOException,DocumentException {
+    public void generatePdfTesi(Tesi tesiView,String path) throws IOException,DocumentException {
 
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());
 
-        FileOutputStream fileOutputStream = new FileOutputStream(this.getNomeFile());
+        FileOutputStream fileOutputStream = new FileOutputStream(path.concat("\\".concat(this.nomeFile).concat(".pdf")));
+
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         //PdfStamper will populate the fields dynamically with real time data.
@@ -49,16 +48,17 @@ public class PdfGenerator {
         stamper.getAcroFields().setField("professoreRelatore", tesiView.getProfRelatore().getText());
         stamper.getAcroFields().setField("titoloTesi", tesiView.getTitoloTesi().getText());
 
+        pdfTemplate.close();
         stamper.close();
         pdfTemplate.close();
     }
 
-    public void generatePdfTirocinio(Tirocinio tirocinioView) throws IOException,DocumentException {
+    public void generatePdfTirocinio(Tirocinio tirocinioView,String path,String fileName) throws IOException,DocumentException {
 
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());
 
-        FileOutputStream fileOutputStream = new FileOutputStream(this.getNomeFile());
+        FileOutputStream fileOutputStream = new FileOutputStream(path.concat("\\".concat(fileName).concat(".pdf")));
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         //PdfStamper will populate the fields dynamically with real time data.
@@ -75,17 +75,17 @@ public class PdfGenerator {
         //stamper.getAcroFields().setField("annoCorso", tirocinioView.getAnnoCorso().getText());
         //stamper.getAcroFields().setField("professoreRelatore", tirocinioView.getProfRelatore().getText());
        // stamper.getAcroFields().setField("titoloTesi", tirocinioView.getTitoloTesi().getText());
-
+        pdfTemplate.close();
         stamper.close();
         pdfTemplate.close();
     }
 
-    public void generatePdfImmatricolazione(Immatricolazione immatricolazioneView) throws IOException,DocumentException {
+    public void generatePdfImmatricolazione(Immatricolazione immatricolazioneView,String path,String fileName) throws IOException,DocumentException {
 
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());
 
-        FileOutputStream fileOutputStream = new FileOutputStream(this.getNomeFile());
+        FileOutputStream fileOutputStream = new FileOutputStream(path.concat("\\".concat(fileName).concat(".pdf")));
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         //PdfStamper will populate the fields dynamically with real time data.
@@ -103,6 +103,7 @@ public class PdfGenerator {
         //stamper.getAcroFields().setField("professoreRelatore", tirocinioView.getProfRelatore().getText());
         // stamper.getAcroFields().setField("titoloTesi", tirocinioView.getTitoloTesi().getText());
 
+        pdfTemplate.close();
         stamper.close();
         pdfTemplate.close();
     }

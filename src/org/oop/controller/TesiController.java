@@ -33,7 +33,28 @@ public class TesiController {
             if ((inputNameControl(nome)) && ( inputNameControl(cognome) ) && ( inputSentenceControl(luogo) ) && (inputMailControl(email) ) && inputYearControl(year) ) {
                 String name = stringToCapital(nome);
                 String surname = stringToCapital(cognome);
-                //butta tutto nel modulo
+                //Apre schermata di salvataggio e genera il pdf
+                JFileChooser c = new JFileChooser();
+                int r = c.showSaveDialog(view.tesipanel);
+                if (r == JFileChooser.APPROVE_OPTION) {
+                    String path= c.getCurrentDirectory().toString().replace("\\","\\\\");
+                    String fileName = c.getSelectedFile().getName();
+
+                    try {
+                        PdfGenerator pdfGeneratorCreate = new PdfGenerator("templateTesiPDF.pdf",fileName);
+                        pdfGeneratorCreate.generatePdfTesi(view,path);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (DocumentException e1) {
+                        e1.printStackTrace();
+                    }
+
+                }
+                if (r == JFileChooser.CANCEL_OPTION) {
+                    //chiudi finestra
+                }
+
+
             } else if (!inputNameControl(nome)) {
                 JOptionPane.showMessageDialog(null,"Nome Non Valido!");
              } else if (!inputNameControl(cognome)) {
@@ -45,16 +66,6 @@ public class TesiController {
             } else if (!inputYearControl(year)) {
                 JOptionPane.showMessageDialog(null,"Anno non Valido");
             }
-
-            PdfGenerator pdfGeneratorCreate = new PdfGenerator("templateTesiPDF.pdf","provaTesi.pdf");
-            try {
-                pdfGeneratorCreate.generatePdfTesi(view);
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            } catch (DocumentException e1) {
-                e1.printStackTrace();
-            }
-
         }
     }
 

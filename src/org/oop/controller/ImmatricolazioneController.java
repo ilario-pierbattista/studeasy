@@ -64,14 +64,7 @@ public class ImmatricolazioneController {
                 }
             }
 
-            PdfGenerator pdfGeneratorCreate = new PdfGenerator("templateTesiPDF.pdf","provaTesi.pdf");
-            try {
-                pdfGeneratorCreate.generatePdfImmatricolazione(view);
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            } catch (DocumentException e1) {
-                e1.printStackTrace();
-            }
+
         }
     }
 
