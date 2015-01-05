@@ -3,38 +3,22 @@ package org.oop.model.entities;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Insegnamento extends InsegnamentoOfferto {
+public class Insegnamento {
+    private int id;
+    private InsegnamentoOfferto insegnamentoOfferto;
     private int voto;
     private boolean lode;
     private Date data;
     private ArrayList<Attivita> attivita;
-
-    /* @TODO Eliminare se non serve */
-    public Insegnamento(String name, int credits, int year, int semester, boolean optional, Docente teacher, int voto, boolean lode, Date data) {
-        super(name, credits, year, semester, optional, teacher);
-        this.voto = voto;
-        this.lode = lode;
-        this.data = data;
-        attivita = new ArrayList<Attivita>(3);
-    }
 
     //il seguente è il costruttore che inizializza i dati di deafult
     public Insegnamento() {
         attivita = new ArrayList<Attivita>(3);
     }
 
-    /* @TODO pensare di includere l'insegnamentoOfferto come attributo piuttosto che
-    come classe genitore
-     */
     public Insegnamento(InsegnamentoOfferto insegnamentoOfferto) {
-        super();
-        super.id = insegnamentoOfferto.id;
-        nome = insegnamentoOfferto.nome;
-        anno = insegnamentoOfferto.anno;
-        semestre = insegnamentoOfferto.semestre;
-        cfu = insegnamentoOfferto.cfu;
-        opzionale = insegnamentoOfferto.opzionale;
-        docente = insegnamentoOfferto.docente;
+        this();
+        this.insegnamentoOfferto = insegnamentoOfferto;
     }
 
     public int getId() {
@@ -43,6 +27,15 @@ public class Insegnamento extends InsegnamentoOfferto {
 
     public Insegnamento setId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public InsegnamentoOfferto getInsegnamentoOfferto() {
+        return insegnamentoOfferto;
+    }
+
+    public Insegnamento setInsegnamentoOfferto(InsegnamentoOfferto insegnamentoOfferto) {
+        this.insegnamentoOfferto = insegnamentoOfferto;
         return this;
     }
 
@@ -70,15 +63,6 @@ public class Insegnamento extends InsegnamentoOfferto {
 
     public Insegnamento setData(Date data) {
         this.data = data;
-        return this;
-    }
-
-    public int getInsegnamentoOffertoId() {
-        return super.id;
-    }
-
-    public Insegnamento setInsegnamentoOffertoId(int id) {
-        super.id = id;
         return this;
     }
 

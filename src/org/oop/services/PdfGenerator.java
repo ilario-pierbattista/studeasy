@@ -1,9 +1,7 @@
 package org.oop.services;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
@@ -29,7 +27,9 @@ public class PdfGenerator {
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());
 
-        FileOutputStream fileOutputStream = new FileOutputStream(path.concat("\\".concat(this.nomeFile).concat(".pdf")));
+        FileOutputStream fileOutputStream = new FileOutputStream(path.concat(File.separator.
+                                                                      concat(this.nomeFile).
+                                                                      concat(".pdf")));
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
@@ -80,12 +80,12 @@ public class PdfGenerator {
         pdfTemplate.close();
     }
 
-    public void generatePdfImmatricolazione(Immatricolazione immatricolazioneView,String path,String fileName) throws IOException,DocumentException {
+    public void generatePdfImmatricolazione(Immatricolazione immatricolazioneView,String path) throws IOException,DocumentException {
 
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());
 
-        FileOutputStream fileOutputStream = new FileOutputStream(path.concat("\\".concat(fileName).concat(".pdf")));
+        FileOutputStream fileOutputStream = new FileOutputStream(path.concat("\\".concat(this.nomeFile).concat(".pdf")));
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         //PdfStamper will populate the fields dynamically with real time data.

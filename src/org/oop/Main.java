@@ -1,12 +1,20 @@
 package org.oop;
 
 import org.oop.controller.MainController;
+import org.oop.db.SQLParameters;
+import org.oop.model.dao.CicloDAO;
+import org.oop.model.dao.InsegnamentoDAO;
+import org.oop.model.dao.InsegnamentoOffertoDAO;
+import org.oop.model.entities.Ciclo;
+import org.oop.model.entities.Insegnamento;
+import org.oop.model.entities.InsegnamentoOfferto;
 import org.oop.services.Importatore;
 import org.oop.test.db.DatabaseManagerTest;
 import org.oop.test.db.DatabaseUtilsTest;
 import org.oop.view.Mainframe;
 
 import javax.swing.*;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,6 +31,22 @@ public class Main {
         }
 
         mainInitProcedure(args);
+
+        Ciclo ciclo = new Ciclo();
+        ciclo.setLabel("Ciclo 1")
+                .setInizio(new Date())
+                .setFine(new Date());
+        CicloDAO cicloDAO = new CicloDAO();
+        InsegnamentoOffertoDAO insegnamentoOffertoDAO = new InsegnamentoOffertoDAO();
+        InsegnamentoDAO insegnamentoDAO = new InsegnamentoDAO();
+        InsegnamentoOfferto insegnamentoOfferto = insegnamentoOffertoDAO.findBy(
+                new SQLParameters().add("nome","Analisi Matematica 1")
+        ).get(0);
+        Insegnamento insegnamento = new Insegnamento(insegnamentoOfferto);
+        insegnamentoDAO.persist(insegnamento);
+        ciclo.addInsegnamento(insegnamento);
+        cicloDAO.persist(ciclo);
+        cicloDAO.flush();
 
         Mainframe mainframe = new Mainframe();
         new MainController(mainframe);

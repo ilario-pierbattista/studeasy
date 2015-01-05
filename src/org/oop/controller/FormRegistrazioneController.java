@@ -3,6 +3,8 @@ package org.oop.controller;
 import org.oop.db.SQLParameters;
 import org.oop.model.dao.CorsoDAO;
 import org.oop.model.dao.UtenteDAO;
+import org.oop.model.entities.Insegnamento;
+import org.oop.model.entities.InsegnamentoOfferto;
 import org.oop.model.entities.Utente;
 import org.oop.view.Mainframe;
 import org.oop.view.profilo.FormRegistrazione;
@@ -19,10 +21,12 @@ public class FormRegistrazioneController {
     private FormRegistrazione view;
     private Utente utente;
     private CorsoDAO corsoDAO;
+    private UtenteDAO utenteDAO;
     private boolean primoAvvio;
 
     public FormRegistrazioneController(FormRegistrazione view) {
         corsoDAO = new CorsoDAO();
+        utenteDAO = new UtenteDAO();
 
         this.view = view;
         view.addSubmitFormButtonListener(new submitFormAction());
@@ -44,7 +48,6 @@ public class FormRegistrazioneController {
      * @return Utente trovato oppure utente nuovo
      */
     private Utente cercaUtente() {
-        UtenteDAO utenteDAO = new UtenteDAO();
         ArrayList<Utente> utenti = utenteDAO.findAll();
         primoAvvio = utenti.isEmpty();
         if (primoAvvio) {
@@ -53,6 +56,26 @@ public class FormRegistrazioneController {
             utente = utenti.get(0);
         }
         return utente;
+    }
+
+    private void aggiornaUtente(Utente nuoviDati) {
+        if(!primoAvvio && utente.getMatricola() != nuoviDati.getMatricola()) {
+            utenteDAO.remove(utente);
+        } else if(!primoAvvio && utente.getLibretto().getCorso().getId() != nuoviDati.getLibretto().getCorso().getId()) {
+            utenteDAO.remove(utente);
+        }
+        utente = nuoviDati;
+        if(utente.getLibretto().getInsegnamenti().isEmpty()) {
+            // Aggiunta degli insegnamenti obbligatori
+            ArrayList<Insegnamento> insegnamenti = new ArrayList<Insegnamento>(10);
+            for (InsegnamentoOfferto insegnamentoOfferto : utente.getLibretto().getCorso().getInsegnamentiObbligatori()) {
+                insegnamenti.add(new Insegnamento(insegnamentoOfferto));
+            }
+            utente.getLibretto().setInsegnamenti(insegnamenti);
+        }
+        if(!utente.getLibretto().getCorso().getInsegnamentiOpzionali().isEmpty()) {
+            /* Todo far apparire il form per opzionare gli insegnamenti a scelta */
+        }
     }
 
     private void initInfo() {

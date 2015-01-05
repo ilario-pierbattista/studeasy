@@ -13,7 +13,7 @@ public class IscrizioneController {
     public IscrizioneController(Iscrizione view)
     {
         this.view=view;
-        //Passo come argomento gli ascoltatori li passo ai metodi della classe Iscrizione che permettono di settare gli
+        //Passo come argomento gli ascoltatori ai metodi della classe Iscrizione che permettono di settare gli
         // ascoltatori per i bottoni
         view.addAggiungiRigaButtonListener(new AggiungiRigaAction());
         view.addEliminaRigaButtonListener(new EliminaRigaAction());

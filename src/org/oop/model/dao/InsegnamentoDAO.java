@@ -19,7 +19,7 @@ public class InsegnamentoDAO extends AbstractDAO<Insegnamento> {
                 .add("voto", e.getVoto())
                 .add("lode", e.isLode())
                 .add("data", e.getData())
-                .add("insegnamento", e.getInsegnamentoOffertoId());
+                .add("insegnamento", e.getInsegnamentoOfferto().getId());
         return parameters;
     }
 
