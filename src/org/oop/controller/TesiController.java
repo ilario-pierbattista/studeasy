@@ -1,7 +1,7 @@
 package org.oop.controller;
 
 import com.lowagie.text.DocumentException;
-import org.oop.view.Pdf;
+import org.oop.services.PdfGenerator;
 import org.oop.view.segreteria.Tesi;
 
 import javax.swing.*;
@@ -46,9 +46,9 @@ public class TesiController {
                 JOptionPane.showMessageDialog(null,"Anno non Valido");
             }
 
-            Pdf pdfCreate = new Pdf("templateTesiPDF.pdf","provaTesi.pdf",view);
+            PdfGenerator pdfGeneratorCreate = new PdfGenerator("templateTesiPDF.pdf","provaTesi.pdf");
             try {
-                pdfCreate.generatePdf();
+                pdfGeneratorCreate.generatePdfTesi(view);
             } catch (IOException e1) {
                 e1.printStackTrace();
             } catch (DocumentException e1) {
