@@ -109,7 +109,7 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
         ArrayList<Insegnamento> insegnamenti = new ArrayList<Insegnamento>(1);
         SQLParameters parameters = new SQLParameters();
         parameters.add("id", ciclo.getId());
-        ResultSet rs = db.createSqlStatement("SELECT * FROM iu_ciclo WHERE id = :id")
+        ResultSet rs = db.createSqlStatement("SELECT * FROM iu_ciclo WHERE ciclo = :id")
                 .setParameters(parameters)
                 .getResult();
         try {
@@ -140,14 +140,14 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
     }
 
     private void updateInsegnamentiRelationship(Ciclo ciclo) {
-        db.createSqlStatement("DELETE FROM ui_ciclo WHERE ciclo = :ciclo")
+        db.createSqlStatement("DELETE FROM iu_ciclo WHERE ciclo = :ciclo")
                 .setParameters(new SQLParameters().add("ciclo", ciclo.getId()))
                 .executeUpdate();
         for(Insegnamento insegnamento : ciclo.getInsegnamenti()) {
             SQLParameters insPar = new SQLParameters();
             insPar.add("ciclo", ciclo.getId())
                     .add("insegnamento_utente", insegnamento.getId());
-            db.createSqlStatement("INSERT INTO ui_ciclo (ciclo, insegnamento_utente) " +
+            db.createSqlStatement("INSERT INTO iu_ciclo (ciclo, insegnamento_utente) " +
                     "VALUES (:ciclo, :insegnamento_utente)")
                     .setParameters(insPar)
                     .executeUpdate();

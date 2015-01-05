@@ -54,7 +54,13 @@ public class FormCiclo extends AbstractView<FormCiclo> {
         Date start = (Date) cicloStartField.getValue();
         Date end = (Date) cicloEndField.getValue();
 
-        if (Validator.isDateGreater(start,end) && Validator.isTextFieldFilled(ciclonamefield)){
+        if (Validator.isFormattedFieldEmpty(cicloStartField) || Validator.isFormattedFieldEmpty(cicloEndField) ){
+            JOptionPane.showMessageDialog(null, "Il ciclo deve avere una data di inizio ed una data di fine!");
+            flag = false;
+        } else if (Validator.isTextFieldEmpty(ciclonamefield)){
+            JOptionPane.showMessageDialog(null, "Il ciclo deve avere un nome!");
+            flag = false;
+        } else if (Validator.isDateGreater(start,end)){
             flag = true;
         } else {
             flag = false;

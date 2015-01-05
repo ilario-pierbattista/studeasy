@@ -23,7 +23,7 @@ public class Ciclo {
 
     //il seguente è il costruttore che inizializza i dati di deafult
     public Ciclo() {
-        ArrayList<Insegnamento> insegnamenti = new ArrayList<Insegnamento>(1);
+        insegnamenti = new ArrayList<Insegnamento>(1);
     }
 
     public int getId() {

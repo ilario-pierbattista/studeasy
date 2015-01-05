@@ -144,10 +144,10 @@ public class AgendaController {
 
                 cicloDAO.persist(ciclo);
                 cicloDAO.flush();
-                updateView();
-            }
 
-            formcicloview.closeFrame();
+                updateView();
+                formcicloview.closeFrame();
+            }
         }
     }
 
