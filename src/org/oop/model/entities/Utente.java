@@ -26,6 +26,8 @@ public class Utente {
 
     //il seguente è il costruttore che inizializza i dati di deafult
     public Utente() {
+        libretto = new Libretto();
+        agenda = new Agenda();
     }
 
     public int getMatricola() {
@@ -80,5 +82,17 @@ public class Utente {
     public Utente setLibretto(Libretto libretto) {
         this.libretto = libretto;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Utente{" +
+                "matricola=" + matricola +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", email='" + email + '\'' +
+                ", agenda=" + agenda +
+                ", libretto=" + libretto +
+                '}';
     }
 }

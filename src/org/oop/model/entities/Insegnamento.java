@@ -1,6 +1,3 @@
-/**
- * Created by Lvns on 12/20/14.
- */
 package org.oop.model.entities;
 
 import java.util.ArrayList;
@@ -12,11 +9,13 @@ public class Insegnamento extends InsegnamentoOfferto {
     private Date data;
     private ArrayList<Attivita> attivita;
 
+    /* @TODO Eliminare se non serve */
     public Insegnamento(String name, int credits, int year, int semester, boolean optional, Docente teacher, int voto, boolean lode, Date data) {
         super(name, credits, year, semester, optional, teacher);
         this.voto = voto;
         this.lode = lode;
         this.data = data;
+        attivita = new ArrayList<Attivita>(3);
     }
 
     //il seguente è il costruttore che inizializza i dati di deafult
@@ -83,4 +82,17 @@ public class Insegnamento extends InsegnamentoOfferto {
         return this;
     }
 
+    public ArrayList<Attivita> getAttivita() {
+        return attivita;
+    }
+
+    public Insegnamento setAttivita(ArrayList<Attivita> attivita) {
+        this.attivita = attivita;
+        return this;
+    }
+
+    public Insegnamento addAttivita(Attivita nuova) {
+        attivita.add(nuova);
+        return this;
+    }
 }

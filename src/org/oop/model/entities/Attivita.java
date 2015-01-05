@@ -1,14 +1,26 @@
-/**
- * Created by Lvns on 12/20/14.
- */
 package org.oop.model.entities;
 
 import java.sql.Time;
 
 public class Attivita {
+    /**
+     * Valori assumibili dall'attributo categoria
+     */
+    public static final String CATEGORIA_LEZIONE = "lezione";
+    public static final String CATEGORIA_LABORATORIO = "laboratorio";
+    public static final String CATEGORIA_PROGETTO = "progetto";
+    public static final String CATEGORIA_ESAME = "esame";
+    public static final String CATEGORIA_SEMINARIO = "seminario";
 
-    private int id;
-    private String aula;
+    /**
+     * Valori assumibili dall'attributo ruoloDocente
+     */
+    public static final String DOCENTE = "docente";
+    public static final String ASSISTENTE = "assistente";
+    public static final String TUTOR = "tutor";
+
+    protected int id;
+    private String luogo;
     private Time oraInizio;
     private Time oraFine;
     private Docente docente;
@@ -19,7 +31,7 @@ public class Attivita {
 
     //per il costruttore è stato usato il this per evitare confusione nella lettura del codice dato l'elevato numero di parametri
     public Attivita(String aula, Time oraInizio, Time oraFine, Docente docente, String ruoloDocente, String categoria) {
-        this.aula = aula;
+        this.luogo = aula;
         this.oraInizio = oraInizio;
         this.oraFine = oraFine;
         this.docente = docente;
@@ -41,12 +53,12 @@ public class Attivita {
         return this;
     }
 
-    public String getAula() {
-        return aula;
+    public String getLuogo() {
+        return luogo;
     }
 
-    public Attivita setAula(String aula) {
-        this.aula = aula;
+    public Attivita setLuogo(String luogo) {
+        this.luogo = luogo;
         return this;
     }
 

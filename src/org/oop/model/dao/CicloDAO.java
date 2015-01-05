@@ -3,6 +3,7 @@ package org.oop.model.dao;
 
 import org.oop.db.DatabaseUtils;
 import org.oop.db.SQLParameters;
+import org.oop.model.entities.Attivita;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Insegnamento;
 
@@ -24,12 +25,12 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
     @Override
     protected Ciclo generaEntita(ResultSet rs) {
         Ciclo ciclo = new Ciclo();
-        InsegnamentoDAO insegnamentoDAO = new InsegnamentoDAO();
         try {
             ciclo.setId(rs.getInt("id"))
                     .setLabel(rs.getString("label"))
                     .setInizio(rs.getDate("inizio"))
                     .setFine(rs.getDate("fine"));
+            ciclo.setInsegnamenti(getInsegnamentiCiclo(ciclo));
         } catch (SQLException ee) {
             ee.printStackTrace();
         }
@@ -77,7 +78,8 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
                 "VALUES (:label, :inizio, :fine)")
                 .setParameters(parameters)
                 .executeUpdate();
-        /* @TODO Aggiungere il collegamento con gli insegnamenti */
+        updateInsegnamentiRelationship(entity);
+        updateAttivitaRelationship(entity);
         entity.setId(id);
     }
 
@@ -89,6 +91,8 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
                 "WHERE id = :id")
                 .setParameters(parameters)
                 .executeUpdate();
+        updateInsegnamentiRelationship(entity);
+        updateAttivitaRelationship(entity);
     }
 
     @Override
@@ -98,5 +102,71 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
                 .setParameters(parameters)
                 .executeUpdate();
         entity.setId(0);
+    }
+
+    private ArrayList<Insegnamento> getInsegnamentiCiclo(Ciclo ciclo) {
+        InsegnamentoDAO insegnamentoDAO = new InsegnamentoDAO();
+        ArrayList<Insegnamento> insegnamenti = new ArrayList<Insegnamento>(1);
+        SQLParameters parameters = new SQLParameters();
+        parameters.add("id", ciclo.getId());
+        ResultSet rs = db.createSqlStatement("SELECT * FROM iu_ciclo WHERE id = :id")
+                .setParameters(parameters)
+                .getResult();
+        try {
+            ArrayList<Integer> idInsegnamenti = new ArrayList<Integer>(3);
+            while(rs.next()) {
+                idInsegnamenti.add(rs.getInt("insegnamento_utente"));
+            }
+            rs.close();
+            insegnamenti = insegnamentoDAO.findBy(new SQLParameters().add("id", idInsegnamenti));
+        } catch (SQLException ee) {
+            ee.printStackTrace();
+        }
+        for(Insegnamento insegnamento : insegnamenti) {
+            ArrayList<Attivita> attivita = getAttivitaPerInsegnamentoCiclo(ciclo, insegnamento);
+            if(attivita != null && !attivita.isEmpty()) {
+                insegnamento.setAttivita(attivita);
+            }
+        }
+        return insegnamenti;
+    }
+
+    private ArrayList<Attivita> getAttivitaPerInsegnamentoCiclo(Ciclo ciclo, Insegnamento insegnamento) {
+        AttivitaDAO attivitaDAO = new AttivitaDAO();
+        SQLParameters parameters = new SQLParameters();
+        parameters.add("ciclo", ciclo.getId())
+                .add("insegnamento_utente", insegnamento.getId());
+        return attivitaDAO.findBy(parameters);
+    }
+
+    private void updateInsegnamentiRelationship(Ciclo ciclo) {
+        db.createSqlStatement("DELETE FROM ui_ciclo WHERE ciclo = :ciclo")
+                .setParameters(new SQLParameters().add("ciclo", ciclo.getId()))
+                .executeUpdate();
+        for(Insegnamento insegnamento : ciclo.getInsegnamenti()) {
+            SQLParameters insPar = new SQLParameters();
+            insPar.add("ciclo", ciclo.getId())
+                    .add("insegnamento_utente", insegnamento.getId());
+            db.createSqlStatement("INSERT INTO ui_ciclo (ciclo, insegnamento_utente) " +
+                    "VALUES (:ciclo, :insegnamento_utente)")
+                    .setParameters(insPar)
+                    .executeUpdate();
+        }
+    }
+
+    private void updateAttivitaRelationship(Ciclo ciclo) {
+        SQLParameters parameters = new SQLParameters();
+        parameters.add("ciclo", ciclo.getId());
+        for (Insegnamento insegnamento : ciclo.getInsegnamenti()) {
+            parameters.add("insegnamento_utente", insegnamento.getId());
+            for (Attivita attivita : insegnamento.getAttivita()) {
+                parameters.add("attivita", attivita.getId());
+                db.createSqlStatement("UPDATE attivita " +
+                        "SET ciclo = :ciclo, insegnamento_utente = :insegnamento_utente " +
+                        "WHERE id = :attivita")
+                        .setParameters(parameters)
+                        .executeUpdate();
+            }
+        }
     }
 }

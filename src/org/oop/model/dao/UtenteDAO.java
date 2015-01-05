@@ -18,6 +18,7 @@ public class UtenteDAO extends AbstractDAO<Utente> {
     protected Utente generaEntita(ResultSet rs) {
         Utente utente = new Utente();
         CorsoDAO corsoDAO = new CorsoDAO();
+        CicloDAO cicloDAO = new CicloDAO();
         InsegnamentoDAO insegnamentoDAO = new InsegnamentoDAO();
         try {
             utente.setMatricola(rs.getInt("matricola"))
@@ -29,8 +30,7 @@ public class UtenteDAO extends AbstractDAO<Utente> {
             libretto.setCorso(corsoDAO.find(rs.getInt("corso")));
             libretto.setInsegnamenti(insegnamentoDAO.findBy(new SQLParameters().add("utente", utente.getMatricola())));
             utente.setLibretto(libretto);
-
-
+            agenda.setCicli(cicloDAO.findBy(new SQLParameters().add("utente", utente.getMatricola())));
         } catch (SQLException ee) {
             ee.printStackTrace();
         }
@@ -84,16 +84,32 @@ public class UtenteDAO extends AbstractDAO<Utente> {
 
     @Override
     public void persist(Utente entity) {
-
+        SQLParameters parameters = generaSQLParams(entity);
+        String sql = "INSERT INTO utente " +
+                "(matricola, nome, cognome, email, corso) " +
+                "VALUES (:matricola, :nome, :cognome, :email, :corso)";
+        db.createSqlStatement(sql)
+                .setParameters(parameters)
+                .executeUpdate();
     }
 
     @Override
     public void update(Utente entity) {
-
+        SQLParameters parameters = generaSQLParams(entity);
+        String sql = "UPDATE utente " +
+                "SET matricola = :matricola, nome = :nome, cognome = :cognome," +
+                "email = :email, corso = :corso";
+        db.createSqlStatement(sql)
+                .setParameters(parameters)
+                .executeUpdate();
     }
 
     @Override
     public void remove(Utente entity) {
-
+        SQLParameters parameters = new SQLParameters();
+        parameters.add("matricola", entity.getMatricola());
+        db.createSqlStatement("DELETE FROM utente WHERE matricola = :matricola")
+                .setParameters(parameters)
+                .executeUpdate();
     }
 }
