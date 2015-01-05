@@ -3,6 +3,7 @@ package org.oop.controller;
 import org.oop.general.Utils;
 import org.oop.model.dao.CicloDAO;
 import org.oop.model.dao.InsegnamentoOffertoDAO;
+import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.InsegnamentoOfferto;
 import org.oop.view.agenda.Agenda;
@@ -143,8 +144,11 @@ public class AgendaController {
             if (formcicloview.isValid()){
                 Ciclo ciclo = formcicloview.getNuovoCiclo();
                 CicloDAO cicloDAO = new CicloDAO();
+                agenda.addCiclo(ciclo);
 
                 cicloDAO.persist(ciclo);
+                UtenteDAO utenteDAO = new UtenteDAO();
+                utenteDAO.update(BaseController.getUtenteCorrente());
                 cicloDAO.flush();
 
                 updateView();

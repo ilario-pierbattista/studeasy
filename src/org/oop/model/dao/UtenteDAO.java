@@ -5,6 +5,7 @@ import org.oop.db.SQLParameters;
 import org.oop.general.Utils;
 import org.oop.model.Agenda;
 import org.oop.model.Libretto;
+import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Corso;
 import org.oop.model.entities.Utente;
 
@@ -31,6 +32,7 @@ public class UtenteDAO extends AbstractDAO<Utente> {
             libretto.setInsegnamenti(insegnamentoDAO.findBy(new SQLParameters().add("utente", utente.getMatricola())));
             utente.setLibretto(libretto);
             agenda.setCicli(cicloDAO.findBy(new SQLParameters().add("utente", utente.getMatricola())));
+            utente.setAgenda(agenda);
         } catch (SQLException ee) {
             ee.printStackTrace();
         }
@@ -102,6 +104,20 @@ public class UtenteDAO extends AbstractDAO<Utente> {
         db.createSqlStatement(sql)
                 .setParameters(parameters)
                 .executeUpdate();
+        ArrayList<Integer> idCicli = new ArrayList<Integer>(2);
+        if(!entity.getAgenda().getCicli().isEmpty()) {
+            for (Ciclo ciclo : entity.getAgenda().getCicli()) {
+                idCicli.add(ciclo.getId());
+            }
+            SQLParameters cicliParams = new SQLParameters();
+            cicliParams.add("id", idCicli);
+            String updateCicliSql = "UPDATE ciclo SET utente = :utente WHERE "
+                    .concat(DatabaseUtils.generateCondition(cicliParams));
+            cicliParams.add("utente", entity.getMatricola());
+            db.createSqlStatement(updateCicliSql)
+                    .setParameters(cicliParams)
+                    .executeUpdate();
+        }
     }
 
     @Override
