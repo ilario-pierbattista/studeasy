@@ -31,7 +31,7 @@ public class ImmatricolazioneController {
             //il voto delle superiori si assume in centesimi
             int voto = Integer.parseInt(view.getVoto().getText());
 
-            String anno = view.getAnnoconseguimento().getText();
+            String anno = view.getAnnoConseguimento1().getText();
             String nome = view.getNome().getText();
             String cognome = view.getCognome().getText();
             String luogonascita = view.getLuogonascita().getText();
@@ -48,8 +48,10 @@ public class ImmatricolazioneController {
                     String fileName = c.getSelectedFile().getName();
 
                     try {
-                        PdfGenerator pdfGeneratorCreate = new PdfGenerator("templateTesiPDF.pdf",fileName);
-                        pdfGeneratorCreate.generatePdfImmatricolazione(view,path);
+                        PdfGenerator pdfGeneratorCreate = new PdfGenerator(System.getProperty("user.dir")
+                                .concat("\\template")
+                                .concat("\\templateImmatricolazionePDF.pdf"),fileName);
+                        pdfGeneratorCreate.generatePdfImmatricolazione(view, path);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     } catch (DocumentException e1) {
@@ -99,7 +101,9 @@ public class ImmatricolazioneController {
             view.getCodicefiscale().setText("");
             view.getDiploma().setText("");
             view.getVoto().setText("");
-            view.getAnnoconseguimento().setText("");
+            view.getAnnoConseguimento1().setText("");
+            view.getAnnoConseguimento2().setText("");
+            view.getProvincia().setText("");
         }
     }
 }

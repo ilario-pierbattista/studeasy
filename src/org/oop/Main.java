@@ -23,7 +23,6 @@ public class Main {
          * della velocità di esecuzione del programma
          */
         System.out.println("Programma avviato");
-
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception ee) {

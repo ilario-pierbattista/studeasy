@@ -31,7 +31,7 @@
           <text value="Compila il form per stampare il modulo di immatricolazione"/>
         </properties>
       </component>
-      <grid id="beda3" layout-manager="GridLayoutManager" row-count="10" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="beda3" layout-manager="GridLayoutManager" row-count="12" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -90,7 +90,7 @@
           </component>
           <component id="54684" class="javax.swing.JLabel" binding="codicefiscalelabel">
             <constraints>
-              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Codice fiscale:"/>
@@ -98,7 +98,7 @@
           </component>
           <component id="dd52c" class="javax.swing.JFormattedTextField" binding="codicefiscale">
             <constraints>
-              <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+              <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="250" height="20"/>
               </grid>
             </constraints>
@@ -106,7 +106,7 @@
           </component>
           <component id="23b69" class="javax.swing.JLabel" binding="diplomalabel">
             <constraints>
-              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Diploma:"/>
@@ -114,7 +114,7 @@
           </component>
           <component id="678e3" class="javax.swing.JLabel" binding="votolabel">
             <constraints>
-              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Voto:"/>
@@ -122,15 +122,15 @@
           </component>
           <component id="ca81a" class="javax.swing.JFormattedTextField" binding="voto">
             <constraints>
-              <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+              <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="250" height="20"/>
               </grid>
             </constraints>
             <properties/>
           </component>
-          <component id="92e1c" class="javax.swing.JFormattedTextField" binding="annoconseguimento">
+          <component id="92e1c" class="javax.swing.JFormattedTextField" binding="annoConseguimento1">
             <constraints>
-              <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+              <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="250" height="20"/>
               </grid>
             </constraints>
@@ -138,10 +138,10 @@
           </component>
           <component id="6f5a7" class="javax.swing.JLabel" binding="annoconseguimentolabel">
             <constraints>
-              <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Anno di conseguimento:"/>
+              <text value="Anno di conseguimento 1:"/>
             </properties>
           </component>
           <component id="6eea2" class="javax.swing.JFormattedTextField" binding="luogonascita">
@@ -154,7 +154,7 @@
           </component>
           <component id="9d5de" class="javax.swing.JFormattedTextField" binding="diploma">
             <constraints>
-              <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+              <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="250" height="20"/>
               </grid>
             </constraints>
@@ -193,6 +193,38 @@
             <properties>
               <text value="(la data deve essere nel formato gg-mm-aaaa)"/>
             </properties>
+          </component>
+          <component id="e93cf" class="javax.swing.JLabel" binding="provinciaLabel">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Provincia"/>
+            </properties>
+          </component>
+          <component id="81684" class="javax.swing.JFormattedTextField" binding="provincia">
+            <constraints>
+              <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="250" height="20"/>
+              </grid>
+            </constraints>
+            <properties/>
+          </component>
+          <component id="371ef" class="javax.swing.JLabel" binding="annoConseguimento2Label">
+            <constraints>
+              <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Anno di Conseguimento 2:"/>
+            </properties>
+          </component>
+          <component id="b3bbc" class="javax.swing.JFormattedTextField" binding="annoConseguimento2">
+            <constraints>
+              <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="250" height="20"/>
+              </grid>
+            </constraints>
+            <properties/>
           </component>
         </children>
       </grid>

@@ -13,7 +13,6 @@ public class Tesi extends AbstractView {
     private JFormattedTextField cognome;
     private JFormattedTextField dataNascita;
     private JFormattedTextField luogoNascita;
-    private JFormattedTextField email;
     private JFormattedTextField annoCorso;
     private JFormattedTextField profRelatore;
     private JFormattedTextField titoloTesi;
@@ -21,10 +20,13 @@ public class Tesi extends AbstractView {
     private JLabel cognomeLabel;
     private JLabel dataNascitaLabel;
     private JLabel luogoDiNascitaLabel;
-    private JLabel emailLabel;
     private JLabel annoCorsoLabel;
     private JLabel profRelatoreLabel;
     private JLabel titoloTesiLabel;
+    private JFormattedTextField matricola;
+    private JLabel matricolaLabel;
+    private JFormattedTextField email;
+    private JLabel emailLabel;
 
 
     public void insSubmitFormButtonListener (ActionListener l) {
@@ -70,14 +72,6 @@ public class Tesi extends AbstractView {
         this.luogoNascita = luogoNascita;
     }
 
-    public JFormattedTextField getEmail() {
-        return email;
-    }
-
-    public void setEmail(JFormattedTextField email) {
-        this.email = email;
-    }
-
     public JFormattedTextField getAnnoCorso() {
         return annoCorso;
     }
@@ -98,71 +92,10 @@ public class Tesi extends AbstractView {
         return titoloTesi;
     }
 
-    public void setTitoloTesi(JFormattedTextField titoloTesi) {
-        this.titoloTesi = titoloTesi;
+    public JFormattedTextField getMatricola () {
+        return matricola;
     }
-
-    public JLabel getNomeLabel() {
-        return nomeLabel;
-    }
-
-    public void setNomeLabel(JLabel nomeLabel) {
-        this.nomeLabel = nomeLabel;
-    }
-
-    public JLabel getCognomeLabel() {
-        return cognomeLabel;
-    }
-
-    public void setCognomeLabel(JLabel cognomeLabel) {
-        this.cognomeLabel = cognomeLabel;
-    }
-
-    public JLabel getDataNascitaLabel() {
-        return dataNascitaLabel;
-    }
-
-    public void setDataNascitaLabel(JLabel dataNascitaLabel) {
-        this.dataNascitaLabel = dataNascitaLabel;
-    }
-
-    public JLabel getLuogoDiNascitaLabel() {
-        return luogoDiNascitaLabel;
-    }
-
-    public void setLuogoDiNascitaLabel(JLabel luogoDiNascitaLabel) {
-        this.luogoDiNascitaLabel = luogoDiNascitaLabel;
-    }
-
-    public JLabel getEmailLabel() {
-        return emailLabel;
-    }
-
-    public void setEmailLabel(JLabel emailLabel) {
-        this.emailLabel = emailLabel;
-    }
-
-    public JLabel getAnnoCorsoLabel() {
-        return annoCorsoLabel;
-    }
-
-    public void setAnnoCorsoLabel(JLabel annoCorsoLabel) {
-        this.annoCorsoLabel = annoCorsoLabel;
-    }
-
-    public JLabel getProfRelatoreLabel() {
-        return profRelatoreLabel;
-    }
-
-    public void setProfRelatoreLabel(JLabel profRelatoreLabel) {
-        this.profRelatoreLabel = profRelatoreLabel;
-    }
-
-    public JLabel getTitoloTesiLabel() {
-        return titoloTesiLabel;
-    }
-
-    public void setTitoloTesiLabel(JLabel titoloTesiLabel) {
-        this.titoloTesiLabel = titoloTesiLabel;
+    public JFormattedTextField getEmail() {
+        return email;
     }
 }

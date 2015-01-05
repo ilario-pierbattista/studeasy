@@ -23,9 +23,6 @@ public class TirocinioController {
     class SubmitFormAction extends AbstractAction {
         @Override
         public void actionPerformed (ActionEvent e) {
-            //controlla che ci siano 120 crediti
-
-
             JFormattedTextField datanascita = view.getDatanascita();
             JFormattedTextField cap = view.getCap();
             JFormattedTextField cfu = view.getCfu();
@@ -44,7 +41,27 @@ public class TirocinioController {
             if ( inputNameControl(nome) && (crediti >=120) && inputNameControl(cognome) && inputMatricolaControl(matricola) && inputSentenceControl(luogonascita) && inputSentenceControl(residenza) && inputSentenceControl(via) && inputProvinciaControl(provincia) && inputCodiceFiscaleControl(codicefiscale) ) {
                 String name = stringToCapital(nome);
                 String surname = stringToCapital(cognome);
-                //butta tutto nel modulo
+                //Apre schermata di salvataggio e genera il pdf
+                JFileChooser c = new JFileChooser();
+                int r = c.showSaveDialog(view.tirociniopanel);
+                if (r == JFileChooser.APPROVE_OPTION) {
+                    String path= c.getCurrentDirectory().toString().replace("\\","\\\\");
+                    String fileName = c.getSelectedFile().getName();
+                    try {
+                        PdfGenerator pdfGeneratorCreate = new PdfGenerator(System.getProperty("user.dir")
+                                .concat("\\template")
+                                .concat("\\templateTirocinioPDF.pdf"),fileName);
+                        pdfGeneratorCreate.generatePdfTirocinio(view,path);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (DocumentException e1) {
+                        e1.printStackTrace();
+                    }
+
+                }
+                if (r == JFileChooser.CANCEL_OPTION) {
+                    //chiudi finestra
+                }
             } else if (!inputNameControl(nome)) {
                 JOptionPane.showMessageDialog(null,"Nome Errato!");
             } else if (!inputNameControl(cognome)) {
