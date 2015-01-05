@@ -6,9 +6,6 @@ import org.oop.view.CustomTableModel;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-/**
- * Created by toioski on 20/12/14.
- */
 public class Profilo extends AbstractView<Profilo> {
     public JPanel profilopanel;
     private JPanel sidebarpanel;
@@ -28,20 +25,7 @@ public class Profilo extends AbstractView<Profilo> {
     private JLabel userTipoCorsoField;
     private JScrollPane scrolpanetable;
 
-    //Colums e data servono per costruire il model della tabella
-    //private String[] colums = new String[]{"Insegnamento", "Ciclo", "CFU", "Data","Voto"};
-    //private Object[][] data = new Object[0][3];
-    /*private DefaultTableModel model = new DefaultTableModel(data, colums){
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            //all cells false
-            return false;
-        }
-    };*/
-    //private Object[][] data;
     CustomTableModel model = new CustomTableModel("Insegnamento", "Ciclo", "CFU", "Data","Voto" );
-
-
 
     public Profilo() {
         super();
@@ -56,24 +40,6 @@ public class Profilo extends AbstractView<Profilo> {
         deleteriga.setEnabled(false);
 
         setUserInfo();
-    }
-
-    /**
-     * Crea l'ascoltatore per il bottone addriga
-     *
-     * @param listener
-     */
-    public void addTableListener(ActionListener listener) {
-        addriga.addActionListener(listener);
-    }
-
-    /**
-     * Crea l'ascoltatore per il bottone deleteriga
-     *
-     * @param listener
-     */
-    public void addDeletetableListener(ActionListener listener) {
-        deleteriga.addActionListener(listener);
     }
 
     /**
@@ -110,6 +76,9 @@ public class Profilo extends AbstractView<Profilo> {
         }
     }
 
+    /**
+     * Imposta le informazioni utente nella sidebar
+     */
     public void setUserInfo(){
         userNameField.setText("");
         userSurnameField.setText("");
@@ -120,15 +89,21 @@ public class Profilo extends AbstractView<Profilo> {
 
     }
 
-    /**
-     * aggiunge il listener per il bottone inserisci form
-     * @param l
-     */
+
+    /* Listeners setter */
+    public void addTableListener(ActionListener listener) {
+        addriga.addActionListener(listener);
+    }
+
+    public void addDeletetableListener(ActionListener listener) {
+        deleteriga.addActionListener(listener);
+    }
+
     public void insFormButtonListener(ActionListener l) {
         aggiungiprofilo.addActionListener(l);
     }
 
-
+    /* Getters */
     public JButton getAggiungiform() { return aggiungiprofilo;}
 }
 
