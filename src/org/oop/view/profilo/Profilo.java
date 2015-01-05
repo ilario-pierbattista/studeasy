@@ -20,6 +20,12 @@ public class Profilo extends AbstractView<Profilo> {
     private JButton deleteriga;
     private JButton aggiungiprofilo;
     private JButton modificaButton;
+    private JLabel userNameField;
+    private JLabel userEmailField;
+    private JLabel userSurnameField;
+    private JLabel userMatricolaField;
+    private JLabel userCorsoField;
+    private JLabel userTipoCorsoField;
     private JScrollPane scrolpanetable;
 
     //Colums e data servono per costruire il model della tabella
@@ -40,7 +46,7 @@ public class Profilo extends AbstractView<Profilo> {
     public Profilo() {
         super();
         //Setta la larghezza della sidebar
-        splitpane.setDividerLocation(200 + splitpane.getInsets().left);
+        splitpane.setDividerLocation(260 + splitpane.getInsets().left);
         //Elimina i bordi
         splitpane.setBorder(null);
         //Setta il modello alla tabella
@@ -48,6 +54,8 @@ public class Profilo extends AbstractView<Profilo> {
         insegnamentotable.setRowHeight(30);
         //inizialmente quando la tabella è vuota rendo il bottone elimina non accessibile
         deleteriga.setEnabled(false);
+
+        setUserInfo();
     }
 
     /**
@@ -100,6 +108,16 @@ public class Profilo extends AbstractView<Profilo> {
         {
             deleteriga.setEnabled(false);
         }
+    }
+
+    public void setUserInfo(){
+        userNameField.setText("");
+        userSurnameField.setText("");
+        userEmailField.setText("");
+        userMatricolaField.setText("");
+        userCorsoField.setText("");
+        userTipoCorsoField.setText("");
+
     }
 
     /**

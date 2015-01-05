@@ -1,5 +1,6 @@
 package org.oop.view.agenda;
 
+import org.oop.general.Validator;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ public class FormAttivita extends AbstractView<AttivitaView> {
     private JTextField namefield;
     private JTextField teacherfield;
     private JTextField aulafield;
-    private JFormattedTextField datafield;
+    private JFormattedTextField dataField;
     private JTextArea descriptionfield;
     private JButton submitbutton;
     private JButton cancelbutton;
@@ -26,6 +27,41 @@ public class FormAttivita extends AbstractView<AttivitaView> {
         frame.setLocationRelativeTo(null);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    /**
+     * Metodo di appoggio che controlla che i campi del form siano stati compilati
+     * correttamente
+     * @return
+     */
+    public boolean isValid(){
+        boolean flag;
+
+        if (Validator.isTextFieldEmpty(teacherfield,"Docente")){
+            flag = false;
+        } else if (Validator.isTextFieldEmpty(aulafield,"Aula")){
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(dataField,"Data")){
+            flag = false;
+        } else {
+            return true;
+        }
+
+        return flag;
+    }
+
+    /**
+     * Setta componenti GUI custom (rispetto all'editor visuale)
+     */
+    private void createUIComponents() {
+        dataField = new JFormattedTextField(dateformat);
+    }
+
+    /**
+     * Metodo che chiude il form
+     */
+    public static void closeFrame(){
+        frame.dispose();
     }
 
     /* Listeners setters */
@@ -58,9 +94,9 @@ public class FormAttivita extends AbstractView<AttivitaView> {
         return descriptionfield;
     }
 
-    public JFormattedTextField getDatafield() {
+    public JFormattedTextField getDataField() {
 
-        return datafield;
+        return dataField;
     }
 
     public JTextField getAulafield() {
@@ -72,9 +108,4 @@ public class FormAttivita extends AbstractView<AttivitaView> {
 
         return namefield;
     }
-
-    public static void closeFrame(){
-        frame.dispose();
-    }
-
 }

@@ -49,16 +49,14 @@ public class FormCiclo extends AbstractView<FormCiclo> {
      * correttamente
      * @return
      */
-    public boolean isValid(){
+    public boolean isValid() {
         boolean flag;
         Date start = (Date) cicloStartField.getValue();
         Date end = (Date) cicloEndField.getValue();
 
-        if (Validator.isFormattedFieldEmpty(cicloStartField) || Validator.isFormattedFieldEmpty(cicloEndField) ){
-            JOptionPane.showMessageDialog(null, "Il ciclo deve avere una data di inizio ed una data di fine!");
+        if (Validator.isTextFieldEmpty(ciclonamefield, "Nome ciclo")) {
             flag = false;
-        } else if (Validator.isTextFieldEmpty(ciclonamefield)){
-            JOptionPane.showMessageDialog(null, "Il ciclo deve avere un nome!");
+        } else if (Validator.isFormattedFieldEmpty(cicloStartField, "Data inizio") || Validator.isFormattedFieldEmpty(cicloEndField, "Date fine") ){
             flag = false;
         } else if (Validator.isDateGreater(start,end)){
             flag = true;
@@ -76,6 +74,10 @@ public class FormCiclo extends AbstractView<FormCiclo> {
         frame.dispose();
     }
 
+
+    /**
+     * Setta componenti GUI custom (rispetto all'editor visuale)
+     */
     private void createUIComponents() {
         cicloStartField = new JFormattedTextField(dateformat);
         cicloEndField = new JFormattedTextField(dateformat);

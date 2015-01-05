@@ -23,12 +23,14 @@ public class Validator {
     /**
      * Ritorna true solo se il JTextField è vuoto
      * @param field JTextfield
+     * @param fieldName Nome del campo
      * @return
      */
-    public static boolean isTextFieldEmpty(JTextField field) {
+    public static boolean isTextFieldEmpty(JTextField field, String fieldName) {
         boolean flag;
 
         if (field.getText().equals("") || field.getText() == null) {
+            JOptionPane.showMessageDialog(null, "Il campo \"" + fieldName + "\" deve avere un valore");
             flag = true;
         } else {
             flag = false;
@@ -40,12 +42,14 @@ public class Validator {
     /**
      * Ritorna true solo se il JFormattedTextField è vuoto
      * @param field JFormattedTextField
+     * @param fieldName Nome del campo
      * @return
      */
-    public static boolean isFormattedFieldEmpty(JFormattedTextField field){
+    public static boolean isFormattedFieldEmpty(JFormattedTextField field, String fieldName){
         boolean flag;
 
         if (field.getText().equals("") || field.getText() == null){
+            JOptionPane.showMessageDialog(null, "Il campo \"" + fieldName + "\" deve avere un valore");
             flag = true;
         } else {
             flag = false;
