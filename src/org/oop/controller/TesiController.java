@@ -79,6 +79,8 @@ public class TesiController {
             view.getLuogoNascita().setText("");
             view.getEmail().setText("");
             view.getAnnoCorso().setText("");
+            view.getProfRelatore().setText("");
+            view.getTitoloTesi().setText("");
         }
     }
 }

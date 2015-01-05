@@ -1,6 +1,6 @@
 package org.oop.controller;
 
-import com.itextpdf.text.pdf.PdfReader;
+//import com.itextpdf.text.pdf.PdfReader;
 import com.lowagie.text.DocumentException;
 import org.oop.services.PdfGenerator;
 import org.oop.view.segreteria.Immatricolazione;
