@@ -80,7 +80,7 @@ public class PdfGenerator {
         pdfTemplate.close();
     }
 
-    public void generatePdfTirocinio(Immatricolazione immatricolazioneView) throws IOException,DocumentException {
+    public void generatePdfImmatricolazione(Immatricolazione immatricolazioneView) throws IOException,DocumentException {
 
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());

@@ -1,5 +1,7 @@
 package org.oop.view.agenda;
 
+import org.oop.general.Utils;
+import org.oop.general.Validator;
 import org.oop.model.entities.Ciclo;
 import org.oop.view.AbstractView;
 
@@ -26,15 +28,44 @@ public class FormCiclo extends AbstractView<FormCiclo> {
         frame.setVisible(true);
     }
 
+    /**
+     * Metodo che prende i valori dei campi del form e li mette dentro un oggetto Ciclo.
+     * Dopodichè ritorna tale oggetto
+     * @return
+     */
     public Ciclo getNuovoCiclo() {
         Ciclo ciclo = new Ciclo();
 
         ciclo.setLabel(ciclonamefield.getText())
                 .setInizio((Date) cicloStartField.getValue())
                 .setFine((Date) cicloEndField.getValue());
+
         return ciclo;
+
     }
 
+    /**
+     * Metodo di appoggio che controlla che i campi del form siano stati compilati
+     * correttamente
+     * @return
+     */
+    public boolean isValid(){
+        boolean flag;
+        Date start = (Date) cicloStartField.getValue();
+        Date end = (Date) cicloEndField.getValue();
+
+        if (Validator.isDateGreater(start,end) && Validator.isTextFieldFilled(ciclonamefield)){
+            flag = true;
+        } else {
+            flag = false;
+        }
+
+        return flag;
+    }
+
+    /**
+     * Metodo che chiude il form
+     */
     public void closeFrame() {
         frame.dispose();
     }
