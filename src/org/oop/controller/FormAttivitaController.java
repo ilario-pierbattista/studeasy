@@ -38,15 +38,16 @@ public class FormAttivitaController {
     class SubmitFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String docente = view.getActivityname().getText();
-            String aula = view.getAulafield().getText();
-            String date = view.getDatafield().getText();
-            String description = view.getDescriptionfield().getText();
+            if (view.isValid()){
+                String docente = view.getActivityname().getText();
+                String aula = view.getAulafield().getText();
+                String date = view.getDataField().getText();
+                String description = view.getDescriptionfield().getText();
 
-            Agenda.getInstance().addAttivita(new AttivitaView(type, docente, aula, date, description));
-            Mainframe.refreshView();
-            FormAttivita.closeFrame();
-
+                Agenda.getInstance().addAttivita(new AttivitaView(type, docente, aula, date, description));
+                Mainframe.refreshView();
+                FormAttivita.closeFrame();
+            }
         }
     }
 
