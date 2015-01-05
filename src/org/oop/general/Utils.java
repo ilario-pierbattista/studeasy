@@ -3,6 +3,7 @@ package org.oop.general;
 
 import org.oop.general.exceptions.RisorsaNonTrovata;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -200,5 +201,22 @@ public class Utils {
         Pattern p = Pattern.compile("[a-zA-Z]{2}");
         Matcher m = p.matcher(s);
         return m.matches();
+    }
+
+    /**
+     * Metodo che ritorna true solo se sul JTextField è stato scritto qualcosa
+     * @param field
+     * @return
+     */
+    public static boolean isTextFieldFilled(JTextField field){
+        boolean flag;
+
+        if (field.getText().equals("") || field.getText() == null){
+            flag = false;
+        } else {
+            flag = true;
+        }
+
+        return flag;
     }
 }

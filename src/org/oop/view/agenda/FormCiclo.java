@@ -1,5 +1,6 @@
 package org.oop.view.agenda;
 
+import org.oop.general.Utils;
 import org.oop.model.entities.Ciclo;
 import org.oop.view.AbstractView;
 
@@ -26,15 +27,55 @@ public class FormCiclo extends AbstractView<FormCiclo> {
         frame.setVisible(true);
     }
 
+    /**
+     * Metodo che prende i valori dei campi del form e li mette dentro un oggetto Ciclo.
+     * Dopodichè ritorna tale oggetto
+     * @return
+     */
     public Ciclo getNuovoCiclo() {
+        boolean flag = false;
         Ciclo ciclo = new Ciclo();
 
-        ciclo.setLabel(ciclonamefield.getText())
-                .setInizio((Date) cicloStartField.getValue())
-                .setFine((Date) cicloEndField.getValue());
+        while(flag){
+            if (isFormValid()) {
+                ciclo.setLabel(ciclonamefield.getText())
+                        .setInizio((Date) cicloStartField.getValue())
+                        .setFine((Date) cicloEndField.getValue());
+                flag = true;
+            }
+        }
+
         return ciclo;
+
     }
 
+    /**
+     * Metodo di appoggio che controlla che i campi del form siano stati compilati
+     * correttamente
+     * @return
+     */
+    private boolean isFormValid(){
+        boolean flag;
+        Date start = (Date) cicloStartField.getValue();
+        Date end = (Date) cicloEndField.getValue();
+
+        if (end.after(start) && Utils.isTextFieldFilled(ciclonamefield)){
+            flag = true;
+        } else if (!end.after(start)){
+            JOptionPane.showMessageDialog(null, "La data di fine deve essere successiva a quella di inizio!");
+            flag = false;
+        } else {
+            JOptionPane.showMessageDialog(null, "Devi inserire un nome per il ciclo!");
+            flag = false;
+
+        }
+
+        return flag;
+    }
+
+    /**
+     * Metodo che chiude il form
+     */
     public void closeFrame() {
         frame.dispose();
     }
