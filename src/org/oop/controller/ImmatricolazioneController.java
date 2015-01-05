@@ -6,6 +6,7 @@ import org.oop.view.segreteria.Immatricolazione;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
@@ -54,8 +55,8 @@ public class ImmatricolazioneController {
 
                     try {
                         PdfGenerator pdfGeneratorCreate = new PdfGenerator(System.getProperty("user.dir")
-                                .concat("\\template")
-                                .concat("\\templateImmatricolazionePDF.pdf"),fileName);
+                                .concat(File.separator.concat("template"))
+                                .concat(File.separator.concat("templateImmatricolazionePDF.pdf")),fileName);
                         pdfGeneratorCreate.generatePdfImmatricolazione(view, path);
                     } catch (IOException e1) {
                         e1.printStackTrace();

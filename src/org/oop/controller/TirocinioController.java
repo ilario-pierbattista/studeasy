@@ -6,6 +6,7 @@ import org.oop.view.segreteria.Tirocinio;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 
 import static org.oop.general.Utils.*;
@@ -49,9 +50,9 @@ public class TirocinioController {
                     String fileName = c.getSelectedFile().getName();
                     try {
                         PdfGenerator pdfGeneratorCreate = new PdfGenerator(System.getProperty("user.dir")
-                                .concat("\\template")
-                                .concat("\\templateTirocinioPDF.pdf"),fileName);
-                        pdfGeneratorCreate.generatePdfTirocinio(view,path);
+                                .concat(File.separator.concat("template"))
+                                .concat(File.separator.concat("templateTirocinioPDF.pdf")),fileName);
+                        pdfGeneratorCreate.generatePdfTirocinio(view, path);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     } catch (DocumentException e1) {
