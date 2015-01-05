@@ -1,11 +1,10 @@
 package org.oop;
 
-import org.oop.controller.*;
+import org.oop.controller.MainController;
 import org.oop.services.Importatore;
 import org.oop.test.db.DatabaseManagerTest;
 import org.oop.test.db.DatabaseUtilsTest;
 import org.oop.view.Mainframe;
-import org.oop.view.profilo.FormRegistrazione;
 
 import javax.swing.*;
 
@@ -27,23 +26,19 @@ public class Main {
 
         Mainframe mainframe = new Mainframe();
         new MainController(mainframe);
-        new AgendaController(mainframe.agenda);
-        new ProfiloController(mainframe.profilo);
-        new SegreteriaController(mainframe.segreteria);
-
     }
 
     private static void mainInitProcedure(String args[]) {
         boolean executeTests = false;
         boolean overrideDatabase = false;
         for (String arg : args) {
-            if(arg.equals("--override-db")) {
+            if (arg.equals("--override-db")) {
                 overrideDatabase = true;
             } else if (arg.equals("--test")) {
                 executeTests = true;
             }
         }
-        if(executeTests) {
+        if (executeTests) {
             tests();
         }
         try {

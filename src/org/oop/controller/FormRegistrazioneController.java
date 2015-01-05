@@ -40,13 +40,14 @@ public class FormRegistrazioneController {
      * per la modifica dei dati.
      * Nel caso in cui non esistesse alcun utente registrato, imposta
      * il form per una nuova registrazione.
+     *
      * @return Utente trovato oppure utente nuovo
      */
     private Utente cercaUtente() {
         UtenteDAO utenteDAO = new UtenteDAO();
         ArrayList<Utente> utenti = utenteDAO.findAll();
         primoAvvio = utenti.isEmpty();
-        if(primoAvvio) {
+        if (primoAvvio) {
             utente = null;
         } else {
             utente = utenti.get(0);
@@ -71,7 +72,7 @@ public class FormRegistrazioneController {
             view.getMagistraleRadioButton().setSelected(false);
             view.getCicloUnicoRadioButton().setSelected(false);
 
-            if(ab.getText().equals("Triennale")) {
+            if (ab.getText().equals("Triennale")) {
                 view.getTriennaleRadioButton().setSelected(true);
                 parameters.add("livello", 1);
             } else if (ab.getText().equals("Magistrale")) {
@@ -101,10 +102,10 @@ public class FormRegistrazioneController {
     class submitFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(view.isValid()) {
+            if (view.isValid()) {
                 UtenteDAO utenteDAO = new UtenteDAO();
                 Utente nuoviDati = view.getUtente();
-                if(primoAvvio) {
+                if (primoAvvio) {
                     utenteDAO.persist(nuoviDati);
                 } else {
                     /** @TODO gestire l'aggiornamento dei dati dell'utente */

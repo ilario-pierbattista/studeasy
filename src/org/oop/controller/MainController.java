@@ -12,12 +12,16 @@ public class MainController {
     public MainController(Mainframe view) {
         this.view = view;
 
+        new AgendaController(view.agenda);
+        new ProfiloController(view.profilo);
+        new SegreteriaController(view.segreteria);
+
         UtenteDAO utenteDAO = new UtenteDAO();
-        if(utenteDAO.findAll().isEmpty()) {
+        if (utenteDAO.findAll().isEmpty()) {
             FormRegistrazione reg = new FormRegistrazione();
             FormRegistrazioneController ctrl = new FormRegistrazioneController(reg);
         } else {
-            view.setVisible(true);
+            Mainframe.setVisible(true);
         }
     }
 }
