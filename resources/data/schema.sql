@@ -84,7 +84,7 @@ Create table attivita(
 Create table iu_ciclo(
 	ciclo int not null,
 	insegnamento_utente int not null,
-	foreign key (ciclo) references ciclo(id),
+	foreign key (ciclo) references ciclo(id) on delete cascade,
 	foreign key (insegnamento_utente) references insegnamento_utente(id),
 	primary key(ciclo, insegnamento_utente)
 );
@@ -93,9 +93,9 @@ Create table ui_attivita_ciclo(
 	ciclo int not null,
 	insegnamento_utente int not null,
 	attivita int not null,
-	foreign key (ciclo) references ciclo(id),
+	foreign key (ciclo) references ciclo(id) on delete cascade,
 	foreign key (insegnamento_utente) references insegnamento_utente(id),
-	foreign key (attivita) references attivita(id)
+	foreign key (attivita) references attivita(id) on delete cascade
 );
 
 Create table tassa(
