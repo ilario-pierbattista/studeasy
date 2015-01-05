@@ -26,12 +26,14 @@ public class PdfGenerator {
 
     }
 
-    public void generatePdfTesi(Tesi tesiView) throws IOException,DocumentException {
+    public void generatePdfTesi(Tesi tesiView,String path,String fileName) throws IOException,DocumentException {
 
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());
 
-        FileOutputStream fileOutputStream = new FileOutputStream(this.getNomeFile());
+        FileOutputStream fileOutputStream = new FileOutputStream(path.concat("\\".concat(fileName).concat(".pdf")));
+
+        //FileOutputStream fileOutputStream = new FileOutputStream(this.getNomeFile());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         //PdfStamper will populate the fields dynamically with real time data.
@@ -49,6 +51,7 @@ public class PdfGenerator {
         stamper.getAcroFields().setField("professoreRelatore", tesiView.getProfRelatore().getText());
         stamper.getAcroFields().setField("titoloTesi", tesiView.getTitoloTesi().getText());
 
+        pdfTemplate.close();
         stamper.close();
         pdfTemplate.close();
     }
