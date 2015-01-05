@@ -1,10 +1,12 @@
 package org.oop.view.segreteria;
 
+import org.oop.general.Validator;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 public class Immatricolazione extends AbstractView {
     public JPanel immatricolazionepanel;
@@ -31,6 +33,23 @@ public class Immatricolazione extends AbstractView {
 
     public Immatricolazione() {
         super();
+    }
+
+    /**
+     * Metodo di appoggio che controlla che i campi del form siano stati compilati
+     * correttamente
+     * @return
+     */
+    public boolean isValid() {
+        boolean flag;
+        Date start = (Date) datanascita.getValue();
+
+        if (Validator.isTextFieldEmpty(datanascita, "Data di nascita")) {
+            flag = false;
+        } else{
+            flag = true;
+        }
+        return flag;
     }
 
     private void createUIComponents() {

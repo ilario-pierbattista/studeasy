@@ -37,6 +37,11 @@ public class ImmatricolazioneController {
             String luogonascita = view.getLuogonascita().getText();
             String diploma = view.getDiploma().getText();
 
+            if(!view.isValid())
+            {
+                JOptionPane.showMessageDialog(null,"Il formato della data non è corretto!");
+            }
+
             if ( (inputCodiceFiscaleControl(codicefiscale)) && (inputMatricolaControl(matricola) ) && ( (voto<=100) || (voto>=60) ) && (inputNameControl(nome)) && (inputNameControl(cognome)) && inputSentenceControl(luogonascita) && inputSentenceControl(diploma) && inputYearControl(anno) ) {
                 String name = stringToCapital(nome);
                 String surname = stringToCapital(cognome);
