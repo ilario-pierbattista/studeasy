@@ -8,16 +8,12 @@ import org.oop.view.profilo.FormRegistrazione;
 import java.util.ArrayList;
 
 
-public class MainController {
-    private Mainframe view;
+public class BaseController {
+    private static Mainframe view;
     private static Utente utenteCorrente;
 
-    public MainController(Mainframe view) {
-        this.view = view;
-
-        new AgendaController(view.agenda);
-        new ProfiloController(view.profilo);
-        new SegreteriaController(view.segreteria);
+    public BaseController(Mainframe v) {
+        view = v;
 
         UtenteDAO utenteDAO = new UtenteDAO();
         ArrayList<Utente> utenti = utenteDAO.findAll();
@@ -27,6 +23,7 @@ public class MainController {
             FormRegistrazioneController ctrl = new FormRegistrazioneController(reg);
         } else {
             utenteCorrente = utenti.get(0);
+            startController();
             Mainframe.setVisible(true);
         }
     }
@@ -35,7 +32,13 @@ public class MainController {
         return utenteCorrente;
     }
 
+    public static void startController(){
+        new AgendaController(view.agenda);
+        new ProfiloController(view.profilo);
+        new SegreteriaController(view.segreteria);
+    }
+
     public static void setUtenteCorrente(Utente utenteCorrente) {
-        MainController.utenteCorrente = utenteCorrente;
+        BaseController.utenteCorrente = utenteCorrente;
     }
 }

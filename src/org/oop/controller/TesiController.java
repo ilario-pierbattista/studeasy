@@ -42,7 +42,9 @@ public class TesiController {
                     String fileName = c.getSelectedFile().getName();
 
                     try {
-                        PdfGenerator pdfGeneratorCreate = new PdfGenerator("templateTesiPDF.pdf",fileName);
+                        PdfGenerator pdfGeneratorCreate = new PdfGenerator(System.getProperty("user.dir")
+                                                                                                .concat("\\template")
+                                                                                                    .concat("\\templateTesiPDF.pdf"),fileName);
                         pdfGeneratorCreate.generatePdfTesi(view,path);
                     } catch (IOException e1) {
                         e1.printStackTrace();
@@ -82,6 +84,7 @@ public class TesiController {
             view.getAnnoCorso().setText("");
             view.getProfRelatore().setText("");
             view.getTitoloTesi().setText("");
+            view.getMatricola().setText("");
         }
     }
 }

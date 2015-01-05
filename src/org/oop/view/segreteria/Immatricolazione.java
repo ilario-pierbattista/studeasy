@@ -4,7 +4,6 @@ import org.oop.general.Validator;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
@@ -24,12 +23,16 @@ public class Immatricolazione extends AbstractView {
     private JLabel diplomalabel;
     private JFormattedTextField voto;
     private JLabel votolabel;
-    private JFormattedTextField annoconseguimento;
+    private JFormattedTextField annoConseguimento1;
     private JLabel annoconseguimentolabel;
     private JFormattedTextField nome;
     private JFormattedTextField cognome;
     private JFormattedTextField luogonascita;
     private JFormattedTextField diploma;
+    private JFormattedTextField provincia;
+    private JLabel provinciaLabel;
+    private JFormattedTextField annoConseguimento2;
+    private JLabel annoConseguimento2Label;
 
     public Immatricolazione() {
         super();
@@ -70,108 +73,25 @@ public class Immatricolazione extends AbstractView {
         this.matricola = matricola;
     }
 
-    public JLabel getMatricolalabel() {
-        return matricolalabel;
+    public JFormattedTextField getProvincia() {
+        return provincia;
     }
-
-    public void setMatricolalabel(JLabel matricolalabel) {
-        this.matricolalabel = matricolalabel;
-    }
-
-    public JLabel getNomelabel() {
-        return nomelabel;
-    }
-
-    public void setNomelabel(JLabel nomelabel) {
-        this.nomelabel = nomelabel;
-    }
-
-    public JLabel getCognomelabel() {
-        return cognomelabel;
-    }
-
-    public void setCognomelabel(JLabel cognomelabel) {
-        this.cognomelabel = cognomelabel;
-    }
-
-    public JFormattedTextField getDatanascita() {
+    public JFormattedTextField getDatanascita(){
         return datanascita;
-    }
-
-    public void setDatanascita(JFormattedTextField datanascita) {
-        this.datanascita = datanascita;
-    }
-
-    public JLabel getDatanascitalabel() {
-        return datanascitalabel;
-    }
-
-    public void setDatanascitalabel(JLabel datanascitalabel) {
-        this.datanascitalabel = datanascitalabel;
-    }
-
-    public JLabel getLuogonascitalabel() {
-        return luogonascitalabel;
-    }
-
-    public void setLuogonascitalabel(JLabel luogonascitalabel) {
-        this.luogonascitalabel = luogonascitalabel;
     }
 
     public JFormattedTextField getCodicefiscale() {
         return codicefiscale;
     }
-
-    public void setCodicefiscale(JFormattedTextField codicefiscale) {
-        this.codicefiscale = codicefiscale;
-    }
-
-    public JLabel getCodicefiscalelabel() {
-        return codicefiscalelabel;
-    }
-
-    public void setCodicefiscalelabel(JLabel codicefiscalelabel) {
-        this.codicefiscalelabel = codicefiscalelabel;
-    }
-
-    public JLabel getDiplomalabel() {
-        return diplomalabel;
-    }
-
-    public void setDiplomalabel(JLabel diplomalabel) {
-        this.diplomalabel = diplomalabel;
-    }
-
     public JFormattedTextField getVoto() {
         return voto;
     }
 
-    public void setVoto(JFormattedTextField voto) {
-        this.voto = voto;
+    public JFormattedTextField getAnnoConseguimento1() {
+        return annoConseguimento1;
     }
-
-    public JLabel getVotolabel() {
-        return votolabel;
-    }
-
-    public void setVotolabel(JLabel votolabel) {
-        this.votolabel = votolabel;
-    }
-
-    public JFormattedTextField getAnnoconseguimento() {
-        return annoconseguimento;
-    }
-
-    public void setAnnoconseguimento(JFormattedTextField annoconseguimento) {
-        this.annoconseguimento = annoconseguimento;
-    }
-
-    public JLabel getAnnoconseguimentolabel() {
-        return annoconseguimentolabel;
-    }
-
-    public void setAnnoconseguimentolabel(JLabel annoconseguimentolabel) {
-        this.annoconseguimentolabel = annoconseguimentolabel;
+    public JFormattedTextField getAnnoConseguimento2() {
+        return annoConseguimento2;
     }
 
     public JFormattedTextField getNome() {
