@@ -33,6 +33,7 @@ public class TesiController {
             if ((inputNameControl(nome)) && ( inputNameControl(cognome) ) && ( inputSentenceControl(luogo) ) && (inputMailControl(email) ) && inputYearControl(year) ) {
                 String name = stringToCapital(nome);
                 String surname = stringToCapital(cognome);
+
                 //Apre schermata di salvataggio e genera il pdf
                 JFileChooser c = new JFileChooser();
                 int r = c.showSaveDialog(view.tesipanel);

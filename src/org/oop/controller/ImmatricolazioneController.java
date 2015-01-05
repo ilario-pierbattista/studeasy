@@ -41,7 +41,26 @@ public class ImmatricolazioneController {
             if ( (inputCodiceFiscaleControl(codicefiscale)) && (inputMatricolaControl(matricola) ) && ( (voto<=100) || (voto>=60) ) && (inputNameControl(nome)) && (inputNameControl(cognome)) && inputSentenceControl(luogonascita) && inputSentenceControl(diploma) && inputYearControl(anno) ) {
                 String name = stringToCapital(nome);
                 String surname = stringToCapital(cognome);
-                //butta tutto nel modulo
+                //Apre schermata di salvataggio e genera il pdf
+                JFileChooser c = new JFileChooser();
+                int r = c.showSaveDialog(view.immatricolazionepanel);
+                if (r == JFileChooser.APPROVE_OPTION) {
+                    String path= c.getCurrentDirectory().toString().replace("\\","\\\\");
+                    String fileName = c.getSelectedFile().getName();
+
+                    try {
+                        PdfGenerator pdfGeneratorCreate = new PdfGenerator("templateTesiPDF.pdf",fileName);
+                        pdfGeneratorCreate.generatePdfImmatricolazione(view,path);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (DocumentException e1) {
+                        e1.printStackTrace();
+                    }
+
+                }
+                if (r == JFileChooser.CANCEL_OPTION) {
+                    //chiudi finestra
+                }
             }
             else if (!inputCodiceFiscaleControl(codicefiscale)) {
                 JOptionPane.showMessageDialog(null,"Codice Fiscale Errato!");
