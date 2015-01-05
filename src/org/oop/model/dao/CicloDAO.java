@@ -109,7 +109,7 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
         ArrayList<Insegnamento> insegnamenti = new ArrayList<Insegnamento>(1);
         SQLParameters parameters = new SQLParameters();
         parameters.add("id", ciclo.getId());
-        ResultSet rs = db.createSqlStatement("SELECT * FROM iu_ciclo WHERE id = :id")
+        ResultSet rs = db.createSqlStatement("SELECT * FROM iu_ciclo WHERE ciclo = :id")
                 .setParameters(parameters)
                 .getResult();
         try {
