@@ -14,6 +14,7 @@ public class Main {
          * Eliminare questi messaggi, servono solo per rendersi conto
          * della velocità di esecuzione del programma
          */
+
         System.out.println("Programma avviato");
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
