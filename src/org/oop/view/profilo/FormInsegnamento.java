@@ -1,17 +1,16 @@
-package org.oop.view.agenda;
+package org.oop.view.profilo;
 
+import org.oop.general.Validator;
 import org.oop.model.entities.Insegnamento;
+import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-/**
- * Created by MelvinMancini on 02/01/15.
- */
-public class FormInsegnamento {
-    public JFrame frame = new JFrame("Inserimento Insegnamento");
+public class FormInsegnamento extends AbstractView<FormInsegnamento> {
+    public static JFrame frame = new JFrame("Inserimento Insegnamento");
     private JPanel forminsegnamentopanel;
     private JLabel titoloforminsegnamento;
     private JButton annullaButton;
@@ -41,7 +40,7 @@ public class FormInsegnamento {
     /**
      * Metodo che aggiunge al model della lista di insegnamenti l'arraylist di
      * insegnamenti che gli è stata passata
-     * @param insegnamenti
+     * @param insegnamenti Lista insegnamenti
      */
     public void setInsegnamentiList(ArrayList<Insegnamento> insegnamenti) {
         //Attenzione, probabilmente non riceve un arraylist di Insegnamento, ma di InsegnamentoOfferto
@@ -61,6 +60,41 @@ public class FormInsegnamento {
 
         return insegnamento;
     }
+
+    /**
+     * Metodo di appoggio che controlla che i campi del form siano stati compilati
+     * correttamente
+     * @return
+     */
+    public boolean isValid(){
+        boolean flag;
+
+        if (Validator.isFormattedFieldEmpty(formattedTextFieldData,"Data di superamento")){
+            flag = false;
+        } else if (Validator.isTextFieldEmpty(formattedTextFieldVoto,"Voto")){
+            flag = false;
+        } else {
+            flag = true;
+        }
+
+        return flag;
+    }
+
+    /**
+     * Setta componenti GUI custom (rispetto all'editor visuale)
+     */
+    private void createUIComponents() {
+        formattedTextFieldData = new JFormattedTextField(dateformat);
+    }
+
+
+    /**
+     * Metodo che chiude il form
+     */
+    public static void closeFrame() {
+        frame.dispose();
+    }
+
 
     /* Listener setters */
     public void addConfermaButtonListener(ActionListener listener) {
@@ -132,6 +166,4 @@ public class FormInsegnamento {
     public JScrollPane getScrollpaneinsegnamenti() {
         return scrollpaneinsegnamenti;
     }
-
-
 }

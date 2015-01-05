@@ -218,8 +218,4 @@ public class AgendaController {
             modalAddInsegnamento.closeFrame();
         }
     }
-
-    /**
-     * Metodo di supporto che controlla che
-     */
 }
