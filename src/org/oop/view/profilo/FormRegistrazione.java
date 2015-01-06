@@ -12,8 +12,8 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import static org.oop.general.Utils.inputAppelControl;
 import static org.oop.general.Utils.inputMatricolaControl;
+import static org.oop.general.Utils.inputNameControl;
 
 public class FormRegistrazione extends AbstractForm {
     private JPanel panel1;
@@ -81,10 +81,10 @@ public class FormRegistrazione extends AbstractForm {
     public boolean isValid() {
         boolean valid = true;
 
-        if(!inputAppelControl(nome.getText())) {
+        if(!inputNameControl(nome.getText())) {
             JOptionPane.showMessageDialog(null, "Nome non valido");
             valid = false;
-        } else if(!inputAppelControl(cognome.getText())) {
+        } else if(!inputNameControl(cognome.getText())) {
             JOptionPane.showMessageDialog(null, "Cognome non valido");
             valid = false;
         } else if(!Validator.email(email.getText())) {

@@ -16,6 +16,16 @@ import java.util.regex.Pattern;
 public class Utils {
 
     /**
+     * Controlla che la matricola sia scritta in modo corretto:
+     * di soli numeri. Se è corretta ritorna true.
+     */
+    public static boolean inputMatricolaControl(String s) {
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(s);
+        return m.matches();
+    }
+
+    /**
      * Racchiude una stringa tra apici singoli
      *
      * @param string
