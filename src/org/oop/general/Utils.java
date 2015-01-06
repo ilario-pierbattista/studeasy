@@ -16,6 +16,21 @@ import java.util.regex.Pattern;
 public class Utils {
 
     /**
+     * Controlla che la matricola sia scritta in modo corretto:
+     * di soli numeri. Se è corretta ritorna true.
+     */
+
+    public static boolean inputMatricolaControl(String s) {
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(s);
+        if (!m.matches()) {
+            JOptionPane.showMessageDialog(null, "Il campo 'Matricola' deve essere di soli numeri");
+
+        }
+        return m.matches();
+    }
+
+    /**
      * Racchiude una stringa tra apici singoli
      *
      * @param string
@@ -166,9 +181,7 @@ public class Utils {
 
     /**
      * Imposta il frame al centro dello schermo
-     * =======
      * /** Imposta il frame al centro dello schermo
-     * >>>>>>> 4e8f8eef96213ac71c7f036ce57323fb035dfd39
      * NB: va usato dopo il metodo pack()
      *
      * @param frame JFrame da centralizzare
