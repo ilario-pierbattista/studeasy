@@ -10,7 +10,7 @@ import org.oop.view.agenda.Agenda;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class Profilo extends AbstractView<Profilo> {
+public class Profilo extends AbstractView {
     public JPanel profilopanel;
     private JPanel sidebarpanel;
     private JSplitPane splitpane;

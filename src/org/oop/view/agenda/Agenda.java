@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class Agenda extends AbstractView<Agenda> {
+public class Agenda extends AbstractView {
     private static Agenda instance;
     public JPanel agendapanel;
 
