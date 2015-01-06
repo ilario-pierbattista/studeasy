@@ -28,10 +28,6 @@ public class PdfGenerator {
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());
 
-        System.out.println(template);
-        System.out.println(path.concat(File.separator.
-                concat(this.nomeFile).
-                concat(".pdf")));
         FileOutputStream fileOutputStream = new FileOutputStream(path.concat(File.separator.
                                                                       concat(this.nomeFile).
                                                                       concat(".pdf")));
