@@ -81,13 +81,19 @@ public class Ciclo {
         return this.label;
     }
 
-    public String toString(boolean flag) {
-        return "Ciclo{" +
-                "id=" + id +
-                ", label='" + label + '\'' +
-                ", inizio=" + inizio +
-                ", fine=" + fine +
-                ", insegnamenti=" + insegnamenti +
-                '}';
+    public String toString(boolean debugMode) {
+        String str;
+        if(debugMode) {
+            str = "Ciclo{" +
+                    "id=" + id +
+                    ", label='" + label + '\'' +
+                    ", inizio=" + inizio +
+                    ", fine=" + fine +
+                    ", insegnamenti=" + insegnamenti +
+                    '}';
+        } else {
+            str = label;
+        }
+        return str;
     }
 }

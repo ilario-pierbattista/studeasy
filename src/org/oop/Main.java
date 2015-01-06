@@ -10,6 +10,9 @@ import org.oop.view.segreteria.FormTasse;
 
 import javax.swing.*;
 
+import static org.oop.general.Utils.inputDateControl;
+import static org.oop.general.Utils.inputStreetControl;
+
 public class Main {
     public static void main(String[] args) {
         /** @TODO

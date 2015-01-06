@@ -5,6 +5,10 @@ import java.util.ArrayList;
 
 public class Corso {
 
+    public static final int TRIENNALE = 1;
+    public static final int MAGISTRALE = 2;
+    public static final int CICLO_UNICO = 0;
+
     private int id;
     private String nome;
     private int livello;
@@ -91,9 +95,9 @@ public class Corso {
 
     public String getNomeLivello() {
         String nome;
-        if(livello == 1) {
+        if(livello == TRIENNALE) {
             nome = "Triennale";
-        } else if(livello == 2) {
+        } else if(livello == MAGISTRALE) {
             nome = "Magistrale";
         } else {
             nome = "Ciclo Unico";

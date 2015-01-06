@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by toioski on 23/12/14.
  */
-public class FormAttivita extends AbstractView<AttivitaView> {
+public class FormAttivita extends AbstractView {
     public static  JFrame frame = new JFrame("Crea Attività");
     private JPanel panel1;
     private JTextField namefield;
