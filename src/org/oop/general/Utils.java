@@ -109,16 +109,6 @@ public class Utils {
         return fupper + s.substring(1, s.length());
     }
 
-    /**
-     * Controlla che il flusso di input sia un anno
-     */
-
-    public static boolean inputYearControl(String s) {
-        //controllo se nella stringa s ci sono solo 4 numeri fra 0 e 9
-        Pattern p = Pattern.compile("[0-9]{4}");
-        Matcher m = p.matcher(s);
-        return m.matches();
-    }
 
     /**
      * Controlla che la stringa passata sia una mail
@@ -163,26 +153,6 @@ public class Utils {
         return m.matches();
     }
 
-    /**
-     * Controlla che la matricola sia scritta in modo corretto:
-     * di soli numeri
-     */
-
-    public static boolean inputMatricolaControl(String s) {
-        Pattern p = Pattern.compile("\\d+");
-        Matcher m = p.matcher(s);
-        return m.matches();
-    }
-
-    /**
-     * Controlla che nella stringa passata ci siano solo lettere
-     */
-
-    public static boolean inputSentenceControl(String s) {
-        Pattern p = Pattern.compile("[a-zA-Z ]+");
-        Matcher m = p.matcher(s);
-        return m.matches();
-    }
 
     /**
      * Esplode la stringa per spazi, e lo mette in un array.
@@ -193,30 +163,12 @@ public class Utils {
         return array[i].toLowerCase();
     }
 
-    /**
-     * controlla che il codice fiscale passato sia scritto in maniera corretta
-     */
-    public static boolean inputCodiceFiscaleControl(String s) {
-        Pattern p = Pattern.compile("[a-zA-Z]{6}\\d\\d[a-zA-Z]\\d\\d[a-zA-Z]\\d\\d\\d[a-zA-Z]");
-        Matcher m = p.matcher(s);
-        return m.matches();
-    }
-
-    /**
-     * controlla che la stringa passata sia di due lettere (Provincia)
-     */
-    public static boolean inputProvinciaControl(String s) {
-        Pattern p = Pattern.compile("[a-zA-Z]{2}");
-        Matcher m = p.matcher(s);
-        return m.matches();
-    }
-
 
     /**
      * Imposta il frame al centro dello schermo
-=======
-    /** Imposta il frame al centro dello schermo
->>>>>>> 4e8f8eef96213ac71c7f036ce57323fb035dfd39
+     * =======
+     * /** Imposta il frame al centro dello schermo
+     * >>>>>>> 4e8f8eef96213ac71c7f036ce57323fb035dfd39
      * NB: va usato dopo il metodo pack()
      *
      * @param frame JFrame da centralizzare

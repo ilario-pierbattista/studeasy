@@ -5,7 +5,6 @@ import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.util.Date;
 
 public class Immatricolazione extends AbstractView {
     public JPanel immatricolazionepanel;
@@ -41,27 +40,55 @@ public class Immatricolazione extends AbstractView {
     /**
      * Metodo di appoggio che controlla che i campi del form siano stati compilati
      * correttamente
+     *
      * @return
      */
     public boolean isValid() {
         boolean flag;
-        Date start = (Date) datanascita.getValue();
 
-        if (Validator.isTextFieldEmpty(datanascita, "Data di nascita")) {
+        if (Validator.isFormattedFieldEmpty(matricola, "Matricola") ) {
             flag = false;
-        } else{
+        } else if (Validator.isFormattedFieldEmpty(nome, "Nome") || !Validator.inputSentenceControl(nome.getText(), "Nome")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(cognome, "Cognome") || !Validator.inputSentenceControl(cognome.getText(), "Cognome")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(datanascita, "Data di nascita")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(luogonascita, "Luogo di nascita") || !Validator.inputSentenceControl(luogonascita.getText(), "Luogo di nascita")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(provincia, "Provincia") || !Validator.inputProvinciaControl(provincia.getText())) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(codicefiscale, "Codice Fiscale") || !Validator.inputCodiceFiscaleControl(codicefiscale.getText())) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(diploma, "Diploma") || !Validator.inputSentenceControl(diploma.getText(),"Diploma")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(voto, "Voto") ) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(annoConseguimento1, "Anno di conseguimento")  || Validator.isFormattedFieldEmpty(annoConseguimento2, "Anno di conseguimento") ) {
+            flag = false;
+        } else if (!Validator.controlloAnno(Integer.parseInt(annoConseguimento1.getText()), Integer.parseInt(annoConseguimento2.getText()))) {
+            flag = false;
+        } else {
             flag = true;
         }
+
+
         return flag;
     }
 
     private void createUIComponents() {
         datanascita = new JFormattedTextField(dateformat);
+        matricola = new JFormattedTextField(cifreMatricola);
+        annoConseguimento1 = new JFormattedTextField(dateformatYear);
+        annoConseguimento2=new JFormattedTextField(dateformatYear);
+        voto = new JFormattedTextField(cifreVoto);
     }
-    public void insSubmitFormButtonListener (ActionListener l) {
+
+    public void insSubmitFormButtonListener(ActionListener l) {
         submit.addActionListener(l);
     }
-    public void insQuitFormButtonListener (ActionListener l) {
+
+    public void insQuitFormButtonListener(ActionListener l) {
         quit.addActionListener(l);
     }
 
@@ -76,13 +103,15 @@ public class Immatricolazione extends AbstractView {
     public JFormattedTextField getProvincia() {
         return provincia;
     }
-    public JFormattedTextField getDatanascita(){
+
+    public JFormattedTextField getDatanascita() {
         return datanascita;
     }
 
     public JFormattedTextField getCodicefiscale() {
         return codicefiscale;
     }
+
     public JFormattedTextField getVoto() {
         return voto;
     }
@@ -90,6 +119,7 @@ public class Immatricolazione extends AbstractView {
     public JFormattedTextField getAnnoConseguimento1() {
         return annoConseguimento1;
     }
+
     public JFormattedTextField getAnnoConseguimento2() {
         return annoConseguimento2;
     }

@@ -27,7 +27,7 @@ public class TirocinioController {
             JFormattedTextField datanascita = view.getDatanascita();
             JFormattedTextField cap = view.getCap();
             JFormattedTextField cfu = view.getCfu();
-            int crediti = Integer.parseInt(cfu.getText());
+            //int crediti = Integer.parseInt(cfu.getText());
 
             String nome = view.getNome().getText();
             String cognome = view.getCognome().getText();
@@ -38,8 +38,36 @@ public class TirocinioController {
             String via = view.getVia().getText();
             String codicefiscale = view.getCodicefiscale().getText();
 
+            if(view.isValid()){
 
-            if ( inputNameControl(nome) && (crediti >=120) && inputNameControl(cognome) && inputMatricolaControl(matricola) && inputSentenceControl(luogonascita) && inputSentenceControl(residenza) && inputSentenceControl(via) && inputProvinciaControl(provincia) && inputCodiceFiscaleControl(codicefiscale) ) {
+                String name = stringToCapital(nome);
+                String surname = stringToCapital(cognome);
+                //Apre schermata di salvataggio e genera il pdf
+                JFileChooser c = new JFileChooser();
+                int r = c.showSaveDialog(view.tirociniopanel);
+                if (r == JFileChooser.APPROVE_OPTION) {
+                    String path= c.getCurrentDirectory().toString().replace("\\","\\\\");
+                    String fileName = c.getSelectedFile().getName();
+                    try {
+                        PdfGenerator pdfGeneratorCreate = new PdfGenerator(System.getProperty("user.dir")
+                                .concat(File.separator.concat("template"))
+                                .concat(File.separator.concat("templateTirocinioPDF.pdf")),fileName);
+                        pdfGeneratorCreate.generatePdfTirocinio(view, path);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (DocumentException e1) {
+                        e1.printStackTrace();
+                    }
+
+                }
+                if (r == JFileChooser.CANCEL_OPTION) {
+                    //chiudi finestra
+                }
+
+            }
+
+
+            /*if ( inputNameControl(nome) && (crediti >=120) && inputNameControl(cognome) && inputMatricolaControl(matricola) && inputSentenceControl(luogonascita) && inputSentenceControl(residenza) && inputSentenceControl(via) && inputProvinciaControl(provincia) && inputCodiceFiscaleControl(codicefiscale) ) {
                 String name = stringToCapital(nome);
                 String surname = stringToCapital(cognome);
                 //Apre schermata di salvataggio e genera il pdf
@@ -83,7 +111,7 @@ public class TirocinioController {
                 JOptionPane.showMessageDialog(null,"Non hai abbastanza crediti!");
             }
 
-
+*/
         }
     }
 

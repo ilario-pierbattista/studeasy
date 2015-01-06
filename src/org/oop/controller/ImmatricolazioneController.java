@@ -22,15 +22,16 @@ public class ImmatricolazioneController {
         view.insQuitFormButtonListener(new QuitFormAction());
     }
 
+
     class SubmitFormAction extends AbstractAction {
         @Override
-        public void actionPerformed(ActionEvent e)  {
+        public void actionPerformed(ActionEvent e) {
             Date datanascita = (Date) view.getDatanascita().getValue();
 
             String codicefiscale = view.getCodicefiscale().getText();
             String matricola = view.getMatricola().getText();
             //il voto delle superiori si assume in centesimi
-            int voto = Integer.parseInt(view.getVoto().getText());
+//            int voto = Integer.parseInt(view.getVoto().getText());
 
             String anno = view.getAnnoConseguimento1().getText();
             String nome = view.getNome().getText();
@@ -38,12 +39,39 @@ public class ImmatricolazioneController {
             String luogonascita = view.getLuogonascita().getText();
             String diploma = view.getDiploma().getText();
 
-            if(!view.isValid())
-            {
-                JOptionPane.showMessageDialog(null,"Il formato della data non è corretto!");
+            if (view.isValid()) {
+
+                String name = stringToCapital(nome);
+                String surname = stringToCapital(cognome);
+                //Apre schermata di salvataggio e genera il pdf
+                JFileChooser c = new JFileChooser();
+                int r = c.showSaveDialog(view.immatricolazionepanel);
+                if (r == JFileChooser.APPROVE_OPTION) {
+                    String path = c.getCurrentDirectory().toString().replace("\\", "\\\\");
+                    String fileName = c.getSelectedFile().getName();
+
+                    try {
+                        PdfGenerator pdfGeneratorCreate = new PdfGenerator(System.getProperty("user.dir")
+                                .concat(File.separator.concat("template"))
+                                .concat(File.separator.concat("templateImmatricolazionePDF.pdf")), fileName);
+                        pdfGeneratorCreate.generatePdfImmatricolazione(view, path);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (DocumentException e1) {
+                        e1.printStackTrace();
+                    }
+
+
+                }
+                if (r == JFileChooser.CANCEL_OPTION) {
+                    //chiudi finestra
+                }
             }
 
-            if ( (inputCodiceFiscaleControl(codicefiscale)) && (inputMatricolaControl(matricola) ) && ( (voto<=100) || (voto>=60) ) && (inputNameControl(nome)) && (inputNameControl(cognome)) && inputSentenceControl(luogonascita) && inputSentenceControl(diploma) && inputYearControl(anno) ) {
+        }
+    }
+
+            /*if ( (inputCodiceFiscaleControl(codicefiscale)) && (inputMatricolaControl(matricola) ) && ( (voto<=100) || (voto>=60) ) && (inputNameControl(nome)) && (inputNameControl(cognome)) && inputSentenceControl(luogonascita) && inputSentenceControl(diploma) && view.isValid() ) {
                 String name = stringToCapital(nome);
                 String surname = stringToCapital(cognome);
                 //Apre schermata di salvataggio e genera il pdf
@@ -84,7 +112,7 @@ public class ImmatricolazioneController {
             } else if (!inputSentenceControl(diploma)) {
                 JOptionPane.showMessageDialog(null,"Diploma Errato!");
             } else {
-                if (!inputYearControl(anno)) {
+                /*if (!view.isValid()) {
                     JOptionPane.showMessageDialog(null, "Anno Errato!");
                 } else if ( nome.equals("") || cognome.equals("") || luogonascita.equals("") || diploma.equals("") || codicefiscale.equals("") || matricola.equals("")){
                     JOptionPane.showMessageDialog(null,"Uno o Più Campi devono essere riempiti");
@@ -92,8 +120,8 @@ public class ImmatricolazioneController {
             }
 
 
-        }
-    }
+        }*/
+
 
     class QuitFormAction extends AbstractAction {
         @Override
@@ -113,3 +141,5 @@ public class ImmatricolazioneController {
         }
     }
 }
+
+

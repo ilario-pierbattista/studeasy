@@ -1,5 +1,6 @@
 package org.oop.view.segreteria;
 
+import org.oop.general.Validator;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;
@@ -33,10 +34,50 @@ public class Tirocinio extends AbstractView {
     private JLabel cfulabel;
     private JFormattedTextField cfu;
 
-    public void insSubmitButtonListener (ActionListener l) {
+    /**
+     * Metodo di appoggio che controlla che i campi del form siano stati compilati
+     * correttamente
+     *
+     * @return
+     */
+    public boolean isValid() {
+        boolean flag;
+
+        if (Validator.isFormattedFieldEmpty(nome, "Nome") || !Validator.inputSentenceControl(nome.getText(), "Nome")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(cognome, "Cognome") || !Validator.inputSentenceControl(cognome.getText(), "Cognome")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(matricola, "Matricola") ) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(datanascita, "Data di nascita")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(luogonascita, "Luogo di nascita") || !Validator.inputSentenceControl(luogonascita.getText(), "Luogo di nascita")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(residenza, "Residenza") || !Validator.inputSentenceControl(residenza.getText(), "residenza")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(provincia, "Provincia") || !Validator.inputProvinciaControl(provincia.getText())) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(cap, "CAP")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(via, "Via") || !Validator.inputSentenceControl(via.getText(), "Via")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(codicefiscale, "Codice Fiscale") || !Validator.inputCodiceFiscaleControl(codicefiscale.getText())) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(cfu, "CFU") || !Validator.controlloNumeroCFU(Integer.parseInt(cfu.getText()))) {
+            flag = false;
+        } else {
+            flag = true;
+        }
+
+
+        return flag;
+    }
+
+    public void insSubmitButtonListener(ActionListener l) {
         submit.addActionListener(l);
     }
-    public void insQuitFormButtonListener (ActionListener l) {
+
+    public void insQuitFormButtonListener(ActionListener l) {
         quit.addActionListener(l);
     }
 
@@ -199,11 +240,15 @@ public class Tirocinio extends AbstractView {
     public void setCodicefiscalelabel(JLabel codicefiscalelabel) {
         this.codicefiscalelabel = codicefiscalelabel;
     }
+
     public JFormattedTextField getCfu() {
         return cfu;
     }
 
     private void createUIComponents() {
         datanascita = new JFormattedTextField(dateformat);
+        matricola = new JFormattedTextField(cifreMatricola);
+        cap = new JFormattedTextField((cifreCAP));
+        cfu= new JFormattedTextField(cifreCFU);
     }
 }
