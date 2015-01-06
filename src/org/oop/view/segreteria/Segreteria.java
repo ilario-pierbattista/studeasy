@@ -8,7 +8,7 @@ import javax.swing.*;
 /**
  * Created by toioski on 20/12/14.
  */
-public class Segreteria extends AbstractView<Segreteria> {
+public class Segreteria extends AbstractView {
     public JPanel segreteriapanel;
     private JTabbedPane maintabpane;
 

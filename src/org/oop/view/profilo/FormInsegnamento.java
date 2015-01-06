@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class FormInsegnamento extends AbstractView<FormInsegnamento> {
+public class FormInsegnamento extends AbstractView {
     public static JFrame frame = new JFrame("Inserimento Insegnamento");
     private JPanel forminsegnamentopanel;
     private JLabel titoloforminsegnamento;

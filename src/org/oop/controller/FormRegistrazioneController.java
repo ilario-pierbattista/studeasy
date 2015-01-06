@@ -3,6 +3,7 @@ package org.oop.controller;
 import org.oop.db.SQLParameters;
 import org.oop.model.dao.CorsoDAO;
 import org.oop.model.dao.UtenteDAO;
+import org.oop.model.entities.Corso;
 import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.InsegnamentoOfferto;
 import org.oop.model.entities.Utente;
@@ -31,7 +32,9 @@ public class FormRegistrazioneController {
         view.addQuitFormButtonListener(new quitFormAction());
         view.addLivelloRadiusButtonsListener(new changeLivelloAction());
         utente = cercaUtente();
-        initInfo();
+        if(!primoAvvio) {
+            view.initInfo(utente);
+        }
 
         view.setVisible(true);
     }
@@ -56,6 +59,14 @@ public class FormRegistrazioneController {
         return utente;
     }
 
+    /**
+     * Crea od aggiorna un utente. Vi sono 4 casi:
+     * 1) L'utente non esiste. Viene creato.
+     * 2) L'utente ha una matricola diversa. Viene rimosso e ricreato.
+     * 3) L'utente ha un corso di laurea diverso.
+     * 4) L'utente esiste e differisce solo per alcune informazioni. Viene aggiornato.
+     * @param nuoviDati Nuovi dati dell'utente
+     */
     private void aggiornaUtente(Utente nuoviDati) {
         if(!primoAvvio && utente.getMatricola() != nuoviDati.getMatricola()) {
             utenteDAO.remove(utente);
@@ -76,34 +87,38 @@ public class FormRegistrazioneController {
         }
     }
 
-    private void initInfo() {
-        /* @TODO aggiornare le informazioni iniziali del form con i dati giò
-           salvati
-         */
-    }
-
     class changeLivelloAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
             AbstractButton ab = (AbstractButton) e.getSource();
-
             SQLParameters parameters = new SQLParameters();
+            int livello = getLivelloLaureaFromSelection(ab);
+            parameters.add("livello", livello);
+            view.setCorsiList(corsoDAO.findBy(parameters));
+        }
 
+        /**
+         * Restituisce il livello del corso di laurea dalla selezione
+         * @param ab
+         * @return
+         */
+        private int getLivelloLaureaFromSelection(AbstractButton ab) {
+            int livello;
             view.getTriennaleRadioButton().setSelected(false);
             view.getMagistraleRadioButton().setSelected(false);
             view.getCicloUnicoRadioButton().setSelected(false);
 
             if (ab.getText().equals("Triennale")) {
                 view.getTriennaleRadioButton().setSelected(true);
-                parameters.add("livello", 1);
+                livello = Corso.TRIENNALE;
             } else if (ab.getText().equals("Magistrale")) {
                 view.getMagistraleRadioButton().setSelected(true);
-                parameters.add("livello", 2);
+                livello = Corso.MAGISTRALE;
             } else {
                 view.getCicloUnicoRadioButton().setSelected(true);
-                parameters.add("livello", 0);
+                livello = Corso.CICLO_UNICO;
             }
-            view.setCorsiList(corsoDAO.findBy(parameters));
+            return livello;
         }
     }
 

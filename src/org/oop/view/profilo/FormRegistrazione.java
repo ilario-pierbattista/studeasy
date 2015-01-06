@@ -1,9 +1,12 @@
 package org.oop.view.profilo;
 
+import org.oop.db.SQLParameters;
 import org.oop.general.Utils;
 import org.oop.general.Validator;
+import org.oop.model.dao.CorsoDAO;
 import org.oop.model.entities.Corso;
 import org.oop.model.entities.Utente;
+import org.oop.view.AbstractForm;
 import org.oop.view.AbstractView;
 import org.oop.view.agenda.Agenda;
 
@@ -14,8 +17,7 @@ import java.util.ArrayList;
 import static org.oop.general.Utils.inputMatricolaControl;
 import static org.oop.general.Utils.inputAppelControl;
 
-public class FormRegistrazione extends AbstractView<Agenda> {
-    public JFrame frame = new JFrame("Registrazione");
+public class FormRegistrazione extends AbstractForm {
     private JPanel panel1;
     private JTextField nome;
     private JTextField cognome;
@@ -30,18 +32,35 @@ public class FormRegistrazione extends AbstractView<Agenda> {
     private JRadioButton cicloUnicoRadioButton;
 
     public FormRegistrazione() {
+        frame = new JFrame("Registrazione");
         frame.setContentPane(panel1);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         Utils.centerJFrame(frame);
     }
 
     /**
-     * Rende visibile la finestra
-     * @param visible
+     * Imposta le informazioni di default
+     * @param utente Utente da cui prendere le informazioni
      */
-    public void setVisible(boolean visible) {
-        frame.setVisible(visible);
+    public void initInfo(Utente utente) {
+        nome.setText(utente.getNome());
+        cognome.setText(utente.getCognome());
+        email.setText(utente.getEmail());
+        matricola.setText(Integer.toString(utente.getMatricola()));
+        int livello = utente.getLibretto().getCorso().getLivello();
+        Corso corso = utente.getLibretto().getCorso();
+        SQLParameters parameters = new SQLParameters();
+        parameters.add("livello", livello);
+        setCorsiList(new CorsoDAO().findBy(parameters));
+        if(livello == Corso.TRIENNALE) {
+            triennaleRadioButton.setSelected(true);
+        } else if(livello == Corso.MAGISTRALE) {
+            magistraleRadioButton.setSelected(true);
+        } else {
+            cicloUnicoRadioButton.setSelected(true);
+        }
+        corsiList.setSelectedValue(corso, true);
     }
 
     /**
