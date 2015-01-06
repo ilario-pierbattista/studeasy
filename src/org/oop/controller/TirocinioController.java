@@ -39,7 +39,7 @@ public class TirocinioController {
             String codicefiscale = view.getCodicefiscale().getText();
 
 
-            if ( inputNameControl(nome) && (crediti >=120) && inputNameControl(cognome) && inputMatricolaControl(matricola) && inputSentenceControl(luogonascita) && inputSentenceControl(residenza) && inputSentenceControl(via) && inputProvinciaControl(provincia) && inputCodiceFiscaleControl(codicefiscale) ) {
+            if ( inputAppelControl(nome) && (crediti >=120) && inputAppelControl(cognome) && inputMatricolaControl(matricola) && inputSentenceControl(luogonascita) && inputSentenceControl(residenza) && inputSentenceControl(via) && inputProvinciaControl(provincia) && inputCodiceFiscaleControl(codicefiscale) ) {
                 String name = stringToCapital(nome);
                 String surname = stringToCapital(cognome);
                 //Apre schermata di salvataggio e genera il pdf
@@ -63,9 +63,9 @@ public class TirocinioController {
                 if (r == JFileChooser.CANCEL_OPTION) {
                     //chiudi finestra
                 }
-            } else if (!inputNameControl(nome)) {
+            } else if (!inputAppelControl(nome)) {
                 JOptionPane.showMessageDialog(null,"Nome Errato!");
-            } else if (!inputNameControl(cognome)) {
+            } else if (!inputAppelControl(cognome)) {
                 JOptionPane.showMessageDialog(null,"Cognome Errato!");
             } else if (!inputMatricolaControl(matricola)) {
                 JOptionPane.showMessageDialog(null,"Matricola Errata!");

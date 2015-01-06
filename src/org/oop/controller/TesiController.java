@@ -31,7 +31,7 @@ public class TesiController {
             String luogo = view.getLuogoNascita().getText();
             String email = view.getEmail().getText();
             String year = view.getAnnoCorso().getText();
-            if ((inputNameControl(nome)) && ( inputNameControl(cognome) ) && ( inputSentenceControl(luogo) ) && (inputMailControl(email) ) && inputYearControl(year) ) {
+            if ((inputAppelControl(nome)) && ( inputAppelControl(cognome) ) && ( inputSentenceControl(luogo) ) && (inputMailControl(email) ) && inputYearControl(year) ) {
                 String name = stringToCapital(nome);
                 String surname = stringToCapital(cognome);
 
@@ -59,9 +59,9 @@ public class TesiController {
                 }
 
 
-            } else if (!inputNameControl(nome)) {
+            } else if (!inputAppelControl(nome)) {
                 JOptionPane.showMessageDialog(null,"Nome Non Valido!");
-             } else if (!inputNameControl(cognome)) {
+             } else if (!inputAppelControl(cognome)) {
                 JOptionPane.showMessageDialog(null,"Cognome Non Valido!");
             } else if (!inputSentenceControl(luogo)) {
                 JOptionPane.showMessageDialog(null,"Luogo Non Valido!");

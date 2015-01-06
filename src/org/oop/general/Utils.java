@@ -139,7 +139,7 @@ public class Utils {
      * @return
      */
     public static boolean inputDateControl(String s) {
-        Pattern p = Pattern.compile("\\d{2}+/+\\d{2}+/+\\d{4}");
+        Pattern p = Pattern.compile("\\d{2}/\\d{2}/\\d{4}");
         Matcher m = p.matcher(s);
         return m.matches();
     }
@@ -156,9 +156,10 @@ public class Utils {
 
     /**
      * Controlla che la stringa passata sia di sole lettere
+     * usato per i nomi
      */
-    public static boolean inputNameControl(String s) {
-        Pattern p = Pattern.compile("([a-zA-Z])+");
+    public static boolean inputAppelControl(String s) {
+        Pattern p = Pattern.compile("([a-zA-Zàèéìòù])+");
         Matcher m = p.matcher(s);
         return m.matches();
     }
@@ -179,11 +180,20 @@ public class Utils {
      */
 
     public static boolean inputSentenceControl(String s) {
-        Pattern p = Pattern.compile("[a-zA-Z ]+");
+        Pattern p = Pattern.compile("[a-zA-Zàèéìòù ]+");
         Matcher m = p.matcher(s);
         return m.matches();
     }
 
+    /**
+     * controlla che la stringa passata sia una via con eventuale numero civico
+     */
+
+    public static boolean inputStreetControl(String s) {
+        Pattern p = Pattern.compile("[a-zA-Zàèéìòù ]+[0-9]{0,}");
+        Matcher m = p.matcher(s);
+        return m.matches();
+    }
     /**
      * Esplode la stringa per spazi, e lo mette in un array.
      * Ritorna il valore dell'array all'indice passatogli dopo averlo messo in lowercase.

@@ -38,7 +38,7 @@ public class ImmatricolazioneController {
             String luogonascita = view.getLuogonascita().getText();
             String diploma = view.getDiploma().getText();
 
-            if ( (inputCodiceFiscaleControl(codicefiscale)) && (inputMatricolaControl(matricola) ) && ( (voto<=100) || (voto>=60) ) && (inputNameControl(nome)) && (inputNameControl(cognome)) && inputSentenceControl(luogonascita) && inputSentenceControl(diploma) && inputYearControl(anno) ) {
+            if ( (inputCodiceFiscaleControl(codicefiscale)) && (inputMatricolaControl(matricola) ) && ( (voto<=100) || (voto>=60) ) && (inputAppelControl(nome)) && (inputAppelControl(cognome)) && inputSentenceControl(luogonascita) && inputSentenceControl(diploma) && inputYearControl(anno) ) {
                 String name = stringToCapital(nome);
                 String surname = stringToCapital(cognome);
                 //Apre schermata di salvataggio e genera il pdf
@@ -70,9 +70,9 @@ public class ImmatricolazioneController {
                 JOptionPane.showMessageDialog(null,"Matricola Errata!");
             } else if ( (voto >100) || (voto < 60) ){
                 JOptionPane.showMessageDialog(null,"Voto Conseguito Errato");
-            } else if (!inputNameControl(nome)) {
+            } else if (!inputAppelControl(nome)) {
                 JOptionPane.showMessageDialog(null,"Nome Errato!");
-            } else if (!inputNameControl(cognome)) {
+            } else if (!inputAppelControl(cognome)) {
                 JOptionPane.showMessageDialog(null,"Cognome Errato!");
             } else if (!inputSentenceControl(luogonascita)) {
                 JOptionPane.showMessageDialog(null,"Luogo Di Nascita Errato!");

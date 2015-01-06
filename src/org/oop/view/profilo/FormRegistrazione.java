@@ -10,12 +10,9 @@ import org.oop.view.agenda.Agenda;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import static org.oop.general.Utils.inputMailControl;
 import static org.oop.general.Utils.inputMatricolaControl;
-import static org.oop.general.Utils.inputNameControl;
+import static org.oop.general.Utils.inputAppelControl;
 
 public class FormRegistrazione extends AbstractView<Agenda> {
     public JFrame frame = new JFrame("Registrazione");
@@ -67,10 +64,10 @@ public class FormRegistrazione extends AbstractView<Agenda> {
     public boolean isValid() {
         boolean valid = true;
 
-        if(!inputNameControl(nome.getText())) {
+        if(!inputAppelControl(nome.getText())) {
             JOptionPane.showMessageDialog(null, "Nome non valido");
             valid = false;
-        } else if(!inputNameControl(cognome.getText())) {
+        } else if(!inputAppelControl(cognome.getText())) {
             JOptionPane.showMessageDialog(null, "Cognome non valido");
             valid = false;
         } else if(!Validator.email(email.getText())) {
