@@ -6,6 +6,7 @@ import org.oop.db.SQLParameters;
 import org.oop.model.entities.Attivita;
 import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.InsegnamentoOfferto;
+import org.oop.model.entities.Utente;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -101,5 +102,22 @@ public class InsegnamentoDAO extends AbstractDAO<Insegnamento> {
                 .setParameters(parameters)
                 .executeUpdate();
         entity.setId(0);
+    }
+
+    public void setUtente(Utente utente) {
+        if(!utente.getLibretto().getInsegnamenti().isEmpty()) {
+            ArrayList<Integer> ids = new ArrayList<Integer>(10);
+            SQLParameters parameters = new SQLParameters();
+            for (Insegnamento insegnamento : utente.getLibretto().getInsegnamenti()) {
+                ids.add(insegnamento.getId());
+            }
+            parameters.add("id", ids);
+            String sql = "UPDATE insegnamento_utente SET utente = :utente WHERE "
+                    .concat(DatabaseUtils.generateCondition(parameters));
+            parameters.add("utente", utente.getMatricola());
+            db.createSqlStatement(sql)
+                    .setParameters(parameters)
+                    .executeUpdate();
+        }
     }
 }

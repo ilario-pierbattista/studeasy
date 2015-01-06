@@ -2,6 +2,7 @@ package org.oop.controller;
 
 import org.oop.db.SQLParameters;
 import org.oop.model.dao.CorsoDAO;
+import org.oop.model.dao.InsegnamentoDAO;
 import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Corso;
 import org.oop.model.entities.Insegnamento;
@@ -21,18 +22,20 @@ public class FormRegistrazioneController {
     private Utente utente;
     private CorsoDAO corsoDAO;
     private UtenteDAO utenteDAO;
+    private InsegnamentoDAO insegnamentoDAO;
     private boolean primoAvvio;
 
     public FormRegistrazioneController(FormRegistrazione view) {
         corsoDAO = new CorsoDAO();
         utenteDAO = new UtenteDAO();
+        insegnamentoDAO = new InsegnamentoDAO();
 
         this.view = view;
         view.addSubmitFormButtonListener(new submitFormAction());
         view.addQuitFormButtonListener(new quitFormAction());
         view.addLivelloRadiusButtonsListener(new changeLivelloAction());
         utente = cercaUtente();
-        if(!primoAvvio) {
+        if (!primoAvvio) {
             view.initInfo(utente);
         }
 
@@ -62,29 +65,42 @@ public class FormRegistrazioneController {
     /**
      * Crea od aggiorna un utente. Vi sono 4 casi:
      * 1) L'utente non esiste. Viene creato.
-     * 2) L'utente ha una matricola diversa. Viene rimosso e ricreato.
-     * 3) L'utente ha un corso di laurea diverso.
-     * 4) L'utente esiste e differisce solo per alcune informazioni. Viene aggiornato.
+     * 2) L'utente ha un corso di laurea diverso. Bisogna reinserire anche gli insegnamenti.
+     * 3) L'utente esiste e differisce solo per alcune informazioni. Viene aggiornato.
+     *
      * @param nuoviDati Nuovi dati dell'utente
      */
     private void aggiornaUtente(Utente nuoviDati) {
-        if(!primoAvvio && utente.getMatricola() != nuoviDati.getMatricola()) {
-            utenteDAO.remove(utente);
-        } else if(!primoAvvio && utente.getLibretto().getCorso().getId() != nuoviDati.getLibretto().getCorso().getId()) {
-            utenteDAO.remove(utente);
+        boolean compilazioneLibretto;
+
+        // Il libretto viene compilato se non esiste alcun utente o se l'utente ha cambiato corso
+        compilazioneLibretto = (primoAvvio ||
+                utente.getLibretto().getCorso().getId() != nuoviDati.getLibretto().getCorso().getId()
+        );
+
+        if (!compilazioneLibretto) {
+            nuoviDati.setLibretto(utente.getLibretto())
+                    .setAgenda(utente.getAgenda());
         }
         utente = nuoviDati;
-        if(utente.getLibretto().getInsegnamenti().isEmpty()) {
-            // Aggiunta degli insegnamenti obbligatori
-            ArrayList<Insegnamento> insegnamenti = new ArrayList<Insegnamento>(10);
-            for (InsegnamentoOfferto insegnamentoOfferto : utente.getLibretto().getCorso().getInsegnamentiObbligatori()) {
-                insegnamenti.add(new Insegnamento(insegnamentoOfferto));
+        // Impostazione del nuovo utente
+        BaseController.setUtenteCorrente(utente);
+        if (primoAvvio) {
+            utenteDAO.persist(utente);
+        } else {
+            utenteDAO.update(utente);
+        }
+        if (compilazioneLibretto) {
+            // @TODO far partire il form di compilazione del libretto
+            // @TODO cambiare con la action del form le righe seguenti
+            for(InsegnamentoOfferto insegnamentoOfferto : utente.getLibretto().getCorso().getInsegnamentiObbligatori()) {
+                Insegnamento insegnamento = new Insegnamento(insegnamentoOfferto);
+                utente.getLibretto().addInsegnamento(insegnamento);
+                insegnamentoDAO.persist(insegnamento);
             }
-            utente.getLibretto().setInsegnamenti(insegnamenti);
+            utenteDAO.update(utente);
         }
-        if(!utente.getLibretto().getCorso().getInsegnamentiOpzionali().isEmpty()) {
-            /* Todo far apparire il form per opzionare gli insegnamenti a scelta */
-        }
+        utenteDAO.flush();
     }
 
     class changeLivelloAction extends AbstractAction {
@@ -99,6 +115,7 @@ public class FormRegistrazioneController {
 
         /**
          * Restituisce il livello del corso di laurea dalla selezione
+         *
          * @param ab
          * @return
          */
@@ -139,16 +156,11 @@ public class FormRegistrazioneController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (view.isValid()) {
-                UtenteDAO utenteDAO = new UtenteDAO();
                 Utente nuoviDati = view.getUtente();
+                aggiornaUtente(nuoviDati);
                 if (primoAvvio) {
-                    utenteDAO.persist(nuoviDati);
-                    BaseController.setUtenteCorrente(nuoviDati);
-                } else {
-                    /** @TODO gestire l'aggiornamento dei dati dell'utente */
                     BaseController.startController();
                 }
-                utenteDAO.flush();
             }
             view.frame.dispose();
             Mainframe.setVisible(true);

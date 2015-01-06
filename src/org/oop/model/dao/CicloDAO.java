@@ -6,6 +6,7 @@ import org.oop.db.SQLParameters;
 import org.oop.model.entities.Attivita;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Insegnamento;
+import org.oop.model.entities.Utente;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -102,6 +103,23 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
                 .setParameters(parameters)
                 .executeUpdate();
         entity.setId(0);
+    }
+
+    public void setUtente(Utente utente) {
+        ArrayList<Integer> idCicli = new ArrayList<Integer>(2);
+        if(!utente.getAgenda().getCicli().isEmpty()) {
+            for (Ciclo ciclo : utente.getAgenda().getCicli()) {
+                idCicli.add(ciclo.getId());
+            }
+            SQLParameters cicliParams = new SQLParameters();
+            cicliParams.add("id", idCicli);
+            String updateCicliSql = "UPDATE ciclo SET utente = :utente WHERE "
+                    .concat(DatabaseUtils.generateCondition(cicliParams));
+            cicliParams.add("utente", utente.getMatricola());
+            db.createSqlStatement(updateCicliSql)
+                    .setParameters(cicliParams)
+                    .executeUpdate();
+        }
     }
 
     private ArrayList<Insegnamento> getInsegnamentiCiclo(Ciclo ciclo) {
