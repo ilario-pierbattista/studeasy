@@ -18,6 +18,7 @@ public class PdfGenerator {
 
     public PdfGenerator(String nomeTemplate,String nome)
     {
+        //template contiene la path della cartella template
         template=nomeTemplate;
         nomeFile = nome;
     }
@@ -27,6 +28,10 @@ public class PdfGenerator {
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());
 
+        System.out.println(template);
+        System.out.println(path.concat(File.separator.
+                concat(this.nomeFile).
+                concat(".pdf")));
         FileOutputStream fileOutputStream = new FileOutputStream(path.concat(File.separator.
                                                                       concat(this.nomeFile).
                                                                       concat(".pdf")));
@@ -41,6 +46,7 @@ public class PdfGenerator {
 
         stamper.getAcroFields().setField("nome", tesiView.getNome().getText());
         stamper.getAcroFields().setField("cognome", tesiView.getCognome().getText());
+        stamper.getAcroFields().setField("matricola",tesiView.getMatricola().getText());
         stamper.getAcroFields().setField("dataNascita", tesiView.getDataNascita().getText());
         stamper.getAcroFields().setField("luogoNascita", tesiView.getLuogoNascita().getText());
         stamper.getAcroFields().setField("eMail", tesiView.getEmail().getText());
@@ -53,12 +59,14 @@ public class PdfGenerator {
         pdfTemplate.close();
     }
 
-    public void generatePdfTirocinio(Tirocinio tirocinioView,String path,String fileName) throws IOException,DocumentException {
+    public void generatePdfTirocinio(Tirocinio tirocinioView,String path) throws IOException,DocumentException {
 
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());
 
-        FileOutputStream fileOutputStream = new FileOutputStream(path.concat("\\".concat(fileName).concat(".pdf")));
+        FileOutputStream fileOutputStream = new FileOutputStream(path.concat(File.separator
+                                                                                        .concat(this.nomeFile)
+                                                                                        .concat(".pdf")));
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         //PdfStamper will populate the fields dynamically with real time data.
@@ -66,15 +74,17 @@ public class PdfGenerator {
 
         stamper.setFormFlattening(true);
 
-        //MODIFICARE I CAMPI IN BASE AI TEXTFIELD
         stamper.getAcroFields().setField("nome", tirocinioView.getNome().getText());
         stamper.getAcroFields().setField("cognome", tirocinioView.getCognome().getText());
-        //stamper.getAcroFields().setField("dataNascita", tirocinioView.getDataNascita().getText());
-        //stamper.getAcroFields().setField("luogoNascita", tirocinioView.getLuogoNascita().getText());
-       // stamper.getAcroFields().setField("eMail", tirocinioView.getEmail().getText());
-        //stamper.getAcroFields().setField("annoCorso", tirocinioView.getAnnoCorso().getText());
-        //stamper.getAcroFields().setField("professoreRelatore", tirocinioView.getProfRelatore().getText());
-       // stamper.getAcroFields().setField("titoloTesi", tirocinioView.getTitoloTesi().getText());
+        stamper.getAcroFields().setField("matricola", tirocinioView.getMatricola().getText());
+        stamper.getAcroFields().setField("luogoNascita", tirocinioView.getLuogonascita().getText());
+        stamper.getAcroFields().setField("dataNascita", tirocinioView.getDatanascita().getText());
+        stamper.getAcroFields().setField("residenza", tirocinioView.getResidenza().getText());
+        stamper.getAcroFields().setField("provincia", tirocinioView.getProvincia().getText());
+        stamper.getAcroFields().setField("cap", tirocinioView.getCap().getText());
+        stamper.getAcroFields().setField("via",tirocinioView.getVia().getText());
+        stamper.getAcroFields().setField("codiceFiscale",tirocinioView.getCodicefiscale().getText());
+
         pdfTemplate.close();
         stamper.close();
         pdfTemplate.close();
@@ -85,7 +95,9 @@ public class PdfGenerator {
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());
 
-        FileOutputStream fileOutputStream = new FileOutputStream(path.concat("\\".concat(this.nomeFile).concat(".pdf")));
+        FileOutputStream fileOutputStream = new FileOutputStream(path.concat(File.separator
+                                                                                        .concat(this.nomeFile)
+                                                                                        .concat(".pdf")));
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         //PdfStamper will populate the fields dynamically with real time data.
@@ -93,15 +105,17 @@ public class PdfGenerator {
 
         stamper.setFormFlattening(true);
 
-        //MODIFICARE I CAMPI IN BASE AI TEXTFIELD
         stamper.getAcroFields().setField("nome", immatricolazioneView.getNome().getText());
         stamper.getAcroFields().setField("cognome", immatricolazioneView.getCognome().getText());
-        //stamper.getAcroFields().setField("dataNascita", tirocinioView.getDataNascita().getText());
-        //stamper.getAcroFields().setField("luogoNascita", tirocinioView.getLuogoNascita().getText());
-        // stamper.getAcroFields().setField("eMail", tirocinioView.getEmail().getText());
-        //stamper.getAcroFields().setField("annoCorso", tirocinioView.getAnnoCorso().getText());
-        //stamper.getAcroFields().setField("professoreRelatore", tirocinioView.getProfRelatore().getText());
-        // stamper.getAcroFields().setField("titoloTesi", tirocinioView.getTitoloTesi().getText());
+        stamper.getAcroFields().setField("matricola", immatricolazioneView.getMatricola().getText());
+        stamper.getAcroFields().setField("luogoNascita", immatricolazioneView.getLuogonascita().getText());
+        stamper.getAcroFields().setField("dataNascita", immatricolazioneView.getDatanascita().getText());
+        stamper.getAcroFields().setField("provinciaNascita", immatricolazioneView.getProvincia().getText());
+        stamper.getAcroFields().setField("codiceFiscale", immatricolazioneView.getCodicefiscale().getText());
+        stamper.getAcroFields().setField("tipologiaScuolaSuperiore", immatricolazioneView.getDiploma().getText());
+        stamper.getAcroFields().setField("voto",immatricolazioneView.getVoto().getText());
+        stamper.getAcroFields().setField("anno1",immatricolazioneView.getAnnoConseguimento1().getText());
+        stamper.getAcroFields().setField("anno2",immatricolazioneView.getAnnoConseguimento2().getText());
 
         pdfTemplate.close();
         stamper.close();

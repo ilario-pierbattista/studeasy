@@ -6,6 +6,7 @@ import org.oop.view.segreteria.Tesi;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
@@ -42,8 +43,10 @@ public class TesiController {
                     String fileName = c.getSelectedFile().getName();
 
                     try {
-                        PdfGenerator pdfGeneratorCreate = new PdfGenerator("templateTesiPDF.pdf",fileName);
-                        pdfGeneratorCreate.generatePdfTesi(view,path);
+                        PdfGenerator pdfGeneratorCreate = new PdfGenerator(System.getProperty("user.dir")
+                                                                                                .concat(File.separator.concat("template"))
+                                                                                                    .concat(File.separator.concat("templateTesiPDF.pdf")),fileName);
+                        pdfGeneratorCreate.generatePdfTesi(view, path);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     } catch (DocumentException e1) {
@@ -80,6 +83,9 @@ public class TesiController {
             view.getLuogoNascita().setText("");
             view.getEmail().setText("");
             view.getAnnoCorso().setText("");
+            view.getProfRelatore().setText("");
+            view.getTitoloTesi().setText("");
+            view.getMatricola().setText("");
         }
     }
 }
