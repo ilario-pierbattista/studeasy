@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Corso {
 
-    /* Dichiarazione degli attributi */
     private int id;
     private String nome;
     private int livello;

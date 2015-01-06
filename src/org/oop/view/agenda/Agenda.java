@@ -1,6 +1,7 @@
 package org.oop.view.agenda;
 
 import org.oop.model.entities.Ciclo;
+import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.InsegnamentoOfferto;
 import org.oop.view.AbstractView;
 
@@ -103,10 +104,22 @@ public class Agenda extends AbstractView<Agenda> {
     }
 
     /**
+     * Metodo che aggiorna la lista degl insegnamenti
+     */
+    public void updateListaInsegnamenti(){
+        if (insegnamentilist.getModel().getSize() <= 0) {
+            removeInsegnamentoButton.setEnabled(false);
+        } else {
+            removeInsegnamentoButton.setEnabled(true);
+            insegnamentilist.setSelectedIndex(0);
+        }
+    }
+
+    /**
      * Metodo che aggiunge l'insegnamento che gli si passa alla lista degli insegnamenti
      */
-    public void addInsegnamentoToList(InsegnamentoOfferto insegnamento) {
-        DefaultListModel<InsegnamentoOfferto> listModel =  (DefaultListModel<InsegnamentoOfferto>) insegnamentilist.getModel();
+    public void addInsegnamentoToList(Insegnamento insegnamento) {
+        DefaultListModel<Insegnamento> listModel =  (DefaultListModel<Insegnamento>) insegnamentilist.getModel();
         listModel.addElement(insegnamento);
     }
 
@@ -114,7 +127,7 @@ public class Agenda extends AbstractView<Agenda> {
      * Metodo che carica la lista delle attivita in relazione all'insegnamento
      * che gli si è passato come parametro
      */
-    public void updateElencoAttivita (InsegnamentoOfferto insegnamento){
+    public void updateElencoAttivita (Insegnamento insegnamento){
 
     }
 

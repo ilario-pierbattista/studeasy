@@ -6,7 +6,6 @@ import org.oop.model.Libretto;
 
 public class Utente {
 
-    /* Dichiarazione degli attributi */
     private int matricola;
     private String nome;
     private String cognome;
@@ -14,7 +13,6 @@ public class Utente {
     private Agenda agenda;
     private Libretto libretto;
 
-    /* Metodo costruttore */
     public Utente(int matricola, String nome, String cognome, String email, Agenda agenda, Libretto libretto) {
         this.matricola = matricola;
         this.nome = nome;
@@ -24,7 +22,6 @@ public class Utente {
         this.libretto = libretto;
     }
 
-    //il seguente è il costruttore che inizializza i dati di deafult
     public Utente() {
         libretto = new Libretto();
         agenda = new Agenda();
