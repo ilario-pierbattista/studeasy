@@ -1,7 +1,11 @@
 package org.oop.view.profilo;
 
+import org.oop.controller.BaseController;
+import org.oop.model.Libretto;
+import org.oop.model.entities.Utente;
 import org.oop.view.AbstractView;
 import org.oop.view.CustomTableModel;
+import org.oop.view.agenda.Agenda;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -25,6 +29,7 @@ public class Profilo extends AbstractView<Profilo> {
     private JLabel userTipoCorsoField;
     private JScrollPane scrolpanetable;
 
+    private Utente utente;
     CustomTableModel model = new CustomTableModel("Insegnamento", "Ciclo", "CFU", "Data","Voto" );
 
     public Profilo() {
@@ -39,6 +44,7 @@ public class Profilo extends AbstractView<Profilo> {
         //inizialmente quando la tabella è vuota rendo il bottone elimina non accessibile
         deleteriga.setEnabled(false);
 
+        utente = BaseController.getUtenteCorrente();
         setUserInfo();
     }
 
@@ -80,12 +86,15 @@ public class Profilo extends AbstractView<Profilo> {
      * Imposta le informazioni utente nella sidebar
      */
     public void setUserInfo(){
-        userNameField.setText("");
-        userSurnameField.setText("");
-        userEmailField.setText("");
-        userMatricolaField.setText("");
-        userCorsoField.setText("");
-        userTipoCorsoField.setText("");
+        /*
+        userNameField.setText(utente.getNome());
+        userSurnameField.setText(utente.getCognome());
+        userEmailField.setText(utente.getEmail());
+        userMatricolaField.setText(String.valueOf(utente.getMatricola()));
+        /*
+        userCorsoField.setText(libretto.getCorso().toString());
+        userTipoCorsoField.setText(libretto.getCorso().getNomeLivello());
+        */
 
     }
 

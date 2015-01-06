@@ -1,44 +1,74 @@
 package org.oop.controller;
 
+import org.oop.view.segreteria.FormIscrizione;
 import org.oop.view.segreteria.Iscrizione;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-/**
- * Created by MelvinMancini on 30/12/14.
- */
+
 public class IscrizioneController {
     private Iscrizione view;
+    private FormIscrizione form;
 
     public IscrizioneController(Iscrizione view)
     {
         this.view=view;
-        //Passo come argomento gli ascoltatori ai metodi della classe Iscrizione che permettono di settare gli
-        // ascoltatori per i bottoni
-        view.addAggiungiRigaButtonListener(new AggiungiRigaAction());
-        view.addEliminaRigaButtonListener(new EliminaRigaAction());
-        view.addConfermaButtonListener(new ConfermaAction());
+
+        view.addAddButtonListener(new addIscrizioneAction());
+        view.addDeleteButtonListener(new deleteIscrizioneAction());
+        view.addEditButtonListener(new editIscrizioneAction());
     }
 
-    public class AggiungiRigaAction extends AbstractAction{
-        //Quando primo il bottone Aggiungi richiamo il metodo aggiungiriga() della classe Iscrizione
+    /**
+     * Action per far partire il form di aggiunta
+     */
+    class addIscrizioneAction extends AbstractAction{
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.addRiga();
+            view.addRiga(); //Va tolto
+            form = new FormIscrizione();
+            form.addSubmitButtonListener(new submitFormAction());
+            form.addCancelButtonListener(new closeFormAction());
         }
     }
-    public class EliminaRigaAction extends AbstractAction{
-        //Quando primo il bottone Elimina richiamo il metodo eliminariga() della classe Iscrizione
+
+    /**
+     * Action per il submit del form di aggiunta di iscrizione
+     */
+    class submitFormAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //Submit
+        }
+    }
+
+    /**
+     * Action per chiudere il form
+     */
+    class closeFormAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            form.closeFrame();
+        }
+    }
+
+    /**
+     * Action che elimina una riga dalla tabella delle iscrizioni
+     */
+    class deleteIscrizioneAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.eliminaRiga();
         }
     }
 
-    public class ConfermaAction extends AbstractAction{
+    /**
+     * Action per modificare un'iscrizione
+     */
+    class editIscrizioneAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //Inserire il codice che permette di salvare le modifiche fatte sul form Iscrizione
         }
     }
 }

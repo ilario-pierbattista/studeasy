@@ -3,7 +3,6 @@ package org.oop.view.segreteria;
 import org.oop.view.CustomTableModel;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 
 /**
@@ -12,52 +11,34 @@ import java.awt.event.ActionListener;
 public class Tasse {
     public JPanel tassepanel;
     private JTable tabellatasse;
-    private JButton eliminaButton;
-    private JButton aggiungiButton;
-    private JButton confermaButton;
+    private JButton removeButton;
+    private JButton editButton;
+    private JButton addButton;
 
-    /*private String[] colonne = {"Anno Accademico", "Corso di Laurea", "Importo", "Stato"};
-    private Object[][] data;
-    private DefaultTableModel model = new DefaultTableModel(data, colonne){
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            //all cells false
-            return false;
-        }
-    };*/
     CustomTableModel model = new CustomTableModel("Anno Accademico", "Corso di Laurea", "Importo", "Stato");
     int contarighe = 1;
 
     public Tasse() {
         super();
         tabellatasse.setModel(model);
-        eliminaButton.setEnabled(false);
+        removeButton.setEnabled(false);
         tabellatasse.setRowHeight(30);
     }
 
-    //Metodi che settano i listener ai bottoni
-    public void addAggiungiTassaListener(ActionListener listener) {
-        aggiungiButton.addActionListener(listener);
-    }
-
-    public void addEliminaTassaListener(ActionListener listener) {
-        eliminaButton.addActionListener(listener);
-    }
-
-    public void addConfermaTassaListener(ActionListener listener) {
-        confermaButton.addActionListener(listener);
-    }
-
-    //Metodi che permettono di aggungere o togliere elementi dalla tabellatasse
-
+    /**
+     * Metodo per aggiungere una riga alla tabella
+     */
     public void addTassa() {
 
         Object[] appoggio = new Object[]{"Anno Accademico " + contarighe, "Corso " + contarighe, "Importo " + contarighe, "Stato" + contarighe};
         model.addRow(appoggio);
         contarighe++;
-        eliminaButton.setEnabled(true);
+        removeButton.setEnabled(true);
     }
 
+    /**
+     * Metodo per eliminare una riga dalla tabella
+     */
     public void eliminaTassa() {
         int n = tabellatasse.getSelectedRow();
         if (tabellatasse.getSelectedRow() == -1) {
@@ -70,9 +51,34 @@ public class Tasse {
         }
         int size = model.getRowCount();
         if (size == 0) {
-            eliminaButton.setEnabled(false);
+            removeButton.setEnabled(false);
         }
     }
 
+    /* Getters */
 
+    public JButton getRemoveButton() {
+        return removeButton;
+    }
+
+    public JButton getEditButton() {
+        return editButton;
+    }
+
+    public JButton getAddButton() {
+        return addButton;
+    }
+
+    /* Listeners setter */
+    public void addAddButtonListener(ActionListener listener) {
+        addButton.addActionListener(listener);
+    }
+
+    public void addRemoveButtonListener(ActionListener listener) {
+        removeButton.addActionListener(listener);
+    }
+
+    public void addEditButtonListener(ActionListener listener) {
+        editButton.addActionListener(listener);
+    }
 }
