@@ -1,12 +1,13 @@
 package org.oop.view.segreteria;
 
 import org.oop.general.Validator;
+import org.oop.view.AbstractForm;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class Immatricolazione extends AbstractView {
+public class Immatricolazione extends AbstractForm {
     public JPanel immatricolazionepanel;
     private JButton submit;
     private JButton quit;
@@ -46,7 +47,7 @@ public class Immatricolazione extends AbstractView {
     public boolean isValid() {
         boolean flag;
 
-        if (Validator.isFormattedFieldEmpty(matricola, "Matricola") ) {
+        if (Validator.isFormattedFieldEmpty(matricola, "Matricola")) {
             flag = false;
         } else if (Validator.isFormattedFieldEmpty(nome, "Nome") || !Validator.inputSentenceControl(nome.getText(), "Nome")) {
             flag = false;
@@ -60,11 +61,11 @@ public class Immatricolazione extends AbstractView {
             flag = false;
         } else if (Validator.isFormattedFieldEmpty(codicefiscale, "Codice Fiscale") || !Validator.inputCodiceFiscaleControl(codicefiscale.getText())) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(diploma, "Diploma") || !Validator.inputSentenceControl(diploma.getText(),"Diploma")) {
+        } else if (Validator.isFormattedFieldEmpty(diploma, "Diploma") || !Validator.inputSentenceControl(diploma.getText(), "Diploma")) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(voto, "Voto") ) {
+        } else if (Validator.isFormattedFieldEmpty(voto, "Voto") || !(Validator.inputVotoDiploma(Integer.parseInt(voto.getText())))) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(annoConseguimento1, "Anno di conseguimento")  || Validator.isFormattedFieldEmpty(annoConseguimento2, "Anno di conseguimento") ) {
+        } else if (Validator.isFormattedFieldEmpty(annoConseguimento1, "Anno di conseguimento") || Validator.isFormattedFieldEmpty(annoConseguimento2, "Anno di conseguimento")) {
             flag = false;
         } else if (!Validator.controlloAnno(Integer.parseInt(annoConseguimento1.getText()), Integer.parseInt(annoConseguimento2.getText()))) {
             flag = false;
@@ -80,7 +81,7 @@ public class Immatricolazione extends AbstractView {
         datanascita = new JFormattedTextField(dateformat);
         matricola = new JFormattedTextField(cifreMatricola);
         annoConseguimento1 = new JFormattedTextField(dateformatYear);
-        annoConseguimento2=new JFormattedTextField(dateformatYear);
+        annoConseguimento2 = new JFormattedTextField(dateformatYear);
         voto = new JFormattedTextField(cifreVoto);
     }
 

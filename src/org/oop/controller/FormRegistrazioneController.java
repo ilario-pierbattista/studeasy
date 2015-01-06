@@ -165,10 +165,9 @@ public class FormRegistrazioneController {
                 if (primoAvvio) {
                     BaseController.startController();
                 }
+                view.frame.dispose();
+                Mainframe.setVisible(true);
             }
-            view.frame.dispose();
-
-            Mainframe.setVisible(true);
         }
     }
 }
