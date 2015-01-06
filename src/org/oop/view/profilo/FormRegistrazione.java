@@ -7,15 +7,13 @@ import org.oop.model.dao.CorsoDAO;
 import org.oop.model.entities.Corso;
 import org.oop.model.entities.Utente;
 import org.oop.view.AbstractForm;
-import org.oop.view.AbstractView;
-import org.oop.view.agenda.Agenda;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import static org.oop.general.Utils.inputMatricolaControl;
 import static org.oop.general.Utils.inputAppelControl;
+import static org.oop.general.Utils.inputMatricolaControl;
 
 public class FormRegistrazione extends AbstractForm {
     private JPanel panel1;

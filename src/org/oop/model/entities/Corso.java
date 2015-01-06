@@ -24,15 +24,12 @@ public class Corso {
         this.insegnamentiOfferti = insegnamentiOfferti;
     }
 
-
     /**
      * Costruttore base
      */
     public Corso () {
         insegnamentiOfferti = new ArrayList<InsegnamentoOfferto>(20);
     }
-
-
 
     /**
      * Il metodo getInsegnamentiObbligatori restituisce un ArrayList i cui elementi sono oggetti della Classe

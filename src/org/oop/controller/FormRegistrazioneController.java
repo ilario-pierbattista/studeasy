@@ -10,6 +10,7 @@ import org.oop.model.entities.InsegnamentoOfferto;
 import org.oop.model.entities.Utente;
 import org.oop.view.Mainframe;
 import org.oop.view.profilo.FormRegistrazione;
+import org.oop.view.profilo.Profilo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -101,6 +102,9 @@ public class FormRegistrazioneController {
             utenteDAO.update(utente);
         }
         utenteDAO.flush();
+        if(ProfiloController.getInstance() != null) {
+            ProfiloController.getInstance().updateView();
+        }
     }
 
     class changeLivelloAction extends AbstractAction {
@@ -163,6 +167,7 @@ public class FormRegistrazioneController {
                 }
             }
             view.frame.dispose();
+
             Mainframe.setVisible(true);
         }
     }

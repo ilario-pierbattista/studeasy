@@ -166,9 +166,6 @@ public class Utils {
 
     /**
      * Imposta il frame al centro dello schermo
-     * =======
-     * /** Imposta il frame al centro dello schermo
-     * >>>>>>> 4e8f8eef96213ac71c7f036ce57323fb035dfd39
      * NB: va usato dopo il metodo pack()
      *
      * @param frame JFrame da centralizzare

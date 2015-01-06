@@ -2,6 +2,7 @@ package org.oop.view.profilo;
 
 import org.oop.controller.BaseController;
 import org.oop.model.Libretto;
+import org.oop.model.entities.Corso;
 import org.oop.model.entities.Utente;
 import org.oop.view.AbstractView;
 import org.oop.view.CustomTableModel;
@@ -29,7 +30,6 @@ public class Profilo extends AbstractView {
     private JLabel userTipoCorsoField;
     private JScrollPane scrolpanetable;
 
-    private Utente utente;
     CustomTableModel model = new CustomTableModel("Insegnamento", "Ciclo", "CFU", "Data","Voto" );
 
     public Profilo() {
@@ -43,9 +43,24 @@ public class Profilo extends AbstractView {
         insegnamentotable.setRowHeight(30);
         //inizialmente quando la tabella è vuota rendo il bottone elimina non accessibile
         deleteriga.setEnabled(false);
+    }
 
-        utente = BaseController.getUtenteCorrente();
-        setUserInfo();
+    /**
+     * Imposta le informazioni dell'utente nella sidebar
+     * @param utente Utente corrente
+     */
+    public void setInfoUtente(Utente utente) {
+        userNameField.setText(utente.getNome());
+        userSurnameField.setText(utente.getCognome());
+        userEmailField.setText(utente.getEmail());
+        userMatricolaField.setText(Integer.toString(utente.getMatricola()));
+        Corso corso = utente.getLibretto().getCorso();
+        userCorsoField.setText(corso.getNome());
+        userTipoCorsoField.setText(corso.getNomeLivello());
+    }
+
+    public void setInfoLibretto(Libretto libretto) {
+
     }
 
     /**
@@ -80,22 +95,6 @@ public class Profilo extends AbstractView {
         {
             deleteriga.setEnabled(false);
         }
-    }
-
-    /**
-     * Imposta le informazioni utente nella sidebar
-     */
-    public void setUserInfo(){
-        /*
-        userNameField.setText(utente.getNome());
-        userSurnameField.setText(utente.getCognome());
-        userEmailField.setText(utente.getEmail());
-        userMatricolaField.setText(String.valueOf(utente.getMatricola()));
-        /*
-        userCorsoField.setText(libretto.getCorso().toString());
-        userTipoCorsoField.setText(libretto.getCorso().getNomeLivello());
-        */
-
     }
 
 

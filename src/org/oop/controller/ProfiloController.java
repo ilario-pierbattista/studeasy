@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 
 
 public class ProfiloController {
+    private static ProfiloController instance;
     private Profilo view;
     private FormInsegnamento formInsegnamento;
 
@@ -18,6 +19,21 @@ public class ProfiloController {
         view.addTableListener(new addInsegnamentoAction());
         view.addDeletetableListener(new deleteInsegnamentoAction());
         view.insFormButtonListener(new formAction());
+        instance = this;
+
+        updateView();
+    }
+
+    public void updateView() {
+        view.setInfoUtente(BaseController.getUtenteCorrente());
+    }
+
+    /**
+     * Ritorna l'istanza attiva di ProfiloController
+     * @return
+     */
+    public static ProfiloController getInstance() {
+        return instance;
     }
 
     /**
