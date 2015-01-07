@@ -8,15 +8,18 @@ import java.util.regex.Pattern;
 
 public class Validator {
 
+
+
+
     /**
      * Controlla che il numero dei CFU sia maggiore di 120 per conseguire il tirocinio.
      * Ritorna true se i CFU sono maggiori di 120
      */
 
-    public static boolean controlloNumeroCFU(int cfu) {
+    public static boolean controlloNumeroCFU(double cfu) {
 
         boolean flag;
-        if(cfu<=120)
+        if(cfu<120)
         {
             JOptionPane.showMessageDialog(null, "Il numero dei CFU non è abbastanza elevato per conseguire il tirocinio");
             flag=false;
@@ -68,7 +71,7 @@ public class Validator {
      * @return
      */
 
-    public static boolean controlloAnno(int anno1, int anno2) {
+    public static boolean controlloAnno(double anno1, double anno2) {
         boolean flag;
         if (anno1 < anno2) {
             flag = true;
@@ -101,7 +104,7 @@ public class Validator {
      * @param voto
      * @return
      */
-    public static boolean inputVotoDiploma(int voto) {
+    public static boolean inputVotoDiploma(double voto) {
         boolean flag;
         if (voto >= 60 && voto <= 100) {
             flag = true;
@@ -165,6 +168,9 @@ public class Validator {
     public static boolean email(String str) {
         Pattern p = Pattern.compile("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}");
         Matcher m = p.matcher(str);
+        if (!m.matches()) {
+            JOptionPane.showMessageDialog(null, "Il campo 'Email' non è corretto");
+        }
         return m.matches();
     }
 

@@ -20,15 +20,15 @@ public class FormTesi extends AbstractView {
     private JFormattedTextField titoloTesi;
     private JLabel nomeLabel;
     private JLabel cognomeLabel;
+    private JLabel matricolaLabel;
+    private JLabel emailLabel;
     private JLabel dataNascitaLabel;
     private JLabel luogoDiNascitaLabel;
     private JLabel annoCorsoLabel;
     private JLabel profRelatoreLabel;
     private JLabel titoloTesiLabel;
     private JFormattedTextField matricola;
-    private JLabel matricolaLabel;
     private JFormattedTextField email;
-    private JLabel emailLabel;
 
     public void setInfoUtente(Utente utente) {
         nome.setValue(utente.getNome());
@@ -58,7 +58,7 @@ public class FormTesi extends AbstractView {
             flag = false;
         } else if (Validator.isFormattedFieldEmpty(luogoNascita, "Luogo di nascita") || !Validator.inputSentenceControl(luogoNascita.getText(), "Luogo di nascita")) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(annoCorso, "Anno di corso")) {
+        } else if (Validator.isFormattedFieldEmpty(annoCorso, "Anno di corso") || !Validator.inputYearControl(annoCorso.getText())) {
             flag = false;
         } else if (Validator.isFormattedFieldEmpty(profRelatore, "Professore relatore") || !Validator.inputSentenceControl(profRelatore.getText(), "Professore relatore")) {
             flag = false;
@@ -81,7 +81,7 @@ public class FormTesi extends AbstractView {
 
     private void createUIComponents() {
         dataNascita = new JFormattedTextField(dateformat);
-        matricola = new JFormattedTextField(cifreMatricola);
+        matricola = new JFormattedTextField(dfMatricola);
         annoCorso = new JFormattedTextField(dateformatYear);
     }
 

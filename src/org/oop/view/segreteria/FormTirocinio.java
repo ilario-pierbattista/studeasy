@@ -65,7 +65,7 @@ public class FormTirocinio extends AbstractForm {
             flag = false;
         } else if (Validator.isFormattedFieldEmpty(codicefiscale, "Codice Fiscale") || !Validator.inputCodiceFiscaleControl(codicefiscale.getText())) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(cfu, "CFU") || !Validator.controlloNumeroCFU(Integer.parseInt(cfu.getText()))) {
+        } else if (Validator.isFormattedFieldEmpty(cfu, "CFU") || !Validator.controlloNumeroCFU(Double.parseDouble(cfu.getText()))) {
             flag = false;
         } else {
             flag = true;
@@ -254,8 +254,8 @@ public class FormTirocinio extends AbstractForm {
 
     private void createUIComponents() {
         datanascita = new JFormattedTextField(dateformat);
-        matricola = new JFormattedTextField(cifreMatricola);
-        cap = new JFormattedTextField((cifreCAP));
-        cfu= new JFormattedTextField(cifreCFU);
+        matricola = new JFormattedTextField(dfMatricola);
+        cap = new JFormattedTextField((dfCAP));
+        cfu= new JFormattedTextField(dfCFU);
     }
 }

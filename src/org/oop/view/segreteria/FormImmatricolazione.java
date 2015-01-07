@@ -3,7 +3,6 @@ package org.oop.view.segreteria;
 import org.oop.general.Validator;
 import org.oop.model.entities.Utente;
 import org.oop.view.AbstractForm;
-import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -86,10 +85,10 @@ public class FormImmatricolazione extends AbstractForm {
 
     private void createUIComponents() {
         datanascita = new JFormattedTextField(dateformat);
-        matricola = new JFormattedTextField(cifreMatricola);
+        matricola = new JFormattedTextField(dfMatricola);
         annoConseguimento1 = new JFormattedTextField(dateformatYear);
         annoConseguimento2 = new JFormattedTextField(dateformatYear);
-        voto = new JFormattedTextField(cifreVoto);
+        voto = new JFormattedTextField(dfVoto);
     }
 
     public void insSubmitFormButtonListener(ActionListener l) {
