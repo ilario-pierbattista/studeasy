@@ -76,6 +76,16 @@ public class Agenda extends AbstractView {
     }
 
     /**
+     * Metodo che ritorna il ciclo selezionato
+     * @return Ciclo
+     */
+    public Ciclo getCicloSelected(){
+        int index = ciclilist.getSelectedIndex();
+
+        return ciclilist.getModel().getElementAt(index);
+    }
+
+    /**
      * Metodo che aggiorna la lista dei cicli
      */
     public void updateListaCicli(){
@@ -104,7 +114,7 @@ public class Agenda extends AbstractView {
     }
 
     /**
-     * Metodo che aggiorna la lista degl insegnamenti
+     * Metodo che aggiorna la lista degli insegnamenti
      */
     public void updateListaInsegnamenti(){
         if (insegnamentilist.getModel().getSize() <= 0) {
@@ -121,6 +131,18 @@ public class Agenda extends AbstractView {
     public void addInsegnamentoToList(Insegnamento insegnamento) {
         DefaultListModel<Insegnamento> listModel =  (DefaultListModel<Insegnamento>) insegnamentilist.getModel();
         listModel.addElement(insegnamento);
+    }
+
+    public void setInsegnamentiFromCiclo(Ciclo ciclo) {
+        ArrayList<Insegnamento> listaInsegnamenti = ciclo.getInsegnamenti();
+        if (listaInsegnamenti.size() > 0) {
+            DefaultListModel<Insegnamento> model = new DefaultListModel<Insegnamento>();
+            for (Insegnamento ins : listaInsegnamenti){
+                model.addElement(ins);
+            }
+            insegnamentilist.setModel(model);
+        }
+
     }
 
     /**

@@ -7,9 +7,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-/**
- * Created by toioski on 03/01/15.
- */
+
 public class ModalAddInsegnamento {
     public static  JFrame frame = new JFrame("Aggiungi insegnamento");
     private JButton confermaButton;
@@ -35,13 +33,23 @@ public class ModalAddInsegnamento {
     /**
      * Metodo per popolare la lista di insegnamenti
      */
-    public void setListaInsegnamenti(ArrayList<InsegnamentoOfferto> lista){
-        DefaultListModel<InsegnamentoOfferto> listModel = new DefaultListModel<InsegnamentoOfferto>();
-        for (InsegnamentoOfferto insegnamento : lista){
+    public void setListaInsegnamenti(ArrayList<Insegnamento> lista){
+        DefaultListModel<Insegnamento> listModel = new DefaultListModel<Insegnamento>();
+        for (Insegnamento insegnamento : lista){
             listModel.addElement(insegnamento);
         }
         listInsegnamenti.setModel(listModel);
         listInsegnamenti.setSelectedIndex(0);
+    }
+
+    /**
+     * Metodo che ritorna l'Insegnamento selezionato
+     * @return Insegnamento
+     */
+    public Insegnamento getInsegnamentoSelected(){
+        int index = listInsegnamenti.getSelectedIndex();
+
+        return (Insegnamento) listInsegnamenti.getModel().getElementAt(index);
     }
 
     /* Getters */

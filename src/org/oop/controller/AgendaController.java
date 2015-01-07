@@ -1,12 +1,15 @@
 package org.oop.controller;
 
 import org.oop.general.Utils;
+import org.oop.model.Libretto;
 import org.oop.model.dao.CicloDAO;
+import org.oop.model.dao.InsegnamentoDAO;
 import org.oop.model.dao.InsegnamentoOffertoDAO;
 import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.InsegnamentoOfferto;
+import org.oop.model.entities.Utente;
 import org.oop.view.agenda.Agenda;
 import org.oop.view.agenda.AttivitaView;
 import org.oop.view.agenda.FormCiclo;
@@ -22,13 +25,13 @@ public class AgendaController {
     private Agenda view;
     private FormCiclo formcicloview;
     private ModalAddInsegnamento modalAddInsegnamento;
-    private CicloDAO cicloDAO;
     private org.oop.model.Agenda agenda;
+    private Libretto libretto;
 
     public AgendaController(Agenda view) {
         this.view = view;
-        cicloDAO = new CicloDAO();
         agenda = BaseController.getUtenteCorrente().getAgenda();
+        libretto = BaseController.getUtenteCorrente().getLibretto();
 
         view.addLezioneButtonListener(new AddAttivitaAction());
         view.addEsameButtonListener(new AddAttivitaAction());
@@ -55,8 +58,8 @@ public class AgendaController {
             ListSelectionModel lsm = (ListSelectionModel)e.getSource();
 
             if (!lsm.isSelectionEmpty()){
-                int index = lsm.getMinSelectionIndex();
-                Ciclo ciclo = (Ciclo) view.getCiclilist().getModel().getElementAt(index);
+                Ciclo ciclo = view.getCicloSelected();
+                view.setInsegnamentiFromCiclo(ciclo);
                 view.getListaInsegnamentiTitle().setText("Insegnamenti di " + ciclo.getLabel());
             }
         }
@@ -110,33 +113,6 @@ public class AgendaController {
     }
 
     /**
-     * Action per rimuovere un ciclo dalla lista dei cicli
-     */
-    class RemoveCicloAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            int index = view.getCiclilist().getSelectedIndex();
-            JList list = view.getCiclilist();
-            DefaultListModel<Ciclo> listModel = (DefaultListModel<Ciclo>) list.getModel();
-            int size = listModel.getSize();
-
-            if (index == -1) { //Se non è selezionato niente
-                JOptionPane.showMessageDialog(null, "Seleziona un ciclo per eliminarlo!");
-            } else {
-                CicloDAO cicloDAO = new CicloDAO();
-                cicloDAO.remove(listModel.getElementAt(index));
-                cicloDAO.flush();
-
-                listModel.remove(index);
-
-                updateView(index);
-            }
-
-        }
-
-    }
-
-    /**
      * Action per aggiungere un nuovo ciclo
      */
     class SubmitCicloFormAction extends AbstractAction {
@@ -159,6 +135,32 @@ public class AgendaController {
     }
 
     /**
+     * Action per rimuovere un ciclo dalla lista dei cicli
+     */
+    class RemoveCicloAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int index = view.getCiclilist().getSelectedIndex();
+            JList list = view.getCiclilist();
+            DefaultListModel<Ciclo> listModel = (DefaultListModel<Ciclo>) list.getModel();
+            Ciclo ciclo = listModel.getElementAt(index);
+
+            if (index == -1) { //Se non è selezionato niente
+                JOptionPane.showMessageDialog(null, "Seleziona un ciclo per eliminarlo!");
+            } else {
+                CicloDAO cicloDAO = new CicloDAO();
+                cicloDAO.remove(ciclo);
+                cicloDAO.flush();
+
+                agenda.removeCiclo(ciclo);
+
+                updateView(index);
+            }
+        }
+
+    }
+
+    /**
      * Action per chiudere la finestra di aggiunta di un nuovo ciclo
      */
     class CloseCicloFormAction extends AbstractAction {
@@ -178,9 +180,32 @@ public class AgendaController {
             modalAddInsegnamento.addAnnullaButtonListener(new closeModalInsegnamento());
             modalAddInsegnamento.addConfermaButtonListener(new submitModalInsegnamento());
 
-            //Manda gli insegnamenti alla vista. Deve essere cambiato. Deve prenderli dal libretto.
-            InsegnamentoOffertoDAO insegnamentoOffertoDAO = new InsegnamentoOffertoDAO();
-            modalAddInsegnamento.setListaInsegnamenti(insegnamentoOffertoDAO.findAll());
+            modalAddInsegnamento.setListaInsegnamenti(libretto.getInsegnamenti());
+        }
+    }
+
+    /**
+     * Action aggiunge l'insegnamento selezionato nel modal alla lista degli insegnamenti
+     * nella Agenda
+     */
+    class submitModalInsegnamento extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Insegnamento ins = modalAddInsegnamento.getInsegnamentoSelected();
+            Ciclo ciclo = view.getCicloSelected();
+
+            //Lego l'insegnamento con il ciclo nell'agenda
+            ciclo.addInsegnamento(ins);
+
+            InsegnamentoDAO insegnamentoDAO = new InsegnamentoDAO();
+            CicloDAO cicloDAO = new CicloDAO();
+            insegnamentoDAO.persist(ins);
+            cicloDAO.update(ciclo);
+            cicloDAO.flush();
+            insegnamentoDAO.flush();
+
+            view.addInsegnamentoToList(ins);
+            view.getInsegnamentilist().setSelectedIndex(0);
         }
     }
 
@@ -218,20 +243,6 @@ public class AgendaController {
 
                 view.updateElencoAttivita(insegnamento);
             }
-        }
-    }
-
-    /**
-     * Action aggiunge l'insegnamento selezionato nel modal alla lista degli insegnamenti
-     * nella Agenda
-     */
-    class submitModalInsegnamento extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            int index = modalAddInsegnamento.getListInsegnamenti().getSelectedIndex();
-            Insegnamento ins = (Insegnamento) modalAddInsegnamento.getListInsegnamenti().getModel().getElementAt(index);
-            view.addInsegnamentoToList(ins);
-            view.getInsegnamentilist().setSelectedIndex(0);
         }
     }
 
