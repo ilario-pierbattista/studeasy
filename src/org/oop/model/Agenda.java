@@ -25,4 +25,15 @@ public class Agenda {
         cicli.add(ciclo);
         return this;
     }
+
+    public Agenda removeCiclo(Ciclo ciclo) {
+        boolean found = false;
+        for (int i = 0; i < cicli.size() && !found; i++) {
+            if(ciclo.getId() == cicli.get(i).getId()) {
+                found = true;
+                cicli.remove(i);
+            }
+        }
+        return this;
+    }
 }
