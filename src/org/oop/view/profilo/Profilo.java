@@ -11,8 +11,13 @@ import org.oop.view.CustomTableModel;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+import java.awt.*;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Profilo extends AbstractView {
     public JPanel profiloPanel;
@@ -42,6 +47,8 @@ public class Profilo extends AbstractView {
         model = new CustomTableModel("Insegnamento", "Anno", "Semestre", "CFU", "Data", "Voto");
         librettoTable.setModel(model);
         librettoTable.setRowHeight(30);
+        // Impostazione dei renderer delle celle
+        setCellRenderers();
         modificaInsegnamentoButton.setEnabled(false);
         // Aggiunta di un listener sulla selezione
         librettoTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -73,6 +80,9 @@ public class Profilo extends AbstractView {
      * @param libretto
      */
     public void setInfoLibretto(Libretto libretto) {
+        // Pulizia della tabella
+        model.clearData();
+        // Impostazione dei nuovi dati
         for (Insegnamento insegnamento : libretto.getInsegnamenti()) {
             addElementTable(insegnamento);
         }
@@ -100,28 +110,33 @@ public class Profilo extends AbstractView {
         Insegnamento ins = null;
         ArrayList<Insegnamento> insegnamenti = BaseController.getUtenteCorrente().getLibretto().getInsegnamenti();
         for (int i = 0; i < insegnamenti.size() && ins == null; i++) {
-            if(insegnamenti.get(i).getId() == id) {
+            if (insegnamenti.get(i).getId() == id) {
                 ins = insegnamenti.get(i);
             }
         }
         return ins;
     }
 
-    /**
-     * Permette di eliminare un elemento dalla tabella
-     *
-    public void deleteElementTable() {
-        int n = librettoTable.getSelectedRow();
-        //Controllo se è stata selezionata una riga. Se non è stata selezionata nessuna riga compare un messaggio di errore
-        if (librettoTable.getSelectedRow() == -1) {
-            System.out.println("Non hai selezionato nessun elemento da eliminare");
-            JOptionPane.showMessageDialog(profiloPanel, "Selezionare un Insegnamento per eliminarlo");
-        } else {
-            model.deleteRow(librettoTable.getSelectedRow());
-            n--;
-            librettoTable.changeSelection(n, 0, false, false);
-        }
-    }*/
+    private void setCellRenderers() {
+        TableCellRenderer dateCellRenderer = new DefaultTableCellRenderer() {
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                if (value instanceof Date) {
+                    value = dateformat.format(value);
+                }
+                return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            }
+        };
+        TableCellRenderer votoCellRenderer = new DefaultTableCellRenderer() {
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                if (value == null || (value instanceof Integer && (Integer) value == 0)) {
+                    value = "";
+                }
+                return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            }
+        };
+        librettoTable.getColumnModel().getColumn(4).setCellRenderer(dateCellRenderer);
+        librettoTable.getColumnModel().getColumn(5).setCellRenderer(votoCellRenderer);
+    }
 
     /* Listeners */
     public void modificaProfiloButtonListener(ActionListener l) {

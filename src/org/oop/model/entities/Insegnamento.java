@@ -11,7 +11,6 @@ public class Insegnamento {
     private Date data;
     private ArrayList<Attivita> attivita;
 
-    //il seguente è il costruttore che inizializza i dati di deafult
     public Insegnamento() {
         attivita = new ArrayList<Attivita>(3);
     }
@@ -78,5 +77,9 @@ public class Insegnamento {
     public Insegnamento addAttivita(Attivita nuova) {
         attivita.add(nuova);
         return this;
+    }
+
+    public String toString() {
+        return insegnamentoOfferto.toString();
     }
 }

@@ -2,7 +2,6 @@ package org.oop.view.agenda;
 
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Insegnamento;
-import org.oop.model.entities.InsegnamentoOfferto;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;
@@ -32,7 +31,7 @@ public class Agenda extends AbstractView {
     private JScrollPane insegnamentiscrollpane;
     private JSplitPane insidesplitpane;
     private JList<Ciclo> ciclilist;
-    private JList insegnamentilist;
+    private JList<Insegnamento> insegnamentiList;
     private JButton addciclobutton;
     private JButton removeciclobutton;
     private JButton addInsegnamentoButton;
@@ -53,10 +52,12 @@ public class Agenda extends AbstractView {
 
         //Imposta il layout a 2 colonne
         activitiespanel.setLayout(new GridLayout(0, 2, 20, 20));
+
     }
 
     /**
      * Metodo che aggiunge l'attività che gli viene passata nel JPanel
+     *
      * @param attivita
      */
     public void addAttivita(AttivitaView attivita) {
@@ -65,6 +66,7 @@ public class Agenda extends AbstractView {
 
     /**
      * Metodo che aggiunge ogni Ciclo dell'Arraylist che gli si passa alla lista dei cicli
+     *
      * @param list
      */
     public void setListaCicli(ArrayList<Ciclo> list) {
@@ -73,66 +75,119 @@ public class Agenda extends AbstractView {
             cicliListModel.addElement(ciclo);
         }
         ciclilist.setModel(cicliListModel);
+        ciclilist.setSelectedIndex(0);
     }
 
     /**
-     * Metodo che aggiorna la lista dei cicli
+     * Metodo che ritorna il ciclo selezionato
+     *
+     * @return Ciclo
      */
-    public void updateListaCicli(){
-        if (ciclilist.getModel().getSize() <= 0)  {
-            removeciclobutton.setEnabled(false);
+    public Ciclo getCicloSelected() {
+        int index = ciclilist.getSelectedIndex();
+        Ciclo ciclo;
+
+        if (index < 0) { //non ci sono cicli
+            ciclo = null;
         } else {
-            removeciclobutton.setEnabled(true);
-            ciclilist.setSelectedIndex(0);
+            ciclo = ciclilist.getModel().getElementAt(index);
         }
+
+        return ciclo;
     }
 
-    /**@TODO riguardare meglio sta funzione **/
-    public void updateListaCicli(int index){
+    /**
+     * Metodo che ritorna l'insegnamento selezionato
+     *
+     * @return Insegnamento
+     */
+    public Insegnamento getInsegnamentoSelected() {
+        int index = insegnamentiList.getSelectedIndex();
+        Insegnamento insegnamento;
+
+        if (index < 0) { //non ci sono insegnamenti
+            insegnamento = null;
+        } else {
+            insegnamento = insegnamentiList.getModel().getElementAt(index);
+        }
+
+        return insegnamento;
+    }
+
+    /**
+     * Aggiorna la lista dei cicli mantenendo la selezione e aggiornando lo status
+     * dei bottoni della lista cicli
+     */
+    public void updateListaCicli() {
+        int index = ciclilist.getSelectedIndex();
         DefaultListModel<Ciclo> listmodel = (DefaultListModel<Ciclo>) ciclilist.getModel();
 
-        if (listmodel.getSize() <= 0)  {
+        if (listmodel.getSize() <= 0) {
             removeciclobutton.setEnabled(false);
         } else {
             removeciclobutton.setEnabled(true);
-            if (index == listmodel.getSize() ) {
+            if (index == listmodel.getSize()) {
                 index--;
                 ciclilist.setSelectedIndex(index);
                 ciclilist.ensureIndexIsVisible(index);
+            } else {
+                ciclilist.setSelectedIndex(0);
             }
         }
     }
 
     /**
-     * Metodo che aggiorna la lista degl insegnamenti
+     * Aggiorna la lista degli insegnamenti mantenendo la selezione e aggiornando lo status
+     * dei bottoni della lista degli insegnamenti
      */
-    public void updateListaInsegnamenti(){
-        if (insegnamentilist.getModel().getSize() <= 0) {
+    public void updateListaInsegnamenti() {
+        int index = insegnamentiList.getSelectedIndex();
+        DefaultListModel<Insegnamento> listModel = (DefaultListModel<Insegnamento>) insegnamentiList.getModel();
+
+        if (insegnamentiList.getModel().getSize() <= 0 || ciclilist.getModel().getSize() <= 0) {
             removeInsegnamentoButton.setEnabled(false);
         } else {
             removeInsegnamentoButton.setEnabled(true);
-            insegnamentilist.setSelectedIndex(0);
+            if (index == listModel.getSize()) {
+                index--;
+                insegnamentiList.setSelectedIndex(index);
+                insegnamentiList.ensureIndexIsVisible(index);
+            } else {
+                insegnamentiList.setSelectedIndex(0);
+            }
         }
     }
 
+
     /**
-     * Metodo che aggiunge l'insegnamento che gli si passa alla lista degli insegnamenti
+     * Metodo che crea la lista di insegnamenti per il ciclo che gli si passa.
+     * Indipendentemente dal fatto che il ciclo abbia già insegnamenti associati o meno,
+     * ricrea il model della lista.
+     * @param ciclo Ciclo
      */
-    public void addInsegnamentoToList(Insegnamento insegnamento) {
-        DefaultListModel<Insegnamento> listModel =  (DefaultListModel<Insegnamento>) insegnamentilist.getModel();
-        listModel.addElement(insegnamento);
+    public void setInsegnamentiFromCiclo(Ciclo ciclo) {
+        if (ciclo != null) { //ciclo è null solo se non esiste neanche un ciclo. Guarda getCicloSelected
+            ArrayList<Insegnamento> listaInsegnamenti = ciclo.getInsegnamenti();
+            DefaultListModel<Insegnamento> model = new DefaultListModel<Insegnamento>();
+            for (Insegnamento ins : listaInsegnamenti) {
+                model.addElement(ins);
+            }
+            insegnamentiList.setModel(model);
+            insegnamentiList.setSelectedIndex(0);
+        }
     }
 
     /**
      * Metodo che carica la lista delle attivita in relazione all'insegnamento
      * che gli si è passato come parametro
      */
-    public void updateElencoAttivita (Insegnamento insegnamento){
+    public void updateElencoAttivita(Insegnamento insegnamento) {
 
     }
 
     /**
      * Metodo che ritorna l'istanza della vista
+     *
      * @return
      */
     public static Agenda getInstance() {
@@ -192,8 +247,8 @@ public class Agenda extends AbstractView {
         return removeInsegnamentoButton;
     }
 
-    public JList getInsegnamentilist() {
-        return insegnamentilist;
+    public JList getInsegnamentiList() {
+        return insegnamentiList;
     }
 
     /* Listeners setters */
@@ -225,14 +280,13 @@ public class Agenda extends AbstractView {
         seminariobutton.addActionListener(listener);
     }
 
-    public void addInsegnamentoButtonListener(ActionListener listener){
+    public void addInsegnamentoButtonListener(ActionListener listener) {
         addInsegnamentoButton.addActionListener(listener);
     }
 
-    public void addRemoveInsegnamentoButtonListener(ActionListener listener){
+    public void addRemoveInsegnamentoButtonListener(ActionListener listener) {
         removeInsegnamentoButton.addActionListener(listener);
     }
-
 
 
 }

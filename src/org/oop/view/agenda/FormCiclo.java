@@ -70,7 +70,7 @@ public class FormCiclo extends AbstractView {
     /**
      * Metodo che chiude il form
      */
-    public static void closeFrame() {
+    public void closeFrame() {
         frame.dispose();
     }
 

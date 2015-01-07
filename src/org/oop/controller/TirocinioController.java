@@ -2,27 +2,30 @@ package org.oop.controller;
 
 import com.lowagie.text.DocumentException;
 import org.oop.services.PdfGenerator;
-import org.oop.view.segreteria.Tirocinio;
+import org.oop.view.segreteria.FormTirocinio;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 
-public class TirocinioController {
-    Tirocinio view;
+import static org.oop.general.Utils.*;
 
-    public TirocinioController (Tirocinio view) {
+public class TirocinioController {
+    FormTirocinio view;
+
+    public TirocinioController(FormTirocinio view) {
 
         this.view = view;
         view.insQuitFormButtonListener(new QuitFormAction());
-        view.insSubmitButtonListener(new SubmitFormAction() );
+        view.insSubmitButtonListener(new SubmitFormAction());
+        view.setInfoUtente(BaseController.getUtenteCorrente());
     }
 
     class SubmitFormAction extends AbstractAction {
         @Override
-        public void actionPerformed (ActionEvent e) {
-            /*JFormattedTextField datanascita = view.getDatanascita();
+        public void actionPerformed(ActionEvent e) {
+            JFormattedTextField datanascita = view.getDatanascita();
             JFormattedTextField cap = view.getCap();
             JFormattedTextField cfu = view.getCfu();
             //int crediti = Integer.parseInt(cfu.getText());
@@ -34,22 +37,22 @@ public class TirocinioController {
             String residenza = view.getResidenza().getText();
             String provincia = view.getProvincia().getText();
             String via = view.getVia().getText();
-            String codicefiscale = view.getCodicefiscale().getText();*/
+            String codicefiscale = view.getCodicefiscale().getText();
 
-            if(view.isValid()){
+            if (view.isValid()) {
 
-                /*String name = stringToCapital(nome);
-                String surname = stringToCapital(cognome);*/
+                String name = stringToCapital(nome);
+                String surname = stringToCapital(cognome);
                 //Apre schermata di salvataggio e genera il pdf
                 JFileChooser c = new JFileChooser();
                 int r = c.showSaveDialog(view.tirociniopanel);
                 if (r == JFileChooser.APPROVE_OPTION) {
-                    String path= c.getCurrentDirectory().toString().replace("\\","\\\\");
+                    String path = c.getCurrentDirectory().toString().replace("\\", "\\\\");
                     String fileName = c.getSelectedFile().getName();
                     try {
                         PdfGenerator pdfGeneratorCreate = new PdfGenerator(System.getProperty("user.dir")
                                 .concat(File.separator.concat("template"))
-                                .concat(File.separator.concat("templateTirocinioPDF.pdf")),fileName);
+                                .concat(File.separator.concat("templateTirocinioPDF.pdf")), fileName);
                         pdfGeneratorCreate.generatePdfTirocinio(view, path);
                     } catch (IOException e1) {
                         e1.printStackTrace();

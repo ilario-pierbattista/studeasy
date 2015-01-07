@@ -1,12 +1,12 @@
 package org.oop.controller;
 
 import org.oop.general.Utils;
+import org.oop.model.Libretto;
 import org.oop.model.dao.CicloDAO;
-import org.oop.model.dao.InsegnamentoOffertoDAO;
+import org.oop.model.dao.InsegnamentoDAO;
 import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Insegnamento;
-import org.oop.model.entities.InsegnamentoOfferto;
 import org.oop.view.agenda.Agenda;
 import org.oop.view.agenda.AttivitaView;
 import org.oop.view.agenda.FormCiclo;
@@ -16,20 +16,19 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
-import java.util.Date;
 
 
 public class AgendaController {
     private Agenda view;
     private FormCiclo formcicloview;
     private ModalAddInsegnamento modalAddInsegnamento;
-    private CicloDAO cicloDAO;
     private org.oop.model.Agenda agenda;
+    private Libretto libretto;
 
     public AgendaController(Agenda view) {
         this.view = view;
-        cicloDAO = new CicloDAO();
         agenda = BaseController.getUtenteCorrente().getAgenda();
+        libretto = BaseController.getUtenteCorrente().getLibretto();
 
         view.addLezioneButtonListener(new AddAttivitaAction());
         view.addEsameButtonListener(new AddAttivitaAction());
@@ -39,12 +38,12 @@ public class AgendaController {
         view.addCicloButtonListener(new AddCicloAction());
         view.addRemoveCicloButtonListener(new RemoveCicloAction());
         view.addInsegnamentoButtonListener(new addInsegnamentoAction());
+        view.addRemoveInsegnamentoButtonListener(new removeInsegnamentoAction());
 
         view.getCiclilist().getSelectionModel().addListSelectionListener(new listaCicliSelectionAction());
-        view.getInsegnamentilist().getSelectionModel().addListSelectionListener(new listaInsegnamentiSelectionAction());
+        view.getInsegnamentiList().getSelectionModel().addListSelectionListener(new listaInsegnamentiSelectionAction());
 
         updateView();
-
     }
 
     /**
@@ -53,11 +52,12 @@ public class AgendaController {
      */
     class listaCicliSelectionAction implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent e) {
-            ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+            ListSelectionModel lsm = (ListSelectionModel) e.getSource();
 
-            if (!lsm.isSelectionEmpty()){
-                int index = lsm.getMinSelectionIndex();
-                Ciclo ciclo = (Ciclo) view.getCiclilist().getModel().getElementAt(index);
+            if (!lsm.isSelectionEmpty()) {
+                Ciclo ciclo = view.getCicloSelected();
+                view.setInsegnamentiFromCiclo(ciclo);
+                view.updateListaInsegnamenti();
                 view.getListaInsegnamentiTitle().setText("Insegnamenti di " + ciclo.getLabel());
             }
         }
@@ -66,34 +66,31 @@ public class AgendaController {
     /**
      * Metodo che passa il model alla vista e la mantiene aggiornata
      */
-     public void updateView(){
-         view.setListaCicli(agenda.getCicli());
-         view.updateListaCicli();
-         view.updateListaInsegnamenti();
-
-     }
-
-    /**
-     * Metodo che passa il model alla vista e la mantiene aggiornata.
-     * L'indice permette il fallback della selezione nelle liste.
-     * @param index
-     */
-    /**@TODO riguardare meglio sta funzione **/
-    public void updateView(int index){
+    public void updateView() {
         view.setListaCicli(agenda.getCicli());
-        view.updateListaCicli(index);
-
+        view.setInsegnamentiFromCiclo(view.getCicloSelected());
+        view.updateListaCicli();
+        view.updateListaInsegnamenti();
     }
 
     /**
-     * Action per aggiungere un'attività di tipo lezione
+     * @TODO: da rivedere meglio. Per adesso è necessario perchè altrimenti si hanno problemi di selezione con liste e cicli
+     */
+    public void updateInsegnamenti() {
+        view.setInsegnamentiFromCiclo(view.getCicloSelected());
+        view.updateListaInsegnamenti();
+    }
+
+
+    /**
+     * Action per aggiungere un'attività
      */
     class AddAttivitaAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             String activityType = Utils.explodeStringForSpace(actionEvent.getActionCommand(), 1);
             AttivitaView attivitaview = new AttivitaView(activityType);
-            AttivitaController attivitacontroller = new AttivitaController(attivitaview,activityType);
+            AttivitaController attivitacontroller = new AttivitaController(attivitaview, activityType);
         }
     }
 
@@ -108,33 +105,6 @@ public class AgendaController {
             formcicloview.addSubmitButtonListener(new SubmitCicloFormAction());
             formcicloview.addCancelButtonListener(new CloseCicloFormAction());
         }
-    }
-
-    /**
-     * Action per rimuovere un ciclo dalla lista dei cicli
-     */
-    class RemoveCicloAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            int index = view.getCiclilist().getSelectedIndex();
-            JList list = view.getCiclilist();
-            DefaultListModel<Ciclo> listModel = (DefaultListModel<Ciclo>) list.getModel();
-            int size = listModel.getSize();
-
-            if (index == -1) { //Se non è selezionato niente
-                JOptionPane.showMessageDialog(null, "Seleziona un ciclo per eliminarlo!");
-            } else {
-                CicloDAO cicloDAO = new CicloDAO();
-                cicloDAO.remove(listModel.getElementAt(index));
-                cicloDAO.flush();
-
-                listModel.remove(index);
-
-                updateView(index);
-            }
-
-        }
-
     }
 
     /**
@@ -160,6 +130,30 @@ public class AgendaController {
     }
 
     /**
+     * Action per rimuovere un ciclo dalla lista dei cicli
+     */
+    class RemoveCicloAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int index = view.getCiclilist().getSelectedIndex();
+            Ciclo ciclo = view.getCicloSelected();
+
+            if (index == -1) { //Se non è selezionato niente
+                JOptionPane.showMessageDialog(null, "Seleziona un ciclo per eliminarlo!");
+            } else {
+                CicloDAO cicloDAO = new CicloDAO();
+                cicloDAO.remove(ciclo);
+                cicloDAO.flush();
+
+                agenda.removeCiclo(ciclo);
+
+                updateView();
+            }
+        }
+
+    }
+
+    /**
      * Action per chiudere la finestra di aggiunta di un nuovo ciclo
      */
     class CloseCicloFormAction extends AbstractAction {
@@ -179,9 +173,30 @@ public class AgendaController {
             modalAddInsegnamento.addAnnullaButtonListener(new closeModalInsegnamento());
             modalAddInsegnamento.addConfermaButtonListener(new submitModalInsegnamento());
 
-            //Manda gli insegnamenti alla vista. Deve essere cambiato. Deve prenderli dal libretto.
-            InsegnamentoOffertoDAO insegnamentoOffertoDAO = new InsegnamentoOffertoDAO();
-            modalAddInsegnamento.setListaInsegnamenti(insegnamentoOffertoDAO.findAll());
+            modalAddInsegnamento.setListaInsegnamenti(libretto.getInsegnamenti());
+        }
+    }
+
+    /**
+     * Action aggiunge l'insegnamento selezionato nel modal alla lista degli insegnamenti
+     * nella Agenda
+     */
+    class submitModalInsegnamento extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Insegnamento ins = modalAddInsegnamento.getInsegnamentoSelected();
+            Ciclo ciclo = view.getCicloSelected();
+
+            //Lego l'insegnamento con il ciclo nell'agenda
+            ciclo.addInsegnamento(ins);
+
+            InsegnamentoDAO insegnamentoDAO = new InsegnamentoDAO();
+            CicloDAO cicloDAO = new CicloDAO();
+            insegnamentoDAO.persist(ins);
+            cicloDAO.update(ciclo);
+            cicloDAO.flush();
+
+            updateInsegnamenti();
         }
     }
 
@@ -191,15 +206,20 @@ public class AgendaController {
     class removeInsegnamentoAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            int index = view.getInsegnamentilist().getSelectedIndex();
-            JList list = view.getInsegnamentilist();
-            DefaultListModel<Insegnamento> listModel = (DefaultListModel<Insegnamento>) list.getModel();
-            int size = listModel.getSize();
+            int index = view.getInsegnamentiList().getSelectedIndex();
+            Insegnamento insegnamento = view.getInsegnamentoSelected();
+            Ciclo ciclo = view.getCicloSelected();
 
             if (index == -1) { //Se non è selezionato niente
                 JOptionPane.showMessageDialog(null, "Seleziona un insegnamento per eliminarlo!");
             } else {
-                //Eliminare insegnamento
+                InsegnamentoDAO insegnamentoDAO = new InsegnamentoDAO();
+                insegnamentoDAO.remove(insegnamento);
+                insegnamentoDAO.flush();
+
+                ciclo.removeInsegnamento(insegnamento.getId());
+
+                updateInsegnamenti();
             }
         }
     }
@@ -211,28 +231,14 @@ public class AgendaController {
     class listaInsegnamentiSelectionAction implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+            ListSelectionModel lsm = (ListSelectionModel) e.getSource();
 
             if (!lsm.isSelectionEmpty()) {
                 int index = lsm.getMinSelectionIndex();
-                Insegnamento insegnamento = (Insegnamento) view.getInsegnamentilist().getModel().getElementAt(index);
+                Insegnamento insegnamento = (Insegnamento) view.getInsegnamentiList().getModel().getElementAt(index);
 
                 view.updateElencoAttivita(insegnamento);
             }
-        }
-    }
-
-    /**
-     * Action aggiunge l'insegnamento selezionato nel modal alla lista degli insegnamenti
-     * nella Agenda
-     */
-    class submitModalInsegnamento extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            int index = modalAddInsegnamento.getListInsegnamenti().getSelectedIndex();
-            Insegnamento ins = (Insegnamento) modalAddInsegnamento.getListInsegnamenti().getModel().getElementAt(index);
-            view.addInsegnamentoToList(ins);
-            view.getInsegnamentilist().setSelectedIndex(0);
         }
     }
 

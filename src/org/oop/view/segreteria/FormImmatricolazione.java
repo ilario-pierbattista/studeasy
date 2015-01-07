@@ -1,17 +1,20 @@
 package org.oop.view.segreteria;
 
 import org.oop.general.Validator;
-import org.oop.view.AbstractView;
+import org.oop.model.entities.Utente;
+import org.oop.view.AbstractForm;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class Immatricolazione extends AbstractView {
-
+public class FormImmatricolazione extends AbstractForm {
     public JPanel immatricolazionepanel;
     private JButton submit;
     private JButton quit;
     private JFormattedTextField matricola;
+    private JLabel matricolalabel;
+    private JLabel nomelabel;
+    private JLabel cognomelabel;
     private JFormattedTextField datanascita;
     private JLabel datanascitalabel;
     private JLabel luogonascitalabel;
@@ -31,11 +34,14 @@ public class Immatricolazione extends AbstractView {
     private JFormattedTextField annoConseguimento2;
     private JLabel annoConseguimento2Label;
 
-
-
-    public Immatricolazione() {
+    public FormImmatricolazione() {
         super();
+    }
 
+    public void setInfoUtente(Utente utente) {
+        nome.setValue(utente.getNome());
+        cognome.setValue(utente.getCognome());
+        matricola.setValue(utente.getMatricola());
     }
 
     /**
@@ -63,21 +69,21 @@ public class Immatricolazione extends AbstractView {
             flag = false;
         } else if (Validator.isFormattedFieldEmpty(diploma, "Diploma") || !Validator.inputSentenceControl(diploma.getText(), "Diploma")) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(voto, "Voto") || !(Validator.inputVotoDiploma(Double.parseDouble(voto.getText())))) {
+        } else if (Validator.isFormattedFieldEmpty(voto, "Voto") || !(Validator.inputVotoDiploma(Integer.parseInt(voto.getText())))) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(annoConseguimento1, "Anno di conseguimento") || Validator.isFormattedFieldEmpty(annoConseguimento2, "Anno di conseguimento") || !Validator.inputYearControl(annoConseguimento1.getText()) || !Validator.inputYearControl(annoConseguimento2.getText())) {
+        } else if (Validator.isFormattedFieldEmpty(annoConseguimento1, "Anno di conseguimento") || Validator.isFormattedFieldEmpty(annoConseguimento2, "Anno di conseguimento")) {
             flag = false;
-        } else if (!Validator.controlloAnno(Double.parseDouble(annoConseguimento1.getText()), Double.parseDouble(annoConseguimento2.getText()))) {
+        } else if (!Validator.controlloAnno(Integer.parseInt(annoConseguimento1.getText()), Integer.parseInt(annoConseguimento2.getText()))) {
             flag = false;
         } else {
             flag = true;
         }
 
+
         return flag;
     }
 
     private void createUIComponents() {
-
         datanascita = new JFormattedTextField(dateformat);
         matricola = new JFormattedTextField(dfMatricola);
         annoConseguimento1 = new JFormattedTextField(dateformatYear);

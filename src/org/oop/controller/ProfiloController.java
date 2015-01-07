@@ -1,5 +1,6 @@
 package org.oop.controller;
 
+import org.oop.model.dao.InsegnamentoDAO;
 import org.oop.model.entities.Insegnamento;
 import org.oop.view.profilo.FormInsegnamento;
 import org.oop.view.profilo.FormRegistrazione;
@@ -13,6 +14,7 @@ public class ProfiloController {
     private static ProfiloController instance;
     private Profilo view;
     private FormInsegnamento formInsegnamento;
+    private InsegnamentoDAO insegnamentoDAO;
 
     public ProfiloController(Profilo view) {
         this.view = view;
@@ -20,6 +22,8 @@ public class ProfiloController {
         view.modificaProfiloButtonListener(new registraFormAction());
         view.modificaInsegnamentoButtonListener(new insegnamentoFormAction());
         instance = this;
+
+        insegnamentoDAO = new InsegnamentoDAO();
 
         updateView();
     }
@@ -37,27 +41,6 @@ public class ProfiloController {
         return instance;
     }
 
-    /**
-     * Action per il submit del form
-     * @Todo eliminare, non è utile
-     *
-    class submitInsegnamentoction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (formInsegnamento.isValid()){
-                String nomeinsegnamento = formInsegnamento.getTextFieldnomeinsegnamento().getText();
-                String cfuinsegnamento = formInsegnamento.getFormattedTextFieldCFU().getText();
-                String cicloinsegnamento = formInsegnamento.getFormattedTextFieldCiclo().getText();
-                String datainsegnamento = formInsegnamento.getFormattedTextFieldData().getText();
-                String votoinsegnamento = formInsegnamento.getFormattedTextFieldVoto().getText();
-
-                view.addElementTable(nomeinsegnamento, cfuinsegnamento, datainsegnamento, votoinsegnamento);
-
-                FormInsegnamento.closeFrame();
-            }
-        }
-    } */
-
     class insegnamentoFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -65,7 +48,20 @@ public class ProfiloController {
             formInsegnamento = new FormInsegnamento();
             formInsegnamento.setInsegnamento(insegnamento);
             formInsegnamento.addAnnullaButtonListener(new closeFormInsegnamentoAction());
+            formInsegnamento.addConfermaButtonListener(new submitInsegnamentoFormAction());
             formInsegnamento.setVisible(true);
+        }
+    }
+
+    class submitInsegnamentoFormAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(formInsegnamento.isValid()) {
+                insegnamentoDAO.update(formInsegnamento.salvaInsegnamento());
+                insegnamentoDAO.flush();
+                formInsegnamento.closeFrame();
+                updateView();
+            }
         }
     }
 
