@@ -26,7 +26,7 @@ public class Mainframe {
         profilo = new Profilo();
         segreteria = new Segreteria();
         maintabpane.addTab("Agenda", agenda.agendapanel);
-        maintabpane.addTab("Profilo", profilo.profilopanel);
+        maintabpane.addTab("Profilo", profilo.profiloPanel);
         maintabpane.addTab("Segreteria", segreteria.segreteriapanel);
 
     }

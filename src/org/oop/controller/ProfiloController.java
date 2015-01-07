@@ -1,10 +1,10 @@
 package org.oop.controller;
 
+import org.oop.model.entities.Insegnamento;
 import org.oop.view.profilo.FormInsegnamento;
 import org.oop.view.profilo.FormRegistrazione;
 import org.oop.view.Mainframe;
 import org.oop.view.profilo.Profilo;
-import sun.text.resources.cldr.ia.FormatData_ia;
 
 import java.awt.event.ActionEvent;
 
@@ -16,9 +16,9 @@ public class ProfiloController {
 
     public ProfiloController(Profilo view) {
         this.view = view;
-        view.addTableListener(new addInsegnamentoAction());
-        view.addDeletetableListener(new deleteInsegnamentoAction());
-        view.insFormButtonListener(new formAction());
+
+        view.modificaProfiloButtonListener(new registraFormAction());
+        view.modificaInsegnamentoButtonListener(new insegnamentoFormAction());
         instance = this;
 
         updateView();
@@ -26,6 +26,7 @@ public class ProfiloController {
 
     public void updateView() {
         view.setInfoUtente(BaseController.getUtenteCorrente());
+        view.setInfoLibretto(BaseController.getUtenteCorrente().getLibretto());
     }
 
     /**
@@ -37,31 +38,9 @@ public class ProfiloController {
     }
 
     /**
-     * Action per aprire il form di aggiunta di insegnamenti
-     */
-    class addInsegnamentoAction extends AbstractAction{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            formInsegnamento = new FormInsegnamento();
-            formInsegnamento.addConfermaButtonListener(new submitInsegnamentoction());
-            formInsegnamento.addAnnullaButtonListener(new closeFormInsegnamentoAction());
-            formInsegnamento.setVisible(true);
-            Mainframe.refreshView();
-        }
-    }
-
-    /**
-     * Action per eliminare l'elemento della tabella selezionato
-     */
-    class deleteInsegnamentoAction extends AbstractAction{
-        public void actionPerformed(ActionEvent e){
-            view.DeleteElementTable();
-        }
-    }
-
-    /**
      * Action per il submit del form
-     */
+     * @Todo eliminare, non è utile
+     *
     class submitInsegnamentoction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -72,10 +51,21 @@ public class ProfiloController {
                 String datainsegnamento = formInsegnamento.getFormattedTextFieldData().getText();
                 String votoinsegnamento = formInsegnamento.getFormattedTextFieldVoto().getText();
 
-                view.addElementTable(nomeinsegnamento, cicloinsegnamento, cfuinsegnamento, datainsegnamento, votoinsegnamento);
+                view.addElementTable(nomeinsegnamento, cfuinsegnamento, datainsegnamento, votoinsegnamento);
 
                 FormInsegnamento.closeFrame();
             }
+        }
+    } */
+
+    class insegnamentoFormAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Insegnamento insegnamento = view.getInsegnamentoSelezionato();
+            formInsegnamento = new FormInsegnamento();
+            formInsegnamento.setInsegnamento(insegnamento);
+            formInsegnamento.addAnnullaButtonListener(new closeFormInsegnamentoAction());
+            formInsegnamento.setVisible(true);
         }
     }
 
@@ -85,16 +75,15 @@ public class ProfiloController {
     class closeFormInsegnamentoAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            FormInsegnamento.closeFrame();
+            formInsegnamento.closeFrame();
         }
     }
-
 
 
     /**
      * Action per aprire il form di registrazione
      */
-    class formAction extends AbstractAction {
+    class registraFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
             FormRegistrazione form = new FormRegistrazione();
