@@ -6,8 +6,8 @@ import com.lowagie.text.DocumentException;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
 import org.oop.view.segreteria.FormImmatricolazione;
-import org.oop.view.segreteria.Tesi;
-import org.oop.view.segreteria.Tirocinio;
+import org.oop.view.segreteria.FormTesi;
+import org.oop.view.segreteria.FormTirocinio;
 
 /**
  * Created by MelvinMancini on 05/01/15.
@@ -23,7 +23,7 @@ public class PdfGenerator {
         nomeFile = nome;
     }
 
-    public void generatePdfTesi(Tesi tesiView,String path) throws IOException,DocumentException {
+    public void generatePdfTesi(FormTesi tesiView,String path) throws IOException,DocumentException {
 
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());
@@ -55,7 +55,7 @@ public class PdfGenerator {
         pdfTemplate.close();
     }
 
-    public void generatePdfTirocinio(Tirocinio tirocinioView,String path) throws IOException,DocumentException {
+    public void generatePdfTirocinio(FormTirocinio tirocinioView,String path) throws IOException,DocumentException {
 
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());

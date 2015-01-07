@@ -2,7 +2,7 @@ package org.oop.controller;
 
 import com.lowagie.text.DocumentException;
 import org.oop.services.PdfGenerator;
-import org.oop.view.segreteria.Tirocinio;
+import org.oop.view.segreteria.FormTirocinio;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,18 +12,19 @@ import java.io.IOException;
 import static org.oop.general.Utils.*;
 
 public class TirocinioController {
-    Tirocinio view;
+    FormTirocinio view;
 
-    public TirocinioController (Tirocinio view) {
+    public TirocinioController(FormTirocinio view) {
 
         this.view = view;
         view.insQuitFormButtonListener(new QuitFormAction());
-        view.insSubmitButtonListener(new SubmitFormAction() );
+        view.insSubmitButtonListener(new SubmitFormAction());
+        view.setInfoUtente(BaseController.getUtenteCorrente());
     }
 
     class SubmitFormAction extends AbstractAction {
         @Override
-        public void actionPerformed (ActionEvent e) {
+        public void actionPerformed(ActionEvent e) {
             JFormattedTextField datanascita = view.getDatanascita();
             JFormattedTextField cap = view.getCap();
             JFormattedTextField cfu = view.getCfu();
@@ -38,7 +39,7 @@ public class TirocinioController {
             String via = view.getVia().getText();
             String codicefiscale = view.getCodicefiscale().getText();
 
-            if(view.isValid()){
+            if (view.isValid()) {
 
                 String name = stringToCapital(nome);
                 String surname = stringToCapital(cognome);
@@ -46,12 +47,12 @@ public class TirocinioController {
                 JFileChooser c = new JFileChooser();
                 int r = c.showSaveDialog(view.tirociniopanel);
                 if (r == JFileChooser.APPROVE_OPTION) {
-                    String path= c.getCurrentDirectory().toString().replace("\\","\\\\");
+                    String path = c.getCurrentDirectory().toString().replace("\\", "\\\\");
                     String fileName = c.getSelectedFile().getName();
                     try {
                         PdfGenerator pdfGeneratorCreate = new PdfGenerator(System.getProperty("user.dir")
                                 .concat(File.separator.concat("template"))
-                                .concat(File.separator.concat("templateTirocinioPDF.pdf")),fileName);
+                                .concat(File.separator.concat("templateTirocinioPDF.pdf")), fileName);
                         pdfGeneratorCreate.generatePdfTirocinio(view, path);
                     } catch (IOException e1) {
                         e1.printStackTrace();

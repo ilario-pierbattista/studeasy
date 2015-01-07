@@ -2,7 +2,7 @@ package org.oop.controller;
 
 import com.lowagie.text.DocumentException;
 import org.oop.services.PdfGenerator;
-import org.oop.view.segreteria.Tesi;
+import org.oop.view.segreteria.FormTesi;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,12 +14,13 @@ import static org.oop.general.Utils.*;
 
 public class TesiController {
 
-    private Tesi view;
+    private FormTesi view;
 
-    public TesiController(Tesi view) {
+    public TesiController(FormTesi view) {
         this.view = view;
         view.insQuitFormButtonListener(new QuitFormAction());
         view.insSubmitFormButtonListener(new SubmitFormAction());
+        view.setInfoUtente(BaseController.getUtenteCorrente());
     }
 
     class SubmitFormAction extends AbstractAction {

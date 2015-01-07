@@ -1,12 +1,14 @@
 package org.oop.view.segreteria;
 
 import org.oop.general.Validator;
+import org.oop.model.entities.Utente;
+import org.oop.view.AbstractForm;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class Tirocinio extends AbstractView {
+public class FormTirocinio extends AbstractForm {
 
     public JPanel tirociniopanel;
     private JButton quit;
@@ -68,9 +70,14 @@ public class Tirocinio extends AbstractView {
         } else {
             flag = true;
         }
-
-
         return flag;
+    }
+
+    public void setInfoUtente(Utente utente) {
+        nome.setValue(utente.getNome());
+        cognome.setValue(utente.getCognome());
+        matricola.setValue(utente.getMatricola());
+        cfu.setValue(utente.getLibretto().calcolaCFU());
     }
 
     public void insSubmitButtonListener(ActionListener l) {
