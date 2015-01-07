@@ -1,6 +1,7 @@
 package org.oop.controller;
 
 import org.oop.db.SQLParameters;
+import org.oop.general.Validator;
 import org.oop.model.dao.CorsoDAO;
 import org.oop.model.dao.InsegnamentoDAO;
 import org.oop.model.dao.UtenteDAO;
@@ -10,10 +11,11 @@ import org.oop.model.entities.InsegnamentoOfferto;
 import org.oop.model.entities.Utente;
 import org.oop.view.Mainframe;
 import org.oop.view.profilo.FormRegistrazione;
-import org.oop.view.profilo.Profilo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
 
@@ -35,6 +37,7 @@ public class FormRegistrazioneController {
         view.addSubmitFormButtonListener(new submitFormAction());
         view.addQuitFormButtonListener(new quitFormAction());
         view.addLivelloRadiusButtonsListener(new changeLivelloAction());
+        view.addFocusListenerMatricola(new FocusMatricola());
         utente = cercaUtente();
         if (!primoAvvio) {
             view.initInfo(utente);
@@ -169,5 +172,24 @@ public class FormRegistrazioneController {
                 Mainframe.setVisible(true);
             }
         }
+    }
+    class FocusMatricola implements FocusListener {
+        @Override
+        public void focusGained(FocusEvent e) {
+
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            if (!Validator.controlloCifre(view.getMatricola().getText(),7)){
+                JOptionPane.showMessageDialog(null, "La matricola deve essere di 7 cifre");
+                view.getMatricola().setText("");
+
+            }
+
+        }
+
+
+
     }
 }

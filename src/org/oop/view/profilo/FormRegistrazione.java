@@ -10,6 +10,7 @@ import org.oop.view.AbstractForm;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
 public class FormRegistrazione extends AbstractForm {
@@ -80,7 +81,7 @@ public class FormRegistrazione extends AbstractForm {
 
         if(Validator.isTextFieldEmpty(nome,"Nome") || !Validator.inputSentenceControl(nome.getText(), "Nome")) {
             valid = false;
-        } else if(Validator.isTextFieldEmpty(cognome,"Cognome") || !Validator.inputSentenceControl(cognome.getText(), "Cognome")) {
+        } else if(Validator.isTextFieldEmpty(cognome, "Cognome") || !Validator.inputSentenceControl(cognome.getText(), "Cognome")) {
             valid = false;
         } else if(Validator.isTextFieldEmpty(email,"Email") || !Validator.email(email.getText())) {
             valid = false;
@@ -121,6 +122,7 @@ public class FormRegistrazione extends AbstractForm {
         magistraleRadioButton.addActionListener(l);
         cicloUnicoRadioButton.addActionListener(l);
     }
+    public void addFocusListenerMatricola(FocusListener listener){ matricola.addFocusListener(listener);}
 
     /** GETTER @TODO ottimizzarli, togliere quelli che non servono */
     public JTextField getNome() {

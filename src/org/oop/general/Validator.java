@@ -8,7 +8,25 @@ import java.util.regex.Pattern;
 
 public class Validator {
 
+    /**
+     * Metodo che restituisce true se il numero dei caratteri della stringa passata è uguale al parametro int cifreMax.
+     *
+     * @param s
+     * @param cifreMax
+     * @return
+     */
 
+    public static boolean controlloCifre(String s, int cifreMax) {
+        boolean flag;
+        int counter;
+        counter = s.length();
+        if (counter != cifreMax) {
+            flag = false;
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
 
 
     /**
@@ -19,49 +37,31 @@ public class Validator {
     public static boolean controlloNumeroCFU(double cfu) {
 
         boolean flag;
-        if(cfu<120)
-        {
+        if (cfu < 120) {
             JOptionPane.showMessageDialog(null, "Il numero dei CFU non è abbastanza elevato per conseguire il tirocinio");
-            flag=false;
-        }
-        else{
-            flag=true;
+            flag = false;
+        } else {
+            flag = true;
         }
         return flag;
     }
 
-    /**
-     * Controlla che la stringa passata sia composta da 5 numeri (CAP)
-     * Ritorna true se la stringa è composta da 5 numeri.
-     */
-    public static boolean inputCap(String s){
-        //controllo se nella stringa s ci sono solo 5 numeri fra 0 e 9
-        Pattern p = Pattern.compile("[0-9]{5}");
-        Matcher m = p.matcher(s);
-        if(!m.matches())
-        {
-            JOptionPane.showMessageDialog(null, "Il formato del CAP non è corretto.");
-        }
-        return m.matches();
-    }
-
-
-
 
     /**
      * Controlla che il codice fiscale passato sia scritto in maniera corretta
+     *
      * @param s
      * @return
      */
     public static boolean inputCodiceFiscaleControl(String s) {
         Pattern p = Pattern.compile("[a-zA-Z]{6}\\d\\d[a-zA-Z]\\d\\d[a-zA-Z]\\d\\d\\d[a-zA-Z]");
         Matcher m = p.matcher(s);
-        if(!m.matches())
-        {
+        if (!m.matches()) {
             JOptionPane.showMessageDialog(null, "Il formato del Codice Fiscale non è corretto.");
         }
         return m.matches();
     }
+
     /**
      * Controlla che l'anno di fine sia maggiore di quello di inizio.
      * Ritorna true se l'anno di fine è meggiore di quello di inizio.
@@ -143,6 +143,10 @@ public class Validator {
         }
         return m.matches();
     }
+
+
+
+    /* La funzione inputMatricolaControl(String s) è inutilizzata. Si mantiene per evitare errori in fase di lavoro */
 
     /**
      * Controlla che la matricola sia scritta in modo corretto:

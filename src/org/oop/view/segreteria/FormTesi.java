@@ -6,6 +6,7 @@ import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
 
 public class FormTesi extends AbstractView {
     public JPanel tesipanel;
@@ -70,6 +71,8 @@ public class FormTesi extends AbstractView {
 
         return flag;
     }
+
+    public void addFocusListenerMatricola(FocusListener listener){ matricola.addFocusListener(listener);}
 
     public void insSubmitFormButtonListener(ActionListener l) {
         submit.addActionListener(l);

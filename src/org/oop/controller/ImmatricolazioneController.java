@@ -1,6 +1,7 @@
 package org.oop.controller;
 
 import com.lowagie.text.DocumentException;
+import org.oop.general.Validator;
 import org.oop.services.PdfGenerator;
 import org.oop.view.segreteria.FormImmatricolazione;
 
@@ -23,10 +24,11 @@ public class ImmatricolazioneController {
         view.insSubmitFormButtonListener(new SubmitFormAction());
         view.insQuitFormButtonListener(new QuitFormAction());
         view.setInfoUtente(BaseController.getUtenteCorrente());
+        view.addFocusListenerMatricola(new FocusMatricola());
     }
 
 
-    class Focus implements FocusListener {
+    class FocusMatricola implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
 
@@ -34,25 +36,11 @@ public class ImmatricolazioneController {
 
         @Override
         public void focusLost(FocusEvent e) {
-
-
-        }
-
-        private boolean controlloCifre() {
-            boolean flag;
-            int counter = 0;
-            for (int i = 0; i < view.getMatricola().getText().length(); i++) {
-                if (view.getMatricola().getText().charAt(i) == '$') {
-                    counter++;
-                }
-            }
-            if (counter > 7 || counter < 7) {
+            if (!Validator.controlloCifre(view.getMatricola().getText(), 7)){
                 JOptionPane.showMessageDialog(null, "La matricola deve essere di 7 cifre");
-                flag = false;
-            } else {
-                flag = true;
+                view.getMatricola().setText("");
             }
-            return flag;
+
         }
 
     }

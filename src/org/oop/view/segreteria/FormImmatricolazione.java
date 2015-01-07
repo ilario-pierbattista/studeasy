@@ -6,6 +6,7 @@ import org.oop.view.AbstractForm;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
 
 public class FormImmatricolazione extends AbstractForm {
     public JPanel immatricolazionepanel;
@@ -98,6 +99,8 @@ public class FormImmatricolazione extends AbstractForm {
     public void insQuitFormButtonListener(ActionListener l) {
         quit.addActionListener(l);
     }
+
+    public void addFocusListenerMatricola(FocusListener listener){ matricola.addFocusListener(listener);}
 
     public JFormattedTextField getMatricola() {
         return matricola;

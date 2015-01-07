@@ -1,11 +1,14 @@
 package org.oop.controller;
 
 import com.lowagie.text.DocumentException;
+import org.oop.general.Validator;
 import org.oop.services.PdfGenerator;
 import org.oop.view.segreteria.FormTirocinio;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -20,6 +23,56 @@ public class TirocinioController {
         view.insQuitFormButtonListener(new QuitFormAction());
         view.insSubmitButtonListener(new SubmitFormAction());
         view.setInfoUtente(BaseController.getUtenteCorrente());
+        view.addFocusListenerCap(new FocusCap());
+        view.addFocusListenerMatricola(new FocusMatricola());
+        view.addFocusListenerCfu(new FocusCfu());
+    }
+
+
+    class FocusCfu implements FocusListener {
+        @Override
+        public void focusGained(FocusEvent e) {
+
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            if (!Validator.controlloCifre(view.getCfu().getText(), 3)) {
+                JOptionPane.showMessageDialog(null, "Il numero dei CFU deve essere almeno 120 per conseguire il Tirocinio.");
+                view.getCfu().setText(" ");
+            }
+
+        }
+    }
+
+    class FocusMatricola implements FocusListener {
+        @Override
+        public void focusGained(FocusEvent e) {
+
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            if (!Validator.controlloCifre(view.getMatricola().getText(), 7)) {
+                JOptionPane.showMessageDialog(null, "La matricola deve essere di 7 cifre");
+                view.getMatricola().setText(" ");
+            }
+        }
+    }
+
+    class FocusCap implements FocusListener {
+        @Override
+        public void focusGained(FocusEvent e) {
+
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+            if (!Validator.controlloCifre(view.getCap().getText(), 5)) {
+                JOptionPane.showMessageDialog(null, "Il CAP deve essere di 5 cifre");
+                view.getCap().setText(" ");
+            }
+        }
     }
 
     class SubmitFormAction extends AbstractAction {
