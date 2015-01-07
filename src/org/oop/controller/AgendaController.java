@@ -43,7 +43,6 @@ public class AgendaController {
         view.getInsegnamentiList().getSelectionModel().addListSelectionListener(new listaInsegnamentiSelectionAction());
 
         updateView();
-
     }
 
     /**
@@ -67,22 +66,11 @@ public class AgendaController {
      */
     public void updateView() {
         view.setListaCicli(agenda.getCicli());
+        view.setInsegnamentiFromCiclo(view.getCicloSelected());
         view.updateListaCicli();
         view.updateListaInsegnamenti();
     }
 
-    /**
-     * Metodo che passa il model alla vista e la mantiene aggiornata.
-     * L'indice permette il fallback della selezione nelle liste.
-     * @param index
-     */
-    /**
-     * @TODO riguardare meglio sta funzione *
-     */
-    public void updateView(int index) {
-        view.setListaCicli(agenda.getCicli());
-        view.updateListaCicli(index);
-    }
 
     /**
      * Action per aggiungere un'attività
@@ -151,7 +139,7 @@ public class AgendaController {
 
                 agenda.removeCiclo(ciclo);
 
-                updateView(index);
+                updateView();
             }
         }
 
@@ -200,8 +188,7 @@ public class AgendaController {
             cicloDAO.update(ciclo);
             cicloDAO.flush();
 
-            view.addInsegnamentoToList(ins);
-            view.getInsegnamentiList().setSelectedIndex(0);
+            updateView();
         }
     }
 

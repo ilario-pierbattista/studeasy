@@ -52,6 +52,7 @@ public class Agenda extends AbstractView {
 
         //Imposta il layout a 2 colonne
         activitiespanel.setLayout(new GridLayout(0, 2, 20, 20));
+
     }
 
     /**
@@ -74,6 +75,7 @@ public class Agenda extends AbstractView {
             cicliListModel.addElement(ciclo);
         }
         ciclilist.setModel(cicliListModel);
+        ciclilist.setSelectedIndex(0);
     }
 
     /**
@@ -83,26 +85,24 @@ public class Agenda extends AbstractView {
      */
     public Ciclo getCicloSelected() {
         int index = ciclilist.getSelectedIndex();
+        Ciclo ciclo;
 
-        return ciclilist.getModel().getElementAt(index);
+        if (index < 0) { //non ci sono cicli
+            ciclo = null;
+        } else {
+            ciclo = ciclilist.getModel().getElementAt(index);
+        }
+
+        return ciclo;
     }
 
+
     /**
-     * Metodo che aggiorna la lista dei cicli
+     * Aggiorna la lista dei cicli mantenendo la selezione e aggiornando lo status
+     * dei bottoni della lista cicli
      */
     public void updateListaCicli() {
-        if (ciclilist.getModel().getSize() <= 0) {
-            removeciclobutton.setEnabled(false);
-        } else {
-            removeciclobutton.setEnabled(true);
-            ciclilist.setSelectedIndex(0);
-        }
-    }
-
-    /**
-     * @TODO riguardare meglio sta funzione *
-     */
-    public void updateListaCicli(int index) {
+        int index = ciclilist.getSelectedIndex();
         DefaultListModel<Ciclo> listmodel = (DefaultListModel<Ciclo>) ciclilist.getModel();
 
         if (listmodel.getSize() <= 0) {
@@ -113,6 +113,8 @@ public class Agenda extends AbstractView {
                 index--;
                 ciclilist.setSelectedIndex(index);
                 ciclilist.ensureIndexIsVisible(index);
+            } else {
+                ciclilist.setSelectedIndex(0);
             }
         }
     }
@@ -138,12 +140,15 @@ public class Agenda extends AbstractView {
     }
 
     public void setInsegnamentiFromCiclo(Ciclo ciclo) {
-        ArrayList<Insegnamento> listaInsegnamenti = ciclo.getInsegnamenti();
-        DefaultListModel<Insegnamento> model = new DefaultListModel<Insegnamento>();
-        for (Insegnamento ins : listaInsegnamenti) {
-            model.addElement(ins);
+        if (ciclo != null) { //ciclo è null solo se non esiste neanche un ciclo. Guarda getCicloSelected
+            ArrayList<Insegnamento> listaInsegnamenti = ciclo.getInsegnamenti();
+            DefaultListModel<Insegnamento> model = new DefaultListModel<Insegnamento>();
+            for (Insegnamento ins : listaInsegnamenti) {
+                model.addElement(ins);
+            }
+            insegnamentiList.setModel(model);
+            insegnamentiList.setSelectedIndex(0);
         }
-        insegnamentiList.setModel(model);
     }
 
     /**
