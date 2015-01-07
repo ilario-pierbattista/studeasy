@@ -79,7 +79,7 @@ public class Insegnamento {
         return this;
     }
 
-    public String toString(){
+    public String toString() {
         return insegnamentoOfferto.toString();
     }
 }
