@@ -79,4 +79,16 @@ public class Insegnamento {
         attivita.add(nuova);
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Insegnamento{" +
+                "id=" + id +
+                ", insegnamentoOfferto=" + insegnamentoOfferto +
+                ", voto=" + voto +
+                ", lode=" + lode +
+                ", data=" + data +
+                ", attivita=" + attivita +
+                '}';
+    }
 }

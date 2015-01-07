@@ -4,21 +4,21 @@ import org.oop.general.Utils;
 import org.oop.general.Validator;
 import org.oop.model.entities.Insegnamento;
 import org.oop.view.AbstractForm;
-import org.oop.view.AbstractView;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Date;
 
 public class FormInsegnamento extends AbstractForm {
     private JPanel forminsegnamentopanel;
     private JButton annullaButton;
     private JButton confermaButton;
-    private JFormattedTextField formattedTextFieldData;
-    private JFormattedTextField formattedTextFieldVoto;
+    private JFormattedTextField dataField;
+    private JFormattedTextField votoField;
     private JPanel dettagliInsegnamentoPanel;
+    private JCheckBox lodeCheckBox;
     private Insegnamento insegnamento;
 
     public FormInsegnamento() {
@@ -37,10 +37,19 @@ public class FormInsegnamento extends AbstractForm {
     public boolean isValid() {
         boolean flag = true;
 
-        if (Validator.isFormattedFieldEmpty(formattedTextFieldData, "Data di superamento")) {
+        if (Validator.isFormattedFieldEmpty(dataField, "Data di superamento")) {
             flag = false;
-        } else if (Validator.isTextFieldEmpty(formattedTextFieldVoto, "Voto")) {
+        } else if (Validator.isTextFieldEmpty(votoField, "Voto")) {
             flag = false;
+        } else if (dataField.getValue() == null) {
+            flag = false;
+            JOptionPane.showMessageDialog(null, "Il formato della data non è valido");
+        } else if ((Integer) votoField.getValue() < 18 || (Integer) votoField.getValue() > 30) {
+            flag = false;
+            JOptionPane.showMessageDialog(null, "Voto non valido");
+        } else if ((Integer) votoField.getValue() != 30 && lodeCheckBox.isSelected()) {
+            flag = false;
+            JOptionPane.showMessageDialog(null, "Non è possibile assegnare la lode con questo voto");
         }
 
         return flag;
@@ -49,13 +58,23 @@ public class FormInsegnamento extends AbstractForm {
     public void setInsegnamento(Insegnamento insegnamento) {
         this.insegnamento = insegnamento;
         // @TODO sarebbe bello aggiungere il nome dell'insegnamento nel titolo
+        votoField.setValue(insegnamento.getVoto());
+        dataField.setValue(insegnamento.getData());
+        lodeCheckBox.setSelected(insegnamento.isLode());
+    }
+
+    public Insegnamento salvaInsegnamento() {
+        insegnamento.setVoto((Integer) votoField.getValue());
+        insegnamento.setData((Date) dataField.getValue());
+        insegnamento.setLode(lodeCheckBox.isSelected());
+        return insegnamento;
     }
 
     /**
      * Setta componenti GUI custom (rispetto all'editor visuale)
      */
     private void createUIComponents() {
-        formattedTextFieldData = new JFormattedTextField(dateformat);
+        dataField = new JFormattedTextField(dateformat);
     }
 
     /**
@@ -92,11 +111,11 @@ public class FormInsegnamento extends AbstractForm {
         return confermaButton;
     }
 
-    public JFormattedTextField getFormattedTextFieldData() {
-        return formattedTextFieldData;
+    public JFormattedTextField getDataField() {
+        return dataField;
     }
 
-    public JFormattedTextField getFormattedTextFieldVoto() {
-        return formattedTextFieldVoto;
+    public JFormattedTextField getVotoField() {
+        return votoField;
     }
 }

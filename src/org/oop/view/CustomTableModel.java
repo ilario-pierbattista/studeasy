@@ -55,6 +55,11 @@ public class CustomTableModel extends DefaultTableModel {
         fireTableChanged(new TableModelEvent(this));
     }
 
+    public void clearData() {
+        dataVec.clear();
+        fireTableChanged(new TableModelEvent(this));
+    }
+
     @Override
     public boolean isCellEditable(int row, int column) {
         return false;

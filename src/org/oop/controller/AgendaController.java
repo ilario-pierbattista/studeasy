@@ -53,9 +53,9 @@ public class AgendaController {
      */
     class listaCicliSelectionAction implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent e) {
-            ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+            ListSelectionModel lsm = (ListSelectionModel) e.getSource();
 
-            if (!lsm.isSelectionEmpty()){
+            if (!lsm.isSelectionEmpty()) {
                 int index = lsm.getMinSelectionIndex();
                 Ciclo ciclo = (Ciclo) view.getCiclilist().getModel().getElementAt(index);
                 view.getListaInsegnamentiTitle().setText("Insegnamenti di " + ciclo.getLabel());
@@ -66,20 +66,22 @@ public class AgendaController {
     /**
      * Metodo che passa il model alla vista e la mantiene aggiornata
      */
-     public void updateView(){
-         view.setListaCicli(agenda.getCicli());
-         view.updateListaCicli();
-         view.updateListaInsegnamenti();
+    public void updateView() {
+        view.setListaCicli(agenda.getCicli());
+        view.updateListaCicli();
+        view.updateListaInsegnamenti();
 
-     }
+    }
 
     /**
      * Metodo che passa il model alla vista e la mantiene aggiornata.
      * L'indice permette il fallback della selezione nelle liste.
      * @param index
      */
-    /**@TODO riguardare meglio sta funzione **/
-    public void updateView(int index){
+    /**
+     * @TODO riguardare meglio sta funzione *
+     */
+    public void updateView(int index) {
         view.setListaCicli(agenda.getCicli());
         view.updateListaCicli(index);
 
@@ -93,7 +95,7 @@ public class AgendaController {
         public void actionPerformed(ActionEvent actionEvent) {
             String activityType = Utils.explodeStringForSpace(actionEvent.getActionCommand(), 1);
             AttivitaView attivitaview = new AttivitaView(activityType);
-            AttivitaController attivitacontroller = new AttivitaController(attivitaview,activityType);
+            AttivitaController attivitacontroller = new AttivitaController(attivitaview, activityType);
         }
     }
 
@@ -124,7 +126,6 @@ public class AgendaController {
             if (index == -1) { //Se non è selezionato niente
                 JOptionPane.showMessageDialog(null, "Seleziona un ciclo per eliminarlo!");
             } else {
-                CicloDAO cicloDAO = new CicloDAO();
                 cicloDAO.remove(listModel.getElementAt(index));
                 cicloDAO.flush();
 
@@ -143,9 +144,8 @@ public class AgendaController {
     class SubmitCicloFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (formcicloview.isValid()){
+            if (formcicloview.isValid()) {
                 Ciclo ciclo = formcicloview.getNuovoCiclo();
-                CicloDAO cicloDAO = new CicloDAO();
                 agenda.addCiclo(ciclo);
 
                 cicloDAO.persist(ciclo);
@@ -211,7 +211,7 @@ public class AgendaController {
     class listaInsegnamentiSelectionAction implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+            ListSelectionModel lsm = (ListSelectionModel) e.getSource();
 
             if (!lsm.isSelectionEmpty()) {
                 int index = lsm.getMinSelectionIndex();
