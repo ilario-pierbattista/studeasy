@@ -38,6 +38,7 @@ public class AgendaController {
         view.addCicloButtonListener(new AddCicloAction());
         view.addRemoveCicloButtonListener(new RemoveCicloAction());
         view.addInsegnamentoButtonListener(new addInsegnamentoAction());
+        view.addRemoveInsegnamentoButtonListener(new removeInsegnamentoAction());
 
         view.getCiclilist().getSelectionModel().addListSelectionListener(new listaCicliSelectionAction());
         view.getInsegnamentiList().getSelectionModel().addListSelectionListener(new listaInsegnamentiSelectionAction());
@@ -56,6 +57,7 @@ public class AgendaController {
             if (!lsm.isSelectionEmpty()) {
                 Ciclo ciclo = view.getCicloSelected();
                 view.setInsegnamentiFromCiclo(ciclo);
+                view.updateListaInsegnamenti();
                 view.getListaInsegnamentiTitle().setText("Insegnamenti di " + ciclo.getLabel());
             }
         }
@@ -68,6 +70,14 @@ public class AgendaController {
         view.setListaCicli(agenda.getCicli());
         view.setInsegnamentiFromCiclo(view.getCicloSelected());
         view.updateListaCicli();
+        view.updateListaInsegnamenti();
+    }
+
+    /**
+     * @TODO: da rivedere meglio. Per adesso è necessario perchè altrimenti si hanno problemi di selezione con liste e cicli
+     */
+    public void updateInsegnamenti() {
+        view.setInsegnamentiFromCiclo(view.getCicloSelected());
         view.updateListaInsegnamenti();
     }
 
@@ -126,9 +136,7 @@ public class AgendaController {
         @Override
         public void actionPerformed(ActionEvent e) {
             int index = view.getCiclilist().getSelectedIndex();
-            JList list = view.getCiclilist();
-            DefaultListModel<Ciclo> listModel = (DefaultListModel<Ciclo>) list.getModel();
-            Ciclo ciclo = listModel.getElementAt(index);
+            Ciclo ciclo = view.getCicloSelected();
 
             if (index == -1) { //Se non è selezionato niente
                 JOptionPane.showMessageDialog(null, "Seleziona un ciclo per eliminarlo!");
@@ -188,7 +196,7 @@ public class AgendaController {
             cicloDAO.update(ciclo);
             cicloDAO.flush();
 
-            updateView();
+            updateInsegnamenti();
         }
     }
 
@@ -199,14 +207,19 @@ public class AgendaController {
         @Override
         public void actionPerformed(ActionEvent e) {
             int index = view.getInsegnamentiList().getSelectedIndex();
-            JList list = view.getInsegnamentiList();
-            DefaultListModel<Insegnamento> listModel = (DefaultListModel<Insegnamento>) list.getModel();
-            int size = listModel.getSize();
+            Insegnamento insegnamento = view.getInsegnamentoSelected();
+            Ciclo ciclo = view.getCicloSelected();
 
             if (index == -1) { //Se non è selezionato niente
                 JOptionPane.showMessageDialog(null, "Seleziona un insegnamento per eliminarlo!");
             } else {
-                //Eliminare insegnamento
+                InsegnamentoDAO insegnamentoDAO = new InsegnamentoDAO();
+                insegnamentoDAO.remove(insegnamento);
+                insegnamentoDAO.flush();
+
+                ciclo.removeInsegnamento(insegnamento.getId());
+
+                updateInsegnamenti();
             }
         }
     }

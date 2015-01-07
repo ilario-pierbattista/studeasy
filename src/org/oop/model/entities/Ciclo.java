@@ -76,6 +76,18 @@ public class Ciclo {
         return this;
     }
 
+    public Ciclo removeInsegnamento(int id) {
+        boolean found = false;
+        for (int i = 0; i < insegnamenti.size() && !found; i++) {
+            if (id == insegnamenti.get(i).getId()) {
+                found = true;
+                insegnamenti.remove(i);
+            }
+        }
+
+        return this;
+    }
+
     @Override
     public String toString(){
         return this.label;

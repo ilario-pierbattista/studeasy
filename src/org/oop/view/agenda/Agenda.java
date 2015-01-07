@@ -96,6 +96,23 @@ public class Agenda extends AbstractView {
         return ciclo;
     }
 
+    /**
+     * Metodo che ritorna l'insegnamento selezionato
+     *
+     * @return Insegnamento
+     */
+    public Insegnamento getInsegnamentoSelected() {
+        int index = insegnamentiList.getSelectedIndex();
+        Insegnamento insegnamento;
+
+        if (index < 0) { //non ci sono insegnamenti
+            insegnamento = null;
+        } else {
+            insegnamento = insegnamentiList.getModel().getElementAt(index);
+        }
+
+        return insegnamento;
+    }
 
     /**
      * Aggiorna la lista dei cicli mantenendo la selezione e aggiornando lo status
@@ -120,25 +137,34 @@ public class Agenda extends AbstractView {
     }
 
     /**
-     * Metodo che aggiorna la lista degli insegnamenti
+     * Aggiorna la lista degli insegnamenti mantenendo la selezione e aggiornando lo status
+     * dei bottoni della lista degli insegnamenti
      */
     public void updateListaInsegnamenti() {
-        if (insegnamentiList.getModel().getSize() <= 0) {
+        int index = insegnamentiList.getSelectedIndex();
+        DefaultListModel<Insegnamento> listModel = (DefaultListModel<Insegnamento>) insegnamentiList.getModel();
+
+        if (insegnamentiList.getModel().getSize() <= 0 || ciclilist.getModel().getSize() <= 0) {
             removeInsegnamentoButton.setEnabled(false);
         } else {
             removeInsegnamentoButton.setEnabled(true);
-            insegnamentiList.setSelectedIndex(0);
+            if (index == listModel.getSize()) {
+                index--;
+                insegnamentiList.setSelectedIndex(index);
+                insegnamentiList.ensureIndexIsVisible(index);
+            } else {
+                insegnamentiList.setSelectedIndex(0);
+            }
         }
     }
 
-    /**
-     * Metodo che aggiunge l'insegnamento che gli si passa alla lista degli insegnamenti
-     */
-    public void addInsegnamentoToList(Insegnamento insegnamento) {
-        DefaultListModel<Insegnamento> listModel = (DefaultListModel<Insegnamento>) insegnamentiList.getModel();
-        listModel.addElement(insegnamento);
-    }
 
+    /**
+     * Metodo che crea la lista di insegnamenti per il ciclo che gli si passa.
+     * Indipendentemente dal fatto che il ciclo abbia già insegnamenti associati o meno,
+     * ricrea il model della lista.
+     * @param ciclo Ciclo
+     */
     public void setInsegnamentiFromCiclo(Ciclo ciclo) {
         if (ciclo != null) { //ciclo è null solo se non esiste neanche un ciclo. Guarda getCicloSelected
             ArrayList<Insegnamento> listaInsegnamenti = ciclo.getInsegnamenti();
