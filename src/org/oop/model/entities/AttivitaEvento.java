@@ -7,13 +7,11 @@ public class AttivitaEvento extends Attivita {
 
     private Date data;
 
-    //il costruttore della classe figlia amplia quello della classe padre inizializzando i campi non inizializzati
     public AttivitaEvento(String aula, Time oraInizio, Time oraFine, Docente docente, String ruoloDocente, String categoria, Date data) {
         super(aula, oraInizio, oraFine, docente, ruoloDocente, categoria);
         this.data = data;
     }
 
-    //il seguente è il costruttore che inizializza i dati di deafult
     public AttivitaEvento() {}
 
 

@@ -1,30 +1,34 @@
 package org.oop.view.agenda;
 
 import org.oop.general.Validator;
+import org.oop.view.AbstractForm;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-/**
- * Created by toioski on 23/12/14.
- */
-public class FormAttivita extends AbstractView {
-    public static  JFrame frame = new JFrame("Crea Attività");
-    private JPanel panel1;
+public class FormAttivitaEvento extends AbstractForm {
+    private JFrame frame;
+
+    private JPanel panel;
     private JTextField namefield;
     private JTextField teacherfield;
     private JTextField aulafield;
     private JFormattedTextField dataField;
     private JTextArea descriptionfield;
-    private JButton submitbutton;
-    private JButton cancelbutton;
+    private JButton submitButton;
+    private JButton cancelButton;
     private JLabel activityname;
+    private JFormattedTextField hourStartField;
+    private JFormattedTextField hourEndField;
+    private JComboBox teacherBox;
+    private JTextField luogoField;
 
     private String activityType;
 
-    public FormAttivita() {
-        frame.setContentPane(panel1);
+    public FormAttivitaEvento() {
+        frame = new JFrame("Crea attività");
+        frame.setContentPane(panel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.pack();
@@ -81,16 +85,16 @@ public class FormAttivita extends AbstractView {
     /**
      * Metodo che chiude il form
      */
-    public static void closeFrame(){
+    public void closeFrame(){
         frame.dispose();
     }
 
     /* Listeners setters */
     public void addSubmitButtonListener (ActionListener listener){
-        submitbutton.addActionListener(listener);
+        submitButton.addActionListener(listener);
     }
     public void addCancelButtonListener (ActionListener listener){
-        cancelbutton.addActionListener(listener);
+        cancelButton.addActionListener(listener);
     }
 
     /* Getters */
@@ -99,12 +103,12 @@ public class FormAttivita extends AbstractView {
         return activityname;
     }
 
-    public JButton getSubmitbutton() {
-        return submitbutton;
+    public JButton getSubmitButton() {
+        return submitButton;
     }
 
-    public JButton getCancelbutton() {
-        return cancelbutton;
+    public JButton getCancelButton() {
+        return cancelButton;
     }
 
     public JTextField getTeacherfield() {
@@ -128,5 +132,21 @@ public class FormAttivita extends AbstractView {
     public JTextField getNamefield() {
 
         return namefield;
+    }
+
+    public JFormattedTextField getHourStartField() {
+        return hourStartField;
+    }
+
+    public JFormattedTextField getHourEndField() {
+        return hourEndField;
+    }
+
+    public JComboBox getTeacherBox() {
+        return teacherBox;
+    }
+
+    public JTextField getLuogoField() {
+        return luogoField;
     }
 }
