@@ -6,11 +6,13 @@ import org.oop.view.segreteria.FormImmatricolazione;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
-import static org.oop.general.Utils.*;
+import static org.oop.general.Utils.stringToCapital;
 
 public class ImmatricolazioneController {
     private FormImmatricolazione view;
@@ -23,6 +25,37 @@ public class ImmatricolazioneController {
         view.setInfoUtente(BaseController.getUtenteCorrente());
     }
 
+
+    class Focus implements FocusListener {
+        @Override
+        public void focusGained(FocusEvent e) {
+
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+
+
+        }
+
+        private boolean controlloCifre() {
+            boolean flag;
+            int counter = 0;
+            for (int i = 0; i < view.getMatricola().getText().length(); i++) {
+                if (view.getMatricola().getText().charAt(i) == '$') {
+                    counter++;
+                }
+            }
+            if (counter > 7 || counter < 7) {
+                JOptionPane.showMessageDialog(null, "La matricola deve essere di 7 cifre");
+                flag = false;
+            } else {
+                flag = true;
+            }
+            return flag;
+        }
+
+    }
 
     class SubmitFormAction extends AbstractAction {
         @Override
