@@ -12,22 +12,19 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import static org.oop.general.Utils.inputMatricolaControl;
-import static org.oop.general.Utils.inputNameControl;
-
 public class FormRegistrazione extends AbstractForm {
     private JPanel panel1;
     private JTextField nome;
     private JTextField cognome;
     private JButton Submit;
     private JButton Quit;
-    private JTextField matricola;
     private JTextField email;
     private JList<Corso> corsiList;
     private DefaultListModel<Corso> listaCorsiModel;
     private JRadioButton triennaleRadioButton;
     private JRadioButton magistraleRadioButton;
     private JRadioButton cicloUnicoRadioButton;
+    private JFormattedTextField matricola;
 
     public FormRegistrazione() {
         frame = new JFrame("Registrazione");
@@ -81,17 +78,13 @@ public class FormRegistrazione extends AbstractForm {
     public boolean isValid() {
         boolean valid = true;
 
-        if(!inputNameControl(nome.getText())) {
-            JOptionPane.showMessageDialog(null, "Nome non valido");
+        if(Validator.isTextFieldEmpty(nome,"Nome") || !Validator.inputSentenceControl(nome.getText(), "Nome")) {
             valid = false;
-        } else if(!inputNameControl(cognome.getText())) {
-            JOptionPane.showMessageDialog(null, "Cognome non valido");
+        } else if(Validator.isTextFieldEmpty(cognome,"Cognome") || !Validator.inputSentenceControl(cognome.getText(), "Cognome")) {
             valid = false;
-        } else if(!Validator.email(email.getText())) {
-            JOptionPane.showMessageDialog(null, "Email non valida");
+        } else if(Validator.isTextFieldEmpty(email,"Email") || !Validator.email(email.getText())) {
             valid = false;
-        } else if(!inputMatricolaControl(matricola.getText())) {
-            JOptionPane.showMessageDialog(null, "Matricola non valida");
+        } else if(Validator.isFormattedFieldEmpty(matricola,"Matricola")) {
             valid = false;
         } else if(corsiList.getSelectedValue() == null) {
             JOptionPane.showMessageDialog(null, "Nessun corso selezionato");
@@ -171,5 +164,6 @@ public class FormRegistrazione extends AbstractForm {
         listaCorsiModel.addElement(new Corso().setNome("Selezionare il livello di laurea"));
         corsiList = new JList<Corso>(listaCorsiModel);
         corsiList.setEnabled(false);
+        matricola = new JFormattedTextField(dfMatricola);
     }
 }

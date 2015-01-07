@@ -1,6 +1,7 @@
 package org.oop.controller;
 
 import com.lowagie.text.DocumentException;
+import org.oop.model.entities.Utente;
 import org.oop.services.PdfGenerator;
 import org.oop.view.segreteria.Immatricolazione;
 
@@ -10,14 +11,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
-import static org.oop.general.Utils.*;
+import static org.oop.general.Utils.stringToCapital;
 
 public class ImmatricolazioneController {
     private Immatricolazione view;
+    private Utente utente;
 
     public ImmatricolazioneController(Immatricolazione view) {
         this.view = view;
-
+        utente=BaseController.getUtenteCorrente();
+        //utente.getMatricola();
         view.insSubmitFormButtonListener(new SubmitFormAction());
         view.insQuitFormButtonListener(new QuitFormAction());
     }
@@ -29,7 +32,7 @@ public class ImmatricolazioneController {
             Date datanascita = (Date) view.getDatanascita().getValue();
 
             String codicefiscale = view.getCodicefiscale().getText();
-            String matricola = view.getMatricola().getText();
+            String matricola = String.valueOf(utente.getMatricola());
             //il voto delle superiori si assume in centesimi
 //            int voto = Integer.parseInt(view.getVoto().getText());
 

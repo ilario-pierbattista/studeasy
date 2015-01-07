@@ -1,13 +1,13 @@
 package org.oop.view.segreteria;
 
 import org.oop.general.Validator;
-import org.oop.view.AbstractForm;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class Immatricolazione extends AbstractForm {
+public class Immatricolazione extends AbstractView {
+
     public JPanel immatricolazionepanel;
     private JButton submit;
     private JButton quit;
@@ -34,8 +34,11 @@ public class Immatricolazione extends AbstractForm {
     private JFormattedTextField annoConseguimento2;
     private JLabel annoConseguimento2Label;
 
+
+
     public Immatricolazione() {
         super();
+
     }
 
     /**
@@ -63,26 +66,26 @@ public class Immatricolazione extends AbstractForm {
             flag = false;
         } else if (Validator.isFormattedFieldEmpty(diploma, "Diploma") || !Validator.inputSentenceControl(diploma.getText(), "Diploma")) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(voto, "Voto") || !(Validator.inputVotoDiploma(Integer.parseInt(voto.getText())))) {
+        } else if (Validator.isFormattedFieldEmpty(voto, "Voto") || !(Validator.inputVotoDiploma(Double.parseDouble(voto.getText())))) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(annoConseguimento1, "Anno di conseguimento") || Validator.isFormattedFieldEmpty(annoConseguimento2, "Anno di conseguimento")) {
+        } else if (Validator.isFormattedFieldEmpty(annoConseguimento1, "Anno di conseguimento") || Validator.isFormattedFieldEmpty(annoConseguimento2, "Anno di conseguimento") || !Validator.inputYearControl(annoConseguimento1.getText()) || !Validator.inputYearControl(annoConseguimento2.getText())) {
             flag = false;
-        } else if (!Validator.controlloAnno(Integer.parseInt(annoConseguimento1.getText()), Integer.parseInt(annoConseguimento2.getText()))) {
+        } else if (!Validator.controlloAnno(Double.parseDouble(annoConseguimento1.getText()), Double.parseDouble(annoConseguimento2.getText()))) {
             flag = false;
         } else {
             flag = true;
         }
 
-
         return flag;
     }
 
     private void createUIComponents() {
+
         datanascita = new JFormattedTextField(dateformat);
-        matricola = new JFormattedTextField(cifreMatricola);
+        matricola = new JFormattedTextField(dfMatricola);
         annoConseguimento1 = new JFormattedTextField(dateformatYear);
         annoConseguimento2 = new JFormattedTextField(dateformatYear);
-        voto = new JFormattedTextField(cifreVoto);
+        voto = new JFormattedTextField(dfVoto);
     }
 
     public void insSubmitFormButtonListener(ActionListener l) {
