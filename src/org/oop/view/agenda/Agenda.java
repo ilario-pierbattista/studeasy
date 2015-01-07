@@ -37,6 +37,7 @@ public class Agenda extends AbstractView {
     private JButton addInsegnamentoButton;
     private JButton removeInsegnamentoButton;
     private JLabel listaInsegnamentiTitle;
+    private JLabel nomeCicloLabel;
 
     public Agenda() {
         //Setto istance a questa instanza in modo da rendere statica la vista
@@ -250,6 +251,7 @@ public class Agenda extends AbstractView {
     public JList getInsegnamentiList() {
         return insegnamentiList;
     }
+
 
     /* Listeners setters */
     public void addCicloButtonListener(ActionListener listener) {

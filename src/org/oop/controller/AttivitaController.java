@@ -1,31 +1,41 @@
 package org.oop.controller;
 
 import org.oop.view.Mainframe;
-import org.oop.view.agenda.Agenda;
-import org.oop.view.agenda.AttivitaView;
-import org.oop.view.agenda.FormAttivita;
+import org.oop.view.agenda.*;
 
 import java.awt.event.ActionEvent;
 
-/**
- * Created by toioski on 24/12/14.
- */
+
 public class AttivitaController {
     private AttivitaView view;
-    private FormAttivita formAttivita;
+    private FormAttivitaEvento formAttivitaEvento;
+    private FormAttivitaPeriodica formAttivitaPeriodica;
+    private FormEsame formEsame;
     private String newActivityType;
 
     public AttivitaController(AttivitaView view,String newActivityType){
         this.view = view;
         this.newActivityType = newActivityType;
 
-        formAttivita = new FormAttivita();
-        formAttivita.setType(newActivityType);
-
+        openForm();
 
         view.addEditButtonListener(new EditButtonAction());
-        formAttivita.addSubmitButtonListener(new SubmitFormAction());
-        formAttivita.addCancelButtonListener(new CloseFormAction());
+    }
+
+    private void openForm(){
+        if (newActivityType.equals("progetto")|| newActivityType.equals("seminario")) {
+            formAttivitaEvento = new FormAttivitaEvento();
+            //formAttivitaEvento.addSubmitButtonListener();
+            formAttivitaEvento.addCancelButtonListener(new CloseFormAction());
+        } else if (newActivityType.equals("lezione") || newActivityType.equals("laboratorio")) {
+            formAttivitaPeriodica = new FormAttivitaPeriodica();
+            //formAttivitaPeriodica.addSubmitButtonListener();
+            formAttivitaPeriodica.addCancelButtonListener(new CloseFormAction());
+        } else {
+            formEsame = new FormEsame();
+            //formEsame.addSubmitButtonListener();
+            formEsame.addCancelButtonListener(new CloseFormAction());
+        }
     }
 
     /**
@@ -44,26 +54,20 @@ public class AttivitaController {
     class SubmitFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (formAttivita.isValid()){
-                String docente = formAttivita.getActivityname().getText();
-                String aula = formAttivita.getAulafield().getText();
-                String date = formAttivita.getDataField().getText();
-                String description = formAttivita.getDescriptionfield().getText();
-
-                Agenda.getInstance().addAttivita(new AttivitaView(newActivityType, docente, aula, date, description));
-                Mainframe.refreshView();
-                FormAttivita.closeFrame();
-            }
+         //Submit
         }
     }
 
     /**
      * Action per chiudere il form
+     * @TODO: mezzo porchetto: chiude tutti a brutto muso (non può funzionare)
      */
     class CloseFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            FormAttivita.closeFrame();
+            formAttivitaPeriodica.closeFrame();
+            formAttivitaEvento.closeFrame();
+            formEsame.closeFrame();
         }
     }
 }
