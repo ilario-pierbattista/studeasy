@@ -1,13 +1,18 @@
 package org.oop.services;
 
-import java.io.*;
-
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
+import org.oop.controller.BaseController;
+import org.oop.model.entities.Utente;
 import org.oop.view.segreteria.Immatricolazione;
 import org.oop.view.segreteria.Tesi;
 import org.oop.view.segreteria.Tirocinio;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by MelvinMancini on 05/01/15.
@@ -15,12 +20,14 @@ import org.oop.view.segreteria.Tirocinio;
 public class PdfGenerator {
     private String template;
     private String nomeFile;
+    private Utente utente;
 
     public PdfGenerator(String nomeTemplate,String nome)
     {
         //template contiene la path della cartella template
         template=nomeTemplate;
         nomeFile = nome;
+        utente= BaseController.getUtenteCorrente();
     }
 
     public void generatePdfTesi(Tesi tesiView,String path) throws IOException,DocumentException {
@@ -40,12 +47,12 @@ public class PdfGenerator {
         stamper.setFormFlattening(true);
 
 
-        stamper.getAcroFields().setField("nome", tesiView.getNome().getText());
-        stamper.getAcroFields().setField("cognome", tesiView.getCognome().getText());
-        stamper.getAcroFields().setField("matricola",tesiView.getMatricola().getText());
+        stamper.getAcroFields().setField("nome", utente.getNome());
+        stamper.getAcroFields().setField("cognome", utente.getCognome());
+        stamper.getAcroFields().setField("matricola", String.valueOf(utente.getMatricola()));
         stamper.getAcroFields().setField("dataNascita", tesiView.getDataNascita().getText());
         stamper.getAcroFields().setField("luogoNascita", tesiView.getLuogoNascita().getText());
-        stamper.getAcroFields().setField("eMail", tesiView.getEmail().getText());
+        stamper.getAcroFields().setField("eMail", utente.getEmail());
         stamper.getAcroFields().setField("annoCorso", tesiView.getAnnoCorso().getText());
         stamper.getAcroFields().setField("professoreRelatore", tesiView.getProfRelatore().getText());
         stamper.getAcroFields().setField("titoloTesi", tesiView.getTitoloTesi().getText());
@@ -70,9 +77,9 @@ public class PdfGenerator {
 
         stamper.setFormFlattening(true);
 
-        stamper.getAcroFields().setField("nome", tirocinioView.getNome().getText());
-        stamper.getAcroFields().setField("cognome", tirocinioView.getCognome().getText());
-        stamper.getAcroFields().setField("matricola", tirocinioView.getMatricola().getText());
+        stamper.getAcroFields().setField("nome", utente.getNome());
+        stamper.getAcroFields().setField("cognome", utente.getCognome());
+        stamper.getAcroFields().setField("matricola", String.valueOf(utente.getMatricola()));
         stamper.getAcroFields().setField("luogoNascita", tirocinioView.getLuogonascita().getText());
         stamper.getAcroFields().setField("dataNascita", tirocinioView.getDatanascita().getText());
         stamper.getAcroFields().setField("residenza", tirocinioView.getResidenza().getText());
@@ -101,9 +108,9 @@ public class PdfGenerator {
 
         stamper.setFormFlattening(true);
 
-        stamper.getAcroFields().setField("nome", immatricolazioneView.getNome().getText());
-        stamper.getAcroFields().setField("cognome", immatricolazioneView.getCognome().getText());
-        stamper.getAcroFields().setField("matricola", immatricolazioneView.getMatricola().getText());
+        stamper.getAcroFields().setField("nome", utente.getNome());
+        stamper.getAcroFields().setField("cognome", utente.getCognome());
+        stamper.getAcroFields().setField("matricola", String.valueOf(utente.getMatricola()));
         stamper.getAcroFields().setField("luogoNascita", immatricolazioneView.getLuogonascita().getText());
         stamper.getAcroFields().setField("dataNascita", immatricolazioneView.getDatanascita().getText());
         stamper.getAcroFields().setField("provinciaNascita", immatricolazioneView.getProvincia().getText());

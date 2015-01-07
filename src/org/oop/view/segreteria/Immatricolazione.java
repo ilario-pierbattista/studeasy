@@ -12,9 +12,6 @@ public class Immatricolazione extends AbstractView {
     private JButton submit;
     private JButton quit;
     private JFormattedTextField matricola;
-    private JLabel matricolalabel;
-    private JLabel nomelabel;
-    private JLabel cognomelabel;
     private JFormattedTextField datanascita;
     private JLabel datanascitalabel;
     private JLabel luogonascitalabel;

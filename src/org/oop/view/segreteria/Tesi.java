@@ -17,17 +17,13 @@ public class Tesi extends AbstractView {
     private JFormattedTextField annoCorso;
     private JFormattedTextField profRelatore;
     private JFormattedTextField titoloTesi;
-    private JLabel nomeLabel;
-    private JLabel cognomeLabel;
     private JLabel dataNascitaLabel;
     private JLabel luogoDiNascitaLabel;
     private JLabel annoCorsoLabel;
     private JLabel profRelatoreLabel;
     private JLabel titoloTesiLabel;
     private JFormattedTextField matricola;
-    private JLabel matricolaLabel;
     private JFormattedTextField email;
-    private JLabel emailLabel;
 
     /**
      * Metodo di appoggio che controlla che i campi del form siano stati compilati

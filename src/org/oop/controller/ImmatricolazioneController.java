@@ -7,11 +7,10 @@ import org.oop.view.segreteria.Immatricolazione;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-
-import static org.oop.general.Utils.stringToCapital;
 
 public class ImmatricolazioneController {
     private Immatricolazione view;
@@ -20,19 +19,34 @@ public class ImmatricolazioneController {
     public ImmatricolazioneController(Immatricolazione view) {
         this.view = view;
         utente=BaseController.getUtenteCorrente();
-        //utente.getMatricola();
         view.insSubmitFormButtonListener(new SubmitFormAction());
         view.insQuitFormButtonListener(new QuitFormAction());
     }
 
+    class Focus implements FocusListener {
+        @Override
+        public void focusGained(FocusEvent e) {
+
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+
+        }
+
+        /*private boolean controlloCifre(){
+            boolean flag;
+            //int numCifre = StringUtils.countMatches(view.getMatricola().getText());
+        }*/
+    }
 
     class SubmitFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Date datanascita = (Date) view.getDatanascita().getValue();
+            /*Date datanascita = (Date) view.getDatanascita().getValue();
 
             String codicefiscale = view.getCodicefiscale().getText();
-            String matricola = String.valueOf(utente.getMatricola());
+            //String matricola = String.valueOf(utente.getMatricola());
             //il voto delle superiori si assume in centesimi
 //            int voto = Integer.parseInt(view.getVoto().getText());
 
@@ -40,12 +54,12 @@ public class ImmatricolazioneController {
             String nome = view.getNome().getText();
             String cognome = view.getCognome().getText();
             String luogonascita = view.getLuogonascita().getText();
-            String diploma = view.getDiploma().getText();
+            String diploma = view.getDiploma().getText();*/
 
             if (view.isValid()) {
 
-                String name = stringToCapital(nome);
-                String surname = stringToCapital(cognome);
+                /*String name = stringToCapital(nome);
+                String surname = stringToCapital(cognome);*/
                 //Apre schermata di salvataggio e genera il pdf
                 JFileChooser c = new JFileChooser();
                 int r = c.showSaveDialog(view.immatricolazionepanel);

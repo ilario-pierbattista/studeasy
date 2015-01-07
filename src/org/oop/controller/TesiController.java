@@ -8,9 +8,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-
-import static org.oop.general.Utils.*;
 
 public class TesiController {
 
@@ -25,18 +22,18 @@ public class TesiController {
     class SubmitFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Date datanascita = (Date) view.getDataNascita().getValue();
+           /* Date datanascita = (Date) view.getDataNascita().getValue();
             String nome = view.getNome().getText();
             String cognome = view.getCognome().getText();
             String luogo = view.getLuogoNascita().getText();
             String email = view.getEmail().getText();
-            String year = view.getAnnoCorso().getText();
+            String year = view.getAnnoCorso().getText();*/
 
             /* Se tutti i campi del form sono corretti crea e salva il PDF */
             if (view.isValid()) {
 
-                String name = stringToCapital(nome);
-                String surname = stringToCapital(cognome);
+                /*String name = stringToCapital(nome);
+                String surname = stringToCapital(cognome);*/
 
                 //Apre schermata di salvataggio e genera il pdf
                 JFileChooser c = new JFileChooser();

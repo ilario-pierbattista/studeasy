@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 
-import static org.oop.general.Utils.*;
-
 public class TirocinioController {
     Tirocinio view;
 
@@ -24,7 +22,7 @@ public class TirocinioController {
     class SubmitFormAction extends AbstractAction {
         @Override
         public void actionPerformed (ActionEvent e) {
-            JFormattedTextField datanascita = view.getDatanascita();
+            /*JFormattedTextField datanascita = view.getDatanascita();
             JFormattedTextField cap = view.getCap();
             JFormattedTextField cfu = view.getCfu();
             //int crediti = Integer.parseInt(cfu.getText());
@@ -36,12 +34,12 @@ public class TirocinioController {
             String residenza = view.getResidenza().getText();
             String provincia = view.getProvincia().getText();
             String via = view.getVia().getText();
-            String codicefiscale = view.getCodicefiscale().getText();
+            String codicefiscale = view.getCodicefiscale().getText();*/
 
             if(view.isValid()){
 
-                String name = stringToCapital(nome);
-                String surname = stringToCapital(cognome);
+                /*String name = stringToCapital(nome);
+                String surname = stringToCapital(cognome);*/
                 //Apre schermata di salvataggio e genera il pdf
                 JFileChooser c = new JFileChooser();
                 int r = c.showSaveDialog(view.tirociniopanel);

@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 public abstract class AbstractView {
 
     public DateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
-    public DateFormat dateformatYear = new SimpleDateFormat("yyyy");
+    public DateFormat dateformatYear = new SimpleDateFormat("y");
     public DecimalFormat dfMatricola = new DecimalFormat("#########");
     public DecimalFormat dfCAP = new DecimalFormat("#####");
     public DecimalFormat dfCFU = new DecimalFormat("###");
@@ -27,8 +27,6 @@ public abstract class AbstractView {
         dfCFU.setMinimumIntegerDigits(3);
         dfVoto.setMaximumIntegerDigits(3);
         dfVoto.setMinimumIntegerDigits(2);
-
-
     }
 
     public JFrame frame;
