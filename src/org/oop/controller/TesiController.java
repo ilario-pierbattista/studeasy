@@ -31,7 +31,37 @@ public class TesiController {
             String luogo = view.getLuogoNascita().getText();
             String email = view.getEmail().getText();
             String year = view.getAnnoCorso().getText();
-            if ((inputNameControl(nome)) && ( inputNameControl(cognome) ) && ( inputSentenceControl(luogo) ) && (inputMailControl(email) ) && inputYearControl(year) ) {
+
+            /* Se tutti i campi del form sono corretti crea e salva il PDF */
+            if (view.isValid()) {
+
+                String name = stringToCapital(nome);
+                String surname = stringToCapital(cognome);
+
+                //Apre schermata di salvataggio e genera il pdf
+                JFileChooser c = new JFileChooser();
+                int r = c.showSaveDialog(view.tesipanel);
+                if (r == JFileChooser.APPROVE_OPTION) {
+                    String path = c.getCurrentDirectory().toString().replace("\\", "\\\\");
+                    String fileName = c.getSelectedFile().getName();
+
+                    try {
+                        PdfGenerator pdfGeneratorCreate = new PdfGenerator(System.getProperty("user.dir")
+                                .concat(File.separator.concat("template"))
+                                .concat(File.separator.concat("templateTesiPDF.pdf")), fileName);
+                        pdfGeneratorCreate.generatePdfTesi(view, path);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (DocumentException e1) {
+                        e1.printStackTrace();
+                    }
+
+                }
+                if (r == JFileChooser.CANCEL_OPTION) {
+                    //chiudi finestra
+                }
+            }
+            /*if ((inputNameControl(nome)) && ( inputNameControl(cognome) ) && ( inputSentenceControl(luogo) ) && (inputMailControl(email) ) && inputYearControl(year) ) {
                 String name = stringToCapital(nome);
                 String surname = stringToCapital(cognome);
 
@@ -70,6 +100,7 @@ public class TesiController {
             } else if (!inputYearControl(year)) {
                 JOptionPane.showMessageDialog(null,"Anno non Valido");
             }
+        }*/
         }
     }
 

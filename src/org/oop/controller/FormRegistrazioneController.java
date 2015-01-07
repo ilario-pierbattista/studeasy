@@ -2,12 +2,15 @@ package org.oop.controller;
 
 import org.oop.db.SQLParameters;
 import org.oop.model.dao.CorsoDAO;
+import org.oop.model.dao.InsegnamentoDAO;
 import org.oop.model.dao.UtenteDAO;
+import org.oop.model.entities.Corso;
 import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.InsegnamentoOfferto;
 import org.oop.model.entities.Utente;
 import org.oop.view.Mainframe;
 import org.oop.view.profilo.FormRegistrazione;
+import org.oop.view.profilo.Profilo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,18 +23,22 @@ public class FormRegistrazioneController {
     private Utente utente;
     private CorsoDAO corsoDAO;
     private UtenteDAO utenteDAO;
+    private InsegnamentoDAO insegnamentoDAO;
     private boolean primoAvvio;
 
     public FormRegistrazioneController(FormRegistrazione view) {
         corsoDAO = new CorsoDAO();
         utenteDAO = new UtenteDAO();
+        insegnamentoDAO = new InsegnamentoDAO();
 
         this.view = view;
         view.addSubmitFormButtonListener(new submitFormAction());
         view.addQuitFormButtonListener(new quitFormAction());
         view.addLivelloRadiusButtonsListener(new changeLivelloAction());
         utente = cercaUtente();
-        initInfo();
+        if (!primoAvvio) {
+            view.initInfo(utente);
+        }
 
         view.setVisible(true);
     }
@@ -56,54 +63,83 @@ public class FormRegistrazioneController {
         return utente;
     }
 
+    /**
+     * Crea od aggiorna un utente. Vi sono 4 casi:
+     * 1) L'utente non esiste. Viene creato.
+     * 2) L'utente ha un corso di laurea diverso. Bisogna reinserire anche gli insegnamenti.
+     * 3) L'utente esiste e differisce solo per alcune informazioni. Viene aggiornato.
+     *
+     * @param nuoviDati Nuovi dati dell'utente
+     */
     private void aggiornaUtente(Utente nuoviDati) {
-        if(!primoAvvio && utente.getMatricola() != nuoviDati.getMatricola()) {
-            utenteDAO.remove(utente);
-        } else if(!primoAvvio && utente.getLibretto().getCorso().getId() != nuoviDati.getLibretto().getCorso().getId()) {
-            utenteDAO.remove(utente);
+        boolean compilazioneLibretto;
+
+        // Il libretto viene compilato se non esiste alcun utente o se l'utente ha cambiato corso
+        compilazioneLibretto = (primoAvvio ||
+                utente.getLibretto().getCorso().getId() != nuoviDati.getLibretto().getCorso().getId()
+        );
+
+        if (!compilazioneLibretto) {
+            nuoviDati.setLibretto(utente.getLibretto())
+                    .setAgenda(utente.getAgenda());
         }
         utente = nuoviDati;
-        if(utente.getLibretto().getInsegnamenti().isEmpty()) {
-            // Aggiunta degli insegnamenti obbligatori
-            ArrayList<Insegnamento> insegnamenti = new ArrayList<Insegnamento>(10);
-            for (InsegnamentoOfferto insegnamentoOfferto : utente.getLibretto().getCorso().getInsegnamentiObbligatori()) {
-                insegnamenti.add(new Insegnamento(insegnamentoOfferto));
+        // Impostazione del nuovo utente
+        BaseController.setUtenteCorrente(utente);
+        if (primoAvvio) {
+            utenteDAO.persist(utente);
+        } else {
+            utenteDAO.update(utente);
+        }
+        if (compilazioneLibretto) {
+            // @TODO far partire il form di compilazione del libretto
+            // @TODO cambiare con la action del form le righe seguenti
+            for(InsegnamentoOfferto insegnamentoOfferto : utente.getLibretto().getCorso().getInsegnamentiObbligatori()) {
+                Insegnamento insegnamento = new Insegnamento(insegnamentoOfferto);
+                utente.getLibretto().addInsegnamento(insegnamento);
+                insegnamentoDAO.persist(insegnamento);
             }
-            utente.getLibretto().setInsegnamenti(insegnamenti);
+            utenteDAO.update(utente);
         }
-        if(!utente.getLibretto().getCorso().getInsegnamentiOpzionali().isEmpty()) {
-            /* Todo far apparire il form per opzionare gli insegnamenti a scelta */
+        utenteDAO.flush();
+        if(ProfiloController.getInstance() != null) {
+            ProfiloController.getInstance().updateView();
         }
-    }
-
-    private void initInfo() {
-        /* @TODO aggiornare le informazioni iniziali del form con i dati giò
-           salvati
-         */
     }
 
     class changeLivelloAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
             AbstractButton ab = (AbstractButton) e.getSource();
-
             SQLParameters parameters = new SQLParameters();
+            int livello = getLivelloLaureaFromSelection(ab);
+            parameters.add("livello", livello);
+            view.setCorsiList(corsoDAO.findBy(parameters));
+        }
 
+        /**
+         * Restituisce il livello del corso di laurea dalla selezione
+         *
+         * @param ab
+         * @return
+         */
+        private int getLivelloLaureaFromSelection(AbstractButton ab) {
+            int livello;
             view.getTriennaleRadioButton().setSelected(false);
             view.getMagistraleRadioButton().setSelected(false);
             view.getCicloUnicoRadioButton().setSelected(false);
 
             if (ab.getText().equals("Triennale")) {
                 view.getTriennaleRadioButton().setSelected(true);
-                parameters.add("livello", 1);
+                livello = Corso.TRIENNALE;
             } else if (ab.getText().equals("Magistrale")) {
                 view.getMagistraleRadioButton().setSelected(true);
-                parameters.add("livello", 2);
+                livello = Corso.MAGISTRALE;
             } else {
                 view.getCicloUnicoRadioButton().setSelected(true);
-                parameters.add("livello", 0);
+                livello = Corso.CICLO_UNICO;
             }
-            view.setCorsiList(corsoDAO.findBy(parameters));
+            return livello;
         }
     }
 
@@ -124,19 +160,14 @@ public class FormRegistrazioneController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (view.isValid()) {
-                UtenteDAO utenteDAO = new UtenteDAO();
                 Utente nuoviDati = view.getUtente();
+                aggiornaUtente(nuoviDati);
                 if (primoAvvio) {
-                    utenteDAO.persist(nuoviDati);
-                    BaseController.setUtenteCorrente(nuoviDati);
-                } else {
-                    /** @TODO gestire l'aggiornamento dei dati dell'utente */
                     BaseController.startController();
                 }
-                utenteDAO.flush();
+                view.frame.dispose();
+                Mainframe.setVisible(true);
             }
-            view.frame.dispose();
-            Mainframe.setVisible(true);
         }
     }
 }

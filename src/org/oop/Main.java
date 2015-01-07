@@ -5,8 +5,6 @@ import org.oop.services.Importatore;
 import org.oop.test.db.DatabaseManagerTest;
 import org.oop.test.db.DatabaseUtilsTest;
 import org.oop.view.Mainframe;
-import org.oop.view.segreteria.FormIscrizione;
-import org.oop.view.segreteria.FormTasse;
 
 import javax.swing.*;
 
@@ -16,6 +14,7 @@ public class Main {
          * Eliminare questi messaggi, servono solo per rendersi conto
          * della velocità di esecuzione del programma
          */
+
         System.out.println("Programma avviato");
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

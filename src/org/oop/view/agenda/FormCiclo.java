@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 
 
-public class FormCiclo extends AbstractView<FormCiclo> {
+public class FormCiclo extends AbstractView {
     public static JFrame frame = new JFrame("Crea nuovo ciclo");
 
     private JPanel panel1;
@@ -70,7 +70,7 @@ public class FormCiclo extends AbstractView<FormCiclo> {
     /**
      * Metodo che chiude il form
      */
-    public static void closeFrame() {
+    public void closeFrame() {
         frame.dispose();
     }
 

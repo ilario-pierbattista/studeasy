@@ -7,7 +7,7 @@ import org.oop.view.segreteria.Segreteria;
 import javax.swing.*;
 
 
-public class Mainframe extends AbstractView<Mainframe> {
+public class Mainframe {
     final static JFrame frame = new JFrame("Studeasy");
     private JPanel mainpanel;
     private JTabbedPane maintabpane;
@@ -26,7 +26,7 @@ public class Mainframe extends AbstractView<Mainframe> {
         profilo = new Profilo();
         segreteria = new Segreteria();
         maintabpane.addTab("Agenda", agenda.agendapanel);
-        maintabpane.addTab("Profilo", profilo.profilopanel);
+        maintabpane.addTab("Profilo", profilo.profiloPanel);
         maintabpane.addTab("Segreteria", segreteria.segreteriapanel);
 
     }

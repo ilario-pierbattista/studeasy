@@ -16,7 +16,6 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
-import java.util.Date;
 
 
 public class AgendaController {
@@ -86,7 +85,7 @@ public class AgendaController {
     }
 
     /**
-     * Action per aggiungere un'attività di tipo lezione
+     * Action per aggiungere un'attività
      */
     class AddAttivitaAction extends AbstractAction {
         @Override

@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="tesipanel" layout-manager="GridLayoutManager" row-count="12" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="40" left="15" bottom="40" right="15"/>
     <constraints>
-      <xy x="20" y="20" width="762" height="475"/>
+      <xy x="20" y="20" width="762" height="491"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -111,7 +111,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="bbd38" class="javax.swing.JFormattedTextField" binding="dataNascita">
+          <component id="bbd38" class="javax.swing.JFormattedTextField" binding="dataNascita" custom-create="true">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="250" height="20"/>
@@ -127,7 +127,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="c9699" class="javax.swing.JFormattedTextField" binding="annoCorso">
+          <component id="c9699" class="javax.swing.JFormattedTextField" binding="annoCorso" custom-create="true">
             <constraints>
               <grid row="7" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="250" height="20"/>
@@ -167,7 +167,7 @@
               <text value="Matricola"/>
             </properties>
           </component>
-          <component id="36ff6" class="javax.swing.JFormattedTextField" binding="matricola">
+          <component id="36ff6" class="javax.swing.JFormattedTextField" binding="matricola" custom-create="true">
             <constraints>
               <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>

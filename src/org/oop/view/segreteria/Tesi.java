@@ -1,5 +1,6 @@
 package org.oop.view.segreteria;
 
+import org.oop.general.Validator;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;
@@ -28,18 +29,54 @@ public class Tesi extends AbstractView {
     private JFormattedTextField email;
     private JLabel emailLabel;
 
+    /**
+     * Metodo di appoggio che controlla che i campi del form siano stati compilati
+     * correttamente
+     *
+     * @return
+     */
+    public boolean isValid() {
+        boolean flag;
 
-    public void insSubmitFormButtonListener (ActionListener l) {
+        if (Validator.isFormattedFieldEmpty(nome, "Nome") || !Validator.inputSentenceControl(nome.getText(), "Nome")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(cognome, "Cognome") || !Validator.inputSentenceControl(cognome.getText(), "Cognome")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(dataNascita, "Data di nascita")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(email, "Email") || !Validator.email(email.getText())) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(matricola, "Matricola")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(luogoNascita, "Luogo di nascita") || !Validator.inputSentenceControl(luogoNascita.getText(), "Luogo di nascita")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(annoCorso, "Anno di corso")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(profRelatore, "Professore relatore") || !Validator.inputSentenceControl(profRelatore.getText(), "Professore relatore")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(titoloTesi, "Titolo Tesi") || !Validator.inputSentenceControl(titoloTesi.getText(), "Titolo Tesi")) {
+            flag = false;
+        } else {
+            flag = true;
+        }
+
+        return flag;
+    }
+
+    public void insSubmitFormButtonListener(ActionListener l) {
         submit.addActionListener(l);
     }
 
-    public void insQuitFormButtonListener (ActionListener l) {
+    public void insQuitFormButtonListener(ActionListener l) {
         quit.addActionListener(l);
     }
 
     private void createUIComponents() {
         dataNascita = new JFormattedTextField(dateformat);
+        matricola = new JFormattedTextField(cifreMatricola);
+        annoCorso = new JFormattedTextField(dateformatYear);
     }
+
     public JFormattedTextField getNome() {
         return nome;
     }
@@ -92,9 +129,10 @@ public class Tesi extends AbstractView {
         return titoloTesi;
     }
 
-    public JFormattedTextField getMatricola () {
+    public JFormattedTextField getMatricola() {
         return matricola;
     }
+
     public JFormattedTextField getEmail() {
         return email;
     }

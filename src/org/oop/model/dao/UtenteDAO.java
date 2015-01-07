@@ -15,6 +15,16 @@ import java.util.ArrayList;
 
 
 public class UtenteDAO extends AbstractDAO<Utente> {
+
+    private InsegnamentoDAO insegnamentoDAO;
+    private CicloDAO cicloDAO;
+
+    public UtenteDAO() {
+        super();
+        insegnamentoDAO = new InsegnamentoDAO();
+        cicloDAO = new CicloDAO();
+    }
+
     @Override
     protected Utente generaEntita(ResultSet rs) {
         Utente utente = new Utente();
@@ -93,6 +103,8 @@ public class UtenteDAO extends AbstractDAO<Utente> {
         db.createSqlStatement(sql)
                 .setParameters(parameters)
                 .executeUpdate();
+        cicloDAO.setUtente(entity);
+        insegnamentoDAO.setUtente(entity);
     }
 
     @Override
@@ -104,20 +116,8 @@ public class UtenteDAO extends AbstractDAO<Utente> {
         db.createSqlStatement(sql)
                 .setParameters(parameters)
                 .executeUpdate();
-        ArrayList<Integer> idCicli = new ArrayList<Integer>(2);
-        if(!entity.getAgenda().getCicli().isEmpty()) {
-            for (Ciclo ciclo : entity.getAgenda().getCicli()) {
-                idCicli.add(ciclo.getId());
-            }
-            SQLParameters cicliParams = new SQLParameters();
-            cicliParams.add("id", idCicli);
-            String updateCicliSql = "UPDATE ciclo SET utente = :utente WHERE "
-                    .concat(DatabaseUtils.generateCondition(cicliParams));
-            cicliParams.add("utente", entity.getMatricola());
-            db.createSqlStatement(updateCicliSql)
-                    .setParameters(cicliParams)
-                    .executeUpdate();
-        }
+        cicloDAO.setUtente(entity);
+        insegnamentoDAO.setUtente(entity);
     }
 
     @Override
