@@ -5,7 +5,7 @@ import java.io.*;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
-import org.oop.view.segreteria.Immatricolazione;
+import org.oop.view.segreteria.FormImmatricolazione;
 import org.oop.view.segreteria.Tesi;
 import org.oop.view.segreteria.Tirocinio;
 
@@ -86,7 +86,7 @@ public class PdfGenerator {
         pdfTemplate.close();
     }
 
-    public void generatePdfImmatricolazione(Immatricolazione immatricolazioneView,String path) throws IOException,DocumentException {
+    public void generatePdfImmatricolazione(FormImmatricolazione immatricolazioneView,String path) throws IOException,DocumentException {
 
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());

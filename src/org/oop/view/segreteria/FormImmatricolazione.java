@@ -1,13 +1,14 @@
 package org.oop.view.segreteria;
 
 import org.oop.general.Validator;
+import org.oop.model.entities.Utente;
 import org.oop.view.AbstractForm;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class Immatricolazione extends AbstractForm {
+public class FormImmatricolazione extends AbstractForm {
     public JPanel immatricolazionepanel;
     private JButton submit;
     private JButton quit;
@@ -34,8 +35,14 @@ public class Immatricolazione extends AbstractForm {
     private JFormattedTextField annoConseguimento2;
     private JLabel annoConseguimento2Label;
 
-    public Immatricolazione() {
+    public FormImmatricolazione() {
         super();
+    }
+
+    public void setInfoUtente(Utente utente) {
+        nome.setValue(utente.getNome());
+        cognome.setValue(utente.getCognome());
+        matricola.setValue(utente.getMatricola());
     }
 
     /**

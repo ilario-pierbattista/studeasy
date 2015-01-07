@@ -4,12 +4,9 @@ import org.oop.general.Utils;
 import org.oop.model.Libretto;
 import org.oop.model.dao.CicloDAO;
 import org.oop.model.dao.InsegnamentoDAO;
-import org.oop.model.dao.InsegnamentoOffertoDAO;
 import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Insegnamento;
-import org.oop.model.entities.InsegnamentoOfferto;
-import org.oop.model.entities.Utente;
 import org.oop.view.agenda.Agenda;
 import org.oop.view.agenda.AttivitaView;
 import org.oop.view.agenda.FormCiclo;
@@ -43,7 +40,7 @@ public class AgendaController {
         view.addInsegnamentoButtonListener(new addInsegnamentoAction());
 
         view.getCiclilist().getSelectionModel().addListSelectionListener(new listaCicliSelectionAction());
-        view.getInsegnamentilist().getSelectionModel().addListSelectionListener(new listaInsegnamentiSelectionAction());
+        view.getInsegnamentiList().getSelectionModel().addListSelectionListener(new listaInsegnamentiSelectionAction());
 
         updateView();
 
@@ -58,8 +55,8 @@ public class AgendaController {
             ListSelectionModel lsm = (ListSelectionModel) e.getSource();
 
             if (!lsm.isSelectionEmpty()) {
-                int index = lsm.getMinSelectionIndex();
-                Ciclo ciclo = (Ciclo) view.getCiclilist().getModel().getElementAt(index);
+                Ciclo ciclo = view.getCicloSelected();
+                view.setInsegnamentiFromCiclo(ciclo);
                 view.getListaInsegnamentiTitle().setText("Insegnamenti di " + ciclo.getLabel());
             }
         }
@@ -72,7 +69,6 @@ public class AgendaController {
         view.setListaCicli(agenda.getCicli());
         view.updateListaCicli();
         view.updateListaInsegnamenti();
-
     }
 
     /**
@@ -86,7 +82,6 @@ public class AgendaController {
     public void updateView(int index) {
         view.setListaCicli(agenda.getCicli());
         view.updateListaCicli(index);
-
     }
 
     /**
@@ -204,10 +199,9 @@ public class AgendaController {
             insegnamentoDAO.persist(ins);
             cicloDAO.update(ciclo);
             cicloDAO.flush();
-            insegnamentoDAO.flush();
 
             view.addInsegnamentoToList(ins);
-            view.getInsegnamentilist().setSelectedIndex(0);
+            view.getInsegnamentiList().setSelectedIndex(0);
         }
     }
 
@@ -217,8 +211,8 @@ public class AgendaController {
     class removeInsegnamentoAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            int index = view.getInsegnamentilist().getSelectedIndex();
-            JList list = view.getInsegnamentilist();
+            int index = view.getInsegnamentiList().getSelectedIndex();
+            JList list = view.getInsegnamentiList();
             DefaultListModel<Insegnamento> listModel = (DefaultListModel<Insegnamento>) list.getModel();
             int size = listModel.getSize();
 
@@ -241,7 +235,7 @@ public class AgendaController {
 
             if (!lsm.isSelectionEmpty()) {
                 int index = lsm.getMinSelectionIndex();
-                Insegnamento insegnamento = (Insegnamento) view.getInsegnamentilist().getModel().getElementAt(index);
+                Insegnamento insegnamento = (Insegnamento) view.getInsegnamentiList().getModel().getElementAt(index);
 
                 view.updateElencoAttivita(insegnamento);
             }

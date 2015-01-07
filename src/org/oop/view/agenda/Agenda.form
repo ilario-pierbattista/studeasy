@@ -84,7 +84,7 @@
                             </properties>
                             <border type="none"/>
                             <children>
-                              <component id="ad04" class="javax.swing.JList" binding="insegnamentilist">
+                              <component id="ad04" class="javax.swing.JList" binding="insegnamentiList">
                                 <constraints/>
                                 <properties>
                                   <background color="-1"/>

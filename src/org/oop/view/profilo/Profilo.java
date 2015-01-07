@@ -84,9 +84,6 @@ public class Profilo extends AbstractView {
         model.clearData();
         // Impostazione dei nuovi dati
         for (Insegnamento insegnamento : libretto.getInsegnamenti()) {
-            if (insegnamento.getData() != null) {
-                System.out.println(insegnamento.toString());
-            }
             addElementTable(insegnamento);
         }
     }
@@ -119,7 +116,7 @@ public class Profilo extends AbstractView {
         }
         return ins;
     }
-    
+
     private void setCellRenderers() {
         TableCellRenderer dateCellRenderer = new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {

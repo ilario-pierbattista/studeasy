@@ -2,7 +2,7 @@ package org.oop.controller;
 
 import com.lowagie.text.DocumentException;
 import org.oop.services.PdfGenerator;
-import org.oop.view.segreteria.Immatricolazione;
+import org.oop.view.segreteria.FormImmatricolazione;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,13 +13,14 @@ import java.util.Date;
 import static org.oop.general.Utils.*;
 
 public class ImmatricolazioneController {
-    private Immatricolazione view;
+    private FormImmatricolazione view;
 
-    public ImmatricolazioneController(Immatricolazione view) {
+    public ImmatricolazioneController(FormImmatricolazione view) {
         this.view = view;
 
         view.insSubmitFormButtonListener(new SubmitFormAction());
         view.insQuitFormButtonListener(new QuitFormAction());
+        view.setInfoUtente(BaseController.getUtenteCorrente());
     }
 
 

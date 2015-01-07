@@ -8,11 +8,8 @@ public class SegreteriaController {
     private Segreteria view;
 
     public SegreteriaController(Segreteria view) {
+        new ImmatricolazioneController(view.getImmatricolazione());
         this.view = view;
     }
-
-
-
-
 
 }
