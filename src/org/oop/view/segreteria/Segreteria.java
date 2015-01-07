@@ -13,16 +13,17 @@ public class Segreteria extends AbstractView {
     private FormImmatricolazione immatricolazione;
     private Iscrizione iscrizione = new Iscrizione();
     private IscrizioneController iscrizionecontroller = new IscrizioneController(iscrizione);
-    private Tirocinio tirocinio = new Tirocinio();
-    private TirocinioController tirociniocontroller = new TirocinioController(tirocinio);
-    private Tesi tesi = new Tesi();
-    private TesiController tesicontroller = new TesiController(tesi);
+    private FormTirocinio tirocinio;
+    private FormTesi tesi;
     private Tasse tasse = new Tasse();
     private TasseController tassecontroller = new TasseController(tasse);
 
     public Segreteria() {
         super();
         immatricolazione = new FormImmatricolazione();
+        tirocinio = new FormTirocinio();
+        tesi = new FormTesi();
+
         maintabpane.addTab("Immatricolazione", immatricolazione.immatricolazionepanel);
         maintabpane.addTab("Iscrizione", iscrizione.iscrizionepanel);
         maintabpane.addTab("Tirocinio", tirocinio.tirociniopanel);
@@ -32,5 +33,13 @@ public class Segreteria extends AbstractView {
 
     public FormImmatricolazione getImmatricolazione() {
         return immatricolazione;
+    }
+
+    public FormTirocinio getTirocinio() {
+        return tirocinio;
+    }
+
+    public FormTesi getTesi() {
+        return tesi;
     }
 }

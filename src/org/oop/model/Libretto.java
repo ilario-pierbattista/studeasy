@@ -14,6 +14,16 @@ public class Libretto {
         insegnamenti = new ArrayList<Insegnamento>(20);
     }
 
+    public int calcolaCFU() {
+        int cfu = 0;
+        for (Insegnamento insegnamento : insegnamenti) {
+            if(insegnamento.getVoto() != 0) {
+                cfu += insegnamento.getInsegnamentoOfferto().getCfu();
+            }
+        }
+        return cfu;
+    }
+
     public Corso getCorso() {
         return corso;
     }

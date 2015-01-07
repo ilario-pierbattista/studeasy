@@ -1,12 +1,13 @@
 package org.oop.view.segreteria;
 
 import org.oop.general.Validator;
+import org.oop.model.entities.Utente;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class Tesi extends AbstractView {
+public class FormTesi extends AbstractView {
     public JPanel tesipanel;
     private JButton submit;
     private JButton quit;
@@ -28,6 +29,13 @@ public class Tesi extends AbstractView {
     private JLabel matricolaLabel;
     private JFormattedTextField email;
     private JLabel emailLabel;
+
+    public void setInfoUtente(Utente utente) {
+        nome.setValue(utente.getNome());
+        cognome.setValue(utente.getCognome());
+        email.setValue(utente.getEmail());
+        matricola.setValue(utente.getMatricola());
+    }
 
     /**
      * Metodo di appoggio che controlla che i campi del form siano stati compilati
