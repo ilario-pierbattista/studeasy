@@ -27,6 +27,7 @@ public class Main {
 
         Mainframe mainframe = new Mainframe();
         new BaseController(mainframe);
+
     }
 
     private static void mainInitProcedure(String args[]) {

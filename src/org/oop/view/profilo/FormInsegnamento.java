@@ -31,6 +31,7 @@ public class FormInsegnamento extends AbstractView<FormInsegnamento> {
         frame.setContentPane(forminsegnamentopanel);
         frame.setLocationRelativeTo(null);
         frame.pack();
+        frame.setVisible(true);
     }
 
     public void setVisible(boolean visible) {
