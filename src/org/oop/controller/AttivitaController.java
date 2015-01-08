@@ -1,7 +1,12 @@
 package org.oop.controller;
 
-import org.oop.db.SQLParameters;
+import org.oop.model.dao.AttivitaDAO;
+import org.oop.model.dao.CicloDAO;
+import org.oop.model.dao.InsegnamentoDAO;
+import org.oop.model.entities.AttivitaEvento;
+import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Esame;
+import org.oop.model.entities.Insegnamento;
 import org.oop.view.agenda.*;
 
 import javax.swing.*;
@@ -9,19 +14,32 @@ import java.awt.event.ActionEvent;
 
 
 public class AttivitaController {
-    private AttivitaView view;
+    private AttivitaEventoView view;
     private FormAttivitaEvento formAttivitaEvento;
     private FormAttivitaPeriodica formAttivitaPeriodica;
     private FormEsame formEsame;
     private String newActivityType;
+    private AttivitaDAO attivitaDAO;
+    private CicloDAO cicloDAO;
+    private InsegnamentoDAO insegnamentoDAO;
 
-    public AttivitaController(AttivitaView view,String newActivityType){
+    public AttivitaController(AttivitaEventoView view,String newActivityType){
         this.view = view;
         this.newActivityType = newActivityType;
+        attivitaDAO = new AttivitaDAO();
+        cicloDAO = new CicloDAO();
+        insegnamentoDAO = new InsegnamentoDAO();
 
         openForm();
 
         view.addEditButtonListener(new EditButtonAction());
+    }
+
+    /**
+     * Metodo che aggiorna la view
+     */
+    private void updateView(){
+        Agenda.getInstance().updateElencoAttivita(Agenda.getInstance().getInsegnamentoSelected());
     }
 
     /**
@@ -73,7 +91,18 @@ public class AttivitaController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (formAttivitaEvento.isValid()) {
+                Ciclo ciclo = Agenda.getInstance().getCicloSelected();
+                Insegnamento insegnamento = Agenda.getInstance().getInsegnamentoSelected();
+                AttivitaEvento attivitaEvento = formAttivitaEvento.getNuovaAttivita();
 
+                insegnamento.addAttivita(attivitaEvento);
+
+                attivitaDAO.persist(attivitaEvento);
+                cicloDAO.update(ciclo);
+                cicloDAO.flush();
+
+                updateView();
+                formAttivitaEvento.closeFrame();
             }
         }
     }

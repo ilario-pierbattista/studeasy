@@ -9,7 +9,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -167,16 +170,20 @@ public class Utils {
 
 
     /**
-     * Imposta il frame al centro dello schermo
-     * NB: va usato dopo il metodo pack()
-     *
-     * @param frame JFrame da centralizzare
+     * Converte la data che gli si passa in stringa nel formato scelto
+     * @param date Data da convertire
+     * @param format 0 per gg-mm-yyyy , 1 per hh:mm
      */
-    public static void centerJFrame(JFrame frame) {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Point middle = new Point(screenSize.width / 2, screenSize.height / 2);
-        Point location = new Point(middle.x - frame.getWidth() / 2,
-                middle.y - frame.getHeight() / 2);
-        frame.setLocation(location);
+    public static String dateToString(Date date, int format) {
+        String dstring;
+        if (format == 0) {
+            DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+            dstring = df.format(date);
+        } else {
+            DateFormat df = new SimpleDateFormat("HH:mm");
+            dstring = df.format(date);
+        }
+
+        return dstring;
     }
 }
