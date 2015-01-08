@@ -74,6 +74,7 @@ public class AgendaController {
         view.setInsegnamentiFromCiclo(view.getCicloSelected());
         view.updateListaCicli();
         view.updateListaInsegnamenti();
+        view.updateElencoAttivita(view.getInsegnamentoSelected());
     }
 
     /**
