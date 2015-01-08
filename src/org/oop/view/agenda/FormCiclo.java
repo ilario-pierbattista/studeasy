@@ -24,8 +24,8 @@ public class FormCiclo extends AbstractView {
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
-        frame.setVisible(true);
         frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 
     /**

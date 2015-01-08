@@ -18,8 +18,8 @@ public class ModalAddInsegnamento {
     public ModalAddInsegnamento() {
         frame.setContentPane(contentPane);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 

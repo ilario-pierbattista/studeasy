@@ -25,7 +25,8 @@ public class FormInsegnamento extends AbstractForm {
         frame = new JFrame("Inserimento Insegnamento");
         frame.setContentPane(forminsegnamentopanel);
         frame.pack();
-        Utils.centerJFrame(frame);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 
     /**
