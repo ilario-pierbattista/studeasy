@@ -60,8 +60,6 @@ public class AgendaController {
                 view.updateListaInsegnamenti();
                 view.getListaInsegnamentiTitle().setText("Insegnamenti di " + ciclo.getLabel());
                 view.getDurataCicloLabel().setText(ciclo.getInizio() + "/" + ciclo.getFine());
-
-
             }
         }
     }
@@ -74,7 +72,9 @@ public class AgendaController {
         view.setInsegnamentiFromCiclo(view.getCicloSelected());
         view.updateListaCicli();
         view.updateListaInsegnamenti();
-        view.updateElencoAttivita(view.getInsegnamentoSelected());
+        if(view.getInsegnamentoSelected() != null) {
+            view.updateElencoAttivita(view.getInsegnamentoSelected());
+        }
     }
 
     /**
@@ -117,7 +117,7 @@ public class AgendaController {
     class SubmitCicloFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (formcicloview.isValid()){
+            if (formcicloview.isValid()) {
                 Ciclo ciclo = formcicloview.getNuovoCiclo();
                 CicloDAO cicloDAO = new CicloDAO();
                 agenda.addCiclo(ciclo);

@@ -123,6 +123,9 @@ public class Profilo extends AbstractView {
         return ins;
     }
 
+    /**
+     * Impostazione del render delle celle riguardanti la data e il voto
+     */
     private void setCellRenderers() {
         TableCellRenderer dateCellRenderer = new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {

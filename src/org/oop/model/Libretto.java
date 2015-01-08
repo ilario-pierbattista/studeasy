@@ -4,6 +4,7 @@ package org.oop.model;
 import org.oop.general.Utils;
 import org.oop.model.entities.Corso;
 import org.oop.model.entities.Insegnamento;
+import org.oop.model.entities.InsegnamentoOfferto;
 
 import java.util.ArrayList;
 
@@ -17,12 +18,13 @@ public class Libretto {
 
     /**
      * Calcola i CFU conseguiti
+     *
      * @return Somma dei CFU degli esami superati
      */
     public int calcolaCFU() {
         int cfu = 0;
         for (Insegnamento insegnamento : insegnamenti) {
-            if(insegnamento.esameSostenuto()) {
+            if (insegnamento.esameSostenuto()) {
                 cfu += insegnamento.getInsegnamentoOfferto().getCfu();
             }
         }
@@ -31,7 +33,7 @@ public class Libretto {
 
     public int calcolaCFUPrevisti() {
         int cfu = 0;
-        for(Insegnamento insegnamento : insegnamenti) {
+        for (Insegnamento insegnamento : insegnamenti) {
             cfu += insegnamento.getInsegnamentoOfferto().getCfu();
         }
         return cfu;
@@ -39,13 +41,14 @@ public class Libretto {
 
     /**
      * Calcola la media aritmetica dei voti degli esami sostenuti
+     *
      * @return
      */
     public double calcolaMediaAritmetica() {
         int count = 0;
         double sum = 0;
         for (Insegnamento insegnamento : getInsegnamenti()) {
-            if(insegnamento.esameSostenuto()) {
+            if (insegnamento.esameSostenuto()) {
                 count++;
                 sum += insegnamento.getVoto();
             }
@@ -55,13 +58,14 @@ public class Libretto {
 
     /**
      * Calcola la media ponderata dei voti degli esami sostenuti
+     *
      * @return
      */
     public double calcolaMediaPonderata() {
         int cfu = 0;
         double sommaPesata = 0;
         for (Insegnamento insegnamento : getInsegnamenti()) {
-            if(insegnamento.esameSostenuto()) {
+            if (insegnamento.esameSostenuto()) {
                 cfu += insegnamento.getInsegnamentoOfferto().getCfu();
                 sommaPesata += (insegnamento.getVoto() * insegnamento.getInsegnamentoOfferto().getCfu());
             }
@@ -82,6 +86,36 @@ public class Libretto {
         return insegnamenti;
     }
 
+    /**
+     * Ritorna solamente gli insegnamenti opzionali
+     *
+     * @return
+     */
+    public ArrayList<Insegnamento> getInsegnamentiOpzionali() {
+        ArrayList<Insegnamento> opzionali = new ArrayList<Insegnamento>(5);
+        for (Insegnamento insegnamento : insegnamenti) {
+            if (insegnamento.getInsegnamentoOfferto().isOpzionale()) {
+                opzionali.add(insegnamento);
+            }
+        }
+        return opzionali;
+    }
+
+    /**
+     * Ritorna gli insegnamenti obbligatori
+     *
+     * @return
+     */
+    public ArrayList<Insegnamento> getInsegnamentiObbligatori() {
+        ArrayList<Insegnamento> obbligatori = new ArrayList<Insegnamento>(15);
+        for (Insegnamento insegnamento : insegnamenti) {
+            if (!insegnamento.getInsegnamentoOfferto().isOpzionale()) {
+                obbligatori.add(insegnamento);
+            }
+        }
+        return obbligatori;
+    }
+
     public Libretto setInsegnamenti(ArrayList<Insegnamento> insegnamenti) {
         this.insegnamenti = insegnamenti;
         return this;
@@ -92,11 +126,23 @@ public class Libretto {
         return this;
     }
 
-    public boolean hasInsegnamento(Insegnamento insegnamento) {
+    public boolean hasInsegnamentoOfferto(InsegnamentoOfferto insegnamentoOfferto) {
         boolean found = false;
         for (int i = 0; i < insegnamenti.size() && !found; i++) {
-            found = insegnamenti.get(i).equals(insegnamento);
+            found = insegnamenti.get(i).getInsegnamentoOfferto().getId() == insegnamentoOfferto.getId();
         }
         return found;
+    }
+
+    public Insegnamento findInsegnamentoByInsegnamentoOfferto(InsegnamentoOfferto insegnamentoOfferto) {
+        boolean found = false;
+        Insegnamento insegnamento = null;
+        for (int i = 0; i < insegnamenti.size() && !found; i++) {
+            if (insegnamenti.get(i).getInsegnamentoOfferto().getId() == insegnamentoOfferto.getId()) {
+                found = true;
+                insegnamento = insegnamenti.get(i);
+            }
+        }
+        return insegnamento;
     }
 }

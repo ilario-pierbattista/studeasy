@@ -207,7 +207,6 @@ public class Agenda extends AbstractView {
 
                 AttivitaEventoView attivitaEventoView = new AttivitaEventoView(categoria, docente, luogo, orainizio, orainizio, orafine);
                 activitiespanel.add(attivitaEventoView.activitypanel);
-
             }
         }
     }

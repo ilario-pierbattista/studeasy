@@ -10,6 +10,7 @@ import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.InsegnamentoOfferto;
 import org.oop.model.entities.Utente;
 import org.oop.view.Mainframe;
+import org.oop.view.profilo.FormLibretto;
 import org.oop.view.profilo.FormRegistrazione;
 
 import javax.swing.*;
@@ -95,8 +96,6 @@ public class FormRegistrazioneController {
             utenteDAO.update(utente);
         }
         if (compilazioneLibretto) {
-            // @TODO far partire il form di compilazione del libretto
-            // @TODO cambiare con la action del form le righe seguenti
             for (InsegnamentoOfferto insegnamentoOfferto : utente.getLibretto().getCorso().getInsegnamentiObbligatori()) {
                 Insegnamento insegnamento = new Insegnamento(insegnamentoOfferto);
                 utente.getLibretto().addInsegnamento(insegnamento);

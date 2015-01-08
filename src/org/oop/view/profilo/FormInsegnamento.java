@@ -77,15 +77,6 @@ public class FormInsegnamento extends AbstractForm {
         dataField = new JFormattedTextField(dateformat);
     }
 
-
-    /**
-     * Metodo che chiude il form
-     */
-    public void closeFrame() {
-        frame.dispose();
-    }
-
-
     /* Listener setters */
     public void addConfermaButtonListener(ActionListener listener) {
         confermaButton.addActionListener(listener);
