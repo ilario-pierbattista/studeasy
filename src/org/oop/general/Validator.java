@@ -219,6 +219,26 @@ public class Validator {
     }
 
     /**
+     * Ritorna true solo se non è stato selezionato nessun elemento dal ComboBox
+     *
+     * @param field     JFormattedTextField
+     * @param fieldName Nome del campo
+     * @return
+     */
+    public static boolean isComboBoxEmpty(JComboBox field, String fieldName) {
+        boolean flag;
+
+        if (field.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Devi selezionare un valore dal campo \"" + fieldName + "\" ");
+            flag = true;
+        } else  {
+            flag = false;
+        }
+
+        return flag;
+    }
+
+    /**
      * Controlla che la data di fine sia effetivamente successiva a quella di inizio
      *
      * @param start Data inizio

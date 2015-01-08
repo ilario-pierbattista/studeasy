@@ -58,12 +58,7 @@ public class Docente {
 
     @Override
     public String toString() {
-        return "Docente{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", cognome='" + cognome + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return this.cognome + " " + this.nome;
     }
 
     @Override

@@ -1,9 +1,15 @@
 package org.oop.view.agenda;
 
+import org.oop.general.Validator;
+import org.oop.model.ArrayListComboBoxModel;
+import org.oop.model.dao.DocenteDAO;
+import org.oop.model.entities.Docente;
 import org.oop.view.AbstractForm;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class FormAttivitaPeriodica extends AbstractForm {
     private JFrame frame;
@@ -16,15 +22,17 @@ public class FormAttivitaPeriodica extends AbstractForm {
     private JFormattedTextField hourStartField;
     private JFormattedTextField hourEndField;
     private JTextField aulaField;
-    private JComboBox dayField;
+    private JComboBox dayBox;
 
     public FormAttivitaPeriodica() {
         frame = new JFrame("Crea attività");
         frame.setContentPane(panel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
         frame.pack();
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+
+        setListaDocenti();
     }
 
 
@@ -34,7 +42,38 @@ public class FormAttivitaPeriodica extends AbstractForm {
      * @return
      */
     public boolean isValid(){
-        return false;
+        boolean flag = false;
+        Date hstart = (Date) hourStartField.getValue();
+        Date hend = (Date) hourEndField.getValue();
+
+        if (Validator.isComboBoxEmpty(teacherBox, "Docente")) {
+            flag = false;
+        } else if (Validator.isComboBoxEmpty(dayBox, "Giorno")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(hourStartField,"Ora inizio") || Validator.isFormattedFieldEmpty(hourEndField, "Ora fine")) {
+            flag = false;
+        } else if (Validator.isTextFieldEmpty(aulaField, "Aula")) {
+            flag = false;
+        } else if (Validator.isDateGreater(hstart,hend)) {
+            flag = true;
+        }
+
+        return flag;
+
+    }
+
+
+    /**
+     * Setta la lista dei docenti
+     */
+    private void setListaDocenti() {
+        ArrayList<Docente> docenti = new DocenteDAO().findAll();
+        ArrayList<Docente> listadocenti;
+
+        ArrayListComboBoxModel model = new ArrayListComboBoxModel(docenti);
+
+        teacherBox.setModel(model);
+        teacherBox.setSelectedIndex(0);
     }
 
     /**
@@ -85,9 +124,13 @@ public class FormAttivitaPeriodica extends AbstractForm {
         return aulaField;
     }
 
-    public JComboBox getDayField() {
-        return dayField;
+    public JComboBox getDayBox() {
+        return dayBox;
     }
 
+    /* Setters */
 
+    public void setActivityname(String text) {
+        activityname.setText(text);
+    }
 }
