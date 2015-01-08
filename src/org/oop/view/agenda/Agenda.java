@@ -4,6 +4,7 @@ import org.oop.model.entities.Attivita;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Insegnamento;
 import org.oop.view.AbstractView;
+import org.oop.view.Mainframe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -189,12 +190,13 @@ public class Agenda extends AbstractView {
      */
     public void updateElencoAttivita(Insegnamento insegnamento) {
         ArrayList<Attivita> listaAttivita = insegnamento.getAttivita();
+        activitiespanel.removeAll();
+        Mainframe.refreshView();
 
         if (listaAttivita.size() <= 0) {
+            activitiespanel.add(noAttivitaLabel);
             noAttivitaLabel.setVisible(true);
         } else {
-            noAttivitaLabel.setVisible(false);
-            activitiespanel.removeAll();
             for (Attivita attivita : listaAttivita) {
                 String categoria = attivita.getCategoria();
                 String docente = attivita.getDocente().toString();
