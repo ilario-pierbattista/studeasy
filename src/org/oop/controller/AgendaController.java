@@ -59,6 +59,9 @@ public class AgendaController {
                 view.setInsegnamentiFromCiclo(ciclo);
                 view.updateListaInsegnamenti();
                 view.getListaInsegnamentiTitle().setText("Insegnamenti di " + ciclo.getLabel());
+                view.getDurataCicloLabel().setText(ciclo.getInizio() + "/" + ciclo.getFine());
+
+
             }
         }
     }
@@ -234,8 +237,10 @@ public class AgendaController {
             ListSelectionModel lsm = (ListSelectionModel) e.getSource();
 
             if (!lsm.isSelectionEmpty()) {
-                int index = lsm.getMinSelectionIndex();
-                Insegnamento insegnamento = (Insegnamento) view.getInsegnamentiList().getModel().getElementAt(index);
+                Ciclo ciclo = view.getCicloSelected();
+                Insegnamento insegnamento = view.getInsegnamentoSelected();
+
+                view.getInsegnamentoLabel().setText(insegnamento.getInsegnamentoOfferto().getNome());
 
                 view.updateElencoAttivita(insegnamento);
             }

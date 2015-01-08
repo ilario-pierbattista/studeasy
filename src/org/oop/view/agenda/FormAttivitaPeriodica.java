@@ -6,12 +6,12 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 
 public class FormAttivitaPeriodica extends AbstractForm {
-    public static  JFrame frame;
+    private JFrame frame;
 
     private JPanel panel;
     private JLabel activityname;
     private JButton submitButton;
-    private JButton cancelButton;
+    private JButton periodicaCancelButton;
     private JComboBox teacherBox;
     private JFormattedTextField hourStartField;
     private JFormattedTextField hourEndField;
@@ -38,6 +38,14 @@ public class FormAttivitaPeriodica extends AbstractForm {
     }
 
     /**
+     * Setta componenti GUI custom (rispetto all'editor visuale)
+     */
+    private void createUIComponents() {
+        hourStartField = new JFormattedTextField(hourformat);
+        hourEndField = new JFormattedTextField(hourformat);
+    }
+
+    /**
      * Metodo che chiude il form
      */
     public void closeFrame(){
@@ -49,7 +57,7 @@ public class FormAttivitaPeriodica extends AbstractForm {
         submitButton.addActionListener(listener);
     }
     public void addCancelButtonListener (ActionListener listener){
-        cancelButton.addActionListener(listener);
+        periodicaCancelButton.addActionListener(listener);
     }
 
     /* Getters */
@@ -57,8 +65,8 @@ public class FormAttivitaPeriodica extends AbstractForm {
         return submitButton;
     }
 
-    public JButton getCancelButton() {
-        return cancelButton;
+    public JButton getPeriodicaCancelButton() {
+        return periodicaCancelButton;
     }
 
     public JComboBox getTeacherBox() {
@@ -80,4 +88,6 @@ public class FormAttivitaPeriodica extends AbstractForm {
     public JComboBox getDayField() {
         return dayField;
     }
+
+
 }
