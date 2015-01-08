@@ -3,10 +3,10 @@ package org.oop.view.segreteria;
 import org.oop.general.Validator;
 import org.oop.model.entities.Utente;
 import org.oop.view.AbstractForm;
-import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
 
 public class FormTirocinio extends AbstractForm {
 
@@ -49,7 +49,7 @@ public class FormTirocinio extends AbstractForm {
             flag = false;
         } else if (Validator.isFormattedFieldEmpty(cognome, "Cognome") || !Validator.inputSentenceControl(cognome.getText(), "Cognome")) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(matricola, "Matricola") ) {
+        } else if (Validator.isFormattedFieldEmpty(matricola, "Matricola")) {
             flag = false;
         } else if (Validator.isFormattedFieldEmpty(datanascita, "Data di nascita")) {
             flag = false;
@@ -78,6 +78,18 @@ public class FormTirocinio extends AbstractForm {
         cognome.setValue(utente.getCognome());
         matricola.setValue(utente.getMatricola());
         cfu.setValue(utente.getLibretto().calcolaCFU());
+    }
+
+    public void addFocusListenerCfu(FocusListener listener) {
+        cfu.addFocusListener(listener);
+    }
+
+    public void addFocusListenerMatricola(FocusListener listener) {
+        matricola.addFocusListener(listener);
+    }
+
+    public void addFocusListenerCap(FocusListener listener) {
+        cap.addFocusListener(listener);
     }
 
     public void insSubmitButtonListener(ActionListener l) {
@@ -256,6 +268,6 @@ public class FormTirocinio extends AbstractForm {
         datanascita = new JFormattedTextField(dateformat);
         matricola = new JFormattedTextField(dfMatricola);
         cap = new JFormattedTextField((dfCAP));
-        cfu= new JFormattedTextField(dfCFU);
+        cfu = new JFormattedTextField(dfCFU);
     }
 }
