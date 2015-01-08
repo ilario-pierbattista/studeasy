@@ -30,9 +30,9 @@ public class FormRegistrazione extends AbstractForm {
     public FormRegistrazione() {
         frame = new JFrame("Registrazione");
         frame.setContentPane(panel1);
-        //frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
-        Utils.centerJFrame(frame);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 
     /**

@@ -23,8 +23,8 @@ public class FormCiclo extends AbstractView {
     public FormCiclo() {
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -50,7 +50,7 @@ public class FormCiclo extends AbstractView {
      * @return
      */
     public boolean isValid() {
-        boolean flag;
+        boolean flag = false;
         Date start = (Date) cicloStartField.getValue();
         Date end = (Date) cicloEndField.getValue();
 
@@ -60,8 +60,6 @@ public class FormCiclo extends AbstractView {
             flag = false;
         } else if (Validator.isDateGreater(start,end)){
             flag = true;
-        } else {
-            flag = false;
         }
 
         return flag;

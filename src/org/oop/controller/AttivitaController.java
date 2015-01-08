@@ -1,5 +1,7 @@
 package org.oop.controller;
 
+import org.oop.db.SQLParameters;
+import org.oop.model.entities.Esame;
 import org.oop.view.agenda.*;
 
 import javax.swing.*;
@@ -29,16 +31,28 @@ public class AttivitaController {
     private void openForm(){
         if (newActivityType.equals("progetto") || newActivityType.equals("seminario")) {
             formAttivitaEvento = new FormAttivitaEvento();
-            //formAttivitaEvento.addSubmitButtonListener();
+            if (newActivityType.equals("progetto")) {
+                formAttivitaEvento.setActivityname("Nuovo progetto");
+            } else {
+                formAttivitaEvento.setActivityname("Nuovo seminario");
+            }
+            formAttivitaEvento.addSubmitButtonListener(new SubmitFormEventoAction());
             formAttivitaEvento.addCancelButtonListener(new CloseFormEventoAction());
         } else if (newActivityType.equals("lezione") || newActivityType.equals("laboratorio")) {
             formAttivitaPeriodica = new FormAttivitaPeriodica();
-            //formAttivitaPeriodica.addSubmitButtonListener();
+            if (newActivityType.equals("lezione")) {
+                formAttivitaPeriodica.setActivityname("Nuova lezione");
+            } else {
+                formAttivitaPeriodica.setActivityname("Nuovo laboratorio");
+            }
+            formAttivitaPeriodica.addSubmitButtonListener(new SubmitFormPeriodicaAction());
             formAttivitaPeriodica.addCancelButtonListener(new CloseFormPeriodicaAction());
         } else {
             formEsame = new FormEsame();
-            //formEsame.addSubmitButtonListener();
+            formEsame.setActivityname("Nuovo esame");
+            formEsame.addSubmitButtonListener(new SubmitFormEsameAction());
             formEsame.addCancelButtonListener(new CloseFormEsameAction());
+            formEsame.addTipologiaProvaRadioListener(new SetTipologiaEsameAction());
         }
     }
 
@@ -74,6 +88,8 @@ public class AttivitaController {
 
             }
         }
+
+
     }
 
     /**
@@ -86,6 +102,53 @@ public class AttivitaController {
 
             }
         }
+
+        /**
+         * Restituisce la tipologia di esame selezionata
+         *
+         * @return
+         */
+        private String findTipologiaEsameFromSelection() {
+            String tipologia;
+            AbstractButton scrittoButton = formEsame.getScrittoRadioButton();
+            AbstractButton oraleButton = formEsame.getOraleRadioButton();
+            AbstractButton laboratorioButton = formEsame.getLaboratorioRadioButton();
+
+            if (scrittoButton.isSelected()) {
+                tipologia = Esame.TIPOLOGIA_SCRITTO;
+            } else if (oraleButton.isSelected()) {
+                tipologia = Esame.TIPOLOGIA_ORALE;
+            } else {
+                tipologia = Esame.TIPOLOGIA_LABORATORIO;
+            }
+            return tipologia;
+        }
+    }
+
+    /**
+     * Permette di gestire i radio button per la tipologia dell'esame
+     */
+    class SetTipologiaEsameAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AbstractButton button = (AbstractButton) e.getSource();
+            manageRadioButtons(button);
+        }
+
+        private void manageRadioButtons(AbstractButton b) {
+            formEsame.getOraleRadioButton().setSelected(false);
+            formEsame.getScrittoRadioButton().setSelected(false);
+            formEsame.getLaboratorioRadioButton().setSelected(false);
+
+            if (b.getText().equals("Scritto")) {
+                formEsame.getScrittoRadioButton().setSelected(true);
+            } else if (b.getText().equals("Orale")) {
+                formEsame.getOraleRadioButton().setSelected(true);
+            } else {
+                formEsame.getLaboratorioRadioButton().setSelected(true);
+            }
+        }
+
     }
 
     /**

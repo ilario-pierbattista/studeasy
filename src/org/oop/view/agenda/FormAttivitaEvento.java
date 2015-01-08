@@ -1,9 +1,15 @@
 package org.oop.view.agenda;
 
+import org.oop.general.Validator;
+import org.oop.model.ArrayListComboBoxModel;
+import org.oop.model.dao.DocenteDAO;
+import org.oop.model.entities.Docente;
 import org.oop.view.AbstractForm;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class FormAttivitaEvento extends AbstractForm {
     private JFrame frame;
@@ -27,10 +33,11 @@ public class FormAttivitaEvento extends AbstractForm {
         frame = new JFrame("Crea attività");
         frame.setContentPane(panel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
+        setListaDocenti();
     }
 
 
@@ -40,7 +47,37 @@ public class FormAttivitaEvento extends AbstractForm {
      * @return
      */
     public boolean isValid(){
-        return false;
+        boolean flag = false;
+        Date hstart = (Date) hourStartField.getValue();
+        Date hend = (Date) hourEndField.getValue();
+
+        if (Validator.isComboBoxEmpty(teacherBox, "Docente")) {
+            flag = false;
+        } else if (Validator.isTextFieldEmpty(luogoField, "Luogo")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(dataField, "Giorno")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(hourStartField,"Ora inizio") || Validator.isFormattedFieldEmpty(hourEndField, "Ora fine")) {
+            flag = false;
+        } else if (Validator.isDateGreater(hstart,hend)) {
+            flag = true;
+        }
+
+        return flag;
+    }
+
+
+    /**
+     * Setta la lista dei docenti
+     */
+    private void setListaDocenti() {
+        ArrayList<Docente> docenti = new DocenteDAO().findAll();
+        ArrayList<Docente> listadocenti;
+
+        ArrayListComboBoxModel model = new ArrayListComboBoxModel(docenti);
+
+        teacherBox.setModel(model);
+        teacherBox.setSelectedIndex(0);
     }
 
     /**
@@ -118,5 +155,11 @@ public class FormAttivitaEvento extends AbstractForm {
 
     public JTextField getLuogoField() {
         return luogoField;
+    }
+
+    /* Setters */
+
+    public void setActivityname(String text) {
+        activityname.setText(text);
     }
 }
