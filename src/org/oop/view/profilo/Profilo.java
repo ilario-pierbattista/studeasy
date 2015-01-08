@@ -3,6 +3,7 @@ package org.oop.view.profilo;
 import org.oop.controller.BaseController;
 import org.oop.model.Libretto;
 import org.oop.model.entities.Corso;
+import org.oop.model.entities.Docente;
 import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.Utente;
 import org.oop.view.AbstractView;
@@ -21,7 +22,7 @@ import java.util.Date;
 
 public class Profilo extends AbstractView {
     public JPanel profiloPanel;
-    private JPanel sidebarpanel;
+    private JPanel sidebarPanel;
     private JSplitPane splitpane;
     private JPanel librettopanel;
     private JLabel sidebartitle;
@@ -34,6 +35,9 @@ public class Profilo extends AbstractView {
     private JLabel userMatricolaField;
     private JLabel userCorsoField;
     private JLabel userTipoCorsoField;
+    private JLabel mediaAritmeticaLabel;
+    private JLabel mediaPonderataLabel;
+    private JButton modificaLibrettoButton;
     private JScrollPane scrolpanetable;
     private CustomTableModel model;
 
@@ -72,6 +76,8 @@ public class Profilo extends AbstractView {
         Corso corso = utente.getLibretto().getCorso();
         userCorsoField.setText(corso.getNome());
         userTipoCorsoField.setText(corso.getNomeLivello());
+        mediaAritmeticaLabel.setText(Double.toString(utente.getLibretto().calcolaMediaAritmetica()));
+        mediaPonderataLabel.setText(Double.toString(utente.getLibretto().calcolaMediaPonderata()));
     }
 
     /**
@@ -145,6 +151,10 @@ public class Profilo extends AbstractView {
 
     public void modificaInsegnamentoButtonListener(ActionListener l) {
         modificaInsegnamentoButton.addActionListener(l);
+    }
+
+    public void modificaLibrettoButtonListener(ActionListener l) {
+        modificaLibrettoButton.addActionListener(l);
     }
 
     /* Getters */

@@ -17,6 +17,8 @@ public abstract class AbstractView {
     public DecimalFormat dfCFU = new DecimalFormat("###");
     public DecimalFormat dfVoto = new DecimalFormat("#########");
 
+    public JFrame frame;
+
 
     public AbstractView() {
         dfMatricola.setMaximumIntegerDigits(7);
@@ -28,8 +30,6 @@ public abstract class AbstractView {
         dfVoto.setMaximumIntegerDigits(3);
         dfVoto.setMinimumIntegerDigits(2);
     }
-
-    public JFrame frame;
 
     /**
      * Imposta la visibilità del frame

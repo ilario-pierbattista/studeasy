@@ -104,10 +104,28 @@ public class InsegnamentoOfferto {
         return true;
     }
 
+    public String toString(boolean develMode) {
+        String str;
+        if(develMode) {
+            str = "InsegnamentoOfferto{" +
+                    "docente=" + docente +
+                    ", opzionale=" + opzionale +
+                    ", semestre=" + semestre +
+                    ", anno=" + anno +
+                    ", cfu=" + cfu +
+                    ", nome='" + nome + '\'' +
+                    ", id=" + id +
+                    '}';
+        } else {
+            str = nome.concat(" (")
+                    .concat(Integer.toString(cfu))
+                    .concat(" CFU)");
+        }
+        return str;
+    }
 
     @Override
-    //@TODO: da definire meglio
-    public String toString(){
-        return this.nome;
+    public String toString() {
+        return toString(false);
     }
 }

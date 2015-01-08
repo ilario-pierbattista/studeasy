@@ -3,6 +3,7 @@ package org.oop.controller;
 import org.oop.model.dao.InsegnamentoDAO;
 import org.oop.model.entities.Insegnamento;
 import org.oop.view.profilo.FormInsegnamento;
+import org.oop.view.profilo.FormLibretto;
 import org.oop.view.profilo.FormRegistrazione;
 import org.oop.view.Mainframe;
 import org.oop.view.profilo.Profilo;
@@ -14,6 +15,7 @@ public class ProfiloController {
     private static ProfiloController instance;
     private Profilo view;
     private FormInsegnamento formInsegnamento;
+    private FormLibretto formLibretto;
     private InsegnamentoDAO insegnamentoDAO;
 
     public ProfiloController(Profilo view) {
@@ -21,6 +23,7 @@ public class ProfiloController {
 
         view.modificaProfiloButtonListener(new registraFormAction());
         view.modificaInsegnamentoButtonListener(new insegnamentoFormAction());
+        view.modificaLibrettoButtonListener(new ModificaLibrettoAction());
         instance = this;
 
         insegnamentoDAO = new InsegnamentoDAO();
@@ -72,6 +75,15 @@ public class ProfiloController {
         @Override
         public void actionPerformed(ActionEvent e) {
             formInsegnamento.closeFrame();
+        }
+    }
+
+    class ModificaLibrettoAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            formLibretto = new FormLibretto();
+            formLibretto.setLibretto(BaseController.getUtenteCorrente().getLibretto());
+            formLibretto.setVisible(true);
         }
     }
 

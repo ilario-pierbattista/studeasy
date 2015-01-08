@@ -34,7 +34,7 @@ public class FormInsegnamento extends AbstractForm {
      * @return
      */
     public boolean isValid(){
-        boolean flag = false;
+        boolean flag = true;
 
         if (Validator.isFormattedFieldEmpty(dataField, "Data di superamento")) {
             flag = false;

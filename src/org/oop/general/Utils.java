@@ -102,6 +102,21 @@ public class Utils {
     }
 
     /**
+     * Arrotonda un numero ad uno specifico numero di cifre
+     * @param value Numero da arrotondare
+     * @param decimalPlaces Numero di cifre dopo la virgola richieste
+     * @return Numero arrotondato
+     */
+    public static double round(double value, int decimalPlaces) {
+        if(decimalPlaces < 0) {
+            throw new IllegalArgumentException("'decimalPlaces' deve essere un intero maggiore di zero");
+        }
+        value *= Math.pow(10, decimalPlaces);
+        value = Math.round(value);
+        return value / Math.pow(10, decimalPlaces);
+    }
+
+    /**
      * Metodi per il controllo dell'input ("espressioni regolari")
      * scrive la stringa passata come parametro con la lettera maiuscola
      */

@@ -97,7 +97,7 @@ public class FormRegistrazioneController {
         if (compilazioneLibretto) {
             // @TODO far partire il form di compilazione del libretto
             // @TODO cambiare con la action del form le righe seguenti
-            for(InsegnamentoOfferto insegnamentoOfferto : utente.getLibretto().getCorso().getInsegnamentiObbligatori()) {
+            for (InsegnamentoOfferto insegnamentoOfferto : utente.getLibretto().getCorso().getInsegnamentiObbligatori()) {
                 Insegnamento insegnamento = new Insegnamento(insegnamentoOfferto);
                 utente.getLibretto().addInsegnamento(insegnamento);
                 insegnamentoDAO.persist(insegnamento);
@@ -105,7 +105,7 @@ public class FormRegistrazioneController {
             utenteDAO.update(utente);
         }
         utenteDAO.flush();
-        if(ProfiloController.getInstance() != null) {
+        if (ProfiloController.getInstance() != null) {
             ProfiloController.getInstance().updateView();
         }
     }
@@ -173,6 +173,7 @@ public class FormRegistrazioneController {
             }
         }
     }
+
     class FocusMatricola implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
@@ -181,15 +182,10 @@ public class FormRegistrazioneController {
 
         @Override
         public void focusLost(FocusEvent e) {
-            if (!Validator.controlloCifre(view.getMatricola().getText(),7)){
+            if (!Validator.controlloCifre(view.getMatricola().getText(), 7)) {
                 JOptionPane.showMessageDialog(null, "La matricola deve essere di 7 cifre");
                 view.getMatricola().setText("");
-
             }
-
         }
-
-
-
     }
 }
