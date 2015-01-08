@@ -8,7 +8,7 @@ import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Insegnamento;
 import org.oop.view.agenda.Agenda;
-import org.oop.view.agenda.AttivitaView;
+import org.oop.view.agenda.AttivitaEventoView;
 import org.oop.view.agenda.FormCiclo;
 import org.oop.view.agenda.ModalAddInsegnamento;
 
@@ -92,7 +92,7 @@ public class AgendaController {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             String activityType = Utils.explodeStringForSpace(actionEvent.getActionCommand(), 1);
-            AttivitaView attivitaview = new AttivitaView(activityType);
+            AttivitaEventoView attivitaview = new AttivitaEventoView(activityType);
             AttivitaController attivitacontroller = new AttivitaController(attivitaview, activityType);
         }
     }

@@ -1,5 +1,6 @@
 package org.oop.view.agenda;
 
+import org.oop.model.entities.Attivita;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Insegnamento;
 import org.oop.view.AbstractView;
@@ -8,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Agenda extends AbstractView {
     private static Agenda instance;
@@ -37,6 +39,7 @@ public class Agenda extends AbstractView {
     private JButton addInsegnamentoButton;
     private JButton removeInsegnamentoButton;
     private JLabel listaInsegnamentiTitle;
+    private JLabel noAttivitaLabel;
     private JLabel nomeCicloLabel;
 
     public Agenda() {
@@ -61,7 +64,7 @@ public class Agenda extends AbstractView {
      *
      * @param attivita
      */
-    public void addAttivita(AttivitaView attivita) {
+    public void addAttivita(AttivitaEventoView attivita) {
         activitiespanel.add(attivita.activitypanel);
     }
 
@@ -185,7 +188,25 @@ public class Agenda extends AbstractView {
      * che gli si è passato come parametro
      */
     public void updateElencoAttivita(Insegnamento insegnamento) {
+        ArrayList<Attivita> listaAttivita = insegnamento.getAttivita();
 
+        if (listaAttivita.size() <= 0) {
+            noAttivitaLabel.setVisible(true);
+        } else {
+            noAttivitaLabel.setVisible(false);
+            for (Attivita attivita : listaAttivita) {
+                String name = attivita.getCategoria();
+                String docente = attivita.getDocente().toString();
+                String luogo = attivita.getLuogo();
+                //String giorno = attivita.getData() Vale solo se AttivitaEvento ;
+                Date orainizio = attivita.getOraInizio();
+                Date orafine = attivita.getOraFine();
+
+                AttivitaEventoView attivitaEventoView = new AttivitaEventoView(name, docente, luogo, orainizio, orainizio, orafine);
+                activitiespanel.add(attivitaEventoView.activitypanel);
+
+            }
+        }
     }
 
     /**

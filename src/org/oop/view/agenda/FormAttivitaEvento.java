@@ -3,11 +3,13 @@ package org.oop.view.agenda;
 import org.oop.general.Validator;
 import org.oop.model.ArrayListComboBoxModel;
 import org.oop.model.dao.DocenteDAO;
+import org.oop.model.entities.AttivitaEvento;
 import org.oop.model.entities.Docente;
 import org.oop.view.AbstractForm;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -38,6 +40,22 @@ public class FormAttivitaEvento extends AbstractForm {
         frame.setVisible(true);
 
         setListaDocenti();
+    }
+
+    /**
+     * Metodo che prende i valori dei campi del form e li mette dentro un oggetto AttivitaEvento
+     * @return
+     */
+    public AttivitaEvento getNuovaAttivita() {
+        AttivitaEvento attivita = new AttivitaEvento();
+        attivita.setDocente((Docente) teacherBox.getSelectedItem())
+                .setLuogo(luogoField.getText())
+                .setOraInizio(new Time(((Date) hourStartField.getValue()).getTime()))
+                .setOraFine(new Time(((Date) hourEndField.getValue()).getTime()));
+        attivita.setData((Date) dataField.getValue());
+
+        return attivita;
+
     }
 
 
