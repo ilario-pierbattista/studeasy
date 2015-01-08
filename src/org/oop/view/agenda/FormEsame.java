@@ -11,7 +11,7 @@ public class FormEsame extends AbstractForm {
     private JPanel panel;
     private JLabel activityname;
     private JButton submitButton;
-    private JButton cancelButton;
+    private JButton esameCancelButton;
     private JFormattedTextField dataField;
     private JFormattedTextField hourStartField;
     private JFormattedTextField hourEndField;
@@ -39,18 +39,28 @@ public class FormEsame extends AbstractForm {
     }
 
     /**
+     * Setta componenti GUI custom (rispetto all'editor visuale)
+     */
+    private void createUIComponents() {
+        dataField = new JFormattedTextField(dateformat);
+        hourStartField = new JFormattedTextField(hourformat);
+        hourEndField = new JFormattedTextField(hourformat);
+    }
+
+    /**
      * Metodo che chiude il form
      */
     public void closeFrame(){
         frame.dispose();
     }
 
+
     /* Listeners setters */
     public void addSubmitButtonListener (ActionListener listener){
         submitButton.addActionListener(listener);
     }
     public void addCancelButtonListener (ActionListener listener){
-        cancelButton.addActionListener(listener);
+        esameCancelButton.addActionListener(listener);
     }
 
     /* Getters */
@@ -59,8 +69,8 @@ public class FormEsame extends AbstractForm {
         return submitButton;
     }
 
-    public JButton getCancelButton() {
-        return cancelButton;
+    public JButton getEsameCancelButton() {
+        return esameCancelButton;
     }
 
     public JFormattedTextField getDataField() {
@@ -90,4 +100,5 @@ public class FormEsame extends AbstractForm {
     public JRadioButton getOraleRadioButton() {
         return oraleRadioButton;
     }
+
 }

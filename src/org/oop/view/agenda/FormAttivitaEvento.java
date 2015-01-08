@@ -2,14 +2,12 @@ package org.oop.view.agenda;
 
 import org.oop.general.Validator;
 import org.oop.view.AbstractForm;
-import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
 public class FormAttivitaEvento extends AbstractForm {
     private JFrame frame;
-
     private JPanel panel;
     private JTextField namefield;
     private JTextField teacherfield;
@@ -17,7 +15,7 @@ public class FormAttivitaEvento extends AbstractForm {
     private JFormattedTextField dataField;
     private JTextArea descriptionfield;
     private JButton submitButton;
-    private JButton cancelButton;
+    private JButton eventoCancelButton;
     private JLabel activityname;
     private JFormattedTextField hourStartField;
     private JFormattedTextField hourEndField;
@@ -33,7 +31,9 @@ public class FormAttivitaEvento extends AbstractForm {
         frame.setLocationRelativeTo(null);
         frame.pack();
         frame.setVisible(true);
+
     }
+
 
     /**
      * Metodo di appoggio che controlla che i campi del form siano stati compilati
@@ -80,6 +80,8 @@ public class FormAttivitaEvento extends AbstractForm {
      */
     private void createUIComponents() {
         dataField = new JFormattedTextField(dateformat);
+        hourEndField = new JFormattedTextField(hourformat);
+        hourStartField = new JFormattedTextField(hourformat);
     }
 
     /**
@@ -94,7 +96,7 @@ public class FormAttivitaEvento extends AbstractForm {
         submitButton.addActionListener(listener);
     }
     public void addCancelButtonListener (ActionListener listener){
-        cancelButton.addActionListener(listener);
+        eventoCancelButton.addActionListener(listener);
     }
 
     /* Getters */
@@ -107,8 +109,8 @@ public class FormAttivitaEvento extends AbstractForm {
         return submitButton;
     }
 
-    public JButton getCancelButton() {
-        return cancelButton;
+    public JButton getEventoCancelButton() {
+        return eventoCancelButton;
     }
 
     public JTextField getTeacherfield() {

@@ -16,8 +16,8 @@ public class Agenda extends AbstractView {
     private JSplitPane splitpane;
     private JPanel sidebarpanel;
     private JPanel activitypanel;
-    private JLabel insegnamentolabel;
-    private JLabel durataciclolabel;
+    private JLabel insegnamentoLabel;
+    private JLabel durataCicloLabel;
     private JPanel buttonspanel;
     private JButton lezioneButton;
     private JButton laboratorioButton;
@@ -125,6 +125,7 @@ public class Agenda extends AbstractView {
 
         if (listmodel.getSize() <= 0) {
             removeciclobutton.setEnabled(false);
+            durataCicloLabel.setText("");
         } else {
             removeciclobutton.setEnabled(true);
             if (index == listmodel.getSize()) {
@@ -147,6 +148,7 @@ public class Agenda extends AbstractView {
 
         if (insegnamentiList.getModel().getSize() <= 0 || ciclilist.getModel().getSize() <= 0) {
             removeInsegnamentoButton.setEnabled(false);
+            insegnamentoLabel.setText("");
         } else {
             removeInsegnamentoButton.setEnabled(true);
             if (index == listModel.getSize()) {
@@ -196,12 +198,12 @@ public class Agenda extends AbstractView {
     }
 
     /* Getters */
-    public JLabel getInsegnamentolabel() {
-        return insegnamentolabel;
+    public JLabel getInsegnamentoLabel() {
+        return insegnamentoLabel;
     }
 
-    public JLabel getDurataciclolabel() {
-        return durataciclolabel;
+    public JLabel getDurataCicloLabel() {
+        return durataCicloLabel;
     }
 
     public JButton getLezioneButton() {
