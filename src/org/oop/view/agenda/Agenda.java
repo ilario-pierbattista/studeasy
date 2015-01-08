@@ -194,15 +194,16 @@ public class Agenda extends AbstractView {
             noAttivitaLabel.setVisible(true);
         } else {
             noAttivitaLabel.setVisible(false);
+            activitiespanel.removeAll();
             for (Attivita attivita : listaAttivita) {
-                String name = attivita.getCategoria();
+                String categoria = attivita.getCategoria();
                 String docente = attivita.getDocente().toString();
                 String luogo = attivita.getLuogo();
                 //String giorno = attivita.getData() Vale solo se AttivitaEvento ;
                 Date orainizio = attivita.getOraInizio();
                 Date orafine = attivita.getOraFine();
 
-                AttivitaEventoView attivitaEventoView = new AttivitaEventoView(name, docente, luogo, orainizio, orainizio, orafine);
+                AttivitaEventoView attivitaEventoView = new AttivitaEventoView(categoria, docente, luogo, orainizio, orainizio, orafine);
                 activitiespanel.add(attivitaEventoView.activitypanel);
 
             }
