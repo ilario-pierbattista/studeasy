@@ -1,6 +1,5 @@
 package org.oop.view.agenda;
 
-import org.oop.general.Validator;
 import org.oop.view.AbstractForm;
 
 import javax.swing.*;
@@ -41,38 +40,7 @@ public class FormAttivitaEvento extends AbstractForm {
      * @return
      */
     public boolean isValid(){
-        boolean flag;
-
-        if (Validator.isTextFieldEmpty(teacherfield,"Docente")){
-            flag = false;
-        } else if (Validator.isTextFieldEmpty(aulafield,"Aula")){
-            flag = false;
-        } else if (Validator.isFormattedFieldEmpty(dataField,"Data")){
-            flag = false;
-        } else {
-            return true;
-        }
-
-        return flag;
-    }
-
-    /**
-     * Setta il tipo dell'attività in base al bottone che è stato cliccato
-     */
-    public void setType(String type){
-        activityType = type;
-
-        if(activityType.equals("lezione")){
-            activityname.setText("Lezione");
-        } else if (activityType.equals("laboratorio")){
-            activityname.setText("Laboratorio");
-        } else if (activityType.equals("progetto")){
-            activityname.setText("Progetto");
-        } else if (activityType.equals("esame")){
-            activityname.setText("Esame");
-        } else if (activityType.equals("seminario")){
-            activityname.setText("Seminario");
-        }
+        return false;
     }
 
     /**
