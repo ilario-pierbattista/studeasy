@@ -80,10 +80,19 @@ public class FormLibretto extends AbstractForm {
      */
     private void setInsegnamenti() {
         ArrayList<InsegnamentoOfferto> insegnamenti = copiaLibretto.getCorso().getInsegnamentiOpzionali();
+        ArrayList<Integer> selectedIndices = new ArrayList<Integer>(6);
         for (int i = 0; i < insegnamenti.size(); i++) {
             listModel.addElement(insegnamenti.get(i));
+            if(copiaLibretto.hasInsegnamentoOfferto(insegnamenti.get(i))) {
+                selectedIndices.add(i);
+            }
             /** @TODO impostare come selezionati gli insegnamenti già presenti nel libretto */
         }
+        int[] indici = new int[selectedIndices.size()];
+        for (int i = 0; i < selectedIndices.size(); i++) {
+            indici[i] = selectedIndices.get(i);
+        }
+        insList.setSelectedIndices(indici);
     }
 
     /**
