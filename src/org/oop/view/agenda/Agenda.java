@@ -1,5 +1,6 @@
 package org.oop.view.agenda;
 
+import org.apache.commons.lang3.text.WordUtils;
 import org.oop.model.entities.*;
 import org.oop.view.AbstractView;
 import org.oop.view.Mainframe;
@@ -198,7 +199,7 @@ public class Agenda extends AbstractView {
                 noAttivitaLabel.setVisible(true);
             } else {
                 for (org.oop.model.entities.Attivita attivita : listaAttivita) {
-                    String categoria = attivita.getCategoria();
+                    String categoria = WordUtils.capitalize(attivita.getCategoria());
                     String docente = attivita.getDocente().toString();
                     String ruoloDocente = attivita.getRuoloDocente();
                     String luogo = attivita.getLuogo();
