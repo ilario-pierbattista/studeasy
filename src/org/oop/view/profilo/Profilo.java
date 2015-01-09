@@ -45,7 +45,7 @@ public class Profilo extends AbstractView {
     public Profilo() {
         super();
         //Setta la larghezza della sidebar
-        splitpane.setDividerLocation(300 + splitpane.getInsets().left);
+        //splitpane.setDividerLocation(300 + splitpane.getInsets().left);
         //Elimina i bordi
         splitpane.setBorder(null);
         //Setta il modello alla tabella
