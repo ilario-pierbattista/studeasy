@@ -1,14 +1,19 @@
 package org.oop.view.agenda;
 
+import org.oop.general.Utils;
 import org.oop.general.Validator;
 import org.oop.model.ArrayListComboBoxModel;
 import org.oop.model.dao.DocenteDAO;
+import org.oop.model.entities.AttivitaEvento;
+import org.oop.model.entities.AttivitaPeriodica;
 import org.oop.model.entities.Docente;
 import org.oop.view.AbstractForm;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class FormAttivitaPeriodica extends AbstractForm {
@@ -18,11 +23,12 @@ public class FormAttivitaPeriodica extends AbstractForm {
     private JLabel activityname;
     private JButton submitButton;
     private JButton periodicaCancelButton;
-    private JComboBox teacherBox;
+    private JComboBox<Docente> teacherBox;
     private JFormattedTextField hourStartField;
     private JFormattedTextField hourEndField;
     private JTextField aulaField;
     private JComboBox dayBox;
+    private String categoria;
 
     public FormAttivitaPeriodica() {
         frame = new JFrame("Crea attività");
@@ -35,6 +41,41 @@ public class FormAttivitaPeriodica extends AbstractForm {
         setListaDocenti();
     }
 
+    /**
+     * Metodo che prende i valori dei campi del form e li mette dentro un oggetto AttivitaPeriodica
+     * @return
+     */
+    public AttivitaPeriodica getNuovaAttivita() {
+        AttivitaPeriodica attivita = new AttivitaPeriodica();
+        Date oraInizio = (Date) hourStartField.getValue();
+        Date oraFine = (Date) hourEndField.getValue();
+        attivita.setDocente((Docente) teacherBox.getSelectedItem())
+                .setOraInizio(Utils.dateToLocaltime(oraInizio))
+                .setOraFine(Utils.dateToLocaltime(oraFine))
+                .setCategoria(categoria);
+        attivita.setGiorno(convertDayToInt(dayBox.getSelectedItem().toString()));
+
+        return attivita;
+
+    }
+
+    private int convertDayToInt(String giorno){
+        int valore = Calendar.MONDAY;
+
+        if (giorno.equals("Lunedì")) {
+            valore = Calendar.MONDAY;
+        } else if (giorno.equals("Martedì")) {
+            valore = Calendar.TUESDAY;
+        } else if (giorno.equals("Mercoledì")) {
+            valore = Calendar.WEDNESDAY;
+        } else if (giorno.equals("Giovedì")) {
+            valore = Calendar.THURSDAY;
+        } else if (giorno.equals("Venerdì")) {
+            valore = Calendar.FRIDAY;
+        }
+
+        return valore;
+    }
 
     /**
      * Metodo di appoggio che controlla che i campi del form siano stati compilati
@@ -68,7 +109,6 @@ public class FormAttivitaPeriodica extends AbstractForm {
      */
     private void setListaDocenti() {
         ArrayList<Docente> docenti = new DocenteDAO().findAll();
-        ArrayList<Docente> listadocenti;
 
         ArrayListComboBoxModel model = new ArrayListComboBoxModel(docenti);
 
@@ -132,5 +172,9 @@ public class FormAttivitaPeriodica extends AbstractForm {
 
     public void setActivityname(String text) {
         activityname.setText(text);
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

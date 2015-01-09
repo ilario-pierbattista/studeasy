@@ -51,6 +51,7 @@ public class AttivitaController {
             } else {
                 formAttivitaEvento.setActivityname("Nuovo seminario");
             }
+            formAttivitaEvento.setCategoria(newActivityType);
             formAttivitaEvento.addSubmitButtonListener(new SubmitFormEventoAction());
             formAttivitaEvento.addCancelButtonListener(new CloseFormEventoAction());
         } else if (newActivityType.equals(Attivita.CATEGORIA_LEZIONE) || newActivityType.equals(Attivita.CATEGORIA_LABORATORIO)) {
@@ -60,9 +61,11 @@ public class AttivitaController {
             } else {
                 formAttivitaPeriodica.setActivityname("Nuovo laboratorio");
             }
+            formAttivitaPeriodica.setCategoria(newActivityType);
             formAttivitaPeriodica.addSubmitButtonListener(new SubmitFormPeriodicaAction());
             formAttivitaPeriodica.addCancelButtonListener(new CloseFormPeriodicaAction());
         } else {
+            // In questo caso la categoria è ESAME
             formEsame = new FormEsame();
             formEsame.setActivityname("Nuovo esame");
             formEsame.addSubmitButtonListener(new SubmitFormEsameAction());
@@ -111,7 +114,18 @@ public class AttivitaController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (formAttivitaPeriodica.isValid()) {
+                Ciclo ciclo = Agenda.getInstance().getCicloSelected();
+                Insegnamento insegnamento = Agenda.getInstance().getInsegnamentoSelected();
+                AttivitaPeriodica attivitaPeriodica = formAttivitaPeriodica.getNuovaAttivita();
 
+                insegnamento.addAttivita(attivitaPeriodica);
+
+                attivitaDAO.persist(attivitaPeriodica);
+                cicloDAO.update(ciclo);
+                cicloDAO.flush();
+
+                updateView();
+                formAttivitaPeriodica.closeFrame();
             }
         }
 
@@ -125,7 +139,19 @@ public class AttivitaController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (formEsame.isValid()) {
+                Ciclo ciclo = Agenda.getInstance().getCicloSelected();
+                Insegnamento insegnamento = Agenda.getInstance().getInsegnamentoSelected();
+                Esame attivitaEsame = formEsame.getNuovaAttivita();
+                attivitaEsame.setTipologiaProva(findTipologiaEsameFromSelection());
 
+                insegnamento.addAttivita(attivitaEsame);
+
+                attivitaDAO.persist(attivitaEsame);
+                cicloDAO.update(ciclo);
+                cicloDAO.flush();
+
+                updateView();
+                formEsame.closeFrame();
             }
         }
 

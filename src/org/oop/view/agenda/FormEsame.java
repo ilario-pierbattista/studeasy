@@ -3,11 +3,14 @@ package org.oop.view.agenda;
 import org.oop.general.Validator;
 import org.oop.model.ArrayListComboBoxModel;
 import org.oop.model.dao.DocenteDAO;
+import org.oop.model.entities.Attivita;
 import org.oop.model.entities.Docente;
+import org.oop.model.entities.Esame;
 import org.oop.view.AbstractForm;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -36,6 +39,23 @@ public class FormEsame extends AbstractForm {
         frame.setVisible(true);
 
         setListaDocenti();
+    }
+
+    /**
+     * Metodo che prende i valori dei campi del form e li mette dentro un oggetto Esame
+     * @return
+     */
+    public Esame getNuovaAttivita() {
+        Esame attivita = new Esame();
+        attivita.setDocente((Docente) teacherBox.getSelectedItem())
+                .setOraInizio((LocalTime) hourStartField.getValue())
+                .setOraFine((LocalTime) hourEndField.getValue())
+                .setCategoria(Attivita.CATEGORIA_ESAME);
+        attivita.setData((Date) dataField.getValue());
+        //la tipologia dell'esame si setta nel controller
+
+        return attivita;
+
     }
 
     /**

@@ -35,7 +35,7 @@ public class FormAttivitaEvento extends AbstractForm {
     private JComboBox teacherBox;
     private JTextField luogoField;
 
-    private String activityType;
+    private String categoria;
 
     public FormAttivitaEvento() {
         frame = new JFrame("Crea attività");
@@ -59,7 +59,8 @@ public class FormAttivitaEvento extends AbstractForm {
         attivita.setDocente((Docente) teacherBox.getSelectedItem())
                 .setLuogo(luogoField.getText())
                 .setOraInizio(Utils.dateToLocaltime(oraInizio))
-                .setOraFine(Utils.dateToLocaltime(oraFine));
+                .setOraFine(Utils.dateToLocaltime(oraFine))
+                .setCategoria(categoria);
         attivita.setData((Date) dataField.getValue());
         /** @TODO Il ruolo del docente non può essere null, va impostato */
         attivita.setRuoloDocente(Attivita.DOCENTE);
@@ -189,5 +190,9 @@ public class FormAttivitaEvento extends AbstractForm {
 
     public void setActivityname(String text) {
         activityname.setText(text);
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

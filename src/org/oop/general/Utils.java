@@ -203,11 +203,6 @@ public class Utils {
         return dstring;
     }
 
-    public static String timeToString(LocalTime time) {
-        DateFormat df = new SimpleDateFormat("HH:mm");
-        return df.format(time);
-    }
-
     public static LocalTime dateToLocaltime(Date date) {
         DateFormat df = new SimpleDateFormat("HH:mm:ss");
         String st = df.format(date);
