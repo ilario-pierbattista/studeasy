@@ -94,17 +94,24 @@ public class AgendaController {
     }
 
     public void updateAttivita(Insegnamento insegnamento) {
-        ArrayList<Attivita> listaAttivita = insegnamento.getAttivita();
-
-        if (listaAttivita.size() <= 0) { //se l'insegnamento non ha ancora nessun attività
+        if (insegnamento == null) { // se il ciclo non ha ancora nessun insegnamento
             view.setNoAttivita();
         } else {
-            for (org.oop.model.entities.Attivita attivita : listaAttivita) {
-                org.oop.view.agenda.Attivita vistaAttivita = new org.oop.view.agenda.Attivita(attivita);
-                // Aggiungere listener
-                view.addAttivitaView(vistaAttivita);
+            ArrayList<Attivita> listaAttivita = insegnamento.getAttivita();
+            view.getActivitiespanel().removeAll();
+            Mainframe.refreshView();
+
+            if (listaAttivita.size() <= 0) { //se l'insegnamento non ha ancora nessun attività
+                view.setNoAttivita();
+            } else {
+                for (org.oop.model.entities.Attivita attivita : listaAttivita) {
+                    org.oop.view.agenda.Attivita vistaAttivita = new org.oop.view.agenda.Attivita(attivita);
+
+                    view.addAttivitaView(vistaAttivita);
+                }
             }
         }
+
     }
 
     /**
@@ -124,7 +131,6 @@ public class AgendaController {
         public void actionPerformed(ActionEvent actionEvent) {
             // ActionCommand corrisponde con la stringa che identifica il tipo di attivita
             String activityType = actionEvent.getActionCommand();
-            //AttivitaEventoView attivitaview = new AttivitaEventoView(activityType);
             new AttivitaController(activityType);
         }
     }

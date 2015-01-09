@@ -304,6 +304,9 @@ public class Agenda extends AbstractView {
         return insegnamentiList;
     }
 
+    public JPanel getActivitiespanel() {
+        return activitiespanel;
+    }
 
     /* Listeners setters */
     public void addCicloButtonListener(ActionListener listener) {
