@@ -3,10 +3,7 @@ package org.oop.controller;
 import org.oop.model.dao.AttivitaDAO;
 import org.oop.model.dao.CicloDAO;
 import org.oop.model.dao.InsegnamentoDAO;
-import org.oop.model.entities.AttivitaEvento;
-import org.oop.model.entities.Ciclo;
-import org.oop.model.entities.Esame;
-import org.oop.model.entities.Insegnamento;
+import org.oop.model.entities.*;
 import org.oop.view.agenda.*;
 
 import javax.swing.*;
@@ -23,7 +20,7 @@ public class AttivitaController {
     private CicloDAO cicloDAO;
     private InsegnamentoDAO insegnamentoDAO;
 
-    public AttivitaController(AttivitaEventoView view,String newActivityType){
+    public AttivitaController(AttivitaEventoView view, String newActivityType) {
         this.view = view;
         this.newActivityType = newActivityType;
         attivitaDAO = new AttivitaDAO();
@@ -38,7 +35,7 @@ public class AttivitaController {
     /**
      * Metodo che aggiorna la view
      */
-    private void updateView(){
+    private void updateView() {
         Agenda.getInstance().updateElencoAttivita(Agenda.getInstance().getInsegnamentoSelected());
     }
 
@@ -46,19 +43,19 @@ public class AttivitaController {
      * Metodo per aprire il form corretto in base al bottone cliccato.
      * Setta anche i listeners necessari per il funzionamento.
      */
-    private void openForm(){
-        if (newActivityType.equals("progetto") || newActivityType.equals("seminario")) {
+    private void openForm() {
+        if (newActivityType.equals(Attivita.CATEGORIA_PROGETTO) || newActivityType.equals(Attivita.CATEGORIA_SEMINARIO)) {
             formAttivitaEvento = new FormAttivitaEvento();
-            if (newActivityType.equals("progetto")) {
+            if (newActivityType.equals(Attivita.CATEGORIA_PROGETTO)) {
                 formAttivitaEvento.setActivityname("Nuovo progetto");
             } else {
                 formAttivitaEvento.setActivityname("Nuovo seminario");
             }
             formAttivitaEvento.addSubmitButtonListener(new SubmitFormEventoAction());
             formAttivitaEvento.addCancelButtonListener(new CloseFormEventoAction());
-        } else if (newActivityType.equals("lezione") || newActivityType.equals("laboratorio")) {
+        } else if (newActivityType.equals(Attivita.CATEGORIA_LEZIONE) || newActivityType.equals(Attivita.CATEGORIA_LABORATORIO)) {
             formAttivitaPeriodica = new FormAttivitaPeriodica();
-            if (newActivityType.equals("lezione")) {
+            if (newActivityType.equals(Attivita.CATEGORIA_LEZIONE)) {
                 formAttivitaPeriodica.setActivityname("Nuova lezione");
             } else {
                 formAttivitaPeriodica.setActivityname("Nuovo laboratorio");

@@ -1,6 +1,6 @@
 package org.oop.model.entities;
 
-import java.sql.Time;
+import java.time.LocalTime;
 
 public class AttivitaPeriodica extends Attivita {
 
@@ -11,7 +11,7 @@ public class AttivitaPeriodica extends Attivita {
     private int giorno;
 
     //il costruttore della classe figlia "amplia" quello della classe padre assegnando i valori non inizializzati
-    public AttivitaPeriodica(String aula, Time oraInizio, Time oraFine, Docente docente, String ruoloDocente, String categoria, int giorno) {
+    public AttivitaPeriodica(String aula, LocalTime oraInizio, LocalTime oraFine, Docente docente, String ruoloDocente, String categoria, int giorno) {
         super(aula, oraInizio, oraFine, docente, ruoloDocente, categoria);
         this.giorno = giorno;
     }

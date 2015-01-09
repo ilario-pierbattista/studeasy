@@ -3,7 +3,6 @@ package org.oop.model.dao;
 
 import org.oop.db.DatabaseUtils;
 import org.oop.db.SQLParameters;
-import org.oop.model.entities.Attivita;
 import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.InsegnamentoOfferto;
 import org.oop.model.entities.Utente;
@@ -104,6 +103,7 @@ public class InsegnamentoDAO extends AbstractDAO<Insegnamento> {
         entity.setId(0);
     }
 
+    /** @TODO qui ci dovrebbe essere un bug */
     public void setUtente(Utente utente) {
         if(!utente.getLibretto().getInsegnamenti().isEmpty()) {
             ArrayList<Integer> ids = new ArrayList<Integer>(10);

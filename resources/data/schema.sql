@@ -78,7 +78,7 @@ Create table attivita(
 	tipologia_prova enum('scritto', 'orale', 'laboratorio'),
 	docente int,
 	ruolo_docente enum('docente', 'assistente', 'tutor') not null,
-	ciclo int not null,
+	ciclo int,
 	insegnamento_utente int not null,
 	foreign key (docente) references docente(id),
 	foreign key (ciclo) references ciclo(id)

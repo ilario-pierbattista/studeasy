@@ -5,6 +5,7 @@ import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
 import java.util.Date;
 
 
@@ -20,6 +21,7 @@ public class AttivitaEventoView extends AbstractView {
     private JLabel dataField;
 
 
+
     public AttivitaEventoView(String nomeattivita) {
         activityname.setText(nomeattivita);
         teacher.setText("Docente non definito");
@@ -27,13 +29,13 @@ public class AttivitaEventoView extends AbstractView {
         hourEnd.setText("Orario non definito");
     }
 
-    public AttivitaEventoView(String nomeattivita, String nomeprofessore, String place, Date date, Date hstart, Date hend) {
+    public AttivitaEventoView(String nomeattivita, String nomeprofessore, String place, Date date, LocalTime hstart, LocalTime hend) {
         activityname.setText(nomeattivita);
         teacher.setText(nomeprofessore);
         luogo.setText(place);
         dataField.setText(Utils.dateToString(date,0));
-        hourStart.setText(Utils.dateToString(hstart,1));
-        hourEnd.setText(Utils.dateToString(hend,1));
+        hourStart.setText(Utils.timeToString(hstart));
+        hourEnd.setText(Utils.timeToString(hend));
     }
 
     public JButton getEditbutton() {

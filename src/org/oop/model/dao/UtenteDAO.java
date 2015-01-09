@@ -2,11 +2,8 @@ package org.oop.model.dao;
 
 import org.oop.db.DatabaseUtils;
 import org.oop.db.SQLParameters;
-import org.oop.general.Utils;
 import org.oop.model.Agenda;
 import org.oop.model.Libretto;
-import org.oop.model.entities.Ciclo;
-import org.oop.model.entities.Corso;
 import org.oop.model.entities.Utente;
 
 import java.sql.ResultSet;

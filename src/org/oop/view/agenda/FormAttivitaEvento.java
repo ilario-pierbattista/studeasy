@@ -10,6 +10,7 @@ import org.oop.view.AbstractForm;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -50,8 +51,8 @@ public class FormAttivitaEvento extends AbstractForm {
         AttivitaEvento attivita = new AttivitaEvento();
         attivita.setDocente((Docente) teacherBox.getSelectedItem())
                 .setLuogo(luogoField.getText())
-                .setOraInizio(new Time(((Date) hourStartField.getValue()).getTime()))
-                .setOraFine(new Time(((Date) hourEndField.getValue()).getTime()));
+                .setOraInizio((LocalTime) hourStartField.getValue())
+                .setOraFine((LocalTime) hourEndField.getValue());
         attivita.setData((Date) dataField.getValue());
 
         return attivita;

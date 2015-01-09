@@ -1,6 +1,7 @@
 package org.oop.view.agenda;
 
 import org.oop.model.entities.Attivita;
+import org.oop.model.entities.AttivitaEvento;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Insegnamento;
 import org.oop.view.AbstractView;
@@ -9,6 +10,7 @@ import org.oop.view.Mainframe;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -58,6 +60,11 @@ public class Agenda extends AbstractView {
         //Imposta il layout a 2 colonne
         activitiespanel.setLayout(new GridLayout(0, 2, 20, 20));
 
+        lezioneButton.setActionCommand(Attivita.CATEGORIA_LEZIONE);
+        laboratorioButton.setActionCommand(Attivita.CATEGORIA_LABORATORIO);
+        seminariobutton.setActionCommand(Attivita.CATEGORIA_SEMINARIO);
+        progettobutton.setActionCommand(Attivita.CATEGORIA_PROGETTO);
+        esameButton.setActionCommand(Attivita.CATEGORIA_ESAME);
     }
 
     /**
@@ -202,11 +209,14 @@ public class Agenda extends AbstractView {
                 String docente = attivita.getDocente().toString();
                 String luogo = attivita.getLuogo();
                 //String giorno = attivita.getData() Vale solo se AttivitaEvento ;
-                Date orainizio = attivita.getOraInizio();
-                Date orafine = attivita.getOraFine();
+                LocalTime orainizio = attivita.getOraInizio();
+                LocalTime orafine = attivita.getOraFine();
 
-                AttivitaEventoView attivitaEventoView = new AttivitaEventoView(categoria, docente, luogo, orainizio, orainizio, orafine);
-                activitiespanel.add(attivitaEventoView.activitypanel);
+                if(attivita instanceof AttivitaEvento) {
+                    Date data = ((AttivitaEvento) attivita).getData();
+                    AttivitaEventoView attivitaEventoView = new AttivitaEventoView(categoria, docente, luogo, data, orainizio, orafine);
+                    activitiespanel.add(attivitaEventoView.activitypanel);
+                }
             }
         }
     }

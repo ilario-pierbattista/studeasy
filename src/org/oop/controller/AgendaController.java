@@ -72,7 +72,7 @@ public class AgendaController {
         view.setInsegnamentiFromCiclo(view.getCicloSelected());
         view.updateListaCicli();
         view.updateListaInsegnamenti();
-        if(view.getInsegnamentoSelected() != null) {
+        if (view.getInsegnamentoSelected() != null) {
             view.updateElencoAttivita(view.getInsegnamentoSelected());
         }
     }
@@ -92,7 +92,9 @@ public class AgendaController {
     class AddAttivitaAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            String activityType = Utils.explodeStringForSpace(actionEvent.getActionCommand(), 1);
+            System.out.println(actionEvent.getActionCommand());
+            // ActionCommand corrisponde con la stringa che identifica il tipo di attivita
+            String activityType = actionEvent.getActionCommand();
             AttivitaEventoView attivitaview = new AttivitaEventoView(activityType);
             AttivitaController attivitacontroller = new AttivitaController(attivitaview, activityType);
         }
