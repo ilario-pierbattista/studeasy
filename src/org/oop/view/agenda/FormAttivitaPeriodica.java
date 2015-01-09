@@ -2,27 +2,22 @@ package org.oop.view.agenda;
 
 import org.oop.general.Utils;
 import org.oop.general.Validator;
-import org.oop.model.ArrayListComboBoxModel;
-import org.oop.model.dao.DocenteDAO;
 import org.oop.model.entities.Attivita;
 import org.oop.model.entities.AttivitaPeriodica;
 import org.oop.model.entities.Docente;
-import org.oop.view.AbstractForm;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class FormAttivitaPeriodica extends AbstractForm {
-    private JFrame frame;
+public class FormAttivitaPeriodica extends AbstractFormAttivita {
 
     private JPanel panel;
+    private JComboBox<Docente> teacherBox;
     private JLabel activityname;
     private JButton submitButton;
     private JButton periodicaCancelButton;
-    private JComboBox<Docente> teacherBox;
     private JFormattedTextField hourStartField;
     private JFormattedTextField hourEndField;
     private JTextField aulaField;
@@ -38,7 +33,7 @@ public class FormAttivitaPeriodica extends AbstractForm {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        setListaDocenti();
+        setListaDocenti(teacherBox);
     }
 
     /**
@@ -50,7 +45,8 @@ public class FormAttivitaPeriodica extends AbstractForm {
         AttivitaPeriodica attivita = new AttivitaPeriodica();
         Date oraInizio = (Date) hourStartField.getValue();
         Date oraFine = (Date) hourEndField.getValue();
-        attivita.setDocente((Docente) teacherBox.getSelectedItem())
+        attivita.setId(idAttivita)
+                .setDocente((Docente) teacherBox.getSelectedItem())
                 .setOraInizio(Utils.dateToLocaltime(oraInizio))
                 .setOraFine(Utils.dateToLocaltime(oraFine))
                 .setCategoria(categoria)
@@ -59,7 +55,6 @@ public class FormAttivitaPeriodica extends AbstractForm {
         attivita.setGiorno(convertDayToInt(dayBox.getSelectedItem().toString()));
 
         return attivita;
-
     }
 
     /**
@@ -113,7 +108,7 @@ public class FormAttivitaPeriodica extends AbstractForm {
      * @return
      */
     public boolean isValid() {
-        boolean flag = false;
+        boolean flag = true;
 
         if (Validator.isComboBoxEmpty(teacherBox, "Docente")) {
             flag = false;
@@ -124,23 +119,10 @@ public class FormAttivitaPeriodica extends AbstractForm {
         } else if (Validator.isTextFieldEmpty(aulaField, "Aula")) {
             flag = false;
         } else if (Validator.checkTimeJFormattedText(hourStartField, hourEndField)) {
-            flag = true;
+            flag = false;
         }
 
         return flag;
-    }
-
-
-    /**
-     * Setta la lista dei docenti
-     */
-    private void setListaDocenti() {
-        ArrayList<Docente> docenti = new DocenteDAO().findAll();
-
-        ArrayListComboBoxModel model = new ArrayListComboBoxModel(docenti);
-
-        teacherBox.setModel(model);
-        teacherBox.setSelectedIndex(0);
     }
 
     /**
@@ -153,9 +135,10 @@ public class FormAttivitaPeriodica extends AbstractForm {
         teacherBox.setSelectedItem(attivita.getDocente());
         ruoloDocenteBox.setSelectedItem(attivita.getRuoloDocente());
         dayBox.setSelectedItem(attivita.getNomeGiorno());
-        hourStartField.setText(attivita.getOraInizio().toString());
-        hourEndField.setText(attivita.getOraFine().toString());
+        hourStartField.setValue(Utils.localtimeToDate(attivita.getOraInizio()));
+        hourEndField.setValue(Utils.localtimeToDate(attivita.getOraFine()));
         aulaField.setText(attivita.getLuogo());
+        idAttivita = attivita.getId();
     }
 
     /**
@@ -185,30 +168,6 @@ public class FormAttivitaPeriodica extends AbstractForm {
     /* Getters */
     public JButton getSubmitButton() {
         return submitButton;
-    }
-
-    public JButton getPeriodicaCancelButton() {
-        return periodicaCancelButton;
-    }
-
-    public JComboBox getTeacherBox() {
-        return teacherBox;
-    }
-
-    public JFormattedTextField getHourStartField() {
-        return hourStartField;
-    }
-
-    public JFormattedTextField getHourEndField() {
-        return hourEndField;
-    }
-
-    public JTextField getAulaField() {
-        return aulaField;
-    }
-
-    public JComboBox getDayBox() {
-        return dayBox;
     }
 
     /* Setters */

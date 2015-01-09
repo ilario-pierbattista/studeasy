@@ -37,8 +37,8 @@ public class BaseController {
     }
 
     public static void startController() {
-        new AgendaController(view.agenda);
-        new ProfiloController(view.profilo);
+        new AgendaController(view.agendaView);
+        new ProfiloController(view.profiloView);
         new SegreteriaController(view.segreteria);
     }
 

@@ -47,7 +47,7 @@ public class AttivitaDAO extends AbstractDAO<Attivita> {
             if (periodica) {
                 attivita = new AttivitaPeriodica();
             } else {
-                if (categoria.equals(Attivita.CATEGORIA_ESAME)) {
+                if (categoria.equals(Attivita.ESAME)) {
                     attivita = new Esame();
                 } else {
                     attivita = new AttivitaEvento();
@@ -132,9 +132,10 @@ public class AttivitaDAO extends AbstractDAO<Attivita> {
     public void update(Attivita entity) {
         SQLParameters parameters = generaSQLParams(entity);
         String sql = "UPDATE attivita " +
-                "SET ora_inizio = :ora_inizio, ora_fine = :ora_fine, luogo = :luogo, categoria = :categoria " +
-                "ripetizione_settimanale = :ripetizione_settimanale, giorno = :giorno, data = :data " +
-                "tipologia_prova = :tipologia_prova, docente = :docente, ruolo_docente = :ruolo_docente";
+                "SET ora_inizio = :ora_inizio, ora_fine = :ora_fine, luogo = :luogo, categoria = :categoria, " +
+                "ripetizione_settimanale = :ripetizione_settimanale, giorno = :giorno, data = :data, " +
+                "tipologia_prova = :tipologia_prova, docente = :docente, ruolo_docente = :ruolo_docente " +
+                "WHERE id = :id";
         db.createSqlStatement(sql)
                 .setParameters(parameters)
                 .executeUpdate();

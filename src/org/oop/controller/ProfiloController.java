@@ -9,7 +9,7 @@ import org.oop.view.Mainframe;
 import org.oop.view.profilo.FormInsegnamento;
 import org.oop.view.profilo.FormLibretto;
 import org.oop.view.profilo.FormRegistrazione;
-import org.oop.view.profilo.Profilo;
+import org.oop.view.profilo.ProfiloView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,13 +18,13 @@ import java.util.ArrayList;
 
 public class ProfiloController {
     private static ProfiloController instance;
-    private Profilo view;
+    private ProfiloView view;
     private FormInsegnamento formInsegnamento;
     private FormLibretto formLibretto;
     private InsegnamentoDAO insegnamentoDAO;
     private UtenteDAO utenteDAO;
 
-    public ProfiloController(Profilo view) {
+    public ProfiloController(ProfiloView view) {
         this.view = view;
 
         view.modificaProfiloButtonListener(new registraFormAction());

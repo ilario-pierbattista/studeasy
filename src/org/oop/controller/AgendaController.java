@@ -8,7 +8,8 @@ import org.oop.model.entities.Attivita;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Insegnamento;
 import org.oop.view.Mainframe;
-import org.oop.view.agenda.Agenda;
+import org.oop.view.agenda.AgendaView;
+import org.oop.view.agenda.AttivitaView;
 import org.oop.view.agenda.FormCiclo;
 import org.oop.view.agenda.ModalAddInsegnamento;
 
@@ -21,14 +22,14 @@ import java.util.ArrayList;
 
 public class AgendaController {
     private static AgendaController instance;
-    private Agenda view;
+    private AgendaView view;
     private FormCiclo formcicloview;
     private ModalAddInsegnamento modalAddInsegnamento;
     private org.oop.model.Agenda agenda;
     private Libretto libretto;
     private AttivitaController attivitaController;
 
-    public AgendaController(Agenda view) {
+    public AgendaController(AgendaView view) {
 
         this.view = view;
         instance = this;
@@ -58,7 +59,7 @@ public class AgendaController {
         return instance;
     }
 
-    public Agenda getView() {
+    public AgendaView getView() {
         return view;
     }
 
@@ -95,9 +96,9 @@ public class AgendaController {
                 view.setNoAttivita();
             } else {
                 for (org.oop.model.entities.Attivita attivita : listaAttivita) {
-                    org.oop.view.agenda.Attivita vistaAttivita = new org.oop.view.agenda.Attivita(attivita);
-                    attivitaController.setListenersToView(vistaAttivita);
-                    view.addAttivitaView(vistaAttivita);
+                    AttivitaView vistaAttivitaView = new AttivitaView(attivita);
+                    attivitaController.setListenersToView(vistaAttivitaView);
+                    view.addAttivitaView(vistaAttivitaView);
                 }
             }
         }

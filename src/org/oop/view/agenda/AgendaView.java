@@ -1,19 +1,16 @@
 package org.oop.view.agenda;
 
-import org.apache.commons.lang3.text.WordUtils;
-import org.oop.model.entities.*;
+import org.oop.model.entities.Ciclo;
+import org.oop.model.entities.Insegnamento;
 import org.oop.view.AbstractView;
-import org.oop.view.Mainframe;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class Agenda extends AbstractView {
-    private static Agenda instance;
+public class AgendaView extends AbstractView {
+    private static AgendaView instance;
     public JPanel agendapanel;
 
     private JSplitPane splitpane;
@@ -43,7 +40,7 @@ public class Agenda extends AbstractView {
     private JLabel noAttivitaLabel;
     private JLabel nomeCicloLabel;
 
-    public Agenda() {
+    public AgendaView() {
         //Setto istance a questa instanza in modo da rendere statica la vista
         instance = this;
         //Setta la larghezza della sidebar
@@ -58,11 +55,11 @@ public class Agenda extends AbstractView {
         //Imposta il layout a 2 colonne
         activitiespanel.setLayout(new GridLayout(0, 2, 20, 20));
 
-        lezioneButton.setActionCommand(org.oop.model.entities.Attivita.CATEGORIA_LEZIONE);
-        laboratorioButton.setActionCommand(org.oop.model.entities.Attivita.CATEGORIA_LABORATORIO);
-        seminariobutton.setActionCommand(org.oop.model.entities.Attivita.CATEGORIA_SEMINARIO);
-        progettobutton.setActionCommand(org.oop.model.entities.Attivita.CATEGORIA_PROGETTO);
-        esameButton.setActionCommand(org.oop.model.entities.Attivita.CATEGORIA_ESAME);
+        lezioneButton.setActionCommand(org.oop.model.entities.Attivita.LEZIONE);
+        laboratorioButton.setActionCommand(org.oop.model.entities.Attivita.LABORATORIO);
+        seminariobutton.setActionCommand(org.oop.model.entities.Attivita.SEMINARIO);
+        progettobutton.setActionCommand(org.oop.model.entities.Attivita.PROGETTO);
+        esameButton.setActionCommand(org.oop.model.entities.Attivita.ESAME);
     }
 
     /**
@@ -70,7 +67,7 @@ public class Agenda extends AbstractView {
      *
      * @return
      */
-    public static Agenda getInstance() {
+    public static AgendaView getInstance() {
         return instance;
     }
 
@@ -189,54 +186,7 @@ public class Agenda extends AbstractView {
         }
     }
 
-    /**
-     * Metodo che carica la lista delle attivita in relazione all'insegnamento
-     * che gli si è passato come parametro
-     */
-    public void updateElencoAttivita(Insegnamento insegnamento) {
-        if (insegnamento == null) { // se il ciclo non ha ancora nessun insegnamento
-            activitiespanel.removeAll();
-            activitiespanel.add(noAttivitaLabel);
-            noAttivitaLabel.setVisible(true);
-        } else {
-            ArrayList<org.oop.model.entities.Attivita> listaAttivita = insegnamento.getAttivita();
-            activitiespanel.removeAll();
-            Mainframe.refreshView();
-
-            if (listaAttivita.size() <= 0) { //se l'insegnamento non ha ancora nessun attività
-                activitiespanel.add(noAttivitaLabel);
-                noAttivitaLabel.setVisible(true);
-            } else {
-                for (org.oop.model.entities.Attivita attivita : listaAttivita) {
-                    String categoria = WordUtils.capitalize(attivita.getCategoria());
-                    String docente = attivita.getDocente().toString();
-                    String ruoloDocente = attivita.getRuoloDocente();
-                    String luogo = attivita.getLuogo();
-                    LocalTime orainizio = attivita.getOraInizio();
-                    LocalTime orafine = attivita.getOraFine();
-
-                    if (attivita instanceof AttivitaEvento) { //se l'attivita è di  tipo AttivitaEvento (Progetto,Seminario o Esame)
-                        Date data = ((AttivitaEvento) attivita).getData();
-                        if (attivita instanceof Esame) {
-                            String tipoesame = ((Esame) attivita).getTipologiaProva();
-                            Attivita attivitaEsame = new Attivita(categoria, docente, ruoloDocente, luogo, orainizio, orafine, data, tipoesame);
-                            activitiespanel.add(attivitaEsame.activitypanel);
-                        } else {
-                            Attivita attivitaEventoView = new Attivita(categoria, docente, ruoloDocente, luogo, orainizio, orafine, data);
-                            activitiespanel.add(attivitaEventoView.activitypanel);
-                        }
-
-                    } else if (attivita instanceof AttivitaPeriodica) { //se l'attivita è di  tipo AttivitaEvento (Lezione o Laboratorio)
-                        int giorno = ((AttivitaPeriodica) attivita).getGiorno();
-                        Attivita attivitaPeriodica = new Attivita(categoria, docente, ruoloDocente, luogo, orainizio, orafine, giorno);
-                        activitiespanel.add(attivitaPeriodica.activitypanel);
-                    }
-                }
-            }
-        }
-    }
-
-    public void addAttivitaView(Attivita view) {
+    public void addAttivitaView(AttivitaView view) {
         activitiespanel.add(view.activitypanel);
     }
 

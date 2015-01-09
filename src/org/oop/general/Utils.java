@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -207,6 +208,17 @@ public class Utils {
         String st = df.format(date);
         String[] parts = st.split(":");
         return LocalTime.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+    }
+
+    public static Date localtimeToDate(LocalTime localTime) {
+        DateFormat df = new SimpleDateFormat("dd-MM-YYYY HH:mm");
+        Date date = null;
+        try {
+            date = df.parse("01-01-1970 ".concat(localTime.toString()));
+        } catch (ParseException ee) {
+            ee.printStackTrace();
+        }
+        return date;
     }
 
     public static LocalTime parseLocalTime(String localTime) {

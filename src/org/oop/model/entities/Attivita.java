@@ -6,11 +6,11 @@ public class Attivita {
     /**
      * Valori assumibili dall'attributo categoria
      */
-    public static final String CATEGORIA_LEZIONE = "lezione";
-    public static final String CATEGORIA_LABORATORIO = "laboratorio";
-    public static final String CATEGORIA_PROGETTO = "progetto";
-    public static final String CATEGORIA_ESAME = "esame";
-    public static final String CATEGORIA_SEMINARIO = "seminario";
+    public static final String LEZIONE = "lezione";
+    public static final String LABORATORIO = "laboratorio";
+    public static final String PROGETTO = "progetto";
+    public static final String ESAME = "esame";
+    public static final String SEMINARIO = "seminario";
 
     /**
      * Valori assumibili dall'attributo ruoloDocente

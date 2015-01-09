@@ -2,22 +2,19 @@ package org.oop.view.agenda;
 
 import org.oop.general.Utils;
 import org.oop.general.Validator;
-import org.oop.model.ArrayListComboBoxModel;
-import org.oop.model.dao.DocenteDAO;
 import org.oop.model.entities.Attivita;
 import org.oop.model.entities.Docente;
 import org.oop.model.entities.Esame;
-import org.oop.view.AbstractForm;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Date;
 
 
-public class FormEsame extends AbstractForm {
-    private JFrame frame;
+public class FormEsame extends AbstractFormAttivita {
+
     private JPanel panel;
+    private JComboBox<Docente> teacherBox;
     private JLabel activityname;
     private JButton submitButton;
     private JButton esameCancelButton;
@@ -25,7 +22,6 @@ public class FormEsame extends AbstractForm {
     private JFormattedTextField hourStartField;
     private JFormattedTextField hourEndField;
     private JTextField aulaField;
-    private JComboBox teacherBox;
     private JRadioButton scrittoRadioButton;
     private JRadioButton oraleRadioButton;
     private JRadioButton laboratorioRadioButton;
@@ -39,7 +35,7 @@ public class FormEsame extends AbstractForm {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        setListaDocenti();
+        setListaDocenti(teacherBox);
     }
 
     /**
@@ -51,15 +47,15 @@ public class FormEsame extends AbstractForm {
         Esame attivita = new Esame();
         Date oraInizio = (Date) hourStartField.getValue();
         Date oraFine = (Date) hourEndField.getValue();
-        attivita.setDocente((Docente) teacherBox.getSelectedItem())
+        attivita.setId(idAttivita)
+                .setDocente((Docente) teacherBox.getSelectedItem())
                 .setOraInizio(Utils.dateToLocaltime(oraInizio))
                 .setOraFine(Utils.dateToLocaltime(oraFine))
-                .setCategoria(Attivita.CATEGORIA_ESAME)
+                .setCategoria(Attivita.ESAME)
                 .setLuogo(aulaField.getText())
                 .setRuoloDocente(getRuoloDocente());
         attivita.setData((Date) dataField.getValue());
-        //la tipologia dell'esame si setta nel controller
-
+        attivita.setTipologiaProva(findTipologiaEsameFromSelection());
         return attivita;
     }
 
@@ -90,7 +86,7 @@ public class FormEsame extends AbstractForm {
      * @return
      */
     public boolean isValid() {
-        boolean flag = false;
+        boolean flag = true;
 
         if (Validator.isComboBoxEmpty(teacherBox, "Docente")) {
             flag = false;
@@ -101,25 +97,12 @@ public class FormEsame extends AbstractForm {
         } else if (Validator.isTextFieldEmpty(aulaField, "Aula")) {
             flag = false;
         } else if (!scrittoRadioButton.isSelected() && !oraleRadioButton.isSelected()) {
-            flag = true;
+            flag = false;
         } else if (Validator.checkTimeJFormattedText(hourStartField, hourEndField)) {
-            flag = true;
+            flag = false;
         }
 
         return flag;
-    }
-
-    /**
-     * Setta la lista dei docenti
-     */
-    private void setListaDocenti() {
-        ArrayList<Docente> docenti = new DocenteDAO().findAll();
-        ArrayList<Docente> listadocenti;
-
-        ArrayListComboBoxModel model = new ArrayListComboBoxModel(docenti);
-
-        teacherBox.setModel(model);
-        teacherBox.setSelectedIndex(0);
     }
 
     /**
@@ -131,9 +114,9 @@ public class FormEsame extends AbstractForm {
     public void fillForm(Esame attivita) {
         teacherBox.setSelectedItem(attivita.getDocente());
         ruoloDocenteBox.setSelectedItem(attivita.getRuoloDocente());
-        dataField.setText(Utils.dateToString(attivita.getData(), 0));
-        hourStartField.setText(attivita.getOraInizio().toString());
-        hourEndField.setText(attivita.getOraFine().toString());
+        dataField.setValue(attivita.getData());
+        hourStartField.setValue(Utils.localtimeToDate(attivita.getOraInizio()));
+        hourEndField.setValue(Utils.localtimeToDate(attivita.getOraFine()));
         aulaField.setText(attivita.getLuogo());
         if (attivita.getTipologiaProva().equals("scritto")) {
             scrittoRadioButton.setSelected(true);
@@ -142,6 +125,24 @@ public class FormEsame extends AbstractForm {
         } else {
             laboratorioRadioButton.setSelected(true);
         }
+        idAttivita = attivita.getId();
+    }
+
+    /**
+     * Restituisce la tipologia di esame selezionata
+     *
+     * @return
+     */
+    private String findTipologiaEsameFromSelection() {
+        String tipologia;
+        if (scrittoRadioButton.isSelected()) {
+            tipologia = Esame.TIPOLOGIA_SCRITTO;
+        } else if (oraleRadioButton.isSelected()) {
+            tipologia = Esame.TIPOLOGIA_ORALE;
+        } else {
+            tipologia = Esame.TIPOLOGIA_LABORATORIO;
+        }
+        return tipologia;
     }
 
     /**
@@ -162,6 +163,7 @@ public class FormEsame extends AbstractForm {
 
 
     /* Listeners setters */
+
     public void addSubmitButtonListener(ActionListener listener) {
         submitButton.addActionListener(listener);
     }
@@ -180,30 +182,6 @@ public class FormEsame extends AbstractForm {
 
     public JButton getSubmitButton() {
         return submitButton;
-    }
-
-    public JButton getEsameCancelButton() {
-        return esameCancelButton;
-    }
-
-    public JFormattedTextField getDataField() {
-        return dataField;
-    }
-
-    public JFormattedTextField getHourStartField() {
-        return hourStartField;
-    }
-
-    public JFormattedTextField getHourEndField() {
-        return hourEndField;
-    }
-
-    public JTextField getAulaField() {
-        return aulaField;
-    }
-
-    public JComboBox getTeacherBox() {
-        return teacherBox;
     }
 
     public JRadioButton getScrittoRadioButton() {

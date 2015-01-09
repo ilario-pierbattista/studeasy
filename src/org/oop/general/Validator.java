@@ -271,9 +271,16 @@ public class Validator {
     public static boolean checkTimeJFormattedText(JFormattedTextField begin, JFormattedTextField end) {
         Date oraInizio = (Date) begin.getValue();
         Date oraFine = (Date) end.getValue();
+
         boolean flag = true;
         try {
-            if (isDateGreater(oraInizio, oraFine)) {
+            LocalTime inizio = Utils.dateToLocaltime(oraInizio);
+            LocalTime fine = Utils.dateToLocaltime(oraFine);
+
+            // All'interno dei campi JFormattedTextField, quando l'orario viene editato dall'utente,
+            // anche la data cambia in modo imprevedebile, falsando la validazione. È necessario ricreare
+            // nuovamente due oggetti Date dall'orario per evitare inconvenienti di questo tipo.
+            if (isDateGreater(Utils.localtimeToDate(inizio), Utils.localtimeToDate(fine))) {
                 flag = false;
             }
         } catch (NullPointerException ee) {

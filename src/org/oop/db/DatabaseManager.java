@@ -194,7 +194,6 @@ public class DatabaseManager {
      * @throws SQLException
      */
     private void openConnection(boolean autoCommit) throws SQLException {
-        System.out.println("NEW CONNECTION");
         try {
             Class.forName(config.jdbc_driver);
             connection = DriverManager.getConnection(config.db_url, config.user, config.pass);

@@ -1,7 +1,7 @@
 package org.oop.view;
 
-import org.oop.view.agenda.Agenda;
-import org.oop.view.profilo.Profilo;
+import org.oop.view.agenda.AgendaView;
+import org.oop.view.profilo.ProfiloView;
 import org.oop.view.segreteria.Segreteria;
 
 import javax.swing.*;
@@ -9,8 +9,8 @@ import javax.swing.*;
 
 public class Mainframe {
     final static JFrame frame = new JFrame("Studeasy");
-    public Agenda agenda;
-    public Profilo profilo;
+    public AgendaView agendaView;
+    public ProfiloView profiloView;
     public Segreteria segreteria;
     private JPanel mainpanel;
     private JTabbedPane maintabpane;
@@ -21,11 +21,11 @@ public class Mainframe {
         frame.setSize(1000, 650);
         frame.setLocationRelativeTo(null);
 
-        agenda = new Agenda();
-        profilo = new Profilo();
+        agendaView = new AgendaView();
+        profiloView = new ProfiloView();
         segreteria = new Segreteria();
-        maintabpane.addTab("Agenda", agenda.agendapanel);
-        maintabpane.addTab("Profilo", profilo.profiloPanel);
+        maintabpane.addTab("Agenda", agendaView.agendapanel);
+        maintabpane.addTab("Profilo", profiloView.profiloPanel);
         maintabpane.addTab("Segreteria", segreteria.segreteriapanel);
     }
 

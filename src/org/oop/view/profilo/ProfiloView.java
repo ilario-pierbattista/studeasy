@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Profilo extends AbstractView {
+public class ProfiloView extends AbstractView {
     public JPanel profiloPanel;
     private JPanel sidebarPanel;
     private JSplitPane splitpane;
@@ -39,7 +39,7 @@ public class Profilo extends AbstractView {
     private JScrollPane scrolpanetable;
     private CustomTableModel model;
 
-    public Profilo() {
+    public ProfiloView() {
         super();
         //Setta la larghezza della sidebar
         //splitpane.setDividerLocation(300 + splitpane.getInsets().left);
