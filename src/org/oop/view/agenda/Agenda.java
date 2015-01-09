@@ -1,9 +1,6 @@
 package org.oop.view.agenda;
 
-import org.oop.model.entities.Attivita;
-import org.oop.model.entities.AttivitaEvento;
-import org.oop.model.entities.Ciclo;
-import org.oop.model.entities.Insegnamento;
+import org.oop.model.entities.*;
 import org.oop.view.AbstractView;
 import org.oop.view.Mainframe;
 
@@ -65,15 +62,6 @@ public class Agenda extends AbstractView {
         seminariobutton.setActionCommand(Attivita.CATEGORIA_SEMINARIO);
         progettobutton.setActionCommand(Attivita.CATEGORIA_PROGETTO);
         esameButton.setActionCommand(Attivita.CATEGORIA_ESAME);
-    }
-
-    /**
-     * Metodo che aggiunge l'attività che gli viene passata nel JPanel
-     *
-     * @param attivita
-     */
-    public void addAttivita(AttivitaEventoView attivita) {
-        activitiespanel.add(attivita.activitypanel);
     }
 
     /**
@@ -208,14 +196,24 @@ public class Agenda extends AbstractView {
                 String categoria = attivita.getCategoria();
                 String docente = attivita.getDocente().toString();
                 String luogo = attivita.getLuogo();
-                //String giorno = attivita.getData() Vale solo se AttivitaEvento ;
                 LocalTime orainizio = attivita.getOraInizio();
                 LocalTime orafine = attivita.getOraFine();
 
                 if(attivita instanceof AttivitaEvento) {
                     Date data = ((AttivitaEvento) attivita).getData();
-                    AttivitaEventoView attivitaEventoView = new AttivitaEventoView(categoria, docente, luogo, data, orainizio, orafine);
-                    activitiespanel.add(attivitaEventoView.activitypanel);
+                    if (attivita instanceof Esame) {
+                        String tipoesame = ((Esame) attivita).getTipologiaProva();
+                        AttivitaEventoView attivitaEsame = new AttivitaEventoView(categoria, docente, data, orainizio, orafine, luogo, tipoesame);
+                        activitiespanel.add(attivitaEsame.activitypanel);
+                    } else {
+                        AttivitaEventoView attivitaEventoView = new AttivitaEventoView(categoria, docente, luogo, data, orainizio, orafine);
+                        activitiespanel.add(attivitaEventoView.activitypanel);
+                    }
+
+                } else if (attivita instanceof AttivitaPeriodica) {
+                    int giorno = ((AttivitaPeriodica) attivita).getGiorno();
+                    AttivitaEventoView attivitaPeriodica = new AttivitaEventoView(categoria, docente, giorno, orainizio, orafine);
+                    activitiespanel.add(attivitaPeriodica.activitypanel);
                 }
             }
         }
