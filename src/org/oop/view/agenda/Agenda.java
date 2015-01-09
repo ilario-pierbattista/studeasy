@@ -1,6 +1,7 @@
 package org.oop.view.agenda;
 
 import org.apache.commons.lang3.text.WordUtils;
+import org.oop.controller.AttivitaController;
 import org.oop.model.entities.*;
 import org.oop.view.AbstractView;
 import org.oop.view.Mainframe;
