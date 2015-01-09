@@ -90,6 +90,7 @@ public class AttivitaController {
             org.oop.model.entities.Attivita attivita = attivitaDAO.find(id);
             attivitaDAO.remove(attivita);
             attivitaDAO.flush();
+            AgendaController.getInstance().refreshUtente();
             updateView();
         }
     }

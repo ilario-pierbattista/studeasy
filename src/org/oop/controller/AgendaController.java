@@ -62,6 +62,14 @@ public class AgendaController {
         return view;
     }
 
+    public void refreshUtente() {
+        UtenteDAO utenteDAO = new UtenteDAO();
+        BaseController.setUtenteCorrente(utenteDAO.find(BaseController.getUtenteCorrente().getMatricola()));
+        agenda = BaseController.getUtenteCorrente().getAgenda();
+        libretto = BaseController.getUtenteCorrente().getLibretto();
+        updateView();
+    }
+
     /**
      * Action che aggiorna la lista degli insegnamenti in base al ciclo selezionato
      * dalla lista dei cicli
