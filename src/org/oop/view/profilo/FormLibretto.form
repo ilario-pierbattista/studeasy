@@ -33,8 +33,9 @@
               <foreground color="-16777216"/>
             </properties>
             <border type="line" title="Insegnamenti a scelta">
-              <title-color color="-12500671"/>
-              <color color="-16777216"/>
+              <font/>
+              <title-color awt-color="gray"/>
+              <color awt-color="lightGray"/>
             </border>
             <children>
               <scrollpane id="ba9f6">
