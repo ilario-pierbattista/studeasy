@@ -95,18 +95,24 @@ public class AgendaController {
     }
 
     public void updateAttivita(Insegnamento insegnamento) {
-        ArrayList<Attivita> listaAttivita = insegnamento.getAttivita();
-
-        if (listaAttivita.size() <= 0) { //se l'insegnamento non ha ancora nessun attività
+        if (insegnamento == null) { // se il ciclo non ha ancora nessun insegnamento
             view.setNoAttivita();
         } else {
-            for (org.oop.model.entities.Attivita attivita : listaAttivita) {
-                org.oop.view.agenda.Attivita vistaAttivita = new org.oop.view.agenda.Attivita(attivita);
-                // Aggiungere listener
-                attivitaController.setListenersToView(vistaAttivita);
-                view.addAttivitaView(vistaAttivita);
+            ArrayList<Attivita> listaAttivita = insegnamento.getAttivita();
+            view.getActivitiespanel().removeAll();
+            Mainframe.refreshView();
+
+            if (listaAttivita.size() <= 0) { //se l'insegnamento non ha ancora nessun attività
+                view.setNoAttivita();
+            } else {
+                for (org.oop.model.entities.Attivita attivita : listaAttivita) {
+                    org.oop.view.agenda.Attivita vistaAttivita = new org.oop.view.agenda.Attivita(attivita);
+                    attivitaController.setListenersToView(vistaAttivita);
+                    view.addAttivitaView(vistaAttivita);
+                }
             }
         }
+
     }
 
     /**
@@ -130,7 +136,6 @@ public class AgendaController {
             attivitaController.openForm(activityType);
         }
     }
-
 
     /**
      * Action per aprire il form di aggiunta ciclo
