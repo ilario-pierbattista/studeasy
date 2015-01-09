@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 
 
 public class AttivitaController {
-    private Attivita view;
     private FormAttivitaEvento formAttivitaEvento;
     private FormAttivitaPeriodica formAttivitaPeriodica;
     private FormEsame formEsame;
@@ -22,7 +21,6 @@ public class AttivitaController {
     private InsegnamentoDAO insegnamentoDAO;
 
     public AttivitaController(String newActivityType) {
-        //this.view = view;
         this.newActivityType = newActivityType;
         attivitaDAO = new AttivitaDAO();
         cicloDAO = new CicloDAO();
