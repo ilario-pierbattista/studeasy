@@ -20,6 +20,10 @@ public class Insegnamento {
         this.insegnamentoOfferto = insegnamentoOfferto;
     }
 
+    public boolean esameSostenuto() {
+        return voto != 0;
+    }
+
     public int getId() {
         return id;
     }

@@ -28,7 +28,7 @@
               <splitpane position="left"/>
             </constraints>
             <properties>
-              <background color="-1907998"/>
+              <background color="-1644826"/>
             </properties>
             <border type="none">
               <title-color color="-16777216"/>
@@ -42,7 +42,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <background color="-1907998"/>
+                  <background color="-1644826"/>
                   <dividerSize value="0"/>
                   <orientation value="0"/>
                 </properties>
@@ -54,7 +54,7 @@
                       <splitpane position="right"/>
                     </constraints>
                     <properties>
-                      <background color="-1907998"/>
+                      <background color="-1644826"/>
                     </properties>
                     <border type="none"/>
                     <children>
@@ -92,7 +92,7 @@
                           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
-                          <background color="-1907998"/>
+                          <background color="-1644826"/>
                         </properties>
                         <border type="none"/>
                         <children>
@@ -136,7 +136,7 @@
                       <splitpane position="left"/>
                     </constraints>
                     <properties>
-                      <background color="-1907998"/>
+                      <background color="-1644826"/>
                       <preferredSize width="264" height="207"/>
                     </properties>
                     <border type="none"/>
@@ -241,7 +241,7 @@
               <splitpane position="right"/>
             </constraints>
             <properties>
-              <background color="-1907998"/>
+              <background color="-1644826"/>
             </properties>
             <border type="none"/>
             <children>
@@ -251,7 +251,7 @@
                 </constraints>
                 <properties>
                   <font size="16" style="1"/>
-                  <foreground color="-15859567"/>
+                  <foreground awt-color="black"/>
                   <text value="Nome insegnamento"/>
                 </properties>
               </component>
@@ -269,7 +269,7 @@
                   <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <background color="-1907998"/>
+                  <background color="-1644826"/>
                 </properties>
                 <border type="none">
                   <title-color color="-16777216"/>
@@ -289,7 +289,16 @@
                           <background color="-395273"/>
                         </properties>
                         <border type="none"/>
-                        <children/>
+                        <children>
+                          <component id="dcdfd" class="javax.swing.JLabel" binding="noAttivitaLabel">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                            </constraints>
+                            <properties>
+                              <text value="Nessuna attivita ancora presente"/>
+                            </properties>
+                          </component>
+                        </children>
                       </grid>
                     </children>
                   </scrollpane>
@@ -299,7 +308,7 @@
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-1907998"/>
+                      <background color="-1644826"/>
                     </properties>
                     <border type="none"/>
                     <children>

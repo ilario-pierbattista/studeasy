@@ -35,7 +35,7 @@ public class FormInsegnamento extends AbstractForm {
      * @return
      */
     public boolean isValid(){
-        boolean flag = false;
+        boolean flag = true;
 
         if (Validator.isFormattedFieldEmpty(dataField, "Data di superamento")) {
             flag = false;
@@ -76,15 +76,6 @@ public class FormInsegnamento extends AbstractForm {
     private void createUIComponents() {
         dataField = new JFormattedTextField(dateformat);
     }
-
-
-    /**
-     * Metodo che chiude il form
-     */
-    public void closeFrame() {
-        frame.dispose();
-    }
-
 
     /* Listener setters */
     public void addConfermaButtonListener(ActionListener listener) {

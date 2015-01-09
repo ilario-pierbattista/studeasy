@@ -1,39 +1,41 @@
 package org.oop.view.agenda;
 
+import org.oop.general.Utils;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
+import java.util.Date;
 
-/**
- * Created by toioski on 20/12/14.
- */
 
-public class AttivitaView extends AbstractView {
+public class AttivitaEventoView extends AbstractView {
     public JPanel activitypanel;
 
     private JLabel activityname;
     private JLabel teacher;
     private JButton editbutton;
     private JLabel luogo;
-    private JLabel description;
-    private JLabel hour;
+    private JLabel hourEnd;
+    private JLabel hourStart;
+    private JLabel dataField;
 
 
-    public AttivitaView(String nomeattivita) {
+
+    public AttivitaEventoView(String nomeattivita) {
         activityname.setText(nomeattivita);
         teacher.setText("Docente non definito");
         luogo.setText("Aula non definita");
-        description.setText("Descrizione non definita");
-        hour.setText("Orario non definito");
+        hourEnd.setText("Orario non definito");
     }
 
-    public AttivitaView(String nomeattivita, String nomeprofessore, String a, String h, String d) {
+    public AttivitaEventoView(String nomeattivita, String nomeprofessore, String place, Date date, LocalTime hstart, LocalTime hend) {
         activityname.setText(nomeattivita);
         teacher.setText(nomeprofessore);
-        luogo.setText(a);
-        hour.setText(h);
-        description.setText(d);
+        luogo.setText(place);
+        dataField.setText(Utils.dateToString(date,0));
+        hourStart.setText(Utils.timeToString(hstart));
+        hourEnd.setText(Utils.timeToString(hend));
     }
 
     public JButton getEditbutton() {

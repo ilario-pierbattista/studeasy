@@ -41,7 +41,7 @@ public class Importatore {
     }
 
     public void importaDati() {
-        if(!DatabaseUtils.databaseExists() || overrideSchema) {
+        if (!DatabaseUtils.databaseExists() || overrideSchema) {
             try {
                 // Creazione dello schema
                 DatabaseUtils.execSQLScript(SCHEMA_PATH);
@@ -63,6 +63,7 @@ public class Importatore {
 
     /**
      * Prende l'header del file csv
+     *
      * @return
      */
     private ArrayList<String> parseHeader() {
@@ -116,6 +117,9 @@ public class Importatore {
             corso = createCorsoFromRow(row);
             corsoEsistente = Utils.arraySearch(corso, corsi);
             if (corsoEsistente == null) {
+                // Mancano i dati riguardanti l'esame d'inglese, l'esame di tirocinio
+                // e l'esame di laurea. Ce li "inventiamo".
+                fixEsamiMancanti(corso);
                 corsi.add(corso);
             } else {
                 corso = corsoEsistente;
@@ -133,7 +137,6 @@ public class Importatore {
             insegnamento.setDocente(docente);
             corso.addInsegnamentoOfferto(insegnamento);
         }
-
         return corsi;
     }
 
@@ -147,7 +150,7 @@ public class Importatore {
             for (InsegnamentoOfferto insegnamento : corso.getInsegnamentiOfferti()) {
                 Docente docente = insegnamento.getDocente();
                 // Controllo che il docente non sia già stato inserito nel database
-                if (docente.getId() == 0 || docenteDAO.find(docente.getId()) == null) {
+                if (docente != null && (docente.getId() == 0 || docenteDAO.find(docente.getId()) == null)) {
                     docenteDAO.persist(docente);
                 }
 
@@ -240,5 +243,43 @@ public class Importatore {
             totale = 300;
         }
         return totale;
+    }
+
+    /**
+     * Aggiunge ulteriori insegnamenti all'offerta, per far quadrare
+     * il conto dei cfu
+     *
+     * @param corso
+     */
+    private void fixEsamiMancanti(Corso corso) {
+        InsegnamentoOfferto inglese = new InsegnamentoOfferto();
+        inglese.setNome("Inglese")
+                .setAnno(1)
+                .setSemestre(1)
+                .setCfu(3)
+                .setOpzionale(false);
+        InsegnamentoOfferto tirocinio = new InsegnamentoOfferto();
+        tirocinio.setNome("Tirocinio")
+                .setAnno(3)
+                .setSemestre(2)
+                .setCfu(3)
+                .setOpzionale(false);
+        InsegnamentoOfferto laurea = new InsegnamentoOfferto();
+        laurea.setNome("Prova Finale")
+                .setAnno(3)
+                .setSemestre(2)
+                .setOpzionale(false);
+        if (corso.getLivello() == Corso.TRIENNALE) {
+            corso.addInsegnamentoOfferto(inglese)
+                    .addInsegnamentoOfferto(tirocinio)
+                    .addInsegnamentoOfferto(laurea.setCfu(3));
+        } else if (corso.getLivello() == Corso.MAGISTRALE) {
+            corso.addInsegnamentoOfferto(tirocinio)
+                    .addInsegnamentoOfferto(laurea.setCfu(12));
+        } else {
+            corso.addInsegnamentoOfferto(inglese)
+                    .addInsegnamentoOfferto(tirocinio.setCfu(5))
+                    .addInsegnamentoOfferto(laurea.setCfu(15));
+        }
     }
 }

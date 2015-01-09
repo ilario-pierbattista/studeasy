@@ -54,8 +54,8 @@ public class AttivitaDAO extends AbstractDAO<Attivita> {
                 }
             }
             attivita.setId(rs.getInt("id"))
-                    .setOraInizio(rs.getTime("ora_inizio"))
-                    .setOraFine(rs.getTime("ora_fine"))
+                    .setOraInizio(rs.getTime("ora_inizio").toLocalTime())
+                    .setOraFine(rs.getTime("ora_fine").toLocalTime())
                     .setLuogo(rs.getString("luogo"))
                     .setCategoria(categoria)
                     .setRuoloDocente(rs.getString("ruolo_docente"));
@@ -125,6 +125,7 @@ public class AttivitaDAO extends AbstractDAO<Attivita> {
         int id = db.createSqlStatement(sql)
                 .setParameters(parameters)
                 .executeUpdate();
+        System.out.println(db.getSqlStatement());
         entity.setId(id);
     }
 

@@ -5,6 +5,7 @@ import org.oop.general.Utils;
 
 import java.sql.*;
 import java.sql.Date;
+import java.time.LocalTime;
 import java.util.*;
 
 /**
@@ -82,6 +83,9 @@ public class DatabaseManager {
             } else if (param.getValue() instanceof java.util.Date) {
                 String dateString = DatabaseUtils.getDateStringForSQL((java.util.Date) param.getValue());
                 replace = Utils.singleQuotesToString(dateString);
+            } else if (param.getValue() instanceof LocalTime) {
+                String timeString = DatabaseUtils.getTimeStringForSQL((LocalTime) param.getValue());
+                replace = Utils.singleQuotesToString(timeString);
             } else if (param.getValue() == null) {
                 replace = "NULL";
             }

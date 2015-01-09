@@ -15,7 +15,6 @@ public class Mainframe {
     public Profilo profilo;
     public Segreteria segreteria;
 
-
     public Mainframe() {
         frame.setContentPane(mainpanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,7 +27,10 @@ public class Mainframe {
         maintabpane.addTab("Agenda", agenda.agendapanel);
         maintabpane.addTab("Profilo", profilo.profiloPanel);
         maintabpane.addTab("Segreteria", segreteria.segreteriapanel);
+    }
 
+    public void setSelectedTab(int index) {
+        maintabpane.setSelectedIndex(index);
     }
 
     public static void refreshView() {
@@ -38,5 +40,4 @@ public class Mainframe {
     public static void setVisible(boolean visible) {
         frame.setVisible(visible);
     }
-
 }

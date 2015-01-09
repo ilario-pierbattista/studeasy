@@ -23,8 +23,8 @@ public class BaseController {
             FormRegistrazioneController ctrl = new FormRegistrazioneController(reg);
         } else {
             utenteCorrente = utenti.get(0);
-            startController();
             Mainframe.setVisible(true);
+            startController();
         }
     }
 
@@ -40,5 +40,9 @@ public class BaseController {
 
     public static void setUtenteCorrente(Utente utenteCorrente) {
         BaseController.utenteCorrente = utenteCorrente;
+    }
+
+    public static Mainframe getMainframe() {
+        return view;
     }
 }

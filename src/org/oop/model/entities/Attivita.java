@@ -1,6 +1,6 @@
 package org.oop.model.entities;
 
-import java.sql.Time;
+import java.time.LocalTime;
 
 public class Attivita {
     /**
@@ -21,8 +21,8 @@ public class Attivita {
 
     protected int id;
     private String luogo;
-    private Time oraInizio;
-    private Time oraFine;
+    private LocalTime oraInizio;
+    private LocalTime oraFine;
     private Docente docente;
     //da decidere se i seguenti attributi saranno o meno stringhe
     private String ruoloDocente;
@@ -30,7 +30,7 @@ public class Attivita {
 
 
     //per il costruttore è stato usato il this per evitare confusione nella lettura del codice dato l'elevato numero di parametri
-    public Attivita(String aula, Time oraInizio, Time oraFine, Docente docente, String ruoloDocente, String categoria) {
+    public Attivita(String aula, LocalTime oraInizio, LocalTime oraFine, Docente docente, String ruoloDocente, String categoria) {
         this.luogo = aula;
         this.oraInizio = oraInizio;
         this.oraFine = oraFine;
@@ -62,20 +62,20 @@ public class Attivita {
         return this;
     }
 
-    public Time getOraInizio() {
+    public LocalTime getOraInizio() {
         return oraInizio;
     }
 
-    public Attivita setOraInizio(Time oraInizio) {
+    public Attivita setOraInizio(LocalTime oraInizio) {
         this.oraInizio = oraInizio;
         return this;
     }
 
-    public Time getOraFine() {
+    public LocalTime getOraFine() {
         return oraFine;
     }
 
-    public Attivita setOraFine(Time oraFine) {
+    public Attivita setOraFine(LocalTime oraFine) {
         this.oraFine = oraFine;
         return this;
     }

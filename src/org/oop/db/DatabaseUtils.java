@@ -7,6 +7,7 @@ import org.oop.general.exceptions.RisorsaNonTrovata;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.*;
 
 public class DatabaseUtils {
@@ -145,5 +146,10 @@ public class DatabaseUtils {
     protected static String getDateStringForSQL(java.util.Date date) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return df.format(date);
+    }
+
+    protected static String getTimeStringForSQL(LocalTime time) {
+        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+        return df.format(time);
     }
 }

@@ -9,7 +9,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -102,6 +106,21 @@ public class Utils {
     }
 
     /**
+     * Arrotonda un numero ad uno specifico numero di cifre
+     * @param value Numero da arrotondare
+     * @param decimalPlaces Numero di cifre dopo la virgola richieste
+     * @return Numero arrotondato
+     */
+    public static double round(double value, int decimalPlaces) {
+        if(decimalPlaces < 0) {
+            throw new IllegalArgumentException("'decimalPlaces' deve essere un intero maggiore di zero");
+        }
+        value *= Math.pow(10, decimalPlaces);
+        value = Math.round(value);
+        return value / Math.pow(10, decimalPlaces);
+    }
+
+    /**
      * Metodi per il controllo dell'input ("espressioni regolari")
      * scrive la stringa passata come parametro con la lettera maiuscola
      */
@@ -167,16 +186,25 @@ public class Utils {
 
 
     /**
-     * Imposta il frame al centro dello schermo
-     * NB: va usato dopo il metodo pack()
-     *
-     * @param frame JFrame da centralizzare
+     * Converte la data che gli si passa in stringa nel formato scelto
+     * @param date Data da convertire
+     * @param format 0 per gg-mm-yyyy , 1 per hh:mm
      */
-    public static void centerJFrame(JFrame frame) {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Point middle = new Point(screenSize.width / 2, screenSize.height / 2);
-        Point location = new Point(middle.x - frame.getWidth() / 2,
-                middle.y - frame.getHeight() / 2);
-        frame.setLocation(location);
+    public static String dateToString(Date date, int format) {
+        String dstring;
+        if (format == 0) {
+            DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+            dstring = df.format(date);
+        } else {
+            DateFormat df = new SimpleDateFormat("HH:mm");
+            dstring = df.format(date);
+        }
+
+        return dstring;
+    }
+
+    public static String timeToString(LocalTime time) {
+        DateFormat df = new SimpleDateFormat("HH:mm");
+        return df.format(time);
     }
 }

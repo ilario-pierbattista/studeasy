@@ -3,6 +3,7 @@ package org.oop.view.profilo;
 import org.oop.controller.BaseController;
 import org.oop.model.Libretto;
 import org.oop.model.entities.Corso;
+import org.oop.model.entities.Docente;
 import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.Utente;
 import org.oop.view.AbstractView;
@@ -13,6 +14,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
@@ -21,7 +23,7 @@ import java.util.Date;
 
 public class Profilo extends AbstractView {
     public JPanel profiloPanel;
-    private JPanel sidebarpanel;
+    private JPanel sidebarPanel;
     private JSplitPane splitpane;
     private JPanel librettopanel;
     private JLabel sidebartitle;
@@ -34,21 +36,22 @@ public class Profilo extends AbstractView {
     private JLabel userMatricolaField;
     private JLabel userCorsoField;
     private JLabel userTipoCorsoField;
+    private JLabel mediaAritmeticaLabel;
+    private JLabel mediaPonderataLabel;
+    private JButton modificaLibrettoButton;
     private JScrollPane scrolpanetable;
     private CustomTableModel model;
 
     public Profilo() {
         super();
         //Setta la larghezza della sidebar
-        splitpane.setDividerLocation(260 + splitpane.getInsets().left);
+        splitpane.setDividerLocation(300 + splitpane.getInsets().left);
         //Elimina i bordi
         splitpane.setBorder(null);
         //Setta il modello alla tabella
         model = new CustomTableModel("Insegnamento", "Anno", "Semestre", "CFU", "Data", "Voto");
         librettoTable.setModel(model);
-        librettoTable.setRowHeight(30);
         // Impostazione dei renderer delle celle
-        setCellRenderers();
         modificaInsegnamentoButton.setEnabled(false);
         // Aggiunta di un listener sulla selezione
         librettoTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -57,6 +60,35 @@ public class Profilo extends AbstractView {
                 modificaInsegnamentoButton.setEnabled(true);
             }
         });
+
+        setupTableAspect();
+    }
+
+    /**
+     * Imposta le preferenze grafiche per la tabella
+     */
+    private void setupTableAspect() {
+        //Imposta altezza righe
+        librettoTable.setRowHeight(30);
+        setCellRenderers();
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        librettoTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        librettoTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+        librettoTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+        librettoTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        librettoTable.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+
+        //Imposta dimensioni colonne
+        librettoTable.getColumnModel().getColumn(0).setPreferredWidth(400);
+        librettoTable.getColumnModel().getColumn(1).setPreferredWidth(40);
+        librettoTable.getColumnModel().getColumn(2).setPreferredWidth(40);
+        librettoTable.getColumnModel().getColumn(3).setPreferredWidth(40);
+        librettoTable.getColumnModel().getColumn(4).setPreferredWidth(80);
+        librettoTable.getColumnModel().getColumn(5).setPreferredWidth(40);
+
+
     }
 
     /**
@@ -70,8 +102,11 @@ public class Profilo extends AbstractView {
         userEmailField.setText(utente.getEmail());
         userMatricolaField.setText(Integer.toString(utente.getMatricola()));
         Corso corso = utente.getLibretto().getCorso();
-        userCorsoField.setText(corso.getNome());
+        String c =  corso.getNome().replaceFirst("Ingegneria ", ""); //Elimina Ingegneria dal nome del corso
+        userCorsoField.setText(c);
         userTipoCorsoField.setText(corso.getNomeLivello());
+        mediaAritmeticaLabel.setText(Double.toString(utente.getLibretto().calcolaMediaAritmetica()));
+        mediaPonderataLabel.setText(Double.toString(utente.getLibretto().calcolaMediaPonderata()));
     }
 
     /**
@@ -117,6 +152,9 @@ public class Profilo extends AbstractView {
         return ins;
     }
 
+    /**
+     * Impostazione del render delle celle riguardanti la data e il voto
+     */
     private void setCellRenderers() {
         TableCellRenderer dateCellRenderer = new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -145,6 +183,10 @@ public class Profilo extends AbstractView {
 
     public void modificaInsegnamentoButtonListener(ActionListener l) {
         modificaInsegnamentoButton.addActionListener(l);
+    }
+
+    public void modificaLibrettoButtonListener(ActionListener l) {
+        modificaLibrettoButton.addActionListener(l);
     }
 
     /* Getters */

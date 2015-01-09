@@ -1,13 +1,18 @@
 package org.oop.view.agenda;
 
+import org.oop.model.entities.Attivita;
+import org.oop.model.entities.AttivitaEvento;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Insegnamento;
 import org.oop.view.AbstractView;
+import org.oop.view.Mainframe;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Agenda extends AbstractView {
     private static Agenda instance;
@@ -37,6 +42,7 @@ public class Agenda extends AbstractView {
     private JButton addInsegnamentoButton;
     private JButton removeInsegnamentoButton;
     private JLabel listaInsegnamentiTitle;
+    private JLabel noAttivitaLabel;
     private JLabel nomeCicloLabel;
 
     public Agenda() {
@@ -46,7 +52,7 @@ public class Agenda extends AbstractView {
         splitpane.setDividerLocation(230 + splitpane.getInsets().left);
         //Elimina i bordi
         splitpane.setBorder(null);
-        sidebarpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(126, 126, 126)));
+        sidebarpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(230,230,230)));
 
         insidesplitpane.setDividerLocation(150 + insidesplitpane.getInsets().top);
         insidesplitpane.setBorder(null);
@@ -54,6 +60,11 @@ public class Agenda extends AbstractView {
         //Imposta il layout a 2 colonne
         activitiespanel.setLayout(new GridLayout(0, 2, 20, 20));
 
+        lezioneButton.setActionCommand(Attivita.CATEGORIA_LEZIONE);
+        laboratorioButton.setActionCommand(Attivita.CATEGORIA_LABORATORIO);
+        seminariobutton.setActionCommand(Attivita.CATEGORIA_SEMINARIO);
+        progettobutton.setActionCommand(Attivita.CATEGORIA_PROGETTO);
+        esameButton.setActionCommand(Attivita.CATEGORIA_ESAME);
     }
 
     /**
@@ -61,7 +72,7 @@ public class Agenda extends AbstractView {
      *
      * @param attivita
      */
-    public void addAttivita(AttivitaView attivita) {
+    public void addAttivita(AttivitaEventoView attivita) {
         activitiespanel.add(attivita.activitypanel);
     }
 
@@ -185,7 +196,29 @@ public class Agenda extends AbstractView {
      * che gli si è passato come parametro
      */
     public void updateElencoAttivita(Insegnamento insegnamento) {
+        ArrayList<Attivita> listaAttivita = insegnamento.getAttivita();
+        activitiespanel.removeAll();
+        Mainframe.refreshView();
 
+        if (listaAttivita.size() <= 0) {
+            activitiespanel.add(noAttivitaLabel);
+            noAttivitaLabel.setVisible(true);
+        } else {
+            for (Attivita attivita : listaAttivita) {
+                String categoria = attivita.getCategoria();
+                String docente = attivita.getDocente().toString();
+                String luogo = attivita.getLuogo();
+                //String giorno = attivita.getData() Vale solo se AttivitaEvento ;
+                LocalTime orainizio = attivita.getOraInizio();
+                LocalTime orafine = attivita.getOraFine();
+
+                if(attivita instanceof AttivitaEvento) {
+                    Date data = ((AttivitaEvento) attivita).getData();
+                    AttivitaEventoView attivitaEventoView = new AttivitaEventoView(categoria, docente, luogo, data, orainizio, orafine);
+                    activitiespanel.add(attivitaEventoView.activitypanel);
+                }
+            }
+        }
     }
 
     /**

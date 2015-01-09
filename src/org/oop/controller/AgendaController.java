@@ -7,7 +7,7 @@ import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Insegnamento;
 import org.oop.view.agenda.Agenda;
-import org.oop.view.agenda.AttivitaView;
+import org.oop.view.agenda.AttivitaEventoView;
 import org.oop.view.agenda.FormCiclo;
 import org.oop.view.agenda.ModalAddInsegnamento;
 import javax.swing.*;
@@ -62,8 +62,6 @@ public class AgendaController {
                 view.updateListaInsegnamenti();
                 view.getListaInsegnamentiTitle().setText("Insegnamenti di " + ciclo.getLabel());
                 view.getDurataCicloLabel().setText(ciclo.getInizio() + "/" + ciclo.getFine());
-
-
             }
         }
     }
@@ -76,6 +74,9 @@ public class AgendaController {
         view.setInsegnamentiFromCiclo(view.getCicloSelected());
         view.updateListaCicli();
         view.updateListaInsegnamenti();
+        if (view.getInsegnamentoSelected() != null) {
+            view.updateElencoAttivita(view.getInsegnamentoSelected());
+        }
     }
 
     /**
@@ -93,9 +94,10 @@ public class AgendaController {
     class AddAttivitaAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            String activityType = Utils.explodeStringForSpace(actionEvent.getActionCommand(), 1);
-            AttivitaView attivitaview = new AttivitaView(activityType);
-            AttivitaController attivitacontroller = new AttivitaController(attivitaview, activityType);
+            // ActionCommand corrisponde con la stringa che identifica il tipo di attivita
+            String activityType = actionEvent.getActionCommand();
+            //AttivitaEventoView attivitaview = new AttivitaEventoView(activityType);
+            new AttivitaController(activityType);
         }
     }
 
@@ -118,7 +120,7 @@ public class AgendaController {
     class SubmitCicloFormAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (formcicloview.isValid()){
+            if (formcicloview.isValid()) {
                 Ciclo ciclo = formcicloview.getNuovoCiclo();
                 CicloDAO cicloDAO = new CicloDAO();
                 agenda.addCiclo(ciclo);
