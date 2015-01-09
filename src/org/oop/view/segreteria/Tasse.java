@@ -10,13 +10,12 @@ import java.awt.event.ActionListener;
  */
 public class Tasse {
     public JPanel tassepanel;
+    CustomTableModel model = new CustomTableModel("Anno Accademico", "Corso di Laurea", "Importo", "Stato");
+    int contarighe = 1;
     private JTable tabellatasse;
     private JButton removeButton;
     private JButton editButton;
     private JButton addButton;
-
-    CustomTableModel model = new CustomTableModel("Anno Accademico", "Corso di Laurea", "Importo", "Stato");
-    int contarighe = 1;
 
     public Tasse() {
         super();
@@ -47,7 +46,7 @@ public class Tasse {
         } else {
             model.deleteRow(tabellatasse.getSelectedRow());
             n--;
-            tabellatasse.changeSelection(n,0,false,false);
+            tabellatasse.changeSelection(n, 0, false, false);
         }
         int size = model.getRowCount();
         if (size == 0) {

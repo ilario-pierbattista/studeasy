@@ -6,7 +6,6 @@ import org.oop.db.SQLParameters;
 import org.oop.model.entities.*;
 
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -45,10 +44,10 @@ public class AttivitaDAO extends AbstractDAO<Attivita> {
         try {
             String categoria = rs.getString("categoria");
             boolean periodica = rs.getBoolean("ripetizione_settimanale");
-            if(periodica) {
+            if (periodica) {
                 attivita = new AttivitaPeriodica();
             } else {
-                if(categoria.equals(Attivita.CATEGORIA_ESAME)) {
+                if (categoria.equals(Attivita.CATEGORIA_ESAME)) {
                     attivita = new Esame();
                 } else {
                     attivita = new AttivitaEvento();
@@ -62,15 +61,15 @@ public class AttivitaDAO extends AbstractDAO<Attivita> {
                     .setRuoloDocente(rs.getString("ruolo_docente"));
             DocenteDAO docenteDAO = new DocenteDAO();
             Docente docente = null;
-            if(rs.getInt("docente") != 0) {
+            if (rs.getInt("docente") != 0) {
                 docente = docenteDAO.find(rs.getInt("docente"));
             }
             attivita.setDocente(docente);
-            if(attivita instanceof AttivitaPeriodica) {
+            if (attivita instanceof AttivitaPeriodica) {
                 ((AttivitaPeriodica) attivita).setGiorno(rs.getInt("giorno"));
             } else {
                 ((AttivitaEvento) attivita).setData(rs.getDate("data"));
-                if(attivita instanceof Esame) {
+                if (attivita instanceof Esame) {
                     ((Esame) attivita).setTipologiaProva(rs.getString("tipologia_prova"));
                 }
             }
@@ -89,7 +88,7 @@ public class AttivitaDAO extends AbstractDAO<Attivita> {
                 .getResult();
         Attivita attivita = null;
         try {
-            if(rs.next()) {
+            if (rs.next()) {
                 attivita = generaEntita(rs);
             }
             rs.close();

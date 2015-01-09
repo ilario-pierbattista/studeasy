@@ -4,9 +4,7 @@ package org.oop.db;
 import org.oop.general.Utils;
 
 import java.sql.*;
-import java.sql.Date;
 import java.time.LocalTime;
-import java.util.*;
 
 /**
  * Incapsula l'accesso alla connessione, mettendo a disposizione
@@ -14,10 +12,10 @@ import java.util.*;
  */
 public class DatabaseManager {
 
+    private static DatabaseManager instance;
     private DatabaseConfig config;
     private String sql;
     private Connection connection;
-    private static DatabaseManager instance;
 
     /**
      * Configurazione del manager
@@ -30,10 +28,11 @@ public class DatabaseManager {
 
     /**
      * Ritorna l'istanza attiva della classe
+     *
      * @return Istanza di DatabaseManager
      */
     public static DatabaseManager getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             new DatabaseManager();
         }
         return instance;
@@ -110,7 +109,7 @@ public class DatabaseManager {
     public ResultSet getResult() {
         ResultSet rs = null;
         try {
-            if(connection == null || connection.isClosed()) {
+            if (connection == null || connection.isClosed()) {
                 openConnection(false);
             }
             Statement statement = connection.createStatement();
@@ -124,20 +123,21 @@ public class DatabaseManager {
 
     /**
      * Esegue un comando DML
+     *
      * @return
      */
     public int executeUpdate() {
         int auto_generated_key = 0;
         try {
             //l'autocommit è di default impostata. (una commit-promessa- serve a terminare "l'azione" col database)
-            if(connection == null || connection.isClosed() || connection.getAutoCommit()) {
+            if (connection == null || connection.isClosed() || connection.getAutoCommit()) {
                 openConnection(false);
             }
             Statement statement = connection.createStatement();
             statement.closeOnCompletion();
             statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
             ResultSet generatedKeys = statement.getGeneratedKeys();
-            if(generatedKeys.first()) {
+            if (generatedKeys.first()) {
                 auto_generated_key = generatedKeys.getInt("GENERATED_KEY");
             }
         } catch (SQLException ee) {
@@ -189,6 +189,7 @@ public class DatabaseManager {
 
     /**
      * Apre la connessione con il database permettendo di specificare lo stato di Auto-Commit
+     *
      * @param autoCommit
      * @throws SQLException
      */

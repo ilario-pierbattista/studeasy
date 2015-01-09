@@ -106,7 +106,7 @@ public class InsegnamentoOfferto {
 
     public String toString(boolean develMode) {
         String str;
-        if(develMode) {
+        if (develMode) {
             str = "InsegnamentoOfferto{" +
                     "docente=" + docente +
                     ", opzionale=" + opzionale +

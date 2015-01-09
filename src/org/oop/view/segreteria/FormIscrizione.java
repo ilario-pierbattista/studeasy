@@ -31,16 +31,16 @@ public class FormIscrizione {
     /**
      * Chiude form
      */
-    public void closeFrame(){
+    public void closeFrame() {
         frame.dispose();
     }
 
     /* Listeners setter */
-    public void addSubmitButtonListener(ActionListener listener){
+    public void addSubmitButtonListener(ActionListener listener) {
         submitButton.addActionListener(listener);
     }
 
-    public void addCancelButtonListener(ActionListener listener){
+    public void addCancelButtonListener(ActionListener listener) {
         cancelButton.addActionListener(listener);
     }
 

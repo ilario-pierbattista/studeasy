@@ -7,12 +7,10 @@ import org.oop.model.dao.DocenteDAO;
 import org.oop.model.entities.Attivita;
 import org.oop.model.entities.Docente;
 import org.oop.model.entities.Esame;
-import org.oop.model.entities.Utente;
 import org.oop.view.AbstractForm;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -46,6 +44,7 @@ public class FormEsame extends AbstractForm {
 
     /**
      * Metodo che prende i valori dei campi del form e li mette dentro un oggetto Esame
+     *
      * @return
      */
     public Esame getNuovaAttivita() {
@@ -66,6 +65,7 @@ public class FormEsame extends AbstractForm {
 
     /**
      * Ritorna il ruolo del docente in base all'elemento selezionato nella Combobox
+     *
      * @return
      */
     private String getRuoloDocente() {
@@ -86,29 +86,27 @@ public class FormEsame extends AbstractForm {
     /**
      * Metodo di appoggio che controlla che i campi del form siano stati compilati
      * correttamente
+     *
      * @return
      */
-    public boolean isValid(){
+    public boolean isValid() {
         boolean flag = false;
-        Date hstart = (Date) hourStartField.getValue();
-        Date hend = (Date) hourEndField.getValue();
 
         if (Validator.isComboBoxEmpty(teacherBox, "Docente")) {
             flag = false;
         } else if (Validator.isFormattedFieldEmpty(dataField, "Data")) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(hourStartField,"Ora inizio") || Validator.isFormattedFieldEmpty(hourEndField, "Ora fine")) {
+        } else if (Validator.isFormattedFieldEmpty(hourStartField, "Ora inizio") || Validator.isFormattedFieldEmpty(hourEndField, "Ora fine")) {
             flag = false;
         } else if (Validator.isTextFieldEmpty(aulaField, "Aula")) {
             flag = false;
         } else if (!scrittoRadioButton.isSelected() && !oraleRadioButton.isSelected()) {
             flag = true;
-        } else if (Validator.isDateGreater(hstart,hend)) {
+        } else if (Validator.checkTimeJFormattedText(hourStartField, hourEndField)) {
             flag = true;
         }
 
         return flag;
-
     }
 
     /**
@@ -133,7 +131,7 @@ public class FormEsame extends AbstractForm {
     public void fillForm(Esame attivita) {
         teacherBox.setSelectedItem(attivita.getDocente());
         ruoloDocenteBox.setSelectedItem(attivita.getRuoloDocente());
-        dataField.setText(Utils.dateToString(attivita.getData(),0));
+        dataField.setText(Utils.dateToString(attivita.getData(), 0));
         hourStartField.setText(attivita.getOraInizio().toString());
         hourEndField.setText(attivita.getOraFine().toString());
         aulaField.setText(attivita.getLuogo());
@@ -158,19 +156,21 @@ public class FormEsame extends AbstractForm {
     /**
      * Metodo che chiude il form
      */
-    public void closeFrame(){
+    public void closeFrame() {
         frame.dispose();
     }
 
 
     /* Listeners setters */
-    public void addSubmitButtonListener (ActionListener listener){
+    public void addSubmitButtonListener(ActionListener listener) {
         submitButton.addActionListener(listener);
     }
-    public void addCancelButtonListener (ActionListener listener){
+
+    public void addCancelButtonListener(ActionListener listener) {
         esameCancelButton.addActionListener(listener);
     }
-    public void addTipologiaProvaRadioListener (ActionListener listener) {
+
+    public void addTipologiaProvaRadioListener(ActionListener listener) {
         oraleRadioButton.addActionListener(listener);
         laboratorioRadioButton.addActionListener(listener);
         scrittoRadioButton.addActionListener(listener);

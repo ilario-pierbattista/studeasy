@@ -100,7 +100,9 @@ public class FormImmatricolazione extends AbstractForm {
         quit.addActionListener(l);
     }
 
-    public void addFocusListenerMatricola(FocusListener listener){ matricola.addFocusListener(listener);}
+    public void addFocusListenerMatricola(FocusListener listener) {
+        matricola.addFocusListener(listener);
+    }
 
     public JFormattedTextField getMatricola() {
         return matricola;

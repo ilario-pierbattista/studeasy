@@ -9,8 +9,8 @@ import org.oop.model.entities.InsegnamentoOfferto;
 import java.util.ArrayList;
 
 public class Libretto {
-    private Corso corso;
     ArrayList<Insegnamento> insegnamenti;
+    private Corso corso;
 
     public Libretto() {
         insegnamenti = new ArrayList<Insegnamento>(20);
@@ -86,6 +86,11 @@ public class Libretto {
         return insegnamenti;
     }
 
+    public Libretto setInsegnamenti(ArrayList<Insegnamento> insegnamenti) {
+        this.insegnamenti = insegnamenti;
+        return this;
+    }
+
     /**
      * Ritorna solamente gli insegnamenti opzionali
      *
@@ -114,11 +119,6 @@ public class Libretto {
             }
         }
         return obbligatori;
-    }
-
-    public Libretto setInsegnamenti(ArrayList<Insegnamento> insegnamenti) {
-        this.insegnamenti = insegnamenti;
-        return this;
     }
 
     public Libretto addInsegnamento(Insegnamento insegnamento) {

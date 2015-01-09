@@ -1,32 +1,32 @@
 package org.oop.controller;
 
-import org.apache.commons.lang3.text.WordUtils;
 import org.oop.model.Libretto;
 import org.oop.model.dao.CicloDAO;
 import org.oop.model.dao.InsegnamentoDAO;
 import org.oop.model.dao.UtenteDAO;
-import org.oop.model.entities.*;
 import org.oop.model.entities.Attivita;
+import org.oop.model.entities.Ciclo;
+import org.oop.model.entities.Insegnamento;
 import org.oop.view.Mainframe;
-import org.oop.view.agenda.*;
+import org.oop.view.agenda.Agenda;
+import org.oop.view.agenda.FormCiclo;
+import org.oop.view.agenda.ModalAddInsegnamento;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class AgendaController {
+    private static AgendaController instance;
     private Agenda view;
     private FormCiclo formcicloview;
     private ModalAddInsegnamento modalAddInsegnamento;
     private org.oop.model.Agenda agenda;
     private Libretto libretto;
     private AttivitaController attivitaController;
-    private static AgendaController instance;
 
     public AgendaController(Agenda view) {
 
@@ -71,25 +71,6 @@ public class AgendaController {
     }
 
     /**
-     * Action che aggiorna la lista degli insegnamenti in base al ciclo selezionato
-     * dalla lista dei cicli
-     */
-    class listaCicliSelectionAction implements ListSelectionListener {
-        public void valueChanged(ListSelectionEvent e) {
-            ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-
-            if (!lsm.isSelectionEmpty()) {
-                Ciclo ciclo = view.getCicloSelected();
-                view.setInsegnamentiFromCiclo(ciclo);
-                view.updateListaInsegnamenti();
-                view.getListaInsegnamentiTitle().setText("Insegnamenti di " + ciclo.getLabel());
-                view.getDurataCicloLabel().setText(ciclo.getInizio() + "/" + ciclo.getFine());
-                updateAttivita(view.getInsegnamentoSelected());
-            }
-        }
-    }
-
-    /**
      * Metodo che passa il model alla vista e la mantiene aggiornata
      */
     public void updateView() {
@@ -131,6 +112,24 @@ public class AgendaController {
         view.updateListaInsegnamenti();
     }
 
+    /**
+     * Action che aggiorna la lista degli insegnamenti in base al ciclo selezionato
+     * dalla lista dei cicli
+     */
+    class listaCicliSelectionAction implements ListSelectionListener {
+        public void valueChanged(ListSelectionEvent e) {
+            ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+
+            if (!lsm.isSelectionEmpty()) {
+                Ciclo ciclo = view.getCicloSelected();
+                view.setInsegnamentiFromCiclo(ciclo);
+                view.updateListaInsegnamenti();
+                view.getListaInsegnamentiTitle().setText("Insegnamenti di " + ciclo.getLabel());
+                view.getDurataCicloLabel().setText(ciclo.getInizio() + "/" + ciclo.getFine());
+                updateAttivita(view.getInsegnamentoSelected());
+            }
+        }
+    }
 
     /**
      * Action per aggiungere un'attività

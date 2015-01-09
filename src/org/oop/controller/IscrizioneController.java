@@ -3,7 +3,6 @@ package org.oop.controller;
 import org.oop.view.segreteria.FormIscrizione;
 import org.oop.view.segreteria.Iscrizione;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 
@@ -11,9 +10,8 @@ public class IscrizioneController {
     private Iscrizione view;
     private FormIscrizione form;
 
-    public IscrizioneController(Iscrizione view)
-    {
-        this.view=view;
+    public IscrizioneController(Iscrizione view) {
+        this.view = view;
 
         view.addAddButtonListener(new addIscrizioneAction());
         view.addDeleteButtonListener(new deleteIscrizioneAction());
@@ -23,7 +21,7 @@ public class IscrizioneController {
     /**
      * Action per far partire il form di aggiunta
      */
-    class addIscrizioneAction extends AbstractAction{
+    class addIscrizioneAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.addRiga(); //Va tolto

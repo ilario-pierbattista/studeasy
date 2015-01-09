@@ -31,16 +31,16 @@ public class FormTasse {
     /**
      * Chiude form
      */
-    public void closeFrame(){
+    public void closeFrame() {
         frame.dispose();
     }
 
     /* Listener setters */
-    public void addSubmitButtonListener(ActionListener listener){
+    public void addSubmitButtonListener(ActionListener listener) {
         submitButton.addActionListener(listener);
     }
 
-    public void addCancelButtonListener(ActionListener listener){
+    public void addCancelButtonListener(ActionListener listener) {
         cancelButton.addActionListener(listener);
     }
 

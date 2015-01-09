@@ -1,6 +1,7 @@
 package org.oop.view.segreteria;
 
-import org.oop.controller.*;
+import org.oop.controller.IscrizioneController;
+import org.oop.controller.TasseController;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;

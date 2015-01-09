@@ -1,7 +1,6 @@
 package org.oop.view.agenda;
 
 import org.oop.model.entities.Insegnamento;
-import org.oop.model.entities.InsegnamentoOfferto;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 
 
 public class ModalAddInsegnamento {
-    public static  JFrame frame = new JFrame("Aggiungi insegnamento");
+    public static JFrame frame = new JFrame("Aggiungi insegnamento");
     private JButton confermaButton;
     private JButton annullaButton;
     private JList listInsegnamenti;
@@ -33,9 +32,9 @@ public class ModalAddInsegnamento {
     /**
      * Metodo per popolare la lista di insegnamenti
      */
-    public void setListaInsegnamenti(ArrayList<Insegnamento> lista){
+    public void setListaInsegnamenti(ArrayList<Insegnamento> lista) {
         DefaultListModel<Insegnamento> listModel = new DefaultListModel<Insegnamento>();
-        for (Insegnamento insegnamento : lista){
+        for (Insegnamento insegnamento : lista) {
             listModel.addElement(insegnamento);
         }
         listInsegnamenti.setModel(listModel);
@@ -44,9 +43,10 @@ public class ModalAddInsegnamento {
 
     /**
      * Metodo che ritorna l'Insegnamento selezionato
+     *
      * @return Insegnamento
      */
-    public Insegnamento getInsegnamentoSelected(){
+    public Insegnamento getInsegnamentoSelected() {
         int index = listInsegnamenti.getSelectedIndex();
 
         return (Insegnamento) listInsegnamenti.getModel().getElementAt(index);
@@ -66,11 +66,11 @@ public class ModalAddInsegnamento {
     }
 
     /* Listeners setters */
-    public void addConfermaButtonListener(ActionListener listener){
+    public void addConfermaButtonListener(ActionListener listener) {
         confermaButton.addActionListener(listener);
     }
 
-    public void addAnnullaButtonListener(ActionListener listener){
+    public void addAnnullaButtonListener(ActionListener listener) {
         annullaButton.addActionListener(listener);
     }
 }

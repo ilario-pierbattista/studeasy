@@ -18,7 +18,8 @@ public class Esame extends AttivitaEvento {
     }
 
     //il seguente è il costruttore che inizializza i dati di deafult
-    public Esame() {}
+    public Esame() {
+    }
 
     public String getTipologiaProva() {
         return tipologiaProva;

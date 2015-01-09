@@ -27,7 +27,7 @@ public class Corso {
     /**
      * Costruttore base
      */
-    public Corso () {
+    public Corso() {
         insegnamentiOfferti = new ArrayList<InsegnamentoOfferto>(20);
     }
 
@@ -92,9 +92,9 @@ public class Corso {
 
     public String getNomeLivello() {
         String nome;
-        if(livello == TRIENNALE) {
+        if (livello == TRIENNALE) {
             nome = "Triennale";
-        } else if(livello == MAGISTRALE) {
+        } else if (livello == MAGISTRALE) {
             nome = "Magistrale";
         } else {
             nome = "Ciclo Unico";
@@ -149,7 +149,7 @@ public class Corso {
 
     public String toString(boolean debugMode) {
         String str;
-        if(debugMode) {
+        if (debugMode) {
             str = "Corso{" +
                     "id=" + id +
                     ", nome='" + nome + '\'' +

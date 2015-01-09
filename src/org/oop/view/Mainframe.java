@@ -9,11 +9,11 @@ import javax.swing.*;
 
 public class Mainframe {
     final static JFrame frame = new JFrame("Studeasy");
-    private JPanel mainpanel;
-    private JTabbedPane maintabpane;
     public Agenda agenda;
     public Profilo profilo;
     public Segreteria segreteria;
+    private JPanel mainpanel;
+    private JTabbedPane maintabpane;
 
     public Mainframe() {
         frame.setContentPane(mainpanel);
@@ -29,15 +29,15 @@ public class Mainframe {
         maintabpane.addTab("Segreteria", segreteria.segreteriapanel);
     }
 
-    public void setSelectedTab(int index) {
-        maintabpane.setSelectedIndex(index);
-    }
-
     public static void refreshView() {
         frame.repaint();
     }
 
     public static void setVisible(boolean visible) {
         frame.setVisible(visible);
+    }
+
+    public void setSelectedTab(int index) {
+        maintabpane.setSelectedIndex(index);
     }
 }

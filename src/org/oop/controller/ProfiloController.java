@@ -5,10 +5,10 @@ import org.oop.model.dao.InsegnamentoDAO;
 import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.Utente;
+import org.oop.view.Mainframe;
 import org.oop.view.profilo.FormInsegnamento;
 import org.oop.view.profilo.FormLibretto;
 import org.oop.view.profilo.FormRegistrazione;
-import org.oop.view.Mainframe;
 import org.oop.view.profilo.Profilo;
 
 import javax.swing.*;
@@ -40,11 +40,20 @@ public class ProfiloController {
     }
 
     /**
+     * Ritorna l'istanza attiva di ProfiloController
+     *
+     * @return
+     */
+    public static ProfiloController getInstance() {
+        return instance;
+    }
+
+    /**
      * Controlla che l'utente abbia compilato il piano di studi
      */
     public void checkPianoStudi() {
         Utente utente = BaseController.getUtenteCorrente();
-        if(utente.getLibretto().calcolaCFUPrevisti() < utente.getLibretto().getCorso().getTotaleCfu()) {
+        if (utente.getLibretto().calcolaCFUPrevisti() < utente.getLibretto().getCorso().getTotaleCfu()) {
             // Seleziona la tab relativa al profilo
             BaseController.getMainframe().setSelectedTab(1);
             apriFormLibretto();
@@ -69,6 +78,7 @@ public class ProfiloController {
 
     /**
      * Unisce i dati di una copia aggiornata del libretto con i dati gi&agrave; esistenti
+     *
      * @param nuoviDati
      * @return Successo nel merge dei dai.
      */
@@ -135,17 +145,17 @@ public class ProfiloController {
         Utente utente = BaseController.getUtenteCorrente();
         Utente utenteSalvato = utenteDAO.find(utente.getMatricola());
         // Rimozione degli insegnamenti non più presenti
-        System.out.println("Insegnamenti salvati "+utenteSalvato.getLibretto().getInsegnamentiOpzionali().toString());
-        System.out.println("Insegnamenti nuovi "+utente.getLibretto().getInsegnamentiOpzionali().toString());
+        System.out.println("Insegnamenti salvati " + utenteSalvato.getLibretto().getInsegnamentiOpzionali().toString());
+        System.out.println("Insegnamenti nuovi " + utente.getLibretto().getInsegnamentiOpzionali().toString());
         for (Insegnamento ins : utenteSalvato.getLibretto().getInsegnamentiOpzionali()) {
-            if(!utente.getLibretto().hasInsegnamentoOfferto(ins.getInsegnamentoOfferto())) {
+            if (!utente.getLibretto().hasInsegnamentoOfferto(ins.getInsegnamentoOfferto())) {
                 System.out.println(ins);
                 insegnamentoDAO.remove(ins);
             }
         }
         // Salvataggio dei nuovi insegnamenti
         for (Insegnamento ins : utente.getLibretto().getInsegnamenti()) {
-            if(ins.getId() == 0 || insegnamentoDAO.find(ins.getId()) == null) {
+            if (ins.getId() == 0 || insegnamentoDAO.find(ins.getId()) == null) {
                 insegnamentoDAO.persist(ins);
             }
         }
@@ -164,15 +174,6 @@ public class ProfiloController {
 
             Mainframe.refreshView();
         }
-    }
-
-    /**
-     * Ritorna l'istanza attiva di ProfiloController
-     *
-     * @return
-     */
-    public static ProfiloController getInstance() {
-        return instance;
     }
 
     /**
@@ -246,7 +247,7 @@ public class ProfiloController {
             boolean mergeSuccessful;
             if (formLibretto.isValid()) {
                 mergeSuccessful = mergeLibretto(formLibretto.getNuovoLibretto());
-                if(mergeSuccessful) {
+                if (mergeSuccessful) {
                     saveChanges();
                 }
                 updateView();

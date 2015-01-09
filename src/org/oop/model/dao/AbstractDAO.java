@@ -18,6 +18,7 @@ public abstract class AbstractDAO<T> implements DAOInterface<T> {
     /**
      * Genera un ArrayList di entità a partire dal un oggetto
      * ResultSet di un query
+     *
      * @param rs Risultato di una query
      * @return Array di entità
      */

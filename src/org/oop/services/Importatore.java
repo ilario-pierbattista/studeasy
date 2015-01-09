@@ -1,7 +1,6 @@
 package org.oop.services;
 
 
-import org.oop.db.DatabaseConfig;
 import org.oop.db.DatabaseUtils;
 import org.oop.general.Utils;
 import org.oop.general.exceptions.RisorsaNonTrovata;

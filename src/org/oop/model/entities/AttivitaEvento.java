@@ -12,7 +12,8 @@ public class AttivitaEvento extends Attivita {
         this.data = data;
     }
 
-    public AttivitaEvento() {}
+    public AttivitaEvento() {
+    }
 
 
     public Date getData() {

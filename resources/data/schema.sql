@@ -1,121 +1,121 @@
-Drop database if exists oop_db;
+DROP DATABASE IF EXISTS oop_db;
 
-Create database oop_db;
+CREATE DATABASE oop_db;
 
-Use oop_db;
+USE oop_db;
 
-Create table corso(
-	id int not null primary key auto_increment,
-	nome varchar(100) not null,
-	livello int not null,
-	totale_cfu int
+CREATE TABLE corso (
+  id         INT          NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  nome       VARCHAR(100) NOT NULL,
+  livello    INT          NOT NULL,
+  totale_cfu INT
 );
 
-Create table utente(
-	matricola int not null primary key,
-	nome varchar(60) not null,
-	cognome varchar(50) not null,
-	email varchar(50) not null,
-	corso int not null,
-	foreign key (corso) references corso(id)
+CREATE TABLE utente (
+  matricola INT         NOT NULL PRIMARY KEY,
+  nome      VARCHAR(60) NOT NULL,
+  cognome   VARCHAR(50) NOT NULL,
+  email     VARCHAR(50) NOT NULL,
+  corso     INT         NOT NULL,
+  FOREIGN KEY (corso) REFERENCES corso (id)
 );
 
-Create table docente(
-	id int not null primary key auto_increment,
-	nome varchar(60) not null,
-	cognome varchar(50) not null,
-	email varchar(50)
+CREATE TABLE docente (
+  id      INT         NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  nome    VARCHAR(60) NOT NULL,
+  cognome VARCHAR(50) NOT NULL,
+  email   VARCHAR(50)
 );
 
-Create table insegnamento(
-	id int not null primary key auto_increment,
-	nome varchar(100) not null,
-	cfu int not null,
-	anno int not null,
-	semestre int not null,
-	opzionale boolean default false,
-	corso int default null,
-	docente int default null,
-	foreign key (corso) references corso(id)
-		on delete cascade,
-	foreign key (docente) references docente(id)
-		on delete set null
+CREATE TABLE insegnamento (
+  id        INT          NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  nome      VARCHAR(100) NOT NULL,
+  cfu       INT          NOT NULL,
+  anno      INT          NOT NULL,
+  semestre  INT          NOT NULL,
+  opzionale BOOLEAN                           DEFAULT FALSE,
+  corso     INT                               DEFAULT NULL,
+  docente   INT                               DEFAULT NULL,
+  FOREIGN KEY (corso) REFERENCES corso (id)
+    ON DELETE CASCADE,
+  FOREIGN KEY (docente) REFERENCES docente (id)
+    ON DELETE SET NULL
 );
 
-Create table insegnamento_utente(
-	id int not null primary key auto_increment,
-	utente int,
-	insegnamento int not null,
-	voto int,
-	lode boolean default false,
-	data date,
-	foreign key (utente) references utente(matricola)
-		on update cascade
-		on delete cascade,
-	foreign key (insegnamento) references insegnamento(id)
+CREATE TABLE insegnamento_utente (
+  id           INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  utente       INT,
+  insegnamento INT NOT NULL,
+  voto         INT,
+  lode         BOOLEAN                  DEFAULT FALSE,
+  data         DATE,
+  FOREIGN KEY (utente) REFERENCES utente (matricola)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  FOREIGN KEY (insegnamento) REFERENCES insegnamento (id)
 );
 
-Create table ciclo(
-	id int not null primary key auto_increment,
-	label varchar(250) not null,
-	inizio date not null,
-	fine date not null,
-	utente int,
-	foreign key (utente) references utente(matricola)
-		on update cascade
-		on delete cascade
+CREATE TABLE ciclo (
+  id     INT          NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  label  VARCHAR(250) NOT NULL,
+  inizio DATE         NOT NULL,
+  fine   DATE         NOT NULL,
+  utente INT,
+  FOREIGN KEY (utente) REFERENCES utente (matricola)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
 
-Create table attivita(
-	id int not null primary key auto_increment,
-	ora_inizio time not null,
-	ora_fine time not null,
-	luogo varchar(150) not null,
-	categoria enum('lezione', 'laboratorio', 'progetto', 'esame', 'seminario') not null,
-	ripetizione_settimanale boolean not null,
-	giorno int,
-	data date,
-	tipologia_prova enum('scritto', 'orale', 'laboratorio') not null,
-	docente int,
-	ruolo_docente enum('docente', 'assistente', 'tutor') not null,
-	ciclo int,
-	insegnamento_utente int,
-	foreign key (docente) references docente(id),
-	foreign key (ciclo) references ciclo(id)
-		on delete cascade,
-	foreign key (insegnamento_utente) references insegnamento_utente(id)
-		on delete cascade
+CREATE TABLE attivita (
+  id                      INT                                                              NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  ora_inizio              TIME                                                             NOT NULL,
+  ora_fine                TIME                                                             NOT NULL,
+  luogo                   VARCHAR(150)                                                     NOT NULL,
+  categoria               ENUM('lezione', 'laboratorio', 'progetto', 'esame', 'seminario') NOT NULL,
+  ripetizione_settimanale BOOLEAN                                                          NOT NULL,
+  giorno                  INT,
+  data                    DATE,
+  tipologia_prova         ENUM('scritto', 'orale', 'laboratorio')                          NOT NULL,
+  docente                 INT,
+  ruolo_docente           ENUM('docente', 'assistente', 'tutor')                           NOT NULL,
+  ciclo                   INT,
+  insegnamento_utente     INT,
+  FOREIGN KEY (docente) REFERENCES docente (id),
+  FOREIGN KEY (ciclo) REFERENCES ciclo (id)
+    ON DELETE CASCADE,
+  FOREIGN KEY (insegnamento_utente) REFERENCES insegnamento_utente (id)
+    ON DELETE CASCADE
 );
 
-Create table iu_ciclo(
-	ciclo int not null,
-	insegnamento_utente int not null,
-	foreign key (ciclo) references ciclo(id)
-		on delete cascade,
-	foreign key (insegnamento_utente) references insegnamento_utente(id)
-		on delete cascade,
-	primary key(ciclo, insegnamento_utente)
+CREATE TABLE iu_ciclo (
+  ciclo               INT NOT NULL,
+  insegnamento_utente INT NOT NULL,
+  FOREIGN KEY (ciclo) REFERENCES ciclo (id)
+    ON DELETE CASCADE,
+  FOREIGN KEY (insegnamento_utente) REFERENCES insegnamento_utente (id)
+    ON DELETE CASCADE,
+  PRIMARY KEY (ciclo, insegnamento_utente)
 );
 
-Create table ui_attivita_ciclo(
-	ciclo int not null,
-	insegnamento_utente int not null,
-	attivita int not null,
-	foreign key (ciclo) references ciclo(id)
-		on delete cascade,
-	foreign key (insegnamento_utente) references insegnamento_utente(id)
-		on delete cascade,
-	foreign key (attivita) references attivita(id)
-		on delete cascade
+CREATE TABLE ui_attivita_ciclo (
+  ciclo               INT NOT NULL,
+  insegnamento_utente INT NOT NULL,
+  attivita            INT NOT NULL,
+  FOREIGN KEY (ciclo) REFERENCES ciclo (id)
+    ON DELETE CASCADE,
+  FOREIGN KEY (insegnamento_utente) REFERENCES insegnamento_utente (id)
+    ON DELETE CASCADE,
+  FOREIGN KEY (attivita) REFERENCES attivita (id)
+    ON DELETE CASCADE
 );
 
-Create table tassa(
-	id int not null primary key auto_increment,
-	importo decimal(6, 2) not null,
-	scadenza date not null,
-	pagata boolean default false,
-	utente int not null, 
-	foreign key (utente) references utente(matricola)
-		on update cascade
-		on delete cascade
+CREATE TABLE tassa (
+  id       INT           NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  importo  DECIMAL(6, 2) NOT NULL,
+  scadenza DATE          NOT NULL,
+  pagata   BOOLEAN                            DEFAULT FALSE,
+  utente   INT           NOT NULL,
+  FOREIGN KEY (utente) REFERENCES utente (matricola)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );

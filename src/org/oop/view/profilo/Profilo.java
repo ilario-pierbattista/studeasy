@@ -3,7 +3,6 @@ package org.oop.view.profilo;
 import org.oop.controller.BaseController;
 import org.oop.model.Libretto;
 import org.oop.model.entities.Corso;
-import org.oop.model.entities.Docente;
 import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.Utente;
 import org.oop.view.AbstractView;
@@ -14,10 +13,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -102,7 +99,7 @@ public class Profilo extends AbstractView {
         userEmailField.setText(utente.getEmail());
         userMatricolaField.setText(Integer.toString(utente.getMatricola()));
         Corso corso = utente.getLibretto().getCorso();
-        String c =  corso.getNome().replaceFirst("Ingegneria ", ""); //Elimina Ingegneria dal nome del corso
+        String c = corso.getNome().replaceFirst("Ingegneria ", ""); //Elimina Ingegneria dal nome del corso
         userCorsoField.setText(c);
         userTipoCorsoField.setText(corso.getNomeLivello());
         mediaAritmeticaLabel.setText(Double.toString(utente.getLibretto().calcolaMediaAritmetica()));

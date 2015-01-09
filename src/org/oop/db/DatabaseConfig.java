@@ -21,7 +21,7 @@ public class DatabaseConfig {
     }
 
     public static DatabaseConfig getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             new DatabaseConfig();
         }
         return instance;

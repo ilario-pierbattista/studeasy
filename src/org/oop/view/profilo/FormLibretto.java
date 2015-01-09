@@ -1,7 +1,6 @@
 package org.oop.view.profilo;
 
 
-import org.oop.general.Utils;
 import org.oop.model.Libretto;
 import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.InsegnamentoOfferto;
@@ -84,7 +83,7 @@ public class FormLibretto extends AbstractForm {
         ArrayList<Integer> selectedIndices = new ArrayList<Integer>(6);
         for (int i = 0; i < insegnamenti.size(); i++) {
             listModel.addElement(insegnamenti.get(i));
-            if(copiaLibretto.hasInsegnamentoOfferto(insegnamenti.get(i))) {
+            if (copiaLibretto.hasInsegnamentoOfferto(insegnamenti.get(i))) {
                 selectedIndices.add(i);
             }
         }

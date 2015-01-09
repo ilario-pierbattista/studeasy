@@ -32,14 +32,14 @@ public class BaseController {
         return utenteCorrente;
     }
 
-    public static void startController(){
+    public static void setUtenteCorrente(Utente utenteCorrente) {
+        BaseController.utenteCorrente = utenteCorrente;
+    }
+
+    public static void startController() {
         new AgendaController(view.agenda);
         new ProfiloController(view.profilo);
         new SegreteriaController(view.segreteria);
-    }
-
-    public static void setUtenteCorrente(Utente utenteCorrente) {
-        BaseController.utenteCorrente = utenteCorrente;
     }
 
     public static Mainframe getMainframe() {

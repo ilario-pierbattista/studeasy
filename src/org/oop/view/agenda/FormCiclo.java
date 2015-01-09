@@ -1,6 +1,5 @@
 package org.oop.view.agenda;
 
-import org.oop.general.Utils;
 import org.oop.general.Validator;
 import org.oop.model.entities.Ciclo;
 import org.oop.view.AbstractView;
@@ -31,6 +30,7 @@ public class FormCiclo extends AbstractView {
     /**
      * Metodo che prende i valori dei campi del form e li mette dentro un oggetto Ciclo.
      * Dopodichè ritorna tale oggetto
+     *
      * @return
      */
     public Ciclo getNuovoCiclo() {
@@ -47,6 +47,7 @@ public class FormCiclo extends AbstractView {
     /**
      * Metodo di appoggio che controlla che i campi del form siano stati compilati
      * correttamente
+     *
      * @return
      */
     public boolean isValid() {
@@ -56,9 +57,9 @@ public class FormCiclo extends AbstractView {
 
         if (Validator.isTextFieldEmpty(ciclonamefield, "Nome ciclo")) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(cicloStartField, "Data inizio") || Validator.isFormattedFieldEmpty(cicloEndField, "Date fine") ){
+        } else if (Validator.isFormattedFieldEmpty(cicloStartField, "Data inizio") || Validator.isFormattedFieldEmpty(cicloEndField, "Date fine")) {
             flag = false;
-        } else if (Validator.isDateGreater(start,end)){
+        } else if (Validator.isDateGreater(start, end)) {
             flag = true;
         }
 

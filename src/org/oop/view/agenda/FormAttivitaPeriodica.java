@@ -5,14 +5,12 @@ import org.oop.general.Validator;
 import org.oop.model.ArrayListComboBoxModel;
 import org.oop.model.dao.DocenteDAO;
 import org.oop.model.entities.Attivita;
-import org.oop.model.entities.AttivitaEvento;
 import org.oop.model.entities.AttivitaPeriodica;
 import org.oop.model.entities.Docente;
 import org.oop.view.AbstractForm;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -45,6 +43,7 @@ public class FormAttivitaPeriodica extends AbstractForm {
 
     /**
      * Metodo che prende i valori dei campi del form e li mette dentro un oggetto AttivitaPeriodica
+     *
      * @return
      */
     public AttivitaPeriodica getNuovaAttivita() {
@@ -65,10 +64,11 @@ public class FormAttivitaPeriodica extends AbstractForm {
 
     /**
      * Converte il giorno scritto a lettere nel formato elaborato da java.util.calendar
+     *
      * @param giorno
      * @return
      */
-    private int convertDayToInt(String giorno){
+    private int convertDayToInt(String giorno) {
         int valore = Calendar.MONDAY;
 
         if (giorno.equals("Lunedì")) {
@@ -88,6 +88,7 @@ public class FormAttivitaPeriodica extends AbstractForm {
 
     /**
      * Ritorna il ruolo del docente in base all'elemento selezionato nella Combobox
+     *
      * @return
      */
     private String getRuoloDocente() {
@@ -108,27 +109,25 @@ public class FormAttivitaPeriodica extends AbstractForm {
     /**
      * Metodo di appoggio che controlla che i campi del form siano stati compilati
      * correttamente
+     *
      * @return
      */
-    public boolean isValid(){
+    public boolean isValid() {
         boolean flag = false;
-        Date hstart = (Date) hourStartField.getValue();
-        Date hend = (Date) hourEndField.getValue();
 
         if (Validator.isComboBoxEmpty(teacherBox, "Docente")) {
             flag = false;
         } else if (Validator.isComboBoxEmpty(dayBox, "Giorno")) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(hourStartField,"Ora inizio") || Validator.isFormattedFieldEmpty(hourEndField, "Ora fine")) {
+        } else if (Validator.isFormattedFieldEmpty(hourStartField, "Ora inizio") || Validator.isFormattedFieldEmpty(hourEndField, "Ora fine")) {
             flag = false;
         } else if (Validator.isTextFieldEmpty(aulaField, "Aula")) {
             flag = false;
-        } else if (Validator.isDateGreater(hstart,hend)) {
+        } else if (Validator.checkTimeJFormattedText(hourStartField, hourEndField)) {
             flag = true;
         }
 
         return flag;
-
     }
 
 
@@ -170,15 +169,16 @@ public class FormAttivitaPeriodica extends AbstractForm {
     /**
      * Metodo che chiude il form
      */
-    public void closeFrame(){
+    public void closeFrame() {
         frame.dispose();
     }
 
     /* Listeners setters */
-    public void addSubmitButtonListener (ActionListener listener){
+    public void addSubmitButtonListener(ActionListener listener) {
         submitButton.addActionListener(listener);
     }
-    public void addCancelButtonListener (ActionListener listener){
+
+    public void addCancelButtonListener(ActionListener listener) {
         periodicaCancelButton.addActionListener(listener);
     }
 

@@ -36,7 +36,7 @@ public class ImmatricolazioneController {
 
         @Override
         public void focusLost(FocusEvent e) {
-            if (!Validator.controlloCifre(view.getMatricola().getText(), 7)){
+            if (!Validator.controlloCifre(view.getMatricola().getText(), 7)) {
                 JOptionPane.showMessageDialog(null, "La matricola deve essere di 7 cifre");
                 view.getMatricola().setText("");
             }

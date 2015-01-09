@@ -17,7 +17,8 @@ public class Docente {
 
 
     //il seguente è il costruttore che inizializza i dati di deafult
-    public Docente() {}
+    public Docente() {
+    }
 
 
     public int getId() {

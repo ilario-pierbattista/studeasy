@@ -7,13 +7,13 @@ import org.oop.general.exceptions.RisorsaNonTrovata;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.*;
+import java.util.ArrayList;
 
 public class DatabaseUtils {
 
     /**
      * Questa roba deve essere documentata alla perfezione
+     *
      * @param parameters
      * @return
      */
@@ -23,8 +23,8 @@ public class DatabaseUtils {
         SQLParameters parametriAusiliari = new SQLParameters();
         String chiaveParametro;
 
-        for(SQLParameters.Entry<String, Object> param : parameters.entrySet()) {
-            if(param.getValue() instanceof ArrayList) {
+        for (SQLParameters.Entry<String, Object> param : parameters.entrySet()) {
+            if (param.getValue() instanceof ArrayList) {
                 chiaviDaEliminare.add(param.getKey());
                 ArrayList<String> condizioniOr = new ArrayList<String>(3);
                 ArrayList valori = (ArrayList) param.getValue();
@@ -49,6 +49,7 @@ public class DatabaseUtils {
 
     /**
      * Controlla l'esistenza di uno specifico database
+     *
      * @return
      */
     public static boolean databaseExists() {
@@ -63,7 +64,7 @@ public class DatabaseUtils {
             connection = DriverManager.getConnection(config.host_url, config.user, config.pass);
             statement = connection.createStatement();
             rs = statement.executeQuery("SELECT SCHEMA_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME = " + Utils.singleQuotesToString(config.db_name));
-            if(rs.next()) {
+            if (rs.next()) {
                 exists = true;
             }
         } catch (ClassNotFoundException ee) {
@@ -72,10 +73,10 @@ public class DatabaseUtils {
             ee.printStackTrace();
         } finally {
             try {
-                if(statement != null) {
+                if (statement != null) {
                     statement.close();
                 }
-                if(connection != null) {
+                if (connection != null) {
                     connection.close();
                 }
             } catch (SQLException ee) {
@@ -87,6 +88,7 @@ public class DatabaseUtils {
 
     /**
      * Esegue uno script SQL
+     *
      * @param scriptPath path relativa dello script nelle risorse
      * @throws RisorsaNonTrovata Lanciata nel caso in cui la risorsa non venga trovata
      */
@@ -104,14 +106,14 @@ public class DatabaseUtils {
             statement = connection.createStatement();
             StringBuilder sb = new StringBuilder();
             String trimmered;
-            for(String line: lines) {
+            for (String line : lines) {
                 trimmered = line.trim();
                 // Costruisco il comando
-                if(!trimmered.isEmpty()) {
+                if (!trimmered.isEmpty()) {
                     sb.append(line);
                 }
                 // Se il comando termina con il delimiter, ottengo la stringa e lo eseguo
-                if(trimmered.endsWith(commandDelimiter)) {
+                if (trimmered.endsWith(commandDelimiter)) {
                     statement.executeUpdate(sb.toString());
                     // Pulisco lo StringBuilder
                     sb.setLength(0);
@@ -125,10 +127,10 @@ public class DatabaseUtils {
             ee.printStackTrace();
         } finally {
             try {
-                if(statement != null) {
+                if (statement != null) {
                     statement.close();
                 }
-                if(connection != null) {
+                if (connection != null) {
                     connection.close();
                 }
             } catch (SQLException ee) {
@@ -140,6 +142,7 @@ public class DatabaseUtils {
     /**
      * Crea, da un oggetto java.util.Date, una stringa adatta
      * ad una chiamata SQL
+     *
      * @param date
      * @return
      */

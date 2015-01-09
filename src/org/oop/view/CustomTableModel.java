@@ -1,9 +1,7 @@
 package org.oop.view;
 
 import javax.swing.event.TableModelEvent;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-import java.util.Objects;
 import java.util.Vector;
 
 

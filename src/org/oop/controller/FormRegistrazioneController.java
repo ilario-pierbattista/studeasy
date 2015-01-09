@@ -10,7 +10,6 @@ import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.InsegnamentoOfferto;
 import org.oop.model.entities.Utente;
 import org.oop.view.Mainframe;
-import org.oop.view.profilo.FormLibretto;
 import org.oop.view.profilo.FormRegistrazione;
 
 import javax.swing.*;

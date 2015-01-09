@@ -24,7 +24,7 @@ public class DatabaseUtilsTest {
         conditions = DatabaseUtils.generateCondition(parameters);
         String expecetedOutput = "campo1 = :campo1 AND campo3 = :campo3 AND campo2 = :campo2 " +
                 "AND (campo4 = :campo4_0 OR campo4 = :campo4_1 OR campo4 = :campo4_2)";
-        if(!expecetedOutput.equals(conditions)) {
+        if (!expecetedOutput.equals(conditions)) {
             System.out.println("Output atteso: ".concat(expecetedOutput).concat("\nOutput ricevuto: ").concat(conditions));
             throw new TestFallito();
         }

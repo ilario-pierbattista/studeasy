@@ -7,7 +7,6 @@ import org.oop.model.entities.AttivitaPeriodica;
 import org.oop.model.entities.Esame;
 import org.oop.view.AbstractView;
 
-import javax.rmi.CORBA.Util;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.time.LocalTime;
@@ -35,14 +34,14 @@ public class Attivita extends AbstractView {
         luogoField.setText("Luogo: ".concat(attivita.getLuogo()));
         hourStart.setText("Ora inizio: ".concat(attivita.getOraInizio().toString()));
         hourEnd.setText("Ora fine: ".concat(attivita.getOraFine().toString()));
-        if(attivita instanceof AttivitaEvento) {
+        if (attivita instanceof AttivitaEvento) {
             dataField.setText(Utils.dateToString(((AttivitaEvento) attivita).getData(), 0));
             dayField.setText("");
             tipoEsameField.setText("");
-            if(attivita instanceof Esame) {
+            if (attivita instanceof Esame) {
                 tipoEsameField.setText("Tipologia: ".concat(((Esame) attivita).getTipologiaProva()));
             }
-        } else if(attivita instanceof AttivitaPeriodica) {
+        } else if (attivita instanceof AttivitaPeriodica) {
             dayField.setText(((AttivitaPeriodica) attivita).getNomeGiorno());
             dataField.setText("");
             tipoEsameField.setText("");
@@ -59,9 +58,10 @@ public class Attivita extends AbstractView {
         hourStart.setText("Ora inizio: " + hstart.toString());
         hourEnd.setText("Ora fine: " + hend.toString());
     }
+
     // Costruttore attivitaEvento
-    public Attivita(String nomeattivita, String nomeprofessore,String ruolodocente, String place, LocalTime hstart, LocalTime hend, Date date) {
-        this(nomeattivita,nomeprofessore,ruolodocente,place,hstart,hend);
+    public Attivita(String nomeattivita, String nomeprofessore, String ruolodocente, String place, LocalTime hstart, LocalTime hend, Date date) {
+        this(nomeattivita, nomeprofessore, ruolodocente, place, hstart, hend);
         dataField.setText(Utils.dateToString(date, 0));
 
         //Elimino i campi che non servono
@@ -70,7 +70,7 @@ public class Attivita extends AbstractView {
     }
 
     // Costrutto attivitaPeriodica
-    public Attivita(String nomeattivita, String nomeprofessore,String ruolodocente, String place, LocalTime hstart, LocalTime hend, int giorno) {
+    public Attivita(String nomeattivita, String nomeprofessore, String ruolodocente, String place, LocalTime hstart, LocalTime hend, int giorno) {
         this(nomeattivita, nomeprofessore, ruolodocente, place, hstart, hend);
         dayField.setText(Utils.intToStringDate(giorno));
 
@@ -80,9 +80,9 @@ public class Attivita extends AbstractView {
     }
 
     // Costrutto attivitaEsame
-    public Attivita(String nomeattivita, String nomeprofessore,String ruolodocente, String place, LocalTime hstart, LocalTime hend, Date date, String tipoesame) {
+    public Attivita(String nomeattivita, String nomeprofessore, String ruolodocente, String place, LocalTime hstart, LocalTime hend, Date date, String tipoesame) {
         this(nomeattivita, nomeprofessore, ruolodocente, place, hstart, hend);
-        dataField.setText(Utils.dateToString(date,0));
+        dataField.setText(Utils.dateToString(date, 0));
         tipoEsameField.setText("Tipologia: " + "\"" + tipoesame + "\"");
 
         //Elimino i campi che non servono

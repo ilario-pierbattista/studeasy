@@ -89,13 +89,13 @@ public class Ciclo {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.label;
     }
 
     public String toString(boolean debugMode) {
         String str;
-        if(debugMode) {
+        if (debugMode) {
             str = "Ciclo{" +
                     "id=" + id +
                     ", label='" + label + '\'' +

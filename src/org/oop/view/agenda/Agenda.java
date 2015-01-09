@@ -1,7 +1,6 @@
 package org.oop.view.agenda;
 
 import org.apache.commons.lang3.text.WordUtils;
-import org.oop.controller.AttivitaController;
 import org.oop.model.entities.*;
 import org.oop.view.AbstractView;
 import org.oop.view.Mainframe;
@@ -51,7 +50,7 @@ public class Agenda extends AbstractView {
         splitpane.setDividerLocation(230 + splitpane.getInsets().left);
         //Elimina i bordi
         splitpane.setBorder(null);
-        sidebarpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(230,230,230)));
+        sidebarpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(230, 230, 230)));
 
         insidesplitpane.setDividerLocation(150 + insidesplitpane.getInsets().top);
         insidesplitpane.setBorder(null);
@@ -64,6 +63,15 @@ public class Agenda extends AbstractView {
         seminariobutton.setActionCommand(org.oop.model.entities.Attivita.CATEGORIA_SEMINARIO);
         progettobutton.setActionCommand(org.oop.model.entities.Attivita.CATEGORIA_PROGETTO);
         esameButton.setActionCommand(org.oop.model.entities.Attivita.CATEGORIA_ESAME);
+    }
+
+    /**
+     * Metodo che ritorna l'istanza della vista
+     *
+     * @return
+     */
+    public static Agenda getInstance() {
+        return instance;
     }
 
     /**
@@ -162,11 +170,11 @@ public class Agenda extends AbstractView {
         }
     }
 
-
     /**
      * Metodo che crea la lista di insegnamenti per il ciclo che gli si passa.
      * Indipendentemente dal fatto che il ciclo abbia già insegnamenti associati o meno,
      * ricrea il model della lista.
+     *
      * @param ciclo Ciclo
      */
     public void setInsegnamentiFromCiclo(Ciclo ciclo) {
@@ -207,7 +215,7 @@ public class Agenda extends AbstractView {
                     LocalTime orainizio = attivita.getOraInizio();
                     LocalTime orafine = attivita.getOraFine();
 
-                    if(attivita instanceof AttivitaEvento) { //se l'attivita è di  tipo AttivitaEvento (Progetto,Seminario o Esame)
+                    if (attivita instanceof AttivitaEvento) { //se l'attivita è di  tipo AttivitaEvento (Progetto,Seminario o Esame)
                         Date data = ((AttivitaEvento) attivita).getData();
                         if (attivita instanceof Esame) {
                             String tipoesame = ((Esame) attivita).getTipologiaProva();
@@ -236,15 +244,6 @@ public class Agenda extends AbstractView {
         activitiespanel.removeAll();
         activitiespanel.add(noAttivitaLabel);
         noAttivitaLabel.setVisible(true);
-    }
-
-    /**
-     * Metodo che ritorna l'istanza della vista
-     *
-     * @return
-     */
-    public static Agenda getInstance() {
-        return instance;
     }
 
     /* Getters */

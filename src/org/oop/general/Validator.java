@@ -262,7 +262,8 @@ public class Validator {
      * Controlla il contenuto di due oggetti JFormattedTextField per l'immissione di un orario. Il
      * loro contenuto è valido se l'orario di inizio è precedente all'orario di fine.
      * Precondizione: begin ed end devono essere impostati per accettare stringhe del formato HH:mm,
-     *  dove HH sono le ore e mm i minuti
+     * dove HH sono le ore e mm i minuti
+     *
      * @param begin
      * @param end
      * @return

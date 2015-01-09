@@ -47,7 +47,7 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
                 .getResult();
         Ciclo ciclo = null;
         try {
-            if(rs.next()) {
+            if (rs.next()) {
                 ciclo = generaEntita(rs);
             }
             rs.close();
@@ -107,7 +107,7 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
 
     public void setUtente(Utente utente) {
         ArrayList<Integer> idCicli = new ArrayList<Integer>(2);
-        if(!utente.getAgenda().getCicli().isEmpty()) {
+        if (!utente.getAgenda().getCicli().isEmpty()) {
             for (Ciclo ciclo : utente.getAgenda().getCicli()) {
                 idCicli.add(ciclo.getId());
             }
@@ -132,19 +132,19 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
                 .getResult();
         try {
             ArrayList<Integer> idInsegnamenti = new ArrayList<Integer>(3);
-            while(rs.next()) {
+            while (rs.next()) {
                 idInsegnamenti.add(rs.getInt("insegnamento_utente"));
             }
             rs.close();
-            if(!idInsegnamenti.isEmpty()) {
+            if (!idInsegnamenti.isEmpty()) {
                 insegnamenti = insegnamentoDAO.findBy(new SQLParameters().add("id", idInsegnamenti));
             }
         } catch (SQLException ee) {
             ee.printStackTrace();
         }
-        for(Insegnamento insegnamento : insegnamenti) {
+        for (Insegnamento insegnamento : insegnamenti) {
             ArrayList<Attivita> attivita = getAttivitaPerInsegnamentoCiclo(ciclo, insegnamento);
-            if(attivita != null && !attivita.isEmpty()) {
+            if (attivita != null && !attivita.isEmpty()) {
                 insegnamento.setAttivita(attivita);
             }
         }
@@ -163,7 +163,7 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
         db.createSqlStatement("DELETE FROM iu_ciclo WHERE ciclo = :ciclo")
                 .setParameters(new SQLParameters().add("ciclo", ciclo.getId()))
                 .executeUpdate();
-        for(Insegnamento insegnamento : ciclo.getInsegnamenti()) {
+        for (Insegnamento insegnamento : ciclo.getInsegnamenti()) {
             SQLParameters insPar = new SQLParameters();
             insPar.add("ciclo", ciclo.getId())
                     .add("insegnamento_utente", insegnamento.getId());

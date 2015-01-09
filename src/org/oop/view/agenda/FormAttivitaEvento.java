@@ -9,13 +9,8 @@ import org.oop.model.entities.AttivitaEvento;
 import org.oop.model.entities.Docente;
 import org.oop.view.AbstractForm;
 
-import javax.rmi.CORBA.Util;
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.sql.Time;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -51,6 +46,7 @@ public class FormAttivitaEvento extends AbstractForm {
 
     /**
      * Metodo che prende i valori dei campi del form e li mette dentro un oggetto AttivitaEvento
+     *
      * @return
      */
     public AttivitaEvento getNuovaAttivita() {
@@ -71,6 +67,7 @@ public class FormAttivitaEvento extends AbstractForm {
 
     /**
      * Ritorna il ruolo del docente in base all'elemento selezionato nella Combobox
+     *
      * @return
      */
     private String getRuoloDocente() {
@@ -92,9 +89,10 @@ public class FormAttivitaEvento extends AbstractForm {
     /**
      * Metodo di appoggio che controlla che i campi del form siano stati compilati
      * correttamente
+     *
      * @return
      */
-    public boolean isValid(){
+    public boolean isValid() {
         boolean flag = true;
 
         if (Validator.isComboBoxEmpty(teacherBox, "Docente")) {
@@ -103,7 +101,7 @@ public class FormAttivitaEvento extends AbstractForm {
             flag = false;
         } else if (Validator.isFormattedFieldEmpty(dataField, "Giorno")) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(hourStartField,"Ora inizio") || Validator.isFormattedFieldEmpty(hourEndField, "Ora fine")) {
+        } else if (Validator.isFormattedFieldEmpty(hourStartField, "Ora inizio") || Validator.isFormattedFieldEmpty(hourEndField, "Ora fine")) {
             flag = false;
         } else if (Validator.checkTimeJFormattedText(hourStartField, hourEndField)) {
             flag = false;
@@ -136,7 +134,7 @@ public class FormAttivitaEvento extends AbstractForm {
         teacherBox.setSelectedItem(attivita.getDocente());
         ruoloDocenteBox.setSelectedItem(attivita.getRuoloDocente());
         luogoField.setText(attivita.getLuogo());
-        dataField.setText(Utils.dateToString(attivita.getData(),0));
+        dataField.setText(Utils.dateToString(attivita.getData(), 0));
         hourStartField.setText(attivita.getOraInizio().toString());
         hourEndField.setText(attivita.getOraFine().toString());
     }
@@ -153,15 +151,16 @@ public class FormAttivitaEvento extends AbstractForm {
     /**
      * Metodo che chiude il form
      */
-    public void closeFrame(){
+    public void closeFrame() {
         frame.dispose();
     }
 
     /* Listeners setters */
-    public void addSubmitButtonListener (ActionListener listener){
+    public void addSubmitButtonListener(ActionListener listener) {
         submitButton.addActionListener(listener);
     }
-    public void addCancelButtonListener (ActionListener listener){
+
+    public void addCancelButtonListener(ActionListener listener) {
         eventoCancelButton.addActionListener(listener);
     }
 
@@ -169,6 +168,10 @@ public class FormAttivitaEvento extends AbstractForm {
 
     public JLabel getActivityname() {
         return activityname;
+    }
+
+    public void setActivityname(String text) {
+        activityname.setText(text);
     }
 
     public JButton getSubmitButton() {
@@ -183,6 +186,10 @@ public class FormAttivitaEvento extends AbstractForm {
         return teacherfield;
     }
 
+    public void setTeacherfield(JTextField teacherfield) {
+        this.teacherfield = teacherfield;
+    }
+
     public JTextArea getDescriptionfield() {
         return descriptionfield;
     }
@@ -192,9 +199,17 @@ public class FormAttivitaEvento extends AbstractForm {
         return dataField;
     }
 
+    public void setDataField(JFormattedTextField dataField) {
+        this.dataField = dataField;
+    }
+
     public JTextField getAulafield() {
 
         return aulafield;
+    }
+
+    public void setAulafield(JTextField aulafield) {
+        this.aulafield = aulafield;
     }
 
     public JTextField getNamefield() {
@@ -202,62 +217,46 @@ public class FormAttivitaEvento extends AbstractForm {
         return namefield;
     }
 
-    public JFormattedTextField getHourStartField() {
-        return hourStartField;
-    }
-
-    public JFormattedTextField getHourEndField() {
-        return hourEndField;
-    }
-
-    public JComboBox getTeacherBox() {
-        return teacherBox;
-    }
-
-    public JTextField getLuogoField() {
-        return luogoField;
-    }
-
     /* Setters */
-
-    public void setActivityname(String text) {
-        activityname.setText(text);
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
 
     public void setNamefield(JTextField namefield) {
         this.namefield = namefield;
     }
 
-    public void setTeacherfield(JTextField teacherfield) {
-        this.teacherfield = teacherfield;
-    }
-
-    public void setAulafield(JTextField aulafield) {
-        this.aulafield = aulafield;
-    }
-
-    public void setDataField(JFormattedTextField dataField) {
-        this.dataField = dataField;
+    public JFormattedTextField getHourStartField() {
+        return hourStartField;
     }
 
     public void setHourStartField(JFormattedTextField hourStartField) {
         this.hourStartField = hourStartField;
     }
 
+    public JFormattedTextField getHourEndField() {
+        return hourEndField;
+    }
+
     public void setHourEndField(JFormattedTextField hourEndField) {
         this.hourEndField = hourEndField;
+    }
+
+    public JComboBox getTeacherBox() {
+        return teacherBox;
     }
 
     public void setTeacherBox(JComboBox teacherBox) {
         this.teacherBox = teacherBox;
     }
 
+    public JTextField getLuogoField() {
+        return luogoField;
+    }
+
     public void setLuogoField(JTextField luogoField) {
         this.luogoField = luogoField;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public void setRuoloDocenteBox(JComboBox ruoloDocenteBox) {

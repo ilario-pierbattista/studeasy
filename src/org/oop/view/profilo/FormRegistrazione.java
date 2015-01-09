@@ -1,7 +1,6 @@
 package org.oop.view.profilo;
 
 import org.oop.db.SQLParameters;
-import org.oop.general.Utils;
 import org.oop.general.Validator;
 import org.oop.model.dao.CorsoDAO;
 import org.oop.model.entities.Corso;
@@ -37,6 +36,7 @@ public class FormRegistrazione extends AbstractForm {
 
     /**
      * Imposta le informazioni di default
+     *
      * @param utente Utente da cui prendere le informazioni
      */
     public void initInfo(Utente utente) {
@@ -49,9 +49,9 @@ public class FormRegistrazione extends AbstractForm {
         SQLParameters parameters = new SQLParameters();
         parameters.add("livello", livello);
         setCorsiList(new CorsoDAO().findBy(parameters));
-        if(livello == Corso.TRIENNALE) {
+        if (livello == Corso.TRIENNALE) {
             triennaleRadioButton.setSelected(true);
-        } else if(livello == Corso.MAGISTRALE) {
+        } else if (livello == Corso.MAGISTRALE) {
             magistraleRadioButton.setSelected(true);
         } else {
             cicloUnicoRadioButton.setSelected(true);
@@ -61,12 +61,13 @@ public class FormRegistrazione extends AbstractForm {
 
     /**
      * Imposta la lista dei corsi opzionabili
+     *
      * @param corsi
      */
     public void setCorsiList(ArrayList<Corso> corsi) {
         corsiList.setEnabled(true);
         listaCorsiModel.clear();
-        for(Corso corso : corsi) {
+        for (Corso corso : corsi) {
             listaCorsiModel.addElement(corso);
         }
     }
@@ -74,20 +75,21 @@ public class FormRegistrazione extends AbstractForm {
     /**
      * Convalida gli attributi del form ed apre una finestra d'errore
      * nel caso qualcosa non vada bene
+     *
      * @return
      */
     public boolean isValid() {
         boolean valid = true;
 
-        if(Validator.isTextFieldEmpty(nome,"Nome") || !Validator.inputSentenceControl(nome.getText(), "Nome")) {
+        if (Validator.isTextFieldEmpty(nome, "Nome") || !Validator.inputSentenceControl(nome.getText(), "Nome")) {
             valid = false;
-        } else if(Validator.isTextFieldEmpty(cognome, "Cognome") || !Validator.inputSentenceControl(cognome.getText(), "Cognome")) {
+        } else if (Validator.isTextFieldEmpty(cognome, "Cognome") || !Validator.inputSentenceControl(cognome.getText(), "Cognome")) {
             valid = false;
-        } else if(Validator.isTextFieldEmpty(email,"Email") || !Validator.email(email.getText())) {
+        } else if (Validator.isTextFieldEmpty(email, "Email") || !Validator.email(email.getText())) {
             valid = false;
-        } else if(Validator.isFormattedFieldEmpty(matricola,"Matricola")) {
+        } else if (Validator.isFormattedFieldEmpty(matricola, "Matricola")) {
             valid = false;
-        } else if(corsiList.getSelectedValue() == null) {
+        } else if (corsiList.getSelectedValue() == null) {
             JOptionPane.showMessageDialog(null, "Nessun corso selezionato");
             valid = false;
         }
@@ -96,6 +98,7 @@ public class FormRegistrazione extends AbstractForm {
 
     /**
      * Restituisce un oggetto utente dai campi del form
+     *
      * @return
      */
     public Utente getUtente() {
@@ -108,7 +111,7 @@ public class FormRegistrazione extends AbstractForm {
         return utente;
     }
 
-   /*listeners adders*/
+    /*listeners adders*/
     public void addSubmitFormButtonListener(ActionListener l) {
         Submit.addActionListener(l);
     }
@@ -122,9 +125,14 @@ public class FormRegistrazione extends AbstractForm {
         magistraleRadioButton.addActionListener(l);
         cicloUnicoRadioButton.addActionListener(l);
     }
-    public void addFocusListenerMatricola(FocusListener listener){ matricola.addFocusListener(listener);}
 
-    /** GETTER @TODO ottimizzarli, togliere quelli che non servono */
+    public void addFocusListenerMatricola(FocusListener listener) {
+        matricola.addFocusListener(listener);
+    }
+
+    /**
+     * GETTER @TODO ottimizzarli, togliere quelli che non servono
+     */
     public JTextField getNome() {
         return nome;
     }

@@ -35,9 +35,9 @@ public class DatabaseManagerTest {
         db.closeConnection();
 
         for (int i = 0; i < result_expected.size(); i++) {
-            if(!result_expected.get(i).equals(output.get(i))) {
+            if (!result_expected.get(i).equals(output.get(i))) {
                 System.out.println("L'output " + output.get(i) + " e l'output atteso " + result_expected.get(i) +
-                " non corrispondono");
+                        " non corrispondono");
                 throw new TestFallito();
             }
         }

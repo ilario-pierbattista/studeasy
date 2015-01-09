@@ -29,7 +29,7 @@ public class Agenda {
     public Agenda removeCiclo(Ciclo ciclo) {
         boolean found = false;
         for (int i = 0; i < cicli.size() && !found; i++) {
-            if(ciclo.getId() == cicli.get(i).getId()) {
+            if (ciclo.getId() == cicli.get(i).getId()) {
                 found = true;
                 cicli.remove(i);
             }
@@ -37,11 +37,11 @@ public class Agenda {
         return this;
     }
 
-    public Ciclo findCiclo(int idciclo){
+    public Ciclo findCiclo(int idciclo) {
         boolean found = false;
         Ciclo c = new Ciclo();
         for (int i = 0; i < cicli.size() && !found; i++) {
-            if(idciclo == cicli.get(i).getId()) {
+            if (idciclo == cicli.get(i).getId()) {
                 found = true;
                 c = cicli.get(i);
             }

@@ -12,7 +12,7 @@ import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
 
-import static org.oop.general.Utils.*;
+import static org.oop.general.Utils.stringToCapital;
 
 public class TirocinioController {
     FormTirocinio view;

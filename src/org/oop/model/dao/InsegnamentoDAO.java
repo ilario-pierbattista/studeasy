@@ -49,7 +49,7 @@ public class InsegnamentoDAO extends AbstractDAO<Insegnamento> {
                 .getResult();
         Insegnamento ins = null;
         try {
-            if(rs.next()) {
+            if (rs.next()) {
                 ins = generaEntita(rs);
             }
             rs.close();
@@ -103,9 +103,11 @@ public class InsegnamentoDAO extends AbstractDAO<Insegnamento> {
         entity.setId(0);
     }
 
-    /** @TODO qui ci dovrebbe essere un bug */
+    /**
+     * @TODO qui ci dovrebbe essere un bug
+     */
     public void setUtente(Utente utente) {
-        if(!utente.getLibretto().getInsegnamenti().isEmpty()) {
+        if (!utente.getLibretto().getInsegnamenti().isEmpty()) {
             ArrayList<Integer> ids = new ArrayList<Integer>(10);
             SQLParameters parameters = new SQLParameters();
             for (Insegnamento insegnamento : utente.getLibretto().getInsegnamenti()) {

@@ -3,8 +3,6 @@ package org.oop.general;
 
 import org.oop.general.exceptions.RisorsaNonTrovata;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,7 +16,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Utils {
-
 
 
     /**
@@ -107,12 +104,13 @@ public class Utils {
 
     /**
      * Arrotonda un numero ad uno specifico numero di cifre
-     * @param value Numero da arrotondare
+     *
+     * @param value         Numero da arrotondare
      * @param decimalPlaces Numero di cifre dopo la virgola richieste
      * @return Numero arrotondato
      */
     public static double round(double value, int decimalPlaces) {
-        if(decimalPlaces < 0) {
+        if (decimalPlaces < 0) {
             throw new IllegalArgumentException("'decimalPlaces' deve essere un intero maggiore di zero");
         }
         value *= Math.pow(10, decimalPlaces);
@@ -187,7 +185,8 @@ public class Utils {
 
     /**
      * Converte la data che gli si passa in stringa nel formato scelto
-     * @param date Data da convertire
+     *
+     * @param date   Data da convertire
      * @param format 0 per gg-mm-yyyy , 1 per hh:mm
      */
     public static String dateToString(Date date, int format) {
@@ -228,12 +227,11 @@ public class Utils {
     }
 
     /**
+     * @param number Giorno a numero
+     * @return Giorno a lettere
      * @TODO Lasciare questo o l'altro in AttivitaPeriodica
      * Converte il numero (tra 1 e 7) che gli si passa nel corrispondente giorno secondo la logica
      * di java.utils.Calendar
-     *
-     * @param number Giorno a numero
-     * @return Giorno a lettere
      */
     public static String intToStringDate(int number) {
         String giorno = "not valid";
@@ -250,7 +248,7 @@ public class Utils {
             giorno = "Venerdì";
         } else if (number == 7) {
             giorno = "Sabato";
-        } else if (number == 1){
+        } else if (number == 1) {
             giorno = "Domenica";
         }
 

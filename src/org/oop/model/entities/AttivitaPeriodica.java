@@ -18,7 +18,8 @@ public class AttivitaPeriodica extends Attivita {
     }
 
     //il seguente è il costruttore che inizializza i dati di deafult
-    public AttivitaPeriodica() {}
+    public AttivitaPeriodica() {
+    }
 
     public int getGiorno() {
         return giorno;

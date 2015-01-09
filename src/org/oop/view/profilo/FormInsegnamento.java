@@ -1,14 +1,11 @@
 package org.oop.view.profilo;
 
-import org.oop.general.Utils;
 import org.oop.general.Validator;
 import org.oop.model.entities.Insegnamento;
 import org.oop.view.AbstractForm;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Date;
 
 public class FormInsegnamento extends AbstractForm {
@@ -32,9 +29,10 @@ public class FormInsegnamento extends AbstractForm {
     /**
      * Metodo di appoggio che controlla che i campi del form siano stati compilati
      * correttamente
+     *
      * @return
      */
-    public boolean isValid(){
+    public boolean isValid() {
         boolean flag = true;
 
         if (Validator.isFormattedFieldEmpty(dataField, "Data di superamento")) {

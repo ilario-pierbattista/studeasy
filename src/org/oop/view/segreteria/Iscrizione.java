@@ -8,14 +8,13 @@ import java.awt.event.ActionListener;
 
 public class Iscrizione {
     public JPanel iscrizionepanel;
+    int contarighe = 1;
     private JTable tabellaiscrizione;
     private JScrollPane scrollpanetable;
     private JButton deleteButton;
     private JButton editButton;
     private JButton addButton;
-
     private CustomTableModel model = new CustomTableModel("Anno", "Anno Accademico", "Corso di Laurea", "Esami Superati", "CFU");
-    int contarighe = 1;
 
     public Iscrizione() {
         super();
@@ -47,7 +46,7 @@ public class Iscrizione {
         } else {
             model.deleteRow(tabellaiscrizione.getSelectedRow());
             n--;
-            tabellaiscrizione.changeSelection(n,0,false,false);
+            tabellaiscrizione.changeSelection(n, 0, false, false);
         }
         int size = model.getRowCount();
         if (size == 0) {

@@ -72,7 +72,9 @@ public class FormTesi extends AbstractView {
         return flag;
     }
 
-    public void addFocusListenerMatricola(FocusListener listener){ matricola.addFocusListener(listener);}
+    public void addFocusListenerMatricola(FocusListener listener) {
+        matricola.addFocusListener(listener);
+    }
 
     public void insSubmitFormButtonListener(ActionListener l) {
         submit.addActionListener(l);

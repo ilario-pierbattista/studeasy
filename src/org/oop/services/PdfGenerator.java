@@ -9,7 +9,6 @@ import org.oop.view.segreteria.FormImmatricolazione;
 import org.oop.view.segreteria.FormTesi;
 import org.oop.view.segreteria.FormTirocinio;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -22,22 +21,21 @@ public class PdfGenerator {
     private String nomeFile;
     private Utente utente;
 
-    public PdfGenerator(String nomeTemplate,String nome)
-    {
+    public PdfGenerator(String nomeTemplate, String nome) {
         //template contiene la path della cartella template
-        template=nomeTemplate;
+        template = nomeTemplate;
         nomeFile = nome;
-        utente= BaseController.getUtenteCorrente();
+        utente = BaseController.getUtenteCorrente();
     }
 
-    public void generatePdfTesi(FormTesi tesiView,String path) throws IOException,DocumentException {
+    public void generatePdfTesi(FormTesi tesiView, String path) throws IOException, DocumentException {
 
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());
 
         FileOutputStream fileOutputStream = new FileOutputStream(path.concat(File.separator.
-                                                                      concat(this.nomeFile).
-                                                                      concat(".pdf")));
+                concat(this.nomeFile).
+                concat(".pdf")));
 
 
         //PdfStamper will populate the fields dynamically with real time data.
@@ -61,14 +59,14 @@ public class PdfGenerator {
         pdfTemplate.close();
     }
 
-    public void generatePdfTirocinio(FormTirocinio tirocinioView,String path) throws IOException,DocumentException {
+    public void generatePdfTirocinio(FormTirocinio tirocinioView, String path) throws IOException, DocumentException {
 
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());
 
         FileOutputStream fileOutputStream = new FileOutputStream(path.concat(File.separator
-                                                                                        .concat(this.nomeFile)
-                                                                                        .concat(".pdf")));
+                .concat(this.nomeFile)
+                .concat(".pdf")));
 
         //PdfStamper will populate the fields dynamically with real time data.
         PdfStamper stamper = new PdfStamper(pdfTemplate, fileOutputStream);
@@ -83,22 +81,22 @@ public class PdfGenerator {
         stamper.getAcroFields().setField("residenza", tirocinioView.getResidenza().getText());
         stamper.getAcroFields().setField("provincia", tirocinioView.getProvincia().getText());
         stamper.getAcroFields().setField("cap", tirocinioView.getCap().getText());
-        stamper.getAcroFields().setField("via",tirocinioView.getVia().getText());
-        stamper.getAcroFields().setField("codiceFiscale",tirocinioView.getCodicefiscale().getText());
+        stamper.getAcroFields().setField("via", tirocinioView.getVia().getText());
+        stamper.getAcroFields().setField("codiceFiscale", tirocinioView.getCodicefiscale().getText());
 
         pdfTemplate.close();
         stamper.close();
         pdfTemplate.close();
     }
 
-    public void generatePdfImmatricolazione(FormImmatricolazione immatricolazioneView,String path) throws IOException,DocumentException {
+    public void generatePdfImmatricolazione(FormImmatricolazione immatricolazioneView, String path) throws IOException, DocumentException {
 
         //the PdfReader will read the template
         PdfReader pdfTemplate = new PdfReader(this.getTemplate());
 
         FileOutputStream fileOutputStream = new FileOutputStream(path.concat(File.separator
-                                                                                        .concat(this.nomeFile)
-                                                                                        .concat(".pdf")));
+                .concat(this.nomeFile)
+                .concat(".pdf")));
 
         //PdfStamper will populate the fields dynamically with real time data.
         PdfStamper stamper = new PdfStamper(pdfTemplate, fileOutputStream);
@@ -113,9 +111,9 @@ public class PdfGenerator {
         stamper.getAcroFields().setField("provinciaNascita", immatricolazioneView.getProvincia().getText());
         stamper.getAcroFields().setField("codiceFiscale", immatricolazioneView.getCodicefiscale().getText());
         stamper.getAcroFields().setField("tipologiaScuolaSuperiore", immatricolazioneView.getDiploma().getText());
-        stamper.getAcroFields().setField("voto",immatricolazioneView.getVoto().getText());
-        stamper.getAcroFields().setField("anno1",immatricolazioneView.getAnnoConseguimento1().getText());
-        stamper.getAcroFields().setField("anno2",immatricolazioneView.getAnnoConseguimento2().getText());
+        stamper.getAcroFields().setField("voto", immatricolazioneView.getVoto().getText());
+        stamper.getAcroFields().setField("anno1", immatricolazioneView.getAnnoConseguimento1().getText());
+        stamper.getAcroFields().setField("anno2", immatricolazioneView.getAnnoConseguimento2().getText());
 
         pdfTemplate.close();
         stamper.close();
