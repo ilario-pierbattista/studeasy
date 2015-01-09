@@ -1,6 +1,7 @@
 package org.oop.model.entities;
 
 import java.time.LocalTime;
+import java.util.Calendar;
 
 public class AttivitaPeriodica extends Attivita {
 
@@ -16,6 +17,9 @@ public class AttivitaPeriodica extends Attivita {
         this.giorno = giorno;
     }
 
+    //il seguente è il costruttore che inizializza i dati di deafult
+    public AttivitaPeriodica() {}
+
     public int getGiorno() {
         return giorno;
     }
@@ -25,6 +29,34 @@ public class AttivitaPeriodica extends Attivita {
         return this;
     }
 
-    //il seguente è il costruttore che inizializza i dati di deafult
-    public AttivitaPeriodica() {}
+    public String getNomeGiorno() {
+        String nome;
+        switch (giorno) {
+            case Calendar.MONDAY:
+                nome = "Lunedì";
+                break;
+            case Calendar.TUESDAY:
+                nome = "Martedì";
+                break;
+            case Calendar.WEDNESDAY:
+                nome = "Mercoledì";
+                break;
+            case Calendar.THURSDAY:
+                nome = "Giovedì";
+                break;
+            case Calendar.FRIDAY:
+                nome = "Venerdì";
+                break;
+            case Calendar.SATURDAY:
+                nome = "Sabato";
+                break;
+            case Calendar.SUNDAY:
+                nome = "Domenica";
+                break;
+            default:
+                nome = "Giorno non riconosciuto";
+                break;
+        }
+        return nome;
+    }
 }

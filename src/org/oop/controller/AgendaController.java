@@ -1,17 +1,22 @@
 package org.oop.controller;
+
+import org.apache.commons.lang3.text.WordUtils;
 import org.oop.model.Libretto;
 import org.oop.model.dao.CicloDAO;
 import org.oop.model.dao.InsegnamentoDAO;
 import org.oop.model.dao.UtenteDAO;
-import org.oop.model.entities.Ciclo;
-import org.oop.model.entities.Insegnamento;
-import org.oop.view.agenda.Agenda;
-import org.oop.view.agenda.FormCiclo;
-import org.oop.view.agenda.ModalAddInsegnamento;
+import org.oop.model.entities.*;
+import org.oop.model.entities.Attivita;
+import org.oop.view.Mainframe;
+import org.oop.view.agenda.*;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Date;
 
 
 public class AgendaController {
@@ -20,16 +25,19 @@ public class AgendaController {
     private ModalAddInsegnamento modalAddInsegnamento;
     private org.oop.model.Agenda agenda;
     private Libretto libretto;
+    private AttivitaController attivitaController;
+    private static AgendaController instance;
 
     public AgendaController(Agenda view) {
 
         this.view = view;
+        instance = this;
+        attivitaController = new AttivitaController();
 
         agenda = BaseController.getUtenteCorrente().getAgenda();
         libretto = BaseController.getUtenteCorrente().getLibretto();
 
         view.addLezioneButtonListener(new AddAttivitaAction());
-
 
         view.addEsameButtonListener(new AddAttivitaAction());
         view.addLaboratorioButtonListener(new AddAttivitaAction());
@@ -43,6 +51,22 @@ public class AgendaController {
         view.getCiclilist().getSelectionModel().addListSelectionListener(new listaCicliSelectionAction());
         view.getInsegnamentiList().getSelectionModel().addListSelectionListener(new listaInsegnamentiSelectionAction());
 
+        updateView();
+    }
+
+    public static AgendaController getInstance() {
+        return instance;
+    }
+
+    public Agenda getView() {
+        return view;
+    }
+
+    public void refreshUtente() {
+        UtenteDAO utenteDAO = new UtenteDAO();
+        BaseController.setUtenteCorrente(utenteDAO.find(BaseController.getUtenteCorrente().getMatricola()));
+        agenda = BaseController.getUtenteCorrente().getAgenda();
+        libretto = BaseController.getUtenteCorrente().getLibretto();
         updateView();
     }
 
@@ -60,7 +84,7 @@ public class AgendaController {
                 view.updateListaInsegnamenti();
                 view.getListaInsegnamentiTitle().setText("Insegnamenti di " + ciclo.getLabel());
                 view.getDurataCicloLabel().setText(ciclo.getInizio() + "/" + ciclo.getFine());
-                view.updateElencoAttivita(view.getInsegnamentoSelected());
+                updateAttivita(view.getInsegnamentoSelected());
             }
         }
     }
@@ -74,8 +98,29 @@ public class AgendaController {
         view.updateListaCicli();
         view.updateListaInsegnamenti();
         if (view.getInsegnamentoSelected() != null) {
-            view.updateElencoAttivita(view.getInsegnamentoSelected());
+            updateAttivita(view.getInsegnamentoSelected());
         }
+    }
+
+    public void updateAttivita(Insegnamento insegnamento) {
+        if (insegnamento == null) { // se il ciclo non ha ancora nessun insegnamento
+            view.setNoAttivita();
+        } else {
+            ArrayList<Attivita> listaAttivita = insegnamento.getAttivita();
+            view.getActivitiespanel().removeAll();
+            Mainframe.refreshView();
+
+            if (listaAttivita.size() <= 0) { //se l'insegnamento non ha ancora nessun attività
+                view.setNoAttivita();
+            } else {
+                for (org.oop.model.entities.Attivita attivita : listaAttivita) {
+                    org.oop.view.agenda.Attivita vistaAttivita = new org.oop.view.agenda.Attivita(attivita);
+                    attivitaController.setListenersToView(vistaAttivita);
+                    view.addAttivitaView(vistaAttivita);
+                }
+            }
+        }
+
     }
 
     /**
@@ -95,10 +140,10 @@ public class AgendaController {
         public void actionPerformed(ActionEvent actionEvent) {
             // ActionCommand corrisponde con la stringa che identifica il tipo di attivita
             String activityType = actionEvent.getActionCommand();
-            new AttivitaController(activityType);
+            //AttivitaEventoView attivitaview = new AttivitaEventoView(activityType);
+            attivitaController.openForm(activityType);
         }
     }
-
 
     /**
      * Action per aprire il form di aggiunta ciclo
@@ -244,7 +289,7 @@ public class AgendaController {
 
                 view.getInsegnamentoLabel().setText(insegnamento.getInsegnamentoOfferto().getNome());
 
-                view.updateElencoAttivita(insegnamento);
+                updateAttivita(insegnamento);
             }
         }
     }

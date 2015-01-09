@@ -63,6 +63,7 @@ public class FormLibretto extends AbstractForm {
         copiaInsegnamenti.addAll(libretto.getInsegnamenti());
         copiaLibretto.setInsegnamenti(copiaInsegnamenti);
         setInsegnamenti();
+        updateLibretto();
         setCfuLabel();
     }
 
@@ -86,7 +87,6 @@ public class FormLibretto extends AbstractForm {
             if(copiaLibretto.hasInsegnamentoOfferto(insegnamenti.get(i))) {
                 selectedIndices.add(i);
             }
-            /** @TODO impostare come selezionati gli insegnamenti già presenti nel libretto */
         }
         int[] indici = new int[selectedIndices.size()];
         for (int i = 0; i < selectedIndices.size(); i++) {
@@ -124,6 +124,8 @@ public class FormLibretto extends AbstractForm {
                 copiaLibretto.addInsegnamento(insegnamento);
             }
         }
+        /** @TODO rimuovere */
+        System.out.println(copiaLibretto.getInsegnamentiOpzionali().toString());
     }
 
     /**

@@ -1,6 +1,7 @@
 package org.oop.view.agenda;
 
 import org.apache.commons.lang3.text.WordUtils;
+import org.oop.controller.AttivitaController;
 import org.oop.model.entities.*;
 import org.oop.view.AbstractView;
 import org.oop.view.Mainframe;
@@ -227,6 +228,16 @@ public class Agenda extends AbstractView {
         }
     }
 
+    public void addAttivitaView(Attivita view) {
+        activitiespanel.add(view.activitypanel);
+    }
+
+    public void setNoAttivita() {
+        activitiespanel.removeAll();
+        activitiespanel.add(noAttivitaLabel);
+        noAttivitaLabel.setVisible(true);
+    }
+
     /**
      * Metodo che ritorna l'istanza della vista
      *
@@ -293,6 +304,9 @@ public class Agenda extends AbstractView {
         return insegnamentiList;
     }
 
+    public JPanel getActivitiespanel() {
+        return activitiespanel;
+    }
 
     /* Listeners setters */
     public void addCicloButtonListener(ActionListener listener) {

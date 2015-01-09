@@ -133,6 +133,17 @@ public class ProfiloController {
      */
     private void saveChanges() {
         Utente utente = BaseController.getUtenteCorrente();
+        Utente utenteSalvato = utenteDAO.find(utente.getMatricola());
+        // Rimozione degli insegnamenti non più presenti
+        System.out.println("Insegnamenti salvati "+utenteSalvato.getLibretto().getInsegnamentiOpzionali().toString());
+        System.out.println("Insegnamenti nuovi "+utente.getLibretto().getInsegnamentiOpzionali().toString());
+        for (Insegnamento ins : utenteSalvato.getLibretto().getInsegnamentiOpzionali()) {
+            if(!utente.getLibretto().hasInsegnamentoOfferto(ins.getInsegnamentoOfferto())) {
+                System.out.println(ins);
+                insegnamentoDAO.remove(ins);
+            }
+        }
+        // Salvataggio dei nuovi insegnamenti
         for (Insegnamento ins : utente.getLibretto().getInsegnamenti()) {
             if(ins.getId() == 0 || insegnamentoDAO.find(ins.getId()) == null) {
                 insegnamentoDAO.persist(ins);

@@ -129,6 +129,21 @@ public class FormAttivitaEvento extends AbstractForm {
     }
 
     /**
+     * Imposta i campi del form con i parametri dell'attivita passata. Serve se si vuole modificare
+     * un'attivita
+     *
+     * @param attivita
+     */
+    public void fillForm(AttivitaEvento attivita) {
+        teacherBox.setSelectedItem(attivita.getDocente());
+        ruoloDocenteBox.setSelectedItem(attivita.getRuoloDocente());
+        luogoField.setText(attivita.getLuogo());
+        dataField.setText(Utils.dateToString(attivita.getData(),0));
+        hourStartField.setText(attivita.getOraInizio().toString());
+        hourEndField.setText(attivita.getOraFine().toString());
+    }
+
+    /**
      * Setta componenti GUI custom (rispetto all'editor visuale)
      */
     private void createUIComponents() {
@@ -213,5 +228,41 @@ public class FormAttivitaEvento extends AbstractForm {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public void setNamefield(JTextField namefield) {
+        this.namefield = namefield;
+    }
+
+    public void setTeacherfield(JTextField teacherfield) {
+        this.teacherfield = teacherfield;
+    }
+
+    public void setAulafield(JTextField aulafield) {
+        this.aulafield = aulafield;
+    }
+
+    public void setDataField(JFormattedTextField dataField) {
+        this.dataField = dataField;
+    }
+
+    public void setHourStartField(JFormattedTextField hourStartField) {
+        this.hourStartField = hourStartField;
+    }
+
+    public void setHourEndField(JFormattedTextField hourEndField) {
+        this.hourEndField = hourEndField;
+    }
+
+    public void setTeacherBox(JComboBox teacherBox) {
+        this.teacherBox = teacherBox;
+    }
+
+    public void setLuogoField(JTextField luogoField) {
+        this.luogoField = luogoField;
+    }
+
+    public void setRuoloDocenteBox(JComboBox ruoloDocenteBox) {
+        this.ruoloDocenteBox = ruoloDocenteBox;
     }
 }

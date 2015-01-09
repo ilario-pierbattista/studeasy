@@ -145,6 +145,21 @@ public class FormAttivitaPeriodica extends AbstractForm {
     }
 
     /**
+     * Imposta i campi del form con i parametri dell'attivita passata. Serve se si vuole modificare
+     * un'attivita
+     *
+     * @param attivita
+     */
+    public void fillForm(AttivitaPeriodica attivita) {
+        teacherBox.setSelectedItem(attivita.getDocente());
+        ruoloDocenteBox.setSelectedItem(attivita.getRuoloDocente());
+        dayBox.setSelectedItem(attivita.getNomeGiorno());
+        hourStartField.setText(attivita.getOraInizio().toString());
+        hourEndField.setText(attivita.getOraFine().toString());
+        aulaField.setText(attivita.getLuogo());
+    }
+
+    /**
      * Setta componenti GUI custom (rispetto all'editor visuale)
      */
     private void createUIComponents() {

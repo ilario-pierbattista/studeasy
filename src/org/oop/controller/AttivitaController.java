@@ -15,34 +15,33 @@ public class AttivitaController {
     private FormAttivitaEvento formAttivitaEvento;
     private FormAttivitaPeriodica formAttivitaPeriodica;
     private FormEsame formEsame;
-    private String newActivityType;
     private AttivitaDAO attivitaDAO;
     private CicloDAO cicloDAO;
     private InsegnamentoDAO insegnamentoDAO;
 
-    public AttivitaController(String newActivityType) {
-        this.newActivityType = newActivityType;
+    public AttivitaController() {
         attivitaDAO = new AttivitaDAO();
         cicloDAO = new CicloDAO();
         insegnamentoDAO = new InsegnamentoDAO();
+    }
 
-        openForm();
-
-        //   view.addEditButtonListener(new EditButtonAction());
+    public void setListenersToView(Attivita attivita) {
+        attivita.addEditButtonListener(new EditButtonAction());
+        attivita.addDeleteButtonListener(new DeleteButtonAction());
     }
 
     /**
      * Metodo che aggiorna la view
      */
     private void updateView() {
-        Agenda.getInstance().updateElencoAttivita(Agenda.getInstance().getInsegnamentoSelected());
+        AgendaController.getInstance().updateAttivita(AgendaController.getInstance().getView().getInsegnamentoSelected());
     }
 
     /**
      * Metodo per aprire il form corretto in base al bottone cliccato.
      * Setta anche i listeners necessari per il funzionamento.
      */
-    private void openForm() {
+    public void openForm(String newActivityType) {
         if (newActivityType.equals(org.oop.model.entities.Attivita.CATEGORIA_PROGETTO) || newActivityType.equals(org.oop.model.entities.Attivita.CATEGORIA_SEMINARIO)) {
             formAttivitaEvento = new FormAttivitaEvento();
             if (newActivityType.equals(org.oop.model.entities.Attivita.CATEGORIA_PROGETTO)) {
@@ -73,13 +72,71 @@ public class AttivitaController {
         }
     }
 
+
+    /**
+     * Metodo per aprire il form corretto di modifica in base all'attivita cliccata.
+     * Setta anche i listeners necessari per il funzionamento.
+     */
+    public void openFormToModify(org.oop.model.entities.Attivita attivita) {
+        String categoria = attivita.getCategoria();
+        if (categoria.equals(org.oop.model.entities.Attivita.CATEGORIA_PROGETTO) || categoria.equals(org.oop.model.entities.Attivita.CATEGORIA_SEMINARIO)) {
+            formAttivitaEvento = new FormAttivitaEvento();
+            if (categoria.equals(org.oop.model.entities.Attivita.CATEGORIA_PROGETTO)) {
+                formAttivitaEvento.setActivityname("Modifica progetto");
+                formAttivitaEvento.fillForm((AttivitaEvento) attivita);
+            } else {
+                formAttivitaEvento.setActivityname("Modifica seminario");
+                formAttivitaEvento.fillForm((AttivitaEvento) attivita);
+            }
+            formAttivitaEvento.addSubmitButtonListener(new SubmitFormEventoAction());
+            formAttivitaEvento.addCancelButtonListener(new CloseFormEventoAction());
+        } else if (categoria.equals(org.oop.model.entities.Attivita.CATEGORIA_LEZIONE) || categoria.equals(org.oop.model.entities.Attivita.CATEGORIA_LABORATORIO)) {
+            formAttivitaPeriodica = new FormAttivitaPeriodica();
+            if (categoria.equals(org.oop.model.entities.Attivita.CATEGORIA_LEZIONE)) {
+                formAttivitaPeriodica.setActivityname("Modifica lezione");
+                formAttivitaPeriodica.fillForm((AttivitaPeriodica) attivita);
+            } else {
+                formAttivitaPeriodica.setActivityname("Modifica laboratorio");
+                formAttivitaPeriodica.fillForm((AttivitaPeriodica) attivita);
+            }
+            formAttivitaPeriodica.addSubmitButtonListener(new SubmitFormPeriodicaAction());
+            formAttivitaPeriodica.addCancelButtonListener(new CloseFormPeriodicaAction());
+        } else {
+            // In questo caso la categoria è ESAME
+            formEsame = new FormEsame();
+            formEsame.setActivityname("Modifica esame");
+            formEsame.fillForm((Esame) attivita);
+            formEsame.addSubmitButtonListener(new SubmitFormEsameAction());
+            formEsame.addCancelButtonListener(new CloseFormEsameAction());
+            formEsame.addTipologiaProvaRadioListener(new SetTipologiaEsameAction());
+        }
+    }
+
     /**
      * Action per modifica un'attività
      */
     class EditButtonAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
+            int id = Integer.parseInt(e.getActionCommand());
+            org.oop.model.entities.Attivita attivita = attivitaDAO.find(id);
+            openFormToModify(attivita);
 
+        }
+    }
+
+    /**
+     * Action che permetta l'eliminazione di un'attivita
+     */
+    class DeleteButtonAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int id = Integer.parseInt(e.getActionCommand());
+            org.oop.model.entities.Attivita attivita = attivitaDAO.find(id);
+            attivitaDAO.remove(attivita);
+            attivitaDAO.flush();
+            AgendaController.getInstance().refreshUtente();
+            updateView();
         }
     }
 

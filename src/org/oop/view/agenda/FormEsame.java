@@ -126,6 +126,28 @@ public class FormEsame extends AbstractForm {
     }
 
     /**
+     * Imposta i campi del form con i parametri dell'attivita passata. Serve se si vuole modificare
+     * un'attivita
+     *
+     * @param attivita
+     */
+    public void fillForm(Esame attivita) {
+        teacherBox.setSelectedItem(attivita.getDocente());
+        ruoloDocenteBox.setSelectedItem(attivita.getRuoloDocente());
+        dataField.setText(Utils.dateToString(attivita.getData(),1));
+        hourStartField.setText(attivita.getOraInizio().toString());
+        hourEndField.setText(attivita.getOraFine().toString());
+        aulaField.setText(attivita.getLuogo());
+        if (attivita.getTipologiaProva().equals("scritto")) {
+            scrittoRadioButton.setSelected(true);
+        } else if (attivita.getTipologiaProva().equals("orale")) {
+            oraleRadioButton.setSelected(true);
+        } else {
+            laboratorioRadioButton.setSelected(true);
+        }
+    }
+
+    /**
      * Setta componenti GUI custom (rispetto all'editor visuale)
      */
     private void createUIComponents() {
