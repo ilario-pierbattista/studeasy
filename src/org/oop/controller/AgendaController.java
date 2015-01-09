@@ -60,6 +60,7 @@ public class AgendaController {
                 view.updateListaInsegnamenti();
                 view.getListaInsegnamentiTitle().setText("Insegnamenti di " + ciclo.getLabel());
                 view.getDurataCicloLabel().setText(ciclo.getInizio() + "/" + ciclo.getFine());
+                view.updateElencoAttivita(view.getInsegnamentoSelected());
             }
         }
     }

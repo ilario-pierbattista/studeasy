@@ -184,37 +184,43 @@ public class Agenda extends AbstractView {
      * che gli si è passato come parametro
      */
     public void updateElencoAttivita(Insegnamento insegnamento) {
-        ArrayList<org.oop.model.entities.Attivita> listaAttivita = insegnamento.getAttivita();
-        activitiespanel.removeAll();
-        Mainframe.refreshView();
-
-        if (listaAttivita.size() <= 0) {
+        if (insegnamento == null) { // se il ciclo non ha ancora nessun insegnamento
+            activitiespanel.removeAll();
             activitiespanel.add(noAttivitaLabel);
             noAttivitaLabel.setVisible(true);
         } else {
-            for (org.oop.model.entities.Attivita attivita : listaAttivita) {
-                String categoria = attivita.getCategoria();
-                String docente = attivita.getDocente().toString();
-                String ruoloDocente = attivita.getRuoloDocente();
-                String luogo = attivita.getLuogo();
-                LocalTime orainizio = attivita.getOraInizio();
-                LocalTime orafine = attivita.getOraFine();
+            ArrayList<org.oop.model.entities.Attivita> listaAttivita = insegnamento.getAttivita();
+            activitiespanel.removeAll();
+            Mainframe.refreshView();
 
-                if(attivita instanceof AttivitaEvento) {
-                    Date data = ((AttivitaEvento) attivita).getData();
-                    if (attivita instanceof Esame) {
-                        String tipoesame = ((Esame) attivita).getTipologiaProva();
-                        Attivita attivitaEsame = new Attivita(categoria, docente, ruoloDocente, luogo, orainizio, orafine, data, tipoesame);
-                        activitiespanel.add(attivitaEsame.activitypanel);
-                    } else {
-                        Attivita attivitaEventoView = new Attivita(categoria, docente, ruoloDocente, luogo, orainizio, orafine, data);
-                        activitiespanel.add(attivitaEventoView.activitypanel);
+            if (listaAttivita.size() <= 0) { //se l'insegnamento non ha ancora nessun attività
+                activitiespanel.add(noAttivitaLabel);
+                noAttivitaLabel.setVisible(true);
+            } else {
+                for (org.oop.model.entities.Attivita attivita : listaAttivita) {
+                    String categoria = attivita.getCategoria();
+                    String docente = attivita.getDocente().toString();
+                    String ruoloDocente = attivita.getRuoloDocente();
+                    String luogo = attivita.getLuogo();
+                    LocalTime orainizio = attivita.getOraInizio();
+                    LocalTime orafine = attivita.getOraFine();
+
+                    if(attivita instanceof AttivitaEvento) { //se l'attivita è di  tipo AttivitaEvento (Progetto,Seminario o Esame)
+                        Date data = ((AttivitaEvento) attivita).getData();
+                        if (attivita instanceof Esame) {
+                            String tipoesame = ((Esame) attivita).getTipologiaProva();
+                            Attivita attivitaEsame = new Attivita(categoria, docente, ruoloDocente, luogo, orainizio, orafine, data, tipoesame);
+                            activitiespanel.add(attivitaEsame.activitypanel);
+                        } else {
+                            Attivita attivitaEventoView = new Attivita(categoria, docente, ruoloDocente, luogo, orainizio, orafine, data);
+                            activitiespanel.add(attivitaEventoView.activitypanel);
+                        }
+
+                    } else if (attivita instanceof AttivitaPeriodica) { //se l'attivita è di  tipo AttivitaEvento (Lezione o Laboratorio)
+                        int giorno = ((AttivitaPeriodica) attivita).getGiorno();
+                        Attivita attivitaPeriodica = new Attivita(categoria, docente, ruoloDocente, luogo, orainizio, orafine, giorno);
+                        activitiespanel.add(attivitaPeriodica.activitypanel);
                     }
-
-                } else if (attivita instanceof AttivitaPeriodica) {
-                    int giorno = ((AttivitaPeriodica) attivita).getGiorno();
-                    Attivita attivitaPeriodica = new Attivita(categoria, docente, ruoloDocente, luogo, orainizio, orafine, giorno);
-                    activitiespanel.add(attivitaPeriodica.activitypanel);
                 }
             }
         }
