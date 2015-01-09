@@ -210,7 +210,25 @@ public class Utils {
         return LocalTime.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
     }
 
+    public static LocalTime parseLocalTime(String localTime) {
+        String parts[] = localTime.split(":");
+        LocalTime time = null;
+        switch (parts.length) {
+            case 2:
+                time = LocalTime.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+                break;
+            case 3:
+                time = LocalTime.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+                break;
+            case 4:
+                time = LocalTime.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]), Integer.parseInt(parts[3]));
+                break;
+        }
+        return time;
+    }
+
     /**
+     * @TODO Lasciare questo o l'altro in AttivitaPeriodica
      * Converte il numero (tra 1 e 7) che gli si passa nel corrispondente giorno secondo la logica
      * di java.utils.Calendar
      *

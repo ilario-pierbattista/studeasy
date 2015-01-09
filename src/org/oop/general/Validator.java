@@ -2,6 +2,7 @@ package org.oop.general;
 
 
 import javax.swing.*;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -231,7 +232,7 @@ public class Validator {
         if (field.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Devi selezionare un valore dal campo \"" + fieldName + "\" ");
             flag = true;
-        } else  {
+        } else {
             flag = false;
         }
 
@@ -253,6 +254,35 @@ public class Validator {
         } else {
             JOptionPane.showMessageDialog(null, "La data di fine deve essere successiva a quella di inizio!");
             flag = false;
+        }
+        return flag;
+    }
+
+    /**
+     * Controlla il contenuto di due oggetti JFormattedTextField per l'immissione di un orario. Il
+     * loro contenuto è valido se l'orario di inizio è precedente all'orario di fine.
+     * Precondizione: begin ed end devono essere impostati per accettare stringhe del formato HH:mm,
+     *  dove HH sono le ore e mm i minuti
+     * @param begin
+     * @param end
+     * @return
+     */
+    public static boolean checkTimeJFormattedText(JFormattedTextField begin, JFormattedTextField end) {
+        Date oraInizio = (Date) begin.getValue();
+        Date oraFine = (Date) end.getValue();
+        boolean flag = true;
+        try {
+            if (isDateGreater(oraInizio, oraFine)) {
+                flag = false;
+            }
+        } catch (NullPointerException ee) {
+            // C'è stato qualche problema, l'ora non è stata letta come una data
+            LocalTime startTime = Utils.parseLocalTime(begin.getText());
+            LocalTime endTime = Utils.parseLocalTime(end.getText());
+            if (startTime.isAfter(endTime)) {
+                JOptionPane.showMessageDialog(null, "L'ora di fine deve essere successiva a quella di inizio!");
+                flag = false;
+            }
         }
         return flag;
     }

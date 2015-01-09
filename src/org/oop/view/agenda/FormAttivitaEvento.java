@@ -95,9 +95,7 @@ public class FormAttivitaEvento extends AbstractForm {
      * @return
      */
     public boolean isValid(){
-        boolean flag = false;
-        Date hstart = (Date) hourStartField.getValue();
-        Date hend = (Date) hourEndField.getValue();
+        boolean flag = true;
 
         if (Validator.isComboBoxEmpty(teacherBox, "Docente")) {
             flag = false;
@@ -107,8 +105,8 @@ public class FormAttivitaEvento extends AbstractForm {
             flag = false;
         } else if (Validator.isFormattedFieldEmpty(hourStartField,"Ora inizio") || Validator.isFormattedFieldEmpty(hourEndField, "Ora fine")) {
             flag = false;
-        } else if (Validator.isDateGreater(hstart,hend)) {
-            flag = true;
+        } else if (Validator.checkTimeJFormattedText(hourStartField, hourEndField)) {
+            flag = false;
         }
 
         return flag;

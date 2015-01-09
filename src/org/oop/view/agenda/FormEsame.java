@@ -62,7 +62,6 @@ public class FormEsame extends AbstractForm {
         //la tipologia dell'esame si setta nel controller
 
         return attivita;
-
     }
 
     /**
