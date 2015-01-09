@@ -79,7 +79,7 @@ Create table attivita(
 	docente int,
 	ruolo_docente enum('docente', 'assistente', 'tutor') not null,
 	ciclo int,
-	insegnamento_utente int not null,
+	insegnamento_utente int,
 	foreign key (docente) references docente(id),
 	foreign key (ciclo) references ciclo(id)
 		on delete cascade,
