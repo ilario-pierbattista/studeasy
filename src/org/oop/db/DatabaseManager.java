@@ -84,7 +84,7 @@ public class DatabaseManager {
                 String dateString = DatabaseUtils.getDateStringForSQL((java.util.Date) param.getValue());
                 replace = Utils.singleQuotesToString(dateString);
             } else if (param.getValue() instanceof LocalTime) {
-                String timeString = DatabaseUtils.getTimeStringForSQL((LocalTime) param.getValue());
+                String timeString = ((LocalTime) param.getValue()).toString();
                 replace = Utils.singleQuotesToString(timeString);
             } else if (param.getValue() == null) {
                 replace = "NULL";

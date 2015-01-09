@@ -35,8 +35,8 @@ public class AttivitaEventoView extends AbstractView {
         teacher.setText(nomeprofessore);
         luogoField.setText(place);
         dataField.setText(Utils.dateToString(date,0));
-        hourStart.setText(Utils.timeToString(hstart));
-        hourEnd.setText(Utils.timeToString(hend));
+        hourStart.setText(hstart.toString());
+        hourEnd.setText(hend.toString());
     }
 
     // Costrutto attivitaPeriodica
@@ -44,8 +44,8 @@ public class AttivitaEventoView extends AbstractView {
         activityname.setText(nomeattivita);
         teacher.setText(nomeprofessore);
         dayField.setText(String.valueOf(giorno));
-        hourEnd.setText(Utils.timeToString(hstart));
-        hourStart.setText(Utils.timeToString(hend));
+        hourEnd.setText(hend.toString());
+        hourStart.setText(hstart.toString());
     }
 
     // Costrutto attivitaEsame
@@ -53,8 +53,8 @@ public class AttivitaEventoView extends AbstractView {
         activityname.setText(nomeattivita);
         teacher.setText(nomeprofessore);
         dataField.setText(Utils.dateToString(date,0));
-        hourEnd.setText(Utils.timeToString(hstart));
-        hourStart.setText(Utils.timeToString(hend));
+        hourEnd.setText(hstart.toString());
+        hourStart.setText(hend.toString());
         luogoField.setText(aula);
         tipoEsameField.setText(tipoesame);
 

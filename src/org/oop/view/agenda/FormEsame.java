@@ -3,6 +3,7 @@ package org.oop.view.agenda;
 import org.oop.general.Validator;
 import org.oop.model.ArrayListComboBoxModel;
 import org.oop.model.dao.DocenteDAO;
+import org.oop.model.entities.Attivita;
 import org.oop.model.entities.Docente;
 import org.oop.model.entities.Esame;
 import org.oop.view.AbstractForm;
@@ -48,7 +49,8 @@ public class FormEsame extends AbstractForm {
         Esame attivita = new Esame();
         attivita.setDocente((Docente) teacherBox.getSelectedItem())
                 .setOraInizio((LocalTime) hourStartField.getValue())
-                .setOraFine((LocalTime) hourEndField.getValue());
+                .setOraFine((LocalTime) hourEndField.getValue())
+                .setCategoria(Attivita.CATEGORIA_ESAME);
         attivita.setData((Date) dataField.getValue());
         //la tipologia dell'esame si setta nel controller
 

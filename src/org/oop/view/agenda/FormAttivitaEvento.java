@@ -1,15 +1,20 @@
 package org.oop.view.agenda;
 
+import org.oop.general.Utils;
 import org.oop.general.Validator;
 import org.oop.model.ArrayListComboBoxModel;
 import org.oop.model.dao.DocenteDAO;
+import org.oop.model.entities.Attivita;
 import org.oop.model.entities.AttivitaEvento;
 import org.oop.model.entities.Docente;
 import org.oop.view.AbstractForm;
 
+import javax.rmi.CORBA.Util;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.sql.Time;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +35,7 @@ public class FormAttivitaEvento extends AbstractForm {
     private JComboBox teacherBox;
     private JTextField luogoField;
 
-    private String activityType;
+    private String categoria;
 
     public FormAttivitaEvento() {
         frame = new JFrame("Crea attività");
@@ -49,11 +54,16 @@ public class FormAttivitaEvento extends AbstractForm {
      */
     public AttivitaEvento getNuovaAttivita() {
         AttivitaEvento attivita = new AttivitaEvento();
+        Date oraInizio = (Date) hourStartField.getValue();
+        Date oraFine = (Date) hourEndField.getValue();
         attivita.setDocente((Docente) teacherBox.getSelectedItem())
                 .setLuogo(luogoField.getText())
-                .setOraInizio((LocalTime) hourStartField.getValue())
-                .setOraFine((LocalTime) hourEndField.getValue());
+                .setOraInizio(Utils.dateToLocaltime(oraInizio))
+                .setOraFine(Utils.dateToLocaltime(oraFine))
+                .setCategoria(categoria);
         attivita.setData((Date) dataField.getValue());
+        /** @TODO Il ruolo del docente non può essere null, va impostato */
+        attivita.setRuoloDocente(Attivita.DOCENTE);
 
         return attivita;
 
@@ -180,5 +190,9 @@ public class FormAttivitaEvento extends AbstractForm {
 
     public void setActivityname(String text) {
         activityname.setText(text);
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

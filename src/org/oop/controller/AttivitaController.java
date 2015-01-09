@@ -51,6 +51,7 @@ public class AttivitaController {
             } else {
                 formAttivitaEvento.setActivityname("Nuovo seminario");
             }
+            formAttivitaEvento.setCategoria(newActivityType);
             formAttivitaEvento.addSubmitButtonListener(new SubmitFormEventoAction());
             formAttivitaEvento.addCancelButtonListener(new CloseFormEventoAction());
         } else if (newActivityType.equals(Attivita.CATEGORIA_LEZIONE) || newActivityType.equals(Attivita.CATEGORIA_LABORATORIO)) {
@@ -60,9 +61,11 @@ public class AttivitaController {
             } else {
                 formAttivitaPeriodica.setActivityname("Nuovo laboratorio");
             }
+            formAttivitaPeriodica.setCategoria(newActivityType);
             formAttivitaPeriodica.addSubmitButtonListener(new SubmitFormPeriodicaAction());
             formAttivitaPeriodica.addCancelButtonListener(new CloseFormPeriodicaAction());
         } else {
+            // In questo caso la categoria è ESAME
             formEsame = new FormEsame();
             formEsame.setActivityname("Nuovo esame");
             formEsame.addSubmitButtonListener(new SubmitFormEsameAction());

@@ -1,5 +1,6 @@
 package org.oop.view.agenda;
 
+import org.oop.general.Utils;
 import org.oop.general.Validator;
 import org.oop.model.ArrayListComboBoxModel;
 import org.oop.model.dao.DocenteDAO;
@@ -12,6 +13,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class FormAttivitaPeriodica extends AbstractForm {
@@ -21,11 +23,12 @@ public class FormAttivitaPeriodica extends AbstractForm {
     private JLabel activityname;
     private JButton submitButton;
     private JButton periodicaCancelButton;
-    private JComboBox teacherBox;
+    private JComboBox<Docente> teacherBox;
     private JFormattedTextField hourStartField;
     private JFormattedTextField hourEndField;
     private JTextField aulaField;
     private JComboBox dayBox;
+    private String categoria;
 
     public FormAttivitaPeriodica() {
         frame = new JFrame("Crea attività");
@@ -44,9 +47,12 @@ public class FormAttivitaPeriodica extends AbstractForm {
      */
     public AttivitaPeriodica getNuovaAttivita() {
         AttivitaPeriodica attivita = new AttivitaPeriodica();
+        Date oraInizio = (Date) hourStartField.getValue();
+        Date oraFine = (Date) hourEndField.getValue();
         attivita.setDocente((Docente) teacherBox.getSelectedItem())
-                .setOraInizio((LocalTime) hourStartField.getValue())
-                .setOraFine((LocalTime) hourEndField.getValue());
+                .setOraInizio(Utils.dateToLocaltime(oraInizio))
+                .setOraFine(Utils.dateToLocaltime(oraFine))
+                .setCategoria(categoria);
         attivita.setGiorno(convertDayToInt(dayBox.getSelectedItem().toString()));
 
         return attivita;
@@ -54,18 +60,18 @@ public class FormAttivitaPeriodica extends AbstractForm {
     }
 
     private int convertDayToInt(String giorno){
-        int valore = 2;
+        int valore = Calendar.MONDAY;
 
         if (giorno.equals("Lunedì")) {
-            valore = 2;
+            valore = Calendar.MONDAY;
         } else if (giorno.equals("Martedì")) {
-            valore = 3;
+            valore = Calendar.TUESDAY;
         } else if (giorno.equals("Mercoledì")) {
-            valore = 4;
+            valore = Calendar.WEDNESDAY;
         } else if (giorno.equals("Giovedì")) {
-            valore = 5;
+            valore = Calendar.THURSDAY;
         } else if (giorno.equals("Venerdì")) {
-            valore = 6;
+            valore = Calendar.FRIDAY;
         }
 
         return valore;
@@ -103,7 +109,6 @@ public class FormAttivitaPeriodica extends AbstractForm {
      */
     private void setListaDocenti() {
         ArrayList<Docente> docenti = new DocenteDAO().findAll();
-        ArrayList<Docente> listadocenti;
 
         ArrayListComboBoxModel model = new ArrayListComboBoxModel(docenti);
 
@@ -167,5 +172,9 @@ public class FormAttivitaPeriodica extends AbstractForm {
 
     public void setActivityname(String text) {
         activityname.setText(text);
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

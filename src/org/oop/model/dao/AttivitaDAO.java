@@ -6,6 +6,7 @@ import org.oop.db.SQLParameters;
 import org.oop.model.entities.*;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
