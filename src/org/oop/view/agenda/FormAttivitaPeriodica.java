@@ -3,11 +3,14 @@ package org.oop.view.agenda;
 import org.oop.general.Validator;
 import org.oop.model.ArrayListComboBoxModel;
 import org.oop.model.dao.DocenteDAO;
+import org.oop.model.entities.AttivitaEvento;
+import org.oop.model.entities.AttivitaPeriodica;
 import org.oop.model.entities.Docente;
 import org.oop.view.AbstractForm;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -35,6 +38,38 @@ public class FormAttivitaPeriodica extends AbstractForm {
         setListaDocenti();
     }
 
+    /**
+     * Metodo che prende i valori dei campi del form e li mette dentro un oggetto AttivitaPeriodica
+     * @return
+     */
+    public AttivitaPeriodica getNuovaAttivita() {
+        AttivitaPeriodica attivita = new AttivitaPeriodica();
+        attivita.setDocente((Docente) teacherBox.getSelectedItem())
+                .setOraInizio((LocalTime) hourStartField.getValue())
+                .setOraFine((LocalTime) hourEndField.getValue());
+        attivita.setGiorno(convertDayToInt(dayBox.getSelectedItem().toString()));
+
+        return attivita;
+
+    }
+
+    private int convertDayToInt(String giorno){
+        int valore = 2;
+
+        if (giorno.equals("Lunedì")) {
+            valore = 2;
+        } else if (giorno.equals("Martedì")) {
+            valore = 3;
+        } else if (giorno.equals("Mercoledì")) {
+            valore = 4;
+        } else if (giorno.equals("Giovedì")) {
+            valore = 5;
+        } else if (giorno.equals("Venerdì")) {
+            valore = 6;
+        }
+
+        return valore;
+    }
 
     /**
      * Metodo di appoggio che controlla che i campi del form siano stati compilati

@@ -111,7 +111,18 @@ public class AttivitaController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (formAttivitaPeriodica.isValid()) {
+                Ciclo ciclo = Agenda.getInstance().getCicloSelected();
+                Insegnamento insegnamento = Agenda.getInstance().getInsegnamentoSelected();
+                AttivitaPeriodica attivitaPeriodica = formAttivitaPeriodica.getNuovaAttivita();
 
+                insegnamento.addAttivita(attivitaPeriodica);
+
+                attivitaDAO.persist(attivitaPeriodica);
+                cicloDAO.update(ciclo);
+                cicloDAO.flush();
+
+                updateView();
+                formAttivitaPeriodica.closeFrame();
             }
         }
 
@@ -125,7 +136,19 @@ public class AttivitaController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (formEsame.isValid()) {
+                Ciclo ciclo = Agenda.getInstance().getCicloSelected();
+                Insegnamento insegnamento = Agenda.getInstance().getInsegnamentoSelected();
+                Esame attivitaEsame = formEsame.getNuovaAttivita();
+                attivitaEsame.setTipologiaProva(findTipologiaEsameFromSelection());
 
+                insegnamento.addAttivita(attivitaEsame);
+
+                attivitaDAO.persist(attivitaEsame);
+                cicloDAO.update(ciclo);
+                cicloDAO.flush();
+
+                updateView();
+                formEsame.closeFrame();
             }
         }
 
