@@ -95,7 +95,7 @@ public class FormEsame extends AbstractForm {
 
         if (Validator.isComboBoxEmpty(teacherBox, "Docente")) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(dataField, "Luogo")) {
+        } else if (Validator.isFormattedFieldEmpty(dataField, "Data")) {
             flag = false;
         } else if (Validator.isFormattedFieldEmpty(hourStartField,"Ora inizio") || Validator.isFormattedFieldEmpty(hourEndField, "Ora fine")) {
             flag = false;
@@ -133,7 +133,7 @@ public class FormEsame extends AbstractForm {
     public void fillForm(Esame attivita) {
         teacherBox.setSelectedItem(attivita.getDocente());
         ruoloDocenteBox.setSelectedItem(attivita.getRuoloDocente());
-        dataField.setText(Utils.dateToString(attivita.getData(),1));
+        dataField.setText(Utils.dateToString(attivita.getData(),0));
         hourStartField.setText(attivita.getOraInizio().toString());
         hourEndField.setText(attivita.getOraFine().toString());
         aulaField.setText(attivita.getLuogo());
