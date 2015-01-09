@@ -22,6 +22,7 @@ public class Attivita extends AbstractView {
     private JLabel dayField;
     private JLabel tipoEsameField;
     private JLabel ruoloField;
+    private JButton deleteButton;
 
     public Attivita(String nomeattivita, String nomeprofessore, String ruolodocente, String place, LocalTime hstart, LocalTime hend) {
         activityname.setText(nomeattivita);
@@ -62,11 +63,22 @@ public class Attivita extends AbstractView {
 
     }
 
+    /* Listeners setter */
+    public void addEditButtonListener(ActionListener listener) {
+        editbutton.addActionListener(listener);
+    }
+
+    public void addDeleteButtonListener(ActionListener listener) {
+        deleteButton.addActionListener(listener);
+    }
+
+    /* Getters */
     public JButton getEditbutton() {
         return editbutton;
     }
 
-    public void addEditButtonListener (ActionListener listener){
-        editbutton.addActionListener(listener);
+    public JButton getDeleteButton() {
+        return deleteButton;
     }
+
 }
