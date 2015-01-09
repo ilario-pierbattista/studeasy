@@ -25,18 +25,19 @@ public class AgendaController {
     private ModalAddInsegnamento modalAddInsegnamento;
     private org.oop.model.Agenda agenda;
     private Libretto libretto;
+    private AttivitaController attivitaController;
     private static AgendaController instance;
 
     public AgendaController(Agenda view) {
 
         this.view = view;
         instance = this;
+        attivitaController = new AttivitaController();
 
         agenda = BaseController.getUtenteCorrente().getAgenda();
         libretto = BaseController.getUtenteCorrente().getLibretto();
 
         view.addLezioneButtonListener(new AddAttivitaAction());
-
 
         view.addEsameButtonListener(new AddAttivitaAction());
         view.addLaboratorioButtonListener(new AddAttivitaAction());
@@ -102,6 +103,7 @@ public class AgendaController {
             for (org.oop.model.entities.Attivita attivita : listaAttivita) {
                 org.oop.view.agenda.Attivita vistaAttivita = new org.oop.view.agenda.Attivita(attivita);
                 // Aggiungere listener
+                attivitaController.setListenersToView(vistaAttivita);
                 view.addAttivitaView(vistaAttivita);
             }
         }
@@ -125,7 +127,7 @@ public class AgendaController {
             // ActionCommand corrisponde con la stringa che identifica il tipo di attivita
             String activityType = actionEvent.getActionCommand();
             //AttivitaEventoView attivitaview = new AttivitaEventoView(activityType);
-            new AttivitaController(activityType);
+            attivitaController.openForm(activityType);
         }
     }
 

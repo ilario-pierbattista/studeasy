@@ -47,6 +47,8 @@ public class Attivita extends AbstractView {
             dataField.setText("");
             tipoEsameField.setText("");
         }
+        editbutton.setActionCommand(Integer.toString(attivita.getId()));
+        deleteButton.setActionCommand(Integer.toString(attivita.getId()));
     }
 
     public Attivita(String nomeattivita, String nomeprofessore, String ruolodocente, String place, LocalTime hstart, LocalTime hend) {

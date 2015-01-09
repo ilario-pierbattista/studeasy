@@ -12,25 +12,22 @@ import java.awt.event.ActionEvent;
 
 
 public class AttivitaController {
-    private Attivita view;
     private FormAttivitaEvento formAttivitaEvento;
     private FormAttivitaPeriodica formAttivitaPeriodica;
     private FormEsame formEsame;
-    private String newActivityType;
     private AttivitaDAO attivitaDAO;
     private CicloDAO cicloDAO;
     private InsegnamentoDAO insegnamentoDAO;
 
-    public AttivitaController(String newActivityType) {
-        //this.view = view;
-        this.newActivityType = newActivityType;
+    public AttivitaController() {
         attivitaDAO = new AttivitaDAO();
         cicloDAO = new CicloDAO();
         insegnamentoDAO = new InsegnamentoDAO();
+    }
 
-        openForm();
-
-        //   view.addEditButtonListener(new EditButtonAction());
+    public void setListenersToView(Attivita attivita) {
+        attivita.addEditButtonListener(new EditButtonAction());
+        attivita.addDeleteButtonListener(new DeleteButtonAction());
     }
 
     /**
@@ -44,7 +41,7 @@ public class AttivitaController {
      * Metodo per aprire il form corretto in base al bottone cliccato.
      * Setta anche i listeners necessari per il funzionamento.
      */
-    private void openForm() {
+    public void openForm(String newActivityType) {
         if (newActivityType.equals(org.oop.model.entities.Attivita.CATEGORIA_PROGETTO) || newActivityType.equals(org.oop.model.entities.Attivita.CATEGORIA_SEMINARIO)) {
             formAttivitaEvento = new FormAttivitaEvento();
             if (newActivityType.equals(org.oop.model.entities.Attivita.CATEGORIA_PROGETTO)) {
@@ -81,7 +78,19 @@ public class AttivitaController {
     class EditButtonAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
+            int id = Integer.parseInt(e.getActionCommand());
+            System.out.println(attivitaDAO.find(id));
+        }
+    }
 
+    class DeleteButtonAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int id = Integer.parseInt(e.getActionCommand());
+            org.oop.model.entities.Attivita attivita = attivitaDAO.find(id);
+            attivitaDAO.remove(attivita);
+            attivitaDAO.flush();
+            updateView();
         }
     }
 
