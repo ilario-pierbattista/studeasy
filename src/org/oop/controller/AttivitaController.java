@@ -90,7 +90,6 @@ public class AttivitaController {
             if (formAttivitaEvento.isValid()) {
                 Ciclo ciclo = Agenda.getInstance().getCicloSelected();
                 Insegnamento insegnamento = Agenda.getInstance().getInsegnamentoSelected();
-                System.out.println(insegnamento.toString());
                 AttivitaEvento attivitaEvento = formAttivitaEvento.getNuovaAttivita();
 
                 insegnamento.addAttivita(attivitaEvento);
