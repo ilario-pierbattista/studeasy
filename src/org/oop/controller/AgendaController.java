@@ -1,5 +1,4 @@
 package org.oop.controller;
-
 import org.oop.general.Utils;
 import org.oop.model.Libretto;
 import org.oop.model.dao.CicloDAO;
@@ -11,7 +10,6 @@ import org.oop.view.agenda.Agenda;
 import org.oop.view.agenda.AttivitaView;
 import org.oop.view.agenda.FormCiclo;
 import org.oop.view.agenda.ModalAddInsegnamento;
-
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -26,11 +24,15 @@ public class AgendaController {
     private Libretto libretto;
 
     public AgendaController(Agenda view) {
+
         this.view = view;
+
         agenda = BaseController.getUtenteCorrente().getAgenda();
         libretto = BaseController.getUtenteCorrente().getLibretto();
 
         view.addLezioneButtonListener(new AddAttivitaAction());
+
+
         view.addEsameButtonListener(new AddAttivitaAction());
         view.addLaboratorioButtonListener(new AddAttivitaAction());
         view.addSeminarioButtonListener(new AddAttivitaAction());
