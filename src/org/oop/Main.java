@@ -1,5 +1,6 @@
 package org.oop;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.oop.controller.BaseController;
 import org.oop.services.Importatore;
 import org.oop.test.db.DatabaseManagerTest;
@@ -24,6 +25,13 @@ public class Main {
         }
 
         mainInitProcedure(args);
+
+        /** @TODO RIMUOVERE */
+        try {
+            Class<ArrayUtils> arrayUtilsClass = (Class<ArrayUtils>) Class.forName("org.apache.commons.lang3.ArrayUtils");
+        } catch (ClassNotFoundException ee) {
+            ee.printStackTrace();
+        }
 
         Mainframe mainframe = new Mainframe();
         new BaseController(mainframe);

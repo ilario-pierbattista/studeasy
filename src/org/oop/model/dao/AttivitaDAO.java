@@ -126,7 +126,6 @@ public class AttivitaDAO extends AbstractDAO<Attivita> {
         int id = db.createSqlStatement(sql)
                 .setParameters(parameters)
                 .executeUpdate();
-        System.out.println(db.getSqlStatement());
         entity.setId(id);
     }
 
