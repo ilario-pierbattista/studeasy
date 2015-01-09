@@ -228,6 +228,16 @@ public class Agenda extends AbstractView {
         }
     }
 
+    public void addAttivitaView(Attivita view) {
+        activitiespanel.add(view.activitypanel);
+    }
+
+    public void setNoAttivita() {
+        activitiespanel.removeAll();
+        activitiespanel.add(noAttivitaLabel);
+        noAttivitaLabel.setVisible(true);
+    }
+
     /**
      * Metodo che ritorna l'istanza della vista
      *

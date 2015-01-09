@@ -47,6 +47,10 @@ public class Docente {
         return this;
     }
 
+    public String getNomeCognome() {
+        return nome.concat(" ").concat(cognome);
+    }
+
     public String getEmail() {
         return email;
     }

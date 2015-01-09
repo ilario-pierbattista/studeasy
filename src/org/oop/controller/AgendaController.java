@@ -1,17 +1,22 @@
 package org.oop.controller;
+
+import org.apache.commons.lang3.text.WordUtils;
 import org.oop.model.Libretto;
 import org.oop.model.dao.CicloDAO;
 import org.oop.model.dao.InsegnamentoDAO;
 import org.oop.model.dao.UtenteDAO;
-import org.oop.model.entities.Ciclo;
-import org.oop.model.entities.Insegnamento;
-import org.oop.view.agenda.Agenda;
-import org.oop.view.agenda.FormCiclo;
-import org.oop.view.agenda.ModalAddInsegnamento;
+import org.oop.model.entities.*;
+import org.oop.model.entities.Attivita;
+import org.oop.view.Mainframe;
+import org.oop.view.agenda.*;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Date;
 
 
 public class AgendaController {
@@ -20,10 +25,12 @@ public class AgendaController {
     private ModalAddInsegnamento modalAddInsegnamento;
     private org.oop.model.Agenda agenda;
     private Libretto libretto;
+    private static AgendaController instance;
 
     public AgendaController(Agenda view) {
 
         this.view = view;
+        instance = this;
 
         agenda = BaseController.getUtenteCorrente().getAgenda();
         libretto = BaseController.getUtenteCorrente().getLibretto();
@@ -46,6 +53,14 @@ public class AgendaController {
         updateView();
     }
 
+    public static AgendaController getInstance() {
+        return instance;
+    }
+
+    public Agenda getView() {
+        return view;
+    }
+
     /**
      * Action che aggiorna la lista degli insegnamenti in base al ciclo selezionato
      * dalla lista dei cicli
@@ -60,7 +75,7 @@ public class AgendaController {
                 view.updateListaInsegnamenti();
                 view.getListaInsegnamentiTitle().setText("Insegnamenti di " + ciclo.getLabel());
                 view.getDurataCicloLabel().setText(ciclo.getInizio() + "/" + ciclo.getFine());
-                view.updateElencoAttivita(view.getInsegnamentoSelected());
+                updateAttivita(view.getInsegnamentoSelected());
             }
         }
     }
@@ -74,7 +89,21 @@ public class AgendaController {
         view.updateListaCicli();
         view.updateListaInsegnamenti();
         if (view.getInsegnamentoSelected() != null) {
-            view.updateElencoAttivita(view.getInsegnamentoSelected());
+            updateAttivita(view.getInsegnamentoSelected());
+        }
+    }
+
+    public void updateAttivita(Insegnamento insegnamento) {
+        ArrayList<Attivita> listaAttivita = insegnamento.getAttivita();
+
+        if (listaAttivita.size() <= 0) { //se l'insegnamento non ha ancora nessun attività
+            view.setNoAttivita();
+        } else {
+            for (org.oop.model.entities.Attivita attivita : listaAttivita) {
+                org.oop.view.agenda.Attivita vistaAttivita = new org.oop.view.agenda.Attivita(attivita);
+                // Aggiungere listener
+                view.addAttivitaView(vistaAttivita);
+            }
         }
     }
 
@@ -245,7 +274,7 @@ public class AgendaController {
 
                 view.getInsegnamentoLabel().setText(insegnamento.getInsegnamentoOfferto().getNome());
 
-                view.updateElencoAttivita(insegnamento);
+                updateAttivita(insegnamento);
             }
         }
     }

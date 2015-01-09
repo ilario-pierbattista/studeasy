@@ -37,7 +37,7 @@ public class AttivitaController {
      * Metodo che aggiorna la view
      */
     private void updateView() {
-        Agenda.getInstance().updateElencoAttivita(Agenda.getInstance().getInsegnamentoSelected());
+        AgendaController.getInstance().updateAttivita(AgendaController.getInstance().getView().getInsegnamentoSelected());
     }
 
     /**
