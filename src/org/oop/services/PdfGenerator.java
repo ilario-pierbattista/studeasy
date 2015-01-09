@@ -39,7 +39,6 @@ public class PdfGenerator {
                                                                       concat(this.nomeFile).
                                                                       concat(".pdf")));
 
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         //PdfStamper will populate the fields dynamically with real time data.
         PdfStamper stamper = new PdfStamper(pdfTemplate, fileOutputStream);
@@ -70,7 +69,6 @@ public class PdfGenerator {
         FileOutputStream fileOutputStream = new FileOutputStream(path.concat(File.separator
                                                                                         .concat(this.nomeFile)
                                                                                         .concat(".pdf")));
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         //PdfStamper will populate the fields dynamically with real time data.
         PdfStamper stamper = new PdfStamper(pdfTemplate, fileOutputStream);
@@ -101,7 +99,6 @@ public class PdfGenerator {
         FileOutputStream fileOutputStream = new FileOutputStream(path.concat(File.separator
                                                                                         .concat(this.nomeFile)
                                                                                         .concat(".pdf")));
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         //PdfStamper will populate the fields dynamically with real time data.
         PdfStamper stamper = new PdfStamper(pdfTemplate, fileOutputStream);
