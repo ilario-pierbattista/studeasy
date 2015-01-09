@@ -94,8 +94,8 @@ public class AgendaController {
         public void actionPerformed(ActionEvent actionEvent) {
             // ActionCommand corrisponde con la stringa che identifica il tipo di attivita
             String activityType = actionEvent.getActionCommand();
-            AttivitaEventoView attivitaview = new AttivitaEventoView(activityType);
-            new AttivitaController(attivitaview, activityType);
+            //AttivitaEventoView attivitaview = new AttivitaEventoView(activityType);
+            new AttivitaController(activityType);
         }
     }
 

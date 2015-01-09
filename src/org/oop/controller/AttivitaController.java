@@ -20,8 +20,8 @@ public class AttivitaController {
     private CicloDAO cicloDAO;
     private InsegnamentoDAO insegnamentoDAO;
 
-    public AttivitaController(AttivitaEventoView view, String newActivityType) {
-        this.view = view;
+    public AttivitaController(String newActivityType) {
+        //this.view = view;
         this.newActivityType = newActivityType;
         attivitaDAO = new AttivitaDAO();
         cicloDAO = new CicloDAO();
@@ -29,7 +29,7 @@ public class AttivitaController {
 
         openForm();
 
-        view.addEditButtonListener(new EditButtonAction());
+        //   view.addEditButtonListener(new EditButtonAction());
     }
 
     /**

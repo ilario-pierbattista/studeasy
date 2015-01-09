@@ -52,7 +52,7 @@ public class Agenda extends AbstractView {
         splitpane.setDividerLocation(230 + splitpane.getInsets().left);
         //Elimina i bordi
         splitpane.setBorder(null);
-        sidebarpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(126, 126, 126)));
+        sidebarpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(230,230,230)));
 
         insidesplitpane.setDividerLocation(150 + insidesplitpane.getInsets().top);
         insidesplitpane.setBorder(null);
