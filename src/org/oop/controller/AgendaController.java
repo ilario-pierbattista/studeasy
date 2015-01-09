@@ -1,5 +1,4 @@
 package org.oop.controller;
-import org.oop.general.Utils;
 import org.oop.model.Libretto;
 import org.oop.model.dao.CicloDAO;
 import org.oop.model.dao.InsegnamentoDAO;
@@ -7,7 +6,6 @@ import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Insegnamento;
 import org.oop.view.agenda.Agenda;
-import org.oop.view.agenda.AttivitaEventoView;
 import org.oop.view.agenda.FormCiclo;
 import org.oop.view.agenda.ModalAddInsegnamento;
 import javax.swing.*;

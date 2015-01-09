@@ -31,6 +31,7 @@ public class FormEsame extends AbstractForm {
     private JRadioButton scrittoRadioButton;
     private JRadioButton oraleRadioButton;
     private JRadioButton laboratorioRadioButton;
+    private JComboBox ruoloDocenteBox;
 
     public FormEsame() {
         frame = new JFrame("Crea attività");
@@ -54,12 +55,33 @@ public class FormEsame extends AbstractForm {
         attivita.setDocente((Docente) teacherBox.getSelectedItem())
                 .setOraInizio(Utils.dateToLocaltime(oraInizio))
                 .setOraFine(Utils.dateToLocaltime(oraFine))
-                .setCategoria(Attivita.CATEGORIA_ESAME);
+                .setCategoria(Attivita.CATEGORIA_ESAME)
+                .setLuogo(aulaField.getText())
+                .setRuoloDocente(getRuoloDocente());
         attivita.setData((Date) dataField.getValue());
         //la tipologia dell'esame si setta nel controller
 
         return attivita;
 
+    }
+
+    /**
+     * Ritorna il ruolo del docente in base all'elemento selezionato nella Combobox
+     * @return
+     */
+    private String getRuoloDocente() {
+        String ruolo;
+        String e = ruoloDocenteBox.getSelectedItem().toString();
+
+        if (e.equals("Docente")) {
+            ruolo = Attivita.DOCENTE;
+        } else if (e.equals("Assistente")) {
+            ruolo = Attivita.ASSISTENTE;
+        } else {
+            ruolo = Attivita.TUTOR;
+        }
+
+        return ruolo;
     }
 
     /**

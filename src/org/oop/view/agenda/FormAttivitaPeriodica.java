@@ -4,6 +4,7 @@ import org.oop.general.Utils;
 import org.oop.general.Validator;
 import org.oop.model.ArrayListComboBoxModel;
 import org.oop.model.dao.DocenteDAO;
+import org.oop.model.entities.Attivita;
 import org.oop.model.entities.AttivitaEvento;
 import org.oop.model.entities.AttivitaPeriodica;
 import org.oop.model.entities.Docente;
@@ -28,6 +29,7 @@ public class FormAttivitaPeriodica extends AbstractForm {
     private JFormattedTextField hourEndField;
     private JTextField aulaField;
     private JComboBox dayBox;
+    private JComboBox ruoloDocenteBox;
     private String categoria;
 
     public FormAttivitaPeriodica() {
@@ -52,13 +54,20 @@ public class FormAttivitaPeriodica extends AbstractForm {
         attivita.setDocente((Docente) teacherBox.getSelectedItem())
                 .setOraInizio(Utils.dateToLocaltime(oraInizio))
                 .setOraFine(Utils.dateToLocaltime(oraFine))
-                .setCategoria(categoria);
+                .setCategoria(categoria)
+                .setLuogo(aulaField.getText())
+                .setRuoloDocente(getRuoloDocente());
         attivita.setGiorno(convertDayToInt(dayBox.getSelectedItem().toString()));
 
         return attivita;
 
     }
 
+    /**
+     * Converte il giorno scritto a lettere nel formato elaborato da java.util.calendar
+     * @param giorno
+     * @return
+     */
     private int convertDayToInt(String giorno){
         int valore = Calendar.MONDAY;
 
@@ -75,6 +84,25 @@ public class FormAttivitaPeriodica extends AbstractForm {
         }
 
         return valore;
+    }
+
+    /**
+     * Ritorna il ruolo del docente in base all'elemento selezionato nella Combobox
+     * @return
+     */
+    private String getRuoloDocente() {
+        String ruolo;
+        String e = ruoloDocenteBox.getSelectedItem().toString();
+
+        if (e.equals("Docente")) {
+            ruolo = Attivita.DOCENTE;
+        } else if (e.equals("Assistente")) {
+            ruolo = Attivita.ASSISTENTE;
+        } else {
+            ruolo = Attivita.TUTOR;
+        }
+
+        return ruolo;
     }
 
     /**

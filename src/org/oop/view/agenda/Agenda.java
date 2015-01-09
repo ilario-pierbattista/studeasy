@@ -57,11 +57,11 @@ public class Agenda extends AbstractView {
         //Imposta il layout a 2 colonne
         activitiespanel.setLayout(new GridLayout(0, 2, 20, 20));
 
-        lezioneButton.setActionCommand(Attivita.CATEGORIA_LEZIONE);
-        laboratorioButton.setActionCommand(Attivita.CATEGORIA_LABORATORIO);
-        seminariobutton.setActionCommand(Attivita.CATEGORIA_SEMINARIO);
-        progettobutton.setActionCommand(Attivita.CATEGORIA_PROGETTO);
-        esameButton.setActionCommand(Attivita.CATEGORIA_ESAME);
+        lezioneButton.setActionCommand(org.oop.model.entities.Attivita.CATEGORIA_LEZIONE);
+        laboratorioButton.setActionCommand(org.oop.model.entities.Attivita.CATEGORIA_LABORATORIO);
+        seminariobutton.setActionCommand(org.oop.model.entities.Attivita.CATEGORIA_SEMINARIO);
+        progettobutton.setActionCommand(org.oop.model.entities.Attivita.CATEGORIA_PROGETTO);
+        esameButton.setActionCommand(org.oop.model.entities.Attivita.CATEGORIA_ESAME);
     }
 
     /**
@@ -184,7 +184,7 @@ public class Agenda extends AbstractView {
      * che gli si è passato come parametro
      */
     public void updateElencoAttivita(Insegnamento insegnamento) {
-        ArrayList<Attivita> listaAttivita = insegnamento.getAttivita();
+        ArrayList<org.oop.model.entities.Attivita> listaAttivita = insegnamento.getAttivita();
         activitiespanel.removeAll();
         Mainframe.refreshView();
 
@@ -192,9 +192,10 @@ public class Agenda extends AbstractView {
             activitiespanel.add(noAttivitaLabel);
             noAttivitaLabel.setVisible(true);
         } else {
-            for (Attivita attivita : listaAttivita) {
+            for (org.oop.model.entities.Attivita attivita : listaAttivita) {
                 String categoria = attivita.getCategoria();
                 String docente = attivita.getDocente().toString();
+                String ruoloDocente = attivita.getRuoloDocente();
                 String luogo = attivita.getLuogo();
                 LocalTime orainizio = attivita.getOraInizio();
                 LocalTime orafine = attivita.getOraFine();
@@ -203,16 +204,16 @@ public class Agenda extends AbstractView {
                     Date data = ((AttivitaEvento) attivita).getData();
                     if (attivita instanceof Esame) {
                         String tipoesame = ((Esame) attivita).getTipologiaProva();
-                        AttivitaEventoView attivitaEsame = new AttivitaEventoView(categoria, docente, data, orainizio, orafine, luogo, tipoesame);
+                        Attivita attivitaEsame = new Attivita(categoria, docente, ruoloDocente, luogo, orainizio, orafine, data, tipoesame);
                         activitiespanel.add(attivitaEsame.activitypanel);
                     } else {
-                        AttivitaEventoView attivitaEventoView = new AttivitaEventoView(categoria, docente, luogo, data, orainizio, orafine);
+                        Attivita attivitaEventoView = new Attivita(categoria, docente, ruoloDocente, luogo, orainizio, orafine, data);
                         activitiespanel.add(attivitaEventoView.activitypanel);
                     }
 
                 } else if (attivita instanceof AttivitaPeriodica) {
                     int giorno = ((AttivitaPeriodica) attivita).getGiorno();
-                    AttivitaEventoView attivitaPeriodica = new AttivitaEventoView(categoria, docente, giorno, orainizio, orafine);
+                    Attivita attivitaPeriodica = new Attivita(categoria, docente, ruoloDocente, luogo, orainizio, orafine, giorno);
                     activitiespanel.add(attivitaPeriodica.activitypanel);
                 }
             }

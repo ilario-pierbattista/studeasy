@@ -209,4 +209,33 @@ public class Utils {
         String[] parts = st.split(":");
         return LocalTime.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
     }
+
+    /**
+     * Converte il numero (tra 1 e 7) che gli si passa nel corrispondente giorno secondo la logica
+     * di java.utils.Calendar
+     *
+     * @param number Giorno a numero
+     * @return Giorno a lettere
+     */
+    public static String intToStringDate(int number) {
+        String giorno = "not valid";
+
+        if (number == 2) {
+            giorno = "Lunedì";
+        } else if (number == 3) {
+            giorno = "Martedì";
+        } else if (number == 4) {
+            giorno = "Mercoledì";
+        } else if (number == 5) {
+            giorno = "Giovedì";
+        } else if (number == 6) {
+            giorno = "Venerdì";
+        } else if (number == 7) {
+            giorno = "Sabato";
+        } else if (number == 1){
+            giorno = "Domenica";
+        }
+
+        return giorno;
+    }
 }

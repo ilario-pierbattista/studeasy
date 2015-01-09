@@ -5,13 +5,14 @@ import org.oop.model.dao.CicloDAO;
 import org.oop.model.dao.InsegnamentoDAO;
 import org.oop.model.entities.*;
 import org.oop.view.agenda.*;
+import org.oop.view.agenda.Attivita;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 
 public class AttivitaController {
-    private AttivitaEventoView view;
+    private Attivita view;
     private FormAttivitaEvento formAttivitaEvento;
     private FormAttivitaPeriodica formAttivitaPeriodica;
     private FormEsame formEsame;
@@ -44,9 +45,9 @@ public class AttivitaController {
      * Setta anche i listeners necessari per il funzionamento.
      */
     private void openForm() {
-        if (newActivityType.equals(Attivita.CATEGORIA_PROGETTO) || newActivityType.equals(Attivita.CATEGORIA_SEMINARIO)) {
+        if (newActivityType.equals(org.oop.model.entities.Attivita.CATEGORIA_PROGETTO) || newActivityType.equals(org.oop.model.entities.Attivita.CATEGORIA_SEMINARIO)) {
             formAttivitaEvento = new FormAttivitaEvento();
-            if (newActivityType.equals(Attivita.CATEGORIA_PROGETTO)) {
+            if (newActivityType.equals(org.oop.model.entities.Attivita.CATEGORIA_PROGETTO)) {
                 formAttivitaEvento.setActivityname("Nuovo progetto");
             } else {
                 formAttivitaEvento.setActivityname("Nuovo seminario");
@@ -54,9 +55,9 @@ public class AttivitaController {
             formAttivitaEvento.setCategoria(newActivityType);
             formAttivitaEvento.addSubmitButtonListener(new SubmitFormEventoAction());
             formAttivitaEvento.addCancelButtonListener(new CloseFormEventoAction());
-        } else if (newActivityType.equals(Attivita.CATEGORIA_LEZIONE) || newActivityType.equals(Attivita.CATEGORIA_LABORATORIO)) {
+        } else if (newActivityType.equals(org.oop.model.entities.Attivita.CATEGORIA_LEZIONE) || newActivityType.equals(org.oop.model.entities.Attivita.CATEGORIA_LABORATORIO)) {
             formAttivitaPeriodica = new FormAttivitaPeriodica();
-            if (newActivityType.equals(Attivita.CATEGORIA_LEZIONE)) {
+            if (newActivityType.equals(org.oop.model.entities.Attivita.CATEGORIA_LEZIONE)) {
                 formAttivitaPeriodica.setActivityname("Nuova lezione");
             } else {
                 formAttivitaPeriodica.setActivityname("Nuovo laboratorio");
