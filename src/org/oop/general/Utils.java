@@ -207,4 +207,11 @@ public class Utils {
         DateFormat df = new SimpleDateFormat("HH:mm");
         return df.format(time);
     }
+
+    public static LocalTime dateToLocaltime(Date date) {
+        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+        String st = df.format(date);
+        String[] parts = st.split(":");
+        return LocalTime.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+    }
 }

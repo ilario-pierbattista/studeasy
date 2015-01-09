@@ -147,9 +147,4 @@ public class DatabaseUtils {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return df.format(date);
     }
-
-    protected static String getTimeStringForSQL(LocalTime time) {
-        DateFormat df = new SimpleDateFormat("HH:mm:ss");
-        return df.format(time);
-    }
 }

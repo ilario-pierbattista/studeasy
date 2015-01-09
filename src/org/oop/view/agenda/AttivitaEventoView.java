@@ -20,6 +20,8 @@ public class AttivitaEventoView extends AbstractView {
     private JLabel hourStart;
     private JLabel dataField;
 
+    public AttivitaEventoView() {
+    }
 
 
     public AttivitaEventoView(String nomeattivita) {
