@@ -75,7 +75,7 @@ CREATE TABLE attivita (
   ripetizione_settimanale BOOLEAN                                                          NOT NULL,
   giorno                  INT,
   data                    DATE,
-  tipologia_prova         ENUM('scritto', 'orale', 'laboratorio')                          NOT NULL,
+  tipologia_prova         ENUM('scritto', 'orale', 'laboratorio'),
   docente                 INT,
   ruolo_docente           ENUM('docente', 'assistente', 'tutor')                           NOT NULL,
   ciclo                   INT,
@@ -123,7 +123,7 @@ CREATE TABLE tassa (
 
 CREATE TABLE iscrizione (
   id  INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  anno            INT NOT NULL KEY,
+  anno            INT NOT NULL,
   anno_accademico INT NOT NULL,
   utente          INT NOT NULL,
   FOREIGN KEY (utente) REFERENCES utente (matricola)
