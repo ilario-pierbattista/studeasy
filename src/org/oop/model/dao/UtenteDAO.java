@@ -15,19 +15,21 @@ public class UtenteDAO extends AbstractDAO<Utente> {
 
     private InsegnamentoDAO insegnamentoDAO;
     private CicloDAO cicloDAO;
+    private TassaDAO tassaDAO;
+    private CorsoDAO corsoDAO;
+
 
     public UtenteDAO() {
         super();
         insegnamentoDAO = new InsegnamentoDAO();
         cicloDAO = new CicloDAO();
+        tassaDAO = new TassaDAO();
+        corsoDAO = new CorsoDAO();
     }
 
     @Override
     protected Utente generaEntita(ResultSet rs) {
         Utente utente = new Utente();
-        CorsoDAO corsoDAO = new CorsoDAO();
-        CicloDAO cicloDAO = new CicloDAO();
-        InsegnamentoDAO insegnamentoDAO = new InsegnamentoDAO();
         try {
             utente.setMatricola(rs.getInt("matricola"))
                     .setNome(rs.getString("nome"))
@@ -40,6 +42,7 @@ public class UtenteDAO extends AbstractDAO<Utente> {
             utente.setLibretto(libretto);
             agenda.setCicli(cicloDAO.findBy(new SQLParameters().add("utente", utente.getMatricola())));
             utente.setAgenda(agenda);
+            utente.setTasse(tassaDAO.findBy(new SQLParameters().add("utente", utente.getMatricola())));
         } catch (SQLException ee) {
             ee.printStackTrace();
         }
@@ -102,6 +105,7 @@ public class UtenteDAO extends AbstractDAO<Utente> {
                 .executeUpdate();
         cicloDAO.setUtente(entity);
         insegnamentoDAO.setUtente(entity);
+        tassaDAO.setUtente(entity);
     }
 
     @Override
@@ -115,6 +119,7 @@ public class UtenteDAO extends AbstractDAO<Utente> {
                 .executeUpdate();
         cicloDAO.setUtente(entity);
         insegnamentoDAO.setUtente(entity);
+        tassaDAO.setUtente(entity);
     }
 
     @Override
