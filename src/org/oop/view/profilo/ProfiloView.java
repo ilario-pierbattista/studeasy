@@ -16,6 +16,8 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 public class ProfiloView extends AbstractView {
@@ -112,10 +114,12 @@ public class ProfiloView extends AbstractView {
      * @param libretto
      */
     public void setInfoLibretto(Libretto libretto) {
+        ArrayList<Insegnamento> insegnamenti = libretto.getInsegnamenti();
+        Collections.sort(insegnamenti, new InsegnamentoComparator());
         // Pulizia della tabella
         model.clearData();
         // Impostazione dei nuovi dati
-        for (Insegnamento insegnamento : libretto.getInsegnamenti()) {
+        for (Insegnamento insegnamento : insegnamenti) {
             addElementTable(insegnamento);
         }
     }
@@ -189,6 +193,18 @@ public class ProfiloView extends AbstractView {
     /* Getters */
     public JButton getAggiungiform() {
         return modificaProfiloButton;
+    }
+
+    /** Comparator */
+    private class InsegnamentoComparator implements Comparator<Insegnamento> {
+        @Override
+        public int compare(Insegnamento o1, Insegnamento o2) {
+            int comp = o1.getInsegnamentoOfferto().getAnno() - o2.getInsegnamentoOfferto().getAnno();
+            if(comp == 0) {
+                comp = o1.getInsegnamentoOfferto().getSemestre() - o2.getInsegnamentoOfferto().getSemestre();
+            }
+            return comp;
+        }
     }
 }
 

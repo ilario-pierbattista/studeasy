@@ -1,14 +1,13 @@
 package org.oop.view.agenda;
 
-import org.oop.model.entities.Insegnamento;
-import org.oop.view.ArrayListComboBoxModel;
 import org.oop.model.dao.DocenteDAO;
 import org.oop.model.entities.Docente;
+import org.oop.model.entities.Insegnamento;
 import org.oop.view.AbstractForm;
+import org.oop.view.ArrayListComboBoxModel;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -32,7 +31,7 @@ abstract class AbstractFormAttivita extends AbstractForm {
         docentiBox.setSelectedItem(insegnamento.getInsegnamentoOfferto().getDocente());
     }
 
-    class DocenteComparator implements Comparator<Docente> {
+    private class DocenteComparator implements Comparator<Docente> {
         @Override
         public int compare(Docente o1, Docente o2) {
             return o1.getCognome().compareTo(o2.getCognome());

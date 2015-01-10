@@ -205,48 +205,12 @@ public class AgendaView extends AbstractView {
         return durataCicloLabel;
     }
 
-    public JButton getLezioneButton() {
-        return lezioneButton;
-    }
-
-    public JButton getLaboratorioButton() {
-        return laboratorioButton;
-    }
-
-    public JButton getEsameButton() {
-        return esameButton;
-    }
-
-    public JButton getProgettobutton() {
-        return progettobutton;
-    }
-
-    public JButton getSeminariobutton() {
-        return seminariobutton;
-    }
-
     public JList getCiclilist() {
         return ciclilist;
     }
 
-    public JButton getRemoveciclobutton() {
-        return removeciclobutton;
-    }
-
-    public JButton getAddciclobutton() {
-        return addciclobutton;
-    }
-
     public JLabel getListaInsegnamentiTitle() {
         return listaInsegnamentiTitle;
-    }
-
-    public JButton getAddInsegnamentoButton() {
-        return addInsegnamentoButton;
-    }
-
-    public JButton getRemoveInsegnamentoButton() {
-        return removeInsegnamentoButton;
     }
 
     public JList getInsegnamentiList() {
@@ -293,6 +257,4 @@ public class AgendaView extends AbstractView {
     public void addRemoveInsegnamentoButtonListener(ActionListener listener) {
         removeInsegnamentoButton.addActionListener(listener);
     }
-
-
 }

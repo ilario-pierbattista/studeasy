@@ -15,11 +15,13 @@ public class Utente {
     private Agenda agenda;
     private Libretto libretto;
     private ArrayList<Tassa> tasse;
+    private ArrayList<Iscrizione> iscrizioni;
 
     public Utente() {
         libretto = new Libretto();
         agenda = new Agenda();
         tasse = new ArrayList<Tassa>(3);
+        iscrizioni = new ArrayList<Iscrizione>(3);
     }
 
     public int getMatricola() {
@@ -82,6 +84,18 @@ public class Utente {
 
     public Utente setTasse(ArrayList<Tassa> tasse) {
         this.tasse = tasse;
+        return this;
+    }
+
+    public ArrayList<Iscrizione> getIscrizioni() {
+        return iscrizioni;
+    }
+
+    public Utente setIscrizioni(ArrayList<Iscrizione> iscrizioni) {
+        this.iscrizioni = iscrizioni;
+        for (Iscrizione iscrizione : iscrizioni) {
+            iscrizione.setUtente(this);
+        }
         return this;
     }
 

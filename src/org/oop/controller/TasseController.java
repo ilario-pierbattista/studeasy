@@ -2,7 +2,6 @@ package org.oop.controller;
 
 import org.oop.view.segreteria.FormTasse;
 import org.oop.view.segreteria.Tasse;
-import sun.jvm.hotspot.utilities.soql.JSJavaFactoryImpl;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
