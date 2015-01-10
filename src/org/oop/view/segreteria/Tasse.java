@@ -5,12 +5,12 @@ import org.oop.model.entities.Tassa;
 import org.oop.view.CustomTableModel;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Tasse {
     public JPanel tassepanel;
-    CustomTableModel model = new CustomTableModel("Anno Accademico", "Importo", "Scadenza", "Stato", "ID");
+    private CustomTableModel model;
     private JTable tabellaTasse;
     private JButton removeButton;
     private JButton editButton;
@@ -18,8 +18,10 @@ public class Tasse {
 
     public Tasse() {
         super();
+        model = new CustomTableModel("Anno Accademico", "Importo", "Scadenza", "Stato");
         tabellaTasse.setModel(model);
         removeButton.setEnabled(false);
+        editButton.setEnabled(false);
 
         setupTableAspect();
     }
@@ -31,43 +33,49 @@ public class Tasse {
         tabellaTasse.setRowHeight(30);
     }
 
+    public void setTasse(ArrayList<Tassa> tasse) {
+        model = new CustomTableModel("Anno Accademico", "Importo", "Scadenza", "Stato");
+        tabellaTasse.setModel(model);
+        for (Tassa tassa : tasse) {
+            addTassa(tassa);
+        }
+    }
+
     /**
      * Metodo per aggiungere una tassa alla tabella
      */
     public void addTassa(Tassa tassa) {
-
-        Object[] riga = new Object[]{tassa.getAnnoAccademico(), tassa.getImporto(), Utils.dateToString(tassa.getScadenza(),0), tassa.isPagataToString(), tassa.getId()};
+        Object[] riga = new Object[]{tassa.getAnnoAccademico(), tassa.getImporto(), Utils.dateToString(tassa.getScadenza(), 0), tassa.isPagataToString(), tassa.getId()};
         model.addRow(riga);
         tabellaTasse.getSelectedRow();
         removeButton.setEnabled(true);
+        editButton.setEnabled(true);
     }
 
     /**
      * Metodo che restituisce l'id della tassa selezionata in tabella
      *
-     *  @return Id tassa
+     * @return Id tassa
      */
     public int getTassaSelected() {
         int row = tabellaTasse.getSelectedRow();
-        int id;
+        int id = -1;
 
         if (row == -1) {
-            JOptionPane.showMessageDialog(null,"Devi selezionare un tassa per eliminarla");
-            id = -1;
+            JOptionPane.showMessageDialog(null, "Devi selezionare un tassa per eliminarla");
         } else {
-            id = (Integer) model.getValueAt(row,0);
+            id = (Integer) model.getValueAt(row, 4);
         }
-
         return id;
     }
 
     /**
-     * Metodo che aggiorna la tabella
+     * Metodo che aggiorna i bottoni della tabella
      */
-    public void updateTabella() {
-        int size = model.getRowCount();
-        if (size == 0) {
+    public void updateButtonStatus() {
+        if (model.getRowCount() == 0) {
             removeButton.setEnabled(false);
+            editButton.setEnabled(false);
         }
     }
 
@@ -76,25 +84,9 @@ public class Tasse {
      */
     public void eliminaTassa() {
         int n = tabellaTasse.getSelectedRow();
-
         model.deleteRow(tabellaTasse.getSelectedRow());
         n--;
         tabellaTasse.changeSelection(n, 0, false, false);
-
-    }
-
-    /* Getters */
-
-    public JButton getRemoveButton() {
-        return removeButton;
-    }
-
-    public JButton getEditButton() {
-        return editButton;
-    }
-
-    public JButton getAddButton() {
-        return addButton;
     }
 
     /* Listeners setter */

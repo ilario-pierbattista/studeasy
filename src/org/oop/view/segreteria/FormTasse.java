@@ -1,17 +1,16 @@
 package org.oop.view.segreteria;
 
-import org.oop.general.Utils;
 import org.oop.general.Validator;
 import org.oop.model.entities.Tassa;
 import org.oop.view.AbstractForm;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
 
 public class FormTasse extends AbstractForm {
-    private JFrame frame;
     private JFormattedTextField importoField;
     private JFormattedTextField annoField;
     private JFormattedTextField scadenzaField;
@@ -29,6 +28,9 @@ public class FormTasse extends AbstractForm {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        SetPagamentoTassaAction pagamentoTassaAction = new SetPagamentoTassaAction();
+        pagatoRadioButton.addActionListener(pagamentoTassaAction);
+        nonPagatoRadioButton.addActionListener(pagamentoTassaAction);
         idTassa = 0;
     }
 
@@ -46,24 +48,25 @@ public class FormTasse extends AbstractForm {
                 .setAnnoAccademico(Integer.parseInt(annoField.getText()))
                 .setImporto(importo)
                 .setScadenza((Date) scadenzaField.getValue())
-                .setPagata(findStatoTassa());
+                .setPagata(isTassaPagata());
 
         return tassa;
     }
 
     /**
      * Metodo che riempe i campi del form con i valori della Tassa che gli si è passata
+     *
      * @param tassa
      */
     public void fillForm(Tassa tassa) {
         importoField.setText(String.valueOf(tassa.getImporto()));
         annoField.setText(String.valueOf(tassa.getAnnoAccademico()));
-        scadenzaField.setText(Utils.dateToString(tassa.getScadenza(),0));
-        if(tassa.isPagata()) {
+        scadenzaField.setValue(tassa.getScadenza());
+        if (tassa.isPagata()) {
             pagatoRadioButton.setSelected(true);
             nonPagatoRadioButton.setSelected(false);
         } else {
-            pagatoRadioButton.setEnabled(false);
+            pagatoRadioButton.setSelected(false);
             nonPagatoRadioButton.setSelected(true);
         }
         idTassa = tassa.getId();
@@ -78,14 +81,14 @@ public class FormTasse extends AbstractForm {
     public boolean isValid() {
         boolean flag = true;
 
-        if (Validator.isFormattedFieldEmpty(annoField,"Anno accademico")) {
+        if (Validator.isFormattedFieldEmpty(annoField, "Anno accademico")) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(importoField,"Importo")) {
+        } else if (Validator.isFormattedFieldEmpty(importoField, "Importo")) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(scadenzaField,"Data di scadenza")) {
+        } else if (Validator.isFormattedFieldEmpty(scadenzaField, "Data di scadenza")) {
             flag = false;
         } else if (!pagatoRadioButton.isSelected() && !nonPagatoRadioButton.isSelected()) {
-            JOptionPane.showMessageDialog(null,"Devi selezionare lo 'Stato' della tassa");
+            JOptionPane.showMessageDialog(null, "Devi selezionare lo 'Stato' della tassa");
             flag = false;
         }
         return flag;
@@ -96,30 +99,17 @@ public class FormTasse extends AbstractForm {
      *
      * @return
      */
-    private boolean findStatoTassa() {
-        boolean stato;
-        if (pagatoRadioButton.isSelected()) {
-            stato = true;
-        } else {
-            stato = false;
-        }
-        return stato;
+    private boolean isTassaPagata() {
+        return pagatoRadioButton.isSelected();
     }
 
     /**
      * Setta componenti GUI custom (rispetto all'editor visuale)
-    **/
+     */
     private void createUIComponents() {
         annoField = new JFormattedTextField(dateformatYear);
         importoField = new JFormattedTextField(pagamentoformat);
         scadenzaField = new JFormattedTextField(dateformat);
-    }
-
-    /**
-     * Chiude form
-     */
-    public void closeFrame() {
-        frame.dispose();
     }
 
     /* Listener setters */
@@ -129,11 +119,6 @@ public class FormTasse extends AbstractForm {
 
     public void addCancelButtonListener(ActionListener listener) {
         cancelButton.addActionListener(listener);
-    }
-
-    public void addPagamentoRadioButtonListener(ActionListener listener) {
-        pagatoRadioButton.addActionListener(listener);
-        nonPagatoRadioButton.addActionListener(listener);
     }
 
     /* Getters */
@@ -157,5 +142,21 @@ public class FormTasse extends AbstractForm {
         return cancelButton;
     }
 
+    /**
+     * listener interno
+     */
+    class SetPagamentoTassaAction implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AbstractButton button = (AbstractButton) e.getSource();
+            pagatoRadioButton.setSelected(false);
+            nonPagatoRadioButton.setSelected(false);
 
+            if (button.getText().equals("Pagato")) {
+                pagatoRadioButton.setSelected(true);
+            } else {
+                nonPagatoRadioButton.setSelected(true);
+            }
+        }
+    }
 }

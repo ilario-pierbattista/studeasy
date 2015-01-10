@@ -7,7 +7,6 @@ import org.oop.model.entities.Utente;
 import org.oop.view.segreteria.FormTasse;
 import org.oop.view.segreteria.Tasse;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,7 +21,7 @@ public class TasseController {
         this.view = view;
         tassaDAO = new TassaDAO();
         utenteDAO = new UtenteDAO();
-        for(Tassa tassa : BaseController.getUtenteCorrente().getTasse()) {
+        for (Tassa tassa : BaseController.getUtenteCorrente().getTasse()) {
             view.addTassa(tassa);
         }
         view.addAddButtonListener(new addTassaAction());
@@ -39,7 +38,6 @@ public class TasseController {
             form = new FormTasse();
             form.addSubmitButtonListener(new submitFormAction());
             form.addCancelButtonListener(new closeFormAction());
-            form.addPagamentoRadioButtonListener(new SetPagamentoTassaAction());
         }
     }
 
@@ -52,7 +50,7 @@ public class TasseController {
             if (form.isValid()) {
                 Utente utente = BaseController.getUtenteCorrente();
                 Tassa tassa = form.getNuovaTassa();
-                if(utente.findTassa(tassa.getId()) != null) {
+                if (utente.findTassa(tassa.getId()) != null) {
                     tassaDAO.update(tassa);
                     // Aggiornamento dei dati
                     utente.removeTassa(tassa.getId());
@@ -62,8 +60,8 @@ public class TasseController {
                 utente.addTassa(tassa);
                 utenteDAO.update(BaseController.getUtenteCorrente());
                 utenteDAO.flush();
-                view.addTassa(tassa);
-                form.closeFrame();
+                view.setTasse(BaseController.getUtenteCorrente().getTasse());
+                form.close();
             }
         }
     }
@@ -74,7 +72,7 @@ public class TasseController {
     class closeFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            form.closeFrame();
+            form.close();
         }
     }
 
@@ -88,12 +86,12 @@ public class TasseController {
             if (id != -1) {
                 Tassa tassa = tassaDAO.find(id);
                 tassaDAO.remove(tassa);
+                BaseController.getUtenteCorrente().removeTassa(id);
                 tassaDAO.flush();
 
                 view.eliminaTassa();
-                view.updateTabella();
+                view.updateButtonStatus();
             }
-
         }
     }
 
@@ -107,26 +105,9 @@ public class TasseController {
             if (id != -1) {
                 Tassa tassa = tassaDAO.find(id);
                 form = new FormTasse();
+                form.addSubmitButtonListener(new submitFormAction());
+                form.addCancelButtonListener(new closeFormAction());
                 form.fillForm(tassa);
-            }
-        }
-    }
-
-    class SetPagamentoTassaAction implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            AbstractButton button = (AbstractButton) e.getSource();
-            manageRadioButton(button);
-        }
-
-        private void manageRadioButton(AbstractButton b) {
-            form.getPagatoRadioButton().setSelected(false);
-            form.getNonPagatoRadioButton().setSelected(false);
-
-            if (b.getText().equals("Pagato")) {
-                form.getPagatoRadioButton().setSelected(true);
-            } else {
-                form.getNonPagatoRadioButton().setSelected(true);
             }
         }
     }

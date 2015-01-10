@@ -11,10 +11,8 @@ public class Segreteria extends AbstractView {
     public JPanel segreteriapanel;
     private JTabbedPane maintabpane;
 
-    /* @TODO togliere da qua questi controller */
     private FormImmatricolazione immatricolazione;
-    private Iscrizione iscrizione = new Iscrizione();
-    private IscrizioneController iscrizionecontroller = new IscrizioneController(iscrizione);
+    private Iscrizione iscrizione;
     private FormTirocinio tirocinio;
     private FormTesi tesi;
     private Tasse tasse;
@@ -25,6 +23,7 @@ public class Segreteria extends AbstractView {
         tirocinio = new FormTirocinio();
         tesi = new FormTesi();
         tasse = new Tasse();
+        iscrizione = new Iscrizione();
 
         maintabpane.addTab("Immatricolazione", immatricolazione.immatricolazionepanel);
         maintabpane.addTab("Iscrizione", iscrizione.iscrizionepanel);
@@ -47,5 +46,9 @@ public class Segreteria extends AbstractView {
 
     public Tasse getTasse() {
         return tasse;
+    }
+
+    public Iscrizione getIscrizione() {
+        return iscrizione;
     }
 }

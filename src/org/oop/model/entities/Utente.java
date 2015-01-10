@@ -109,7 +109,7 @@ public class Utente {
         for (int i = 0; i < tasse.size() && !found; i++) {
             if(tasse.get(i).getId() == id) {
                 found = true;
-                tasse.remove(id);
+                tasse.remove(i);
             }
         }
         return this;
