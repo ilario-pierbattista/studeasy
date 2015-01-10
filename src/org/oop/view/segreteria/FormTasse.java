@@ -1,5 +1,6 @@
 package org.oop.view.segreteria;
 
+import org.oop.general.Utils;
 import org.oop.general.Validator;
 import org.oop.model.entities.Tassa;
 import org.oop.view.AbstractForm;
@@ -49,6 +50,17 @@ public class FormTasse extends AbstractForm {
     }
 
     /**
+     * Metodo che riempe i campi del form con i valori della Tassa che gli si è passata
+     * @param tassa
+     */
+    public void fillForm(Tassa tassa) {
+        importoField.setText(String.valueOf(tassa.getImporto()));
+        annoField.setText(String.valueOf(tassa.getAnnoAccademico()));
+        scadenzaField.setText(Utils.dateToString(tassa.getScadenza(),0));
+
+    }
+
+    /**
      * Metodo di appoggio che controlla che i campi del form siano stati compilati
      * correttamente
      *
@@ -89,7 +101,6 @@ public class FormTasse extends AbstractForm {
     /**
      * Setta componenti GUI custom (rispetto all'editor visuale)
     **/
-
     private void createUIComponents() {
         annoField = new JFormattedTextField(dateformatYear);
         importoField = new JFormattedTextField(pagamentoformat);

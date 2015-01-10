@@ -8,13 +8,12 @@ import java.awt.event.ActionListener;
 
 public class Iscrizione {
     public JPanel iscrizionepanel;
-    int contarighe = 1;
     private JTable tabellaiscrizione;
     private JScrollPane scrollpanetable;
     private JButton deleteButton;
     private JButton editButton;
     private JButton addButton;
-    private CustomTableModel model = new CustomTableModel("Anno", "Anno Accademico", "Corso di Laurea", "Esami Superati", "CFU");
+    private CustomTableModel model = new CustomTableModel("ID","Anno", "Anno Accademico", "Corso di Laurea", "Esami Superati", "CFU");
 
     public Iscrizione() {
         super();
@@ -25,35 +24,57 @@ public class Iscrizione {
 
 
     /**
-     * Metodo che aggiunge una riga alla tabellaiscrizione utilizzando il model di tipo DefaultTableModel
+     * Metodo che restituisce l'id dell'iscrizione selezionata in tabella
+     *
+     * @return Id iscrizione
      */
-    public void addRiga() {
+    public int getIscrizioneSelected() {
+        int row = tabellaiscrizione.getSelectedRow();
+        int id;
 
-        Object[] appoggio = new Object[]{"Anno " + contarighe, "Anno Accademico " + contarighe, "Corso " + contarighe, "Esami " + contarighe, "CFU" + contarighe};
-        model.addRow(appoggio);
-        contarighe++;
-        deleteButton.setEnabled(true);
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null,"Devi selezionare un tassa per eliminarla");
+            id = -1;
+        } else {
+            id = (Integer) model.getValueAt(row,0);
+        }
+
+        return id;
     }
 
+
     /**
-     * Metodo che elimina una riga dalla tabellaiscrizione utlizzando il model di tipo DefaultTableModel
+     * Metodo che aggiorna la tabella
      */
-    public void eliminaRiga() {
-        int n = tabellaiscrizione.getSelectedRow();
-        if (tabellaiscrizione.getSelectedRow() == -1) {
-            System.out.println("Non hai selezionato nessun elemento da eliminare");
-            JOptionPane.showMessageDialog(iscrizionepanel, "Selezionare un anno per eliminarlo");
-        } else {
-            model.deleteRow(tabellaiscrizione.getSelectedRow());
-            n--;
-            tabellaiscrizione.changeSelection(n, 0, false, false);
-        }
+    public void updateTabella() {
         int size = model.getRowCount();
         if (size == 0) {
             deleteButton.setEnabled(false);
         }
+    }
+
+    /**
+     * Metodo per eliminare una riga dalla tabella
+     */
+    public void eliminaIscrizione() {
+        int n = tabellaiscrizione.getSelectedRow();
+
+        model.deleteRow(tabellaiscrizione.getSelectedRow());
+        n--;
+        tabellaiscrizione.changeSelection(n, 0, false, false);
 
     }
+
+    /**
+     * Metodo che aggiunge un'iscrizione alla tabella
+     */
+    public void addIscrizione(org.oop.model.entities.Iscrizione iscrizione) {
+
+        Object[] riga = new Object[]{iscrizione.getId(), iscrizione.getAnno(), iscrizione.getAnnoAccademico(), "nome utente", "esami superati", "cfu realizzati"};
+        model.addRow(riga);
+        deleteButton.setEnabled(true);
+    }
+
 
     /* Listeners setter */
     public void addEditButtonListener(ActionListener listener) {

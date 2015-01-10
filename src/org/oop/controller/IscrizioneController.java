@@ -1,5 +1,7 @@
 package org.oop.controller;
 
+import org.oop.model.dao.IscrizioneDAO;
+import org.oop.model.dao.UtenteDAO;
 import org.oop.view.segreteria.FormIscrizione;
 import org.oop.view.segreteria.Iscrizione;
 
@@ -10,6 +12,8 @@ import java.awt.event.ActionListener;
 public class IscrizioneController {
     private Iscrizione view;
     private FormIscrizione form;
+    private IscrizioneDAO iscrizioneDAO;
+    private UtenteDAO utenteDAO;
 
     public IscrizioneController(Iscrizione view) {
         this.view = view;
@@ -25,7 +29,6 @@ public class IscrizioneController {
     class addIscrizioneAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.addRiga(); //Va tolto
             form = new FormIscrizione();
             form.addSubmitButtonListener(new submitFormAction());
             form.addCancelButtonListener(new closeFormAction());
@@ -38,7 +41,16 @@ public class IscrizioneController {
     class submitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //Submit
+            if (form.isValid()) {
+                org.oop.model.entities.Iscrizione iscrizione = form.getNuovaIscrizione();
+                view.addIscrizione(iscrizione);
+
+                iscrizioneDAO.persist(iscrizione);
+                utenteDAO.update(BaseController.getUtenteCorrente());
+                utenteDAO.flush();
+
+                form.closeFrame();
+            }
         }
     }
 
@@ -58,7 +70,16 @@ public class IscrizioneController {
     class deleteIscrizioneAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.eliminaRiga();
+            int id = view.getIscrizioneSelected();
+            if (id != -1) {
+                org.oop.model.entities.Iscrizione iscrizione = iscrizioneDAO.find(id);
+                iscrizioneDAO.remove(iscrizione);
+                iscrizioneDAO.flush();
+
+                view.eliminaIscrizione();
+                view.updateTabella();
+
+            }
         }
     }
 
@@ -68,6 +89,12 @@ public class IscrizioneController {
     class editIscrizioneAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            int id = view.getIscrizioneSelected();
+            if (id != -1) {
+                org.oop.model.entities.Iscrizione iscrizione = iscrizioneDAO.find(id);
+                form = new FormIscrizione();
+                form.fillForm(iscrizione);
+            }
         }
     }
 }

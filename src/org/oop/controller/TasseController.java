@@ -24,7 +24,7 @@ public class TasseController {
         utenteDAO = new UtenteDAO();
         view.addAddButtonListener(new addTassaAction());
         view.addRemoveButtonListener(new eliminaTassaAction());
-        view.addEditButtonListener(new ConfermaTassaAction());
+        view.addEditButtonListener(new editTassaAction());
     }
 
     /**
@@ -75,7 +75,6 @@ public class TasseController {
         @Override
         public void actionPerformed(ActionEvent e) {
             int id = view.getTassaSelected();
-            System.out.print(id);
             if (id != -1) {
                 Tassa tassa = tassaDAO.find(id);
                 tassaDAO.remove(tassa);
@@ -91,10 +90,15 @@ public class TasseController {
     /**
      * Action per modificare una tassa
      */
-    class ConfermaTassaAction implements ActionListener {
+    class editTassaAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //Modifica della tassa
+            int id = view.getTassaSelected();
+            if (id != -1) {
+                Tassa tassa = tassaDAO.find(id);
+                form = new FormTasse();
+                form.fillForm(tassa);
+            }
         }
     }
 

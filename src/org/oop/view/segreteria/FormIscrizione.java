@@ -1,23 +1,22 @@
 package org.oop.view.segreteria;
 
+import org.oop.general.Validator;
+import org.oop.model.entities.*;
+import org.oop.model.entities.Iscrizione;
+import org.oop.view.AbstractForm;
+
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
 
-public class FormIscrizione {
+public class FormIscrizione extends AbstractForm {
     private JFrame frame;
 
-    private JTextField annoField;
-    private JTextField annoAccademicoField;
-    private JTextField esamiField;
-    private JTextField cfuField;
-    private JRadioButton triennaleRadioButton;
-    private JRadioButton magistraleRadioButton;
-    private JRadioButton cicloUnicoRadioButton;
-    private JList corsiList;
+    private JFormattedTextField annoAccademicoField;
     private JButton submitButton;
     private JButton cancelButton;
     private JPanel panel;
+    private JFormattedTextField annoCorsoField;
 
     public FormIscrizione() {
         frame = new JFrame("Aggiungi anno iscrizione");
@@ -29,10 +28,55 @@ public class FormIscrizione {
     }
 
     /**
+     * Metodo che prende i valori dei campi del form e li mette dentro un oggetto Iscrizione.
+     * Dopodichè ritorna tale oggetto
+     *
+     * @return Iscrizione
+     */
+    public org.oop.model.entities.Iscrizione getNuovaIscrizione() {
+        org.oop.model.entities.Iscrizione iscrizione = new Iscrizione();
+
+        iscrizione.setAnno(Integer.parseInt(annoCorsoField.getText()));
+        iscrizione.setAnnoAccademico(Integer.parseInt(annoAccademicoField.getText()));
+
+        return iscrizione;
+    }
+
+    @Override
+    public boolean isValid() {
+        boolean flag = true;
+
+        if (Validator.isFormattedFieldEmpty(annoCorsoField, "Anno di corso")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(annoAccademicoField, "Anno accademico")) {
+            flag = false;
+        }
+
+        return flag;
+    }
+
+    /**
+     * Metodo che riempe i campi del form con i valori dell'Iscrizione che gli si è passata
+     * @param iscrizione
+     */
+    public void fillForm(Iscrizione iscrizione) {
+        annoAccademicoField.setText(String.valueOf(iscrizione.getAnnoAccademico()));
+        annoCorsoField.setText(String.valueOf(iscrizione.getAnno()));
+    }
+
+    /**
      * Chiude form
      */
     public void closeFrame() {
         frame.dispose();
+    }
+
+    /**
+     * Setta componenti GUI custom (rispetto all'editor visuale)
+     **/
+    private void createUIComponents() {
+        annoCorsoField = new JFormattedTextField(dateformatYear);
+        annoAccademicoField = new JFormattedTextField(dateformatYear);
     }
 
     /* Listeners setter */
@@ -45,36 +89,8 @@ public class FormIscrizione {
     }
 
     /* Getters */
-    public JTextField getAnnoField() {
-        return annoField;
-    }
-
     public JTextField getAnnoAccademicoField() {
         return annoAccademicoField;
-    }
-
-    public JTextField getEsamiField() {
-        return esamiField;
-    }
-
-    public JTextField getCfuField() {
-        return cfuField;
-    }
-
-    public JRadioButton getTriennaleRadioButton() {
-        return triennaleRadioButton;
-    }
-
-    public JRadioButton getMagistraleRadioButton() {
-        return magistraleRadioButton;
-    }
-
-    public JRadioButton getCicloUnicoRadioButton() {
-        return cicloUnicoRadioButton;
-    }
-
-    public JList getCorsiList() {
-        return corsiList;
     }
 
     public JButton getSubmitButton() {
@@ -84,4 +100,6 @@ public class FormIscrizione {
     public JButton getCancelButton() {
         return cancelButton;
     }
+
+
 }

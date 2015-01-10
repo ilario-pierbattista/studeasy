@@ -32,7 +32,7 @@ public class Tasse {
     }
 
     /**
-     * Metodo per aggiungere una riga alla tabella
+     * Metodo per aggiungere una tassa alla tabella
      */
     public void addTassa(Tassa tassa) {
 
@@ -42,6 +42,11 @@ public class Tasse {
         removeButton.setEnabled(true);
     }
 
+    /**
+     * Metodo che restituisce l'id della tassa selezionata in tabella
+     *
+     *  @return Id tassa
+     */
     public int getTassaSelected() {
         int row = tabellaTasse.getSelectedRow();
         int id;
@@ -56,7 +61,9 @@ public class Tasse {
         return id;
     }
 
-
+    /**
+     * Metodo che aggiorna la tabella
+     */
     public void updateTabella() {
         int size = model.getRowCount();
         if (size == 0) {
