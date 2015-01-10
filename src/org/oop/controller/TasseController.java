@@ -5,7 +5,6 @@ import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Tassa;
 import org.oop.view.segreteria.FormTasse;
 import org.oop.view.segreteria.Tasse;
-import sun.jvm.hotspot.utilities.soql.JSJavaFactoryImpl;
 
 import javax.swing.*;
 import javax.swing.plaf.synth.SynthDesktopIconUI;

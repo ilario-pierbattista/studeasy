@@ -120,3 +120,13 @@ CREATE TABLE tassa (
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
+
+CREATE TABLE iscrizione (
+  id  INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  anno            INT NOT NULL KEY,
+  anno_accademico INT NOT NULL,
+  utente          INT NOT NULL,
+  FOREIGN KEY (utente) REFERENCES utente (matricola)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+);

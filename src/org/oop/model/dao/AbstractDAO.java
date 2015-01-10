@@ -8,12 +8,37 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public abstract class AbstractDAO<T> implements DAOInterface<T> {
+public abstract class AbstractDAO<T> {
     protected DatabaseManager db;
 
     public AbstractDAO() {
         db = DatabaseManager.getInstance();
     }
+
+    /**
+     * Cerca un'entit&agrave; attraverso la sua chiave primaria
+     *
+     * @param id Chiave primaria
+     * @return Istanza dell'entit&agrave; se presente oppure null
+     */
+    public abstract T find(int id);
+
+    /**
+     * Cerca tutte le entit&agrave; presenti nel database
+     *
+     * @return ArrayList di entit&agrave;
+     */
+    public abstract ArrayList<T> findAll();
+
+
+    /** @TODO Commentare */
+    public abstract ArrayList<T> findBy(SQLParameters params);
+
+    public abstract void persist(T entity);
+
+    public abstract void update(T entity);
+
+    public abstract void remove(T entity);
 
     /**
      * Genera un ArrayList di entità a partire dal un oggetto

@@ -14,7 +14,8 @@ public class TassaDAO extends AbstractDAO<Tassa> {
     @Override
     protected SQLParameters generaSQLParams(Tassa e) {
         SQLParameters parameters = new SQLParameters();
-        parameters.add("anno_accademico", e.getAnnoAccademico())
+        parameters.add("id", e.getId())
+                .add("anno_accademico", e.getAnnoAccademico())
                 .add("importo", e.getImporto())
                 .add("scadenza", e.getScadenza())
                 .add("pagata", e.isPagata());
@@ -25,7 +26,8 @@ public class TassaDAO extends AbstractDAO<Tassa> {
     protected Tassa generaEntita(ResultSet rs) {
         Tassa tassa = new Tassa();
         try {
-            tassa.setAnnoAccademico(rs.getInt("anno_accademico"))
+            tassa.setId(rs.getInt("id"))
+                    .setAnnoAccademico(rs.getInt("anno_accademico"))
                     .setImporto(rs.getDouble("importo"))
                     .setPagata(rs.getBoolean("pagata"))
                     .setScadenza(rs.getDate("scadenza"));
@@ -46,6 +48,7 @@ public class TassaDAO extends AbstractDAO<Tassa> {
             if(rs.next()) {
                 tassa = generaEntita(rs);
             }
+            rs.close();
         } catch (SQLException ee) {
             ee.printStackTrace();
         }
