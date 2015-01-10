@@ -7,6 +7,7 @@ import org.oop.view.segreteria.FormTesi;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
@@ -41,7 +42,7 @@ public class TesiController {
 
     }
 
-    class SubmitFormAction extends AbstractAction {
+    class SubmitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
            /* Date datanascita = (Date) view.getDataNascita().getValue();
@@ -80,50 +81,10 @@ public class TesiController {
                     //chiudi finestra
                 }
             }
-            /*if ((inputNameControl(nome)) && ( inputNameControl(cognome) ) && ( inputSentenceControl(luogo) ) && (inputMailControl(email) ) && inputYearControl(year) ) {
-                String name = stringToCapital(nome);
-                String surname = stringToCapital(cognome);
-
-                //Apre schermata di salvataggio e genera il pdf
-                JFileChooser c = new JFileChooser();
-                int r = c.showSaveDialog(view.tesipanel);
-                if (r == JFileChooser.APPROVE_OPTION) {
-                    String path= c.getCurrentDirectory().toString().replace("\\","\\\\");
-                    String fileName = c.getSelectedFile().getName();
-
-                    try {
-                        PdfGenerator pdfGeneratorCreate = new PdfGenerator(System.getProperty("user.dir")
-                                                                                                .concat(File.separator.concat("template"))
-                                                                                                    .concat(File.separator.concat("templateTesiPDF.pdf")),fileName);
-                        pdfGeneratorCreate.generatePdfTesi(view, path);
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    } catch (DocumentException e1) {
-                        e1.printStackTrace();
-                    }
-
-                }
-                if (r == JFileChooser.CANCEL_OPTION) {
-                    //chiudi finestra
-                }
-
-
-            } else if (!inputNameControl(nome)) {
-                JOptionPane.showMessageDialog(null,"Nome Non Valido!");
-             } else if (!inputNameControl(cognome)) {
-                JOptionPane.showMessageDialog(null,"Cognome Non Valido!");
-            } else if (!inputSentenceControl(luogo)) {
-                JOptionPane.showMessageDialog(null,"Luogo Non Valido!");
-            } else if (!inputMailControl(email)) {
-                JOptionPane.showMessageDialog(null,"Email non valida");
-            } else if (!inputYearControl(year)) {
-                JOptionPane.showMessageDialog(null,"Anno non Valido");
-            }
-        }*/
         }
     }
 
-    class QuitFormAction extends AbstractAction {
+    class QuitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             //cancella tutti i campi

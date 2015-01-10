@@ -7,6 +7,7 @@ import org.oop.view.segreteria.FormImmatricolazione;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
@@ -45,7 +46,7 @@ public class ImmatricolazioneController {
 
     }
 
-    class SubmitFormAction extends AbstractAction {
+    class SubmitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             Date datanascita = (Date) view.getDatanascita().getValue();
@@ -145,7 +146,7 @@ public class ImmatricolazioneController {
         }*/
 
 
-    class QuitFormAction extends AbstractAction {
+    class QuitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             //in questo caso l'annullamento del form comporterà la cancellazione di tutti i campi

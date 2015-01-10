@@ -4,6 +4,7 @@ import org.oop.view.segreteria.FormTasse;
 import org.oop.view.segreteria.Tasse;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class TasseController {
@@ -20,7 +21,7 @@ public class TasseController {
     /**
      * Action per aprire il form di aggiunta tassa
      */
-    class addTassaAction extends AbstractAction {
+    class addTassaAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.addTassa(); //Va tolto
@@ -33,7 +34,7 @@ public class TasseController {
     /**
      * Action per il submit del form
      */
-    class submitFormAction extends AbstractAction {
+    class submitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             //Submit form
@@ -43,7 +44,7 @@ public class TasseController {
     /**
      * Action per chiudere il form
      */
-    class closeFormAction extends AbstractAction {
+    class closeFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             form.closeFrame();
@@ -53,7 +54,7 @@ public class TasseController {
     /**
      * Action per eliminare una tassa dalla tabella
      */
-    class eliminaTassaAction extends AbstractAction {
+    class eliminaTassaAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.eliminaTassa();
@@ -63,7 +64,7 @@ public class TasseController {
     /**
      * Action per modificare una tassa
      */
-    class ConfermaTassaAction extends AbstractAction {
+    class ConfermaTassaAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             //Modifica della tassa

@@ -14,6 +14,7 @@ import org.oop.view.profilo.FormRegistrazione;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.ArrayList;
@@ -108,7 +109,7 @@ public class FormRegistrazioneController {
         }
     }
 
-    class changeLivelloAction extends AbstractAction {
+    class changeLivelloAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             AbstractButton ab = (AbstractButton) e.getSource();
@@ -147,7 +148,7 @@ public class FormRegistrazioneController {
     /**
      * Action per annullare l'immissione del form
      */
-    class quitFormAction extends AbstractAction {
+    class quitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.frame.dispose();
@@ -157,7 +158,7 @@ public class FormRegistrazioneController {
     /**
      * Action per confermare l'immissione del form
      */
-    class submitFormAction extends AbstractAction {
+    class submitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (view.isValid()) {

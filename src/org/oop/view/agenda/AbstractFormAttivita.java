@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 
-public abstract class AbstractFormAttivita extends AbstractForm {
+abstract class AbstractFormAttivita extends AbstractForm {
 
     protected int idAttivita = 0;
 

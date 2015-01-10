@@ -17,6 +17,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
@@ -135,7 +136,7 @@ public class AgendaController {
     /**
      * Action per aggiungere un'attività
      */
-    class AddAttivitaAction extends AbstractAction {
+    class AddAttivitaAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             // ActionCommand corrisponde con la stringa che identifica il tipo di attivita
@@ -148,7 +149,7 @@ public class AgendaController {
     /**
      * Action per aprire il form di aggiunta ciclo
      */
-    class AddCicloAction extends AbstractAction {
+    class AddCicloAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             formcicloview = new FormCiclo();
@@ -160,7 +161,7 @@ public class AgendaController {
     /**
      * Action per aggiungere un nuovo ciclo
      */
-    class SubmitCicloFormAction extends AbstractAction {
+    class SubmitCicloFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (formcicloview.isValid()) {
@@ -182,7 +183,7 @@ public class AgendaController {
     /**
      * Action per rimuovere un ciclo dalla lista dei cicli
      */
-    class RemoveCicloAction extends AbstractAction {
+    class RemoveCicloAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             int index = view.getCiclilist().getSelectedIndex();
@@ -206,7 +207,7 @@ public class AgendaController {
     /**
      * Action per chiudere la finestra di aggiunta di un nuovo ciclo
      */
-    class CloseCicloFormAction extends AbstractAction {
+    class CloseCicloFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             formcicloview.closeFrame();
@@ -216,7 +217,7 @@ public class AgendaController {
     /**
      * Action che apre la finestra per aggiungere un insegnamento ad un ciclo
      */
-    class addInsegnamentoAction extends AbstractAction {
+    class addInsegnamentoAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             modalAddInsegnamento = new ModalAddInsegnamento();
@@ -231,7 +232,7 @@ public class AgendaController {
      * Action aggiunge l'insegnamento selezionato nel modal alla lista degli insegnamenti
      * nella Agenda
      */
-    class submitModalInsegnamento extends AbstractAction {
+    class submitModalInsegnamento implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             Insegnamento ins = modalAddInsegnamento.getInsegnamentoSelected();
@@ -253,7 +254,7 @@ public class AgendaController {
     /**
      * Action per rimuovere un insegnamento da un ciclo
      */
-    class removeInsegnamentoAction extends AbstractAction {
+    class removeInsegnamentoAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             int index = view.getInsegnamentiList().getSelectedIndex();
@@ -297,7 +298,7 @@ public class AgendaController {
     /**
      * Action per chiudere il modal di aggiunta di un insegnamento
      */
-    class closeModalInsegnamento extends AbstractAction {
+    class closeModalInsegnamento implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             modalAddInsegnamento.closeFrame();

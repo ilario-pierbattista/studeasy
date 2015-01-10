@@ -13,6 +13,7 @@ import org.oop.view.profilo.ProfiloView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
@@ -166,7 +167,7 @@ public class ProfiloController {
     /**
      * Apertura del form per la registrazione di un utente ed avvio del controller che la gestisce
      */
-    class registraFormAction extends AbstractAction {
+    class registraFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             FormRegistrazione form = new FormRegistrazione();
@@ -180,7 +181,7 @@ public class ProfiloController {
      * Apre il form per la modifica delle informazioni riguardanti ad un insegnamento
      * (voto e data di superamento)
      */
-    class insegnamentoFormAction extends AbstractAction {
+    class insegnamentoFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             Insegnamento insegnamento = view.getInsegnamentoSelezionato();
@@ -195,7 +196,7 @@ public class ProfiloController {
     /**
      * Gestione del submit del form per la modifica dei dati di un insegnamento
      */
-    class submitInsegnamentoFormAction extends AbstractAction {
+    class submitInsegnamentoFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (formInsegnamento.isValid()) {
@@ -210,7 +211,7 @@ public class ProfiloController {
     /**
      * Chiusura del form per la modifica dei dati di un insegnamento
      */
-    class closeFormInsegnamentoAction extends AbstractAction {
+    class closeFormInsegnamentoAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             formInsegnamento.close();
@@ -220,7 +221,7 @@ public class ProfiloController {
     /**
      * Apertura del form per la modifica del libretto
      */
-    class ModificaLibrettoAction extends AbstractAction {
+    class ModificaLibrettoAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             apriFormLibretto();
@@ -230,7 +231,7 @@ public class ProfiloController {
     /**
      * Chiude il form per la modifica del libretto
      */
-    class ChiudiModificaLibrettoAction extends AbstractAction {
+    class ChiudiModificaLibrettoAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             formLibretto.close();
@@ -241,7 +242,7 @@ public class ProfiloController {
      * Gestisce il salvataggio delle informazioni reperibili dal form
      * per la modifica del libretto
      */
-    class SubmitModificaLibrettoAction extends AbstractAction {
+    class SubmitModificaLibrettoAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             boolean mergeSuccessful;

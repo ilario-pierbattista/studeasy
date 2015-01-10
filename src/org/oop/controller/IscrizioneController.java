@@ -4,6 +4,7 @@ import org.oop.view.segreteria.FormIscrizione;
 import org.oop.view.segreteria.Iscrizione;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class IscrizioneController {
@@ -21,7 +22,7 @@ public class IscrizioneController {
     /**
      * Action per far partire il form di aggiunta
      */
-    class addIscrizioneAction extends AbstractAction {
+    class addIscrizioneAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.addRiga(); //Va tolto
@@ -34,7 +35,7 @@ public class IscrizioneController {
     /**
      * Action per il submit del form di aggiunta di iscrizione
      */
-    class submitFormAction extends AbstractAction {
+    class submitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             //Submit
@@ -44,7 +45,7 @@ public class IscrizioneController {
     /**
      * Action per chiudere il form
      */
-    class closeFormAction extends AbstractAction {
+    class closeFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             form.closeFrame();
@@ -54,7 +55,7 @@ public class IscrizioneController {
     /**
      * Action che elimina una riga dalla tabella delle iscrizioni
      */
-    class deleteIscrizioneAction extends AbstractAction {
+    class deleteIscrizioneAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.eliminaRiga();
@@ -64,7 +65,7 @@ public class IscrizioneController {
     /**
      * Action per modificare un'iscrizione
      */
-    class editIscrizioneAction extends AbstractAction {
+    class editIscrizioneAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
         }

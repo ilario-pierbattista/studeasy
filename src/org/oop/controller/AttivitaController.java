@@ -8,6 +8,7 @@ import org.oop.view.agenda.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class AttivitaController {
@@ -157,7 +158,7 @@ public class AttivitaController {
     /**
      * Action per modifica un'attività
      */
-    class EditButtonAction extends AbstractAction {
+    class EditButtonAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             int id = Integer.parseInt(e.getActionCommand());
@@ -169,7 +170,7 @@ public class AttivitaController {
     /**
      * Action che permetta l'eliminazione di un'attivita
      */
-    class DeleteButtonAction extends AbstractAction {
+    class DeleteButtonAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             int id = Integer.parseInt(e.getActionCommand());
@@ -184,7 +185,7 @@ public class AttivitaController {
     /**
      * Action per il submit del form attivitaevento
      */
-    class SubmitFormEventoAction extends AbstractAction {
+    class SubmitFormEventoAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (formAttivitaEvento.isValid()) {
@@ -199,7 +200,7 @@ public class AttivitaController {
     /**
      * Action per il submit del form attivita periodica
      */
-    class SubmitFormPeriodicaAction extends AbstractAction {
+    class SubmitFormPeriodicaAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (formAttivitaPeriodica.isValid()) {
@@ -214,7 +215,7 @@ public class AttivitaController {
     /**
      * Action per il submit del form attivita esame
      */
-    class SubmitFormEsameAction extends AbstractAction {
+    class SubmitFormEsameAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (formEsame.isValid()) {
@@ -229,7 +230,7 @@ public class AttivitaController {
     /**
      * Permette di gestire i radio button per la tipologia dell'esame
      */
-    class SetTipologiaEsameAction extends AbstractAction {
+    class SetTipologiaEsameAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             AbstractButton button = (AbstractButton) e.getSource();
@@ -255,7 +256,7 @@ public class AttivitaController {
     /**
      * Action per chiudere il form attivita evento
      */
-    class CloseFormEventoAction extends AbstractAction {
+    class CloseFormEventoAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             formAttivitaEvento.closeFrame();
@@ -265,7 +266,7 @@ public class AttivitaController {
     /**
      * Action per chiudere il form attivita periodica
      */
-    class CloseFormPeriodicaAction extends AbstractAction {
+    class CloseFormPeriodicaAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             formAttivitaPeriodica.closeFrame();
@@ -275,7 +276,7 @@ public class AttivitaController {
     /**
      * Action per chiudere il form esame
      */
-    class CloseFormEsameAction extends AbstractAction {
+    class CloseFormEsameAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             formEsame.closeFrame();
