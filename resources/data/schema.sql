@@ -110,12 +110,12 @@ CREATE TABLE ui_attivita_ciclo (
 );
 
 CREATE TABLE tassa (
-  id       INT           NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  importo  DECIMAL(6, 2) NOT NULL,
-  scadenza DATE          NOT NULL,
-  pagata   BOOLEAN                            DEFAULT FALSE,
-  anno_accademico INT NOT NULL,
-  utente   INT           NOT NULL,
+  id              INT           NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  importo         DECIMAL(6, 2) NOT NULL,
+  scadenza        DATE          NOT NULL,
+  pagata          BOOLEAN                            DEFAULT FALSE,
+  anno_accademico INT           NOT NULL,
+  utente          INT,
   FOREIGN KEY (utente) REFERENCES utente (matricola)
     ON UPDATE CASCADE
     ON DELETE CASCADE

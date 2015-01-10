@@ -3,6 +3,8 @@ package org.oop.model.entities;
 import org.oop.model.Agenda;
 import org.oop.model.Libretto;
 
+import java.util.ArrayList;
+
 
 public class Utente {
 
@@ -12,19 +14,12 @@ public class Utente {
     private String email;
     private Agenda agenda;
     private Libretto libretto;
-
-    public Utente(int matricola, String nome, String cognome, String email, Agenda agenda, Libretto libretto) {
-        this.matricola = matricola;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.email = email;
-        this.agenda = agenda;
-        this.libretto = libretto;
-    }
+    private ArrayList<Tassa> tasse;
 
     public Utente() {
         libretto = new Libretto();
         agenda = new Agenda();
+        tasse = new ArrayList<Tassa>(3);
     }
 
     public int getMatricola() {
@@ -78,6 +73,15 @@ public class Utente {
 
     public Utente setLibretto(Libretto libretto) {
         this.libretto = libretto;
+        return this;
+    }
+
+    public ArrayList<Tassa> getTasse() {
+        return tasse;
+    }
+
+    public Utente setTasse(ArrayList<Tassa> tasse) {
+        this.tasse = tasse;
         return this;
     }
 
