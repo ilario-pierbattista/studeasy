@@ -1,5 +1,8 @@
 package org.oop.model.entities;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -22,6 +25,29 @@ public class Insegnamento {
 
     public boolean esameSostenuto() {
         return voto != 0;
+    }
+
+    /**
+     * Ritorna l'anno accademico durante il quale si è sostenuto l'esame.
+     * L'anno accademico si presume che cominci da Ottobre, quando la sessione
+     * estiva di recupero si è conclusa.
+     *
+     * @return
+     */
+    public int getAnnoAccademico() {
+        int annoAccademico = 0;
+        if (data != null) {
+            // Le API di java 8 riguardo Date sono cambiare sensibilmente
+            // ci potrebbero essere dei bug
+            Instant instant = Instant.ofEpochMilli(data.getTime());
+            LocalDateTime localDate = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+            if (localDate.getMonthValue() >= 10) {
+                annoAccademico = localDate.getYear();
+            } else {
+                annoAccademico = localDate.getYear() - 1;
+            }
+        }
+        return annoAccademico;
     }
 
     public int getId() {

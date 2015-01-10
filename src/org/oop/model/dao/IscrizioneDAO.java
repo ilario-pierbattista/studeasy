@@ -42,7 +42,7 @@ public class IscrizioneDAO extends AbstractDAO<Iscrizione> {
                 .setParameters(parameters)
                 .getResult();
         try {
-            if(rs.next()) {
+            if (rs.next()) {
                 iscrizione = generaEntita(rs);
             }
             rs.close();
@@ -93,7 +93,7 @@ public class IscrizioneDAO extends AbstractDAO<Iscrizione> {
     @Override
     public void remove(Iscrizione entity) {
         SQLParameters parameters = new SQLParameters().add("id", entity.getId());
-        db.createSqlStatement("DELETE iscrizione WHERE id = :id")
+        db.createSqlStatement("DELETE FROM iscrizione WHERE id = :id")
                 .setParameters(parameters)
                 .executeUpdate();
     }

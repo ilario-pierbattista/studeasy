@@ -34,7 +34,7 @@ public class AttivitaView extends AbstractView {
         hourStart.setText("Ora inizio: ".concat(attivita.getOraInizio().toString()));
         hourEnd.setText("Ora fine: ".concat(attivita.getOraFine().toString()));
         if (attivita instanceof AttivitaEvento) {
-            dataField.setText(Utils.dateToString(((AttivitaEvento) attivita).getData(), 0));
+            dataField.setText(Utils.dateToString(((AttivitaEvento) attivita).getData()));
             dayField.setText("");
             tipoEsameField.setText("");
             if (attivita instanceof Esame) {

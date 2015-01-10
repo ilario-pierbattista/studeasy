@@ -73,6 +73,26 @@ public class Libretto {
         return Utils.round(sommaPesata / cfu, 2);
     }
 
+    public int calcolaEsamiSuperatiPerAnnoAccademico(int annoAccademico) {
+        int counter = 0;
+        for (Insegnamento insegnamento : insegnamenti) {
+            if (insegnamento.getAnnoAccademico() == annoAccademico) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    public int calcolaCFUConseguitiPerAnnoAccademico(int annoAccademico) {
+        int cfu = 0;
+        for (Insegnamento insegnamento : insegnamenti) {
+            if (insegnamento.getAnnoAccademico() == annoAccademico) {
+                cfu += insegnamento.getInsegnamentoOfferto().getCfu();
+            }
+        }
+        return cfu;
+    }
+
     public Corso getCorso() {
         return corso;
     }

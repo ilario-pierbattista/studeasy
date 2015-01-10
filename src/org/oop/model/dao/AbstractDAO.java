@@ -31,7 +31,9 @@ public abstract class AbstractDAO<T> {
     public abstract ArrayList<T> findAll();
 
 
-    /** @TODO Commentare */
+    /**
+     * @TODO Commentare
+     */
     public abstract ArrayList<T> findBy(SQLParameters params);
 
     public abstract void persist(T entity);

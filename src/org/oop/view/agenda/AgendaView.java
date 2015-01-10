@@ -83,7 +83,7 @@ public class AgendaView extends AbstractView {
             cicliListModel.addElement(ciclo);
         }
         ciclilist.setModel(cicliListModel);
-        if(selected < 0) {
+        if (selected < 0) {
             ciclilist.setSelectedIndex(0);
         } else {
             ciclilist.setSelectedIndex(selected);
@@ -154,7 +154,7 @@ public class AgendaView extends AbstractView {
                 model.addElement(ins);
             }
             insegnamentiList.setModel(model);
-            if(selected < 0) {
+            if (selected < 0) {
                 insegnamentiList.setSelectedIndex(0);
             } else {
                 insegnamentiList.setSelectedIndex(selected);

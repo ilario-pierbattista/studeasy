@@ -1,7 +1,7 @@
 package org.oop.view.segreteria;
 
+import org.oop.controller.BaseController;
 import org.oop.general.Validator;
-import org.oop.model.entities.*;
 import org.oop.model.entities.Iscrizione;
 import org.oop.view.AbstractForm;
 
@@ -10,13 +10,12 @@ import java.awt.event.ActionListener;
 
 
 public class FormIscrizione extends AbstractForm {
-    private JFrame frame;
-
     private JFormattedTextField annoAccademicoField;
     private JButton submitButton;
     private JButton cancelButton;
     private JPanel panel;
     private JFormattedTextField annoCorsoField;
+    private int idIscrizione;
 
     public FormIscrizione() {
         frame = new JFrame("Aggiungi anno iscrizione");
@@ -25,6 +24,7 @@ public class FormIscrizione extends AbstractForm {
         frame.setLocationRelativeTo(null);
         frame.pack();
         frame.setVisible(true);
+        idIscrizione = 0;
     }
 
     /**
@@ -33,12 +33,12 @@ public class FormIscrizione extends AbstractForm {
      *
      * @return Iscrizione
      */
-    public org.oop.model.entities.Iscrizione getNuovaIscrizione() {
-        org.oop.model.entities.Iscrizione iscrizione = new Iscrizione();
-
-        iscrizione.setAnno(Integer.parseInt(annoCorsoField.getText()));
-        iscrizione.setAnnoAccademico(Integer.parseInt(annoAccademicoField.getText()));
-
+    public Iscrizione getNuovaIscrizione() {
+        Iscrizione iscrizione = new Iscrizione();
+        iscrizione.setId(idIscrizione)
+                .setAnno(Integer.parseInt(annoCorsoField.getText()))
+                .setAnnoAccademico(Integer.parseInt(annoAccademicoField.getText()))
+                .setUtente(BaseController.getUtenteCorrente());
         return iscrizione;
     }
 
@@ -57,23 +57,18 @@ public class FormIscrizione extends AbstractForm {
 
     /**
      * Metodo che riempe i campi del form con i valori dell'Iscrizione che gli si è passata
+     *
      * @param iscrizione
      */
     public void fillForm(Iscrizione iscrizione) {
+        idIscrizione = iscrizione.getId();
         annoAccademicoField.setText(String.valueOf(iscrizione.getAnnoAccademico()));
         annoCorsoField.setText(String.valueOf(iscrizione.getAnno()));
     }
 
     /**
-     * Chiude form
-     */
-    public void closeFrame() {
-        frame.dispose();
-    }
-
-    /**
      * Setta componenti GUI custom (rispetto all'editor visuale)
-     **/
+     */
     private void createUIComponents() {
         annoCorsoField = new JFormattedTextField(dateformatYear);
         annoAccademicoField = new JFormattedTextField(dateformatYear);
@@ -100,6 +95,4 @@ public class FormIscrizione extends AbstractForm {
     public JButton getCancelButton() {
         return cancelButton;
     }
-
-
 }

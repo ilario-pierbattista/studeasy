@@ -1,6 +1,7 @@
 package org.oop.controller;
 
 import com.lowagie.text.DocumentException;
+import org.apache.commons.lang3.StringUtils;
 import org.oop.general.Validator;
 import org.oop.services.PdfGenerator;
 import org.oop.view.segreteria.FormImmatricolazione;
@@ -13,8 +14,6 @@ import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-
-import static org.oop.general.Utils.stringToCapital;
 
 public class ImmatricolazioneController {
     private FormImmatricolazione view;
@@ -64,8 +63,8 @@ public class ImmatricolazioneController {
 
             if (view.isValid()) {
 
-                String name = stringToCapital(nome);
-                String surname = stringToCapital(cognome);
+                String name = StringUtils.capitalize(nome);
+                String surname = StringUtils.capitalize(cognome);
                 //Apre schermata di salvataggio e genera il pdf
                 JFileChooser c = new JFileChooser();
                 int r = c.showSaveDialog(view.immatricolazionepanel);

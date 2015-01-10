@@ -13,8 +13,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Utils {
 
@@ -120,87 +118,13 @@ public class Utils {
     }
 
     /**
-     * Metodi per il controllo dell'input ("espressioni regolari")
-     * scrive la stringa passata come parametro con la lettera maiuscola
-     */
-    public static String stringToCapital(String s) {
-        char first = s.charAt(0);
-        char fupper = Character.toUpperCase(first);
-        return fupper + s.substring(1, s.length());
-    }
-
-
-    /**
-     * Controlla che la stringa passata sia una mail
-     *
-     * @param s
-     * @return
-     */
-    public static boolean inputMailControl(String s) {
-        Pattern p = Pattern.compile("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}");
-        Matcher m = p.matcher(s);
-        return m.matches();
-    }
-
-    /**
-     * Controlla che la stringa passata sia una data nel formato xx/xx/xxxx
-     *
-     * @param s
-     * @return
-     */
-    public static boolean inputDateControl(String s) {
-        Pattern p = Pattern.compile("\\d{2}+/+\\d{2}+/+\\d{4}");
-        Matcher m = p.matcher(s);
-        return m.matches();
-    }
-
-    /**
-     * Controlla che la stringa passata sia un numero a 3 cifre massimo (cfu)
-     */
-
-    public static boolean inputCfuControl(String s) {
-        Pattern p = Pattern.compile("\\d{1,3}");
-        Matcher m = p.matcher(s);
-        return m.matches();
-    }
-
-    /**
-     * Controlla che la stringa passata sia di sole lettere
-     */
-    public static boolean inputNameControl(String s) {
-        Pattern p = Pattern.compile("([a-zA-Z])+");
-        Matcher m = p.matcher(s);
-        return m.matches();
-    }
-
-
-    /**
-     * Esplode la stringa per spazi, e lo mette in un array.
-     * Ritorna il valore dell'array all'indice passatogli dopo averlo messo in lowercase.
-     */
-    public static String explodeStringForSpace(String s, int i) {
-        String[] array = s.split(" ");
-        return array[i].toLowerCase();
-    }
-
-
-    /**
      * Converte la data che gli si passa in stringa nel formato scelto
      *
-     * @param date   Data da convertire
-     * @param format 0 per gg-mm-yyyy , 1 per hh:mm
+     * @param date Data da convertire
      */
-    public static String dateToString(Date date, int format) {
-        String dstring;
-        if (format == 0) {
-            DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-            dstring = df.format(date);
-        } else {
-            DateFormat df = new SimpleDateFormat("HH:mm");
-            dstring = df.format(date);
-        }
-
-        return dstring;
+    public static String dateToString(Date date) {
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        return df.format(date);
     }
 
     public static LocalTime dateToLocaltime(Date date) {

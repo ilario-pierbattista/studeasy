@@ -45,7 +45,7 @@ public class Tasse {
      * Metodo per aggiungere una tassa alla tabella
      */
     public void addTassa(Tassa tassa) {
-        Object[] riga = new Object[]{tassa.getAnnoAccademico(), tassa.getImporto(), Utils.dateToString(tassa.getScadenza(), 0), tassa.isPagataToString(), tassa.getId()};
+        Object[] riga = new Object[]{tassa.getAnnoAccademico(), tassa.getImporto(), Utils.dateToString(tassa.getScadenza()), tassa.isPagataToString(), tassa.getId()};
         model.addRow(riga);
         tabellaTasse.getSelectedRow();
         removeButton.setEnabled(true);

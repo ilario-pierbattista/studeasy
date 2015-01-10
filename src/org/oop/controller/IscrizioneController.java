@@ -2,25 +2,35 @@ package org.oop.controller;
 
 import org.oop.model.dao.IscrizioneDAO;
 import org.oop.model.dao.UtenteDAO;
+import org.oop.model.entities.Iscrizione;
 import org.oop.view.segreteria.FormIscrizione;
-import org.oop.view.segreteria.Iscrizione;
+import org.oop.view.segreteria.IscrizioneView;
+import org.oop.view.segreteria.Segreteria;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 
 public class IscrizioneController {
-    private Iscrizione view;
+    private IscrizioneView view;
     private FormIscrizione form;
     private IscrizioneDAO iscrizioneDAO;
     private UtenteDAO utenteDAO;
 
-    public IscrizioneController(Iscrizione view) {
+    public IscrizioneController(IscrizioneView view) {
         this.view = view;
+
+        iscrizioneDAO = new IscrizioneDAO();
+        utenteDAO = new UtenteDAO();
 
         view.addAddButtonListener(new addIscrizioneAction());
         view.addDeleteButtonListener(new deleteIscrizioneAction());
         view.addEditButtonListener(new editIscrizioneAction());
+
+        view.setIscrizioni(BaseController.getUtenteCorrente().getIscrizioni());
+        Segreteria.getInstance().getMaintabpane().addFocusListener(new customFocusListener());
     }
 
     /**
@@ -42,14 +52,18 @@ public class IscrizioneController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (form.isValid()) {
-                org.oop.model.entities.Iscrizione iscrizione = form.getNuovaIscrizione();
-                view.addIscrizione(iscrizione);
+                Iscrizione iscrizione = form.getNuovaIscrizione();
+                if (iscrizione.getId() == 0) {
+                    iscrizioneDAO.persist(iscrizione);
+                } else {
+                    iscrizioneDAO.update(iscrizione);
+                    BaseController.getUtenteCorrente().removeIscrizione(iscrizione.getId());
+                }
+                BaseController.getUtenteCorrente().addIscrizione(iscrizione);
+                iscrizioneDAO.flush();
 
-                iscrizioneDAO.persist(iscrizione);
-                utenteDAO.update(BaseController.getUtenteCorrente());
-                utenteDAO.flush();
-
-                form.closeFrame();
+                view.setIscrizioni(BaseController.getUtenteCorrente().getIscrizioni());
+                form.close();
             }
         }
     }
@@ -60,7 +74,7 @@ public class IscrizioneController {
     class closeFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            form.closeFrame();
+            form.close();
         }
     }
 
@@ -72,13 +86,13 @@ public class IscrizioneController {
         public void actionPerformed(ActionEvent e) {
             int id = view.getIscrizioneSelected();
             if (id != -1) {
-                org.oop.model.entities.Iscrizione iscrizione = iscrizioneDAO.find(id);
+                Iscrizione iscrizione = iscrizioneDAO.find(id);
                 iscrizioneDAO.remove(iscrizione);
                 iscrizioneDAO.flush();
+                BaseController.getUtenteCorrente().removeTassa(id);
 
                 view.eliminaIscrizione();
-                view.updateTabella();
-
+                view.updateButtonStatus();
             }
         }
     }
@@ -91,10 +105,24 @@ public class IscrizioneController {
         public void actionPerformed(ActionEvent e) {
             int id = view.getIscrizioneSelected();
             if (id != -1) {
-                org.oop.model.entities.Iscrizione iscrizione = iscrizioneDAO.find(id);
+                Iscrizione iscrizione = iscrizioneDAO.find(id);
                 form = new FormIscrizione();
                 form.fillForm(iscrizione);
+                form.addSubmitButtonListener(new submitFormAction());
+                form.addCancelButtonListener(new closeFormAction());
             }
+        }
+    }
+
+    class customFocusListener implements FocusListener {
+        @Override
+        public void focusGained(FocusEvent e) {
+            view.setIscrizioni(BaseController.getUtenteCorrente().getIscrizioni());
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) {
+
         }
     }
 }

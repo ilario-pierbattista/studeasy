@@ -50,6 +50,11 @@ public class Tassa {
         return pagata;
     }
 
+    public Tassa setPagata(boolean pagata) {
+        this.pagata = pagata;
+        return this;
+    }
+
     public String isPagataToString() {
         String stato;
         if (pagata) {
@@ -59,11 +64,6 @@ public class Tassa {
         }
 
         return stato;
-    }
-
-    public Tassa setPagata(boolean pagata) {
-        this.pagata = pagata;
-        return this;
     }
 
 

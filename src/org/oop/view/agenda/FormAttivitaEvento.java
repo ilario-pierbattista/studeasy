@@ -2,7 +2,6 @@ package org.oop.view.agenda;
 
 import org.oop.general.Utils;
 import org.oop.general.Validator;
-import org.oop.model.Agenda;
 import org.oop.model.entities.Attivita;
 import org.oop.model.entities.AttivitaEvento;
 import org.oop.model.entities.Docente;

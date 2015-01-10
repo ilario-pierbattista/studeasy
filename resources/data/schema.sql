@@ -122,7 +122,7 @@ CREATE TABLE tassa (
 );
 
 CREATE TABLE iscrizione (
-  id  INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  id              INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   anno            INT NOT NULL,
   anno_accademico INT NOT NULL,
   utente          INT NOT NULL,

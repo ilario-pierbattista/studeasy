@@ -17,7 +17,7 @@ public class UtenteDAO extends AbstractDAO<Utente> {
     private CicloDAO cicloDAO;
     private TassaDAO tassaDAO;
     private CorsoDAO corsoDAO;
-
+    private IscrizioneDAO iscrizioneDAO;
 
     public UtenteDAO() {
         super();
@@ -25,6 +25,7 @@ public class UtenteDAO extends AbstractDAO<Utente> {
         cicloDAO = new CicloDAO();
         tassaDAO = new TassaDAO();
         corsoDAO = new CorsoDAO();
+        iscrizioneDAO = new IscrizioneDAO();
     }
 
     @Override
@@ -43,6 +44,7 @@ public class UtenteDAO extends AbstractDAO<Utente> {
             agenda.setCicli(cicloDAO.findBy(new SQLParameters().add("utente", utente.getMatricola())));
             utente.setAgenda(agenda);
             utente.setTasse(tassaDAO.findBy(new SQLParameters().add("utente", utente.getMatricola())));
+            utente.setIscrizioni(iscrizioneDAO.findBy(new SQLParameters().add("utente", utente.getMatricola())));
         } catch (SQLException ee) {
             ee.printStackTrace();
         }

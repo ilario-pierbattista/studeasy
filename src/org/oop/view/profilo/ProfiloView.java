@@ -195,12 +195,14 @@ public class ProfiloView extends AbstractView {
         return modificaProfiloButton;
     }
 
-    /** Comparator */
+    /**
+     * Comparator
+     */
     private class InsegnamentoComparator implements Comparator<Insegnamento> {
         @Override
         public int compare(Insegnamento o1, Insegnamento o2) {
             int comp = o1.getInsegnamentoOfferto().getAnno() - o2.getInsegnamentoOfferto().getAnno();
-            if(comp == 0) {
+            if (comp == 0) {
                 comp = o1.getInsegnamentoOfferto().getSemestre() - o2.getInsegnamentoOfferto().getSemestre();
             }
             return comp;

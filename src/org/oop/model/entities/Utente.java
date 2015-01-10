@@ -96,7 +96,7 @@ public class Utente {
         Tassa tassa = null;
         boolean found = false;
         for (int i = 0; i < tasse.size() && !found; i++) {
-            if(id == tasse.get(i).getId()) {
+            if (id == tasse.get(i).getId()) {
                 found = true;
                 tassa = tasse.get(i);
             }
@@ -107,7 +107,7 @@ public class Utente {
     public Utente removeTassa(int id) {
         boolean found = false;
         for (int i = 0; i < tasse.size() && !found; i++) {
-            if(tasse.get(i).getId() == id) {
+            if (tasse.get(i).getId() == id) {
                 found = true;
                 tasse.remove(i);
             }
@@ -123,6 +123,22 @@ public class Utente {
         this.iscrizioni = iscrizioni;
         for (Iscrizione iscrizione : iscrizioni) {
             iscrizione.setUtente(this);
+        }
+        return this;
+    }
+
+    public Utente addIscrizione(Iscrizione iscrizione) {
+        iscrizioni.add(iscrizione);
+        return this;
+    }
+
+    public Utente removeIscrizione(int id) {
+        boolean found = false;
+        for (int i = 0; i < iscrizioni.size() && !found; i++) {
+            if (iscrizioni.get(i).getId() == id) {
+                iscrizioni.remove(i);
+                found = true;
+            }
         }
         return this;
     }

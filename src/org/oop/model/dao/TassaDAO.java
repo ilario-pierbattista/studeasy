@@ -45,7 +45,7 @@ public class TassaDAO extends AbstractDAO<Tassa> {
                 .setParameters(parameters)
                 .getResult();
         try {
-            if(rs.next()) {
+            if (rs.next()) {
                 tassa = generaEntita(rs);
             }
             rs.close();
@@ -108,7 +108,7 @@ public class TassaDAO extends AbstractDAO<Tassa> {
         ArrayList<Integer> ids = new ArrayList<Integer>(3);
         SQLParameters parameters = new SQLParameters();
         String sql;
-        if(!utente.getTasse().isEmpty()) {
+        if (!utente.getTasse().isEmpty()) {
             for (Tassa tassa : utente.getTasse()) {
                 ids.add(tassa.getId());
             }
