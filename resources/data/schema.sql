@@ -114,6 +114,7 @@ CREATE TABLE tassa (
   importo  DECIMAL(6, 2) NOT NULL,
   scadenza DATE          NOT NULL,
   pagata   BOOLEAN                            DEFAULT FALSE,
+  anno_accademico INT NOT NULL,
   utente   INT           NOT NULL,
   FOREIGN KEY (utente) REFERENCES utente (matricola)
     ON UPDATE CASCADE
