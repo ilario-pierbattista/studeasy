@@ -59,7 +59,7 @@
               <text value="Non pagato"/>
             </properties>
           </component>
-          <component id="8e8e6" class="javax.swing.JFormattedTextField" binding="annoField" custom-create="true">
+          <component id="8e8e6" class="javax.swing.JFormattedTextField" binding="annoField">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>

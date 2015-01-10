@@ -1,14 +1,14 @@
 package org.oop.view.segreteria;
 
 import org.oop.general.Validator;
+import org.oop.view.AbstractForm;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.util.Date;
 
 
-public class FormTasse extends AbstractView {
+public class FormTasse extends AbstractForm {
     private JFrame frame;
     private JTextField annoAccademicoField;
     private JTextField importoField;
@@ -48,7 +48,8 @@ public class FormTasse extends AbstractView {
 
     /**
      * Setta componenti GUI custom (rispetto all'editor visuale)
-     */
+    **/
+
     private void createUIComponents() {
         annoAccademicoField = new JFormattedTextField(dateformatYear);
         importoField = new JFormattedTextField(pagamentoformat);
@@ -112,6 +113,4 @@ public class FormTasse extends AbstractView {
     public JRadioButton getCicloUnicoRadioButton() {
         return cicloUnicoRadioButton;
     }
-
-
 }
