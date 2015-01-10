@@ -1,15 +1,15 @@
-package org.oop.model;
+package org.oop.view;
 
 
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class ArrayListComboBoxModel extends AbstractListModel implements ComboBoxModel {
+public class ArrayListComboBoxModel<T> extends AbstractListModel<T> implements ComboBoxModel<T> {
     private Object selectedItem;
 
-    private ArrayList anArrayList;
+    private ArrayList<T> anArrayList;
 
-    public ArrayListComboBoxModel(ArrayList arrayList) {
+    public ArrayListComboBoxModel(ArrayList<T> arrayList) {
         anArrayList = arrayList;
     }
 
@@ -25,7 +25,7 @@ public class ArrayListComboBoxModel extends AbstractListModel implements ComboBo
         return anArrayList.size();
     }
 
-    public Object getElementAt(int i) {
+    public T getElementAt(int i) {
         return anArrayList.get(i);
     }
 

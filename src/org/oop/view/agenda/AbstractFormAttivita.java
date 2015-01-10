@@ -1,6 +1,6 @@
 package org.oop.view.agenda;
 
-import org.oop.model.ArrayListComboBoxModel;
+import org.oop.view.ArrayListComboBoxModel;
 import org.oop.model.dao.DocenteDAO;
 import org.oop.model.entities.Docente;
 import org.oop.view.AbstractForm;
@@ -18,7 +18,7 @@ abstract class AbstractFormAttivita extends AbstractForm {
      */
     protected void setListaDocenti(JComboBox<Docente> docentiBox) {
         ArrayList<Docente> docenti = new DocenteDAO().findAll();
-        ArrayListComboBoxModel model = new ArrayListComboBoxModel(docenti);
+        ArrayListComboBoxModel<Docente> model = new ArrayListComboBoxModel<Docente>(docenti);
         docentiBox.setModel(model);
         docentiBox.setSelectedIndex(0);
     }
