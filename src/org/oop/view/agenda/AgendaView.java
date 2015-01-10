@@ -186,6 +186,19 @@ public class AgendaView extends AbstractView {
         }
     }
 
+    /**
+     * Metodo per cambiare lo stato dei bottoni di aggiunta di attività
+     *
+     * @param value True o false
+     */
+    public void toggleAttivitaButtons(boolean value) {
+        lezioneButton.setEnabled(value);
+        progettobutton.setEnabled(value);
+        seminariobutton.setEnabled(value);
+        esameButton.setEnabled(value);
+        laboratorioButton.setEnabled(value);
+    }
+
     public void addAttivitaView(AttivitaView view) {
         activitiespanel.add(view.activitypanel);
     }

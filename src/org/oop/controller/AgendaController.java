@@ -83,6 +83,12 @@ public class AgendaController {
         if (view.getInsegnamentoSelected() != null) {
             updateAttivita(view.getInsegnamentoSelected());
         }
+        if (view.getInsegnamentoSelected() == null || view.getCicloSelected() == null) {
+            view.toggleAttivitaButtons(false);
+        } else {
+            view.toggleAttivitaButtons(true);
+        }
+
     }
 
     public void updateAttivita(Insegnamento insegnamento) {
@@ -107,14 +113,6 @@ public class AgendaController {
     }
 
     /**
-     * @TODO: da rivedere meglio. Per adesso è necessario perchè altrimenti si hanno problemi di selezione con liste e cicli
-     */
-    public void updateInsegnamenti() {
-        view.setInsegnamentiFromCiclo(view.getCicloSelected());
-        view.updateListaInsegnamenti();
-    }
-
-    /**
      * Action che aggiorna la lista degli insegnamenti in base al ciclo selezionato
      * dalla lista dei cicli
      */
@@ -129,6 +127,12 @@ public class AgendaController {
                 view.getListaInsegnamentiTitle().setText("Insegnamenti di " + ciclo.getLabel());
                 view.getDurataCicloLabel().setText(ciclo.getInizio() + "/" + ciclo.getFine());
                 updateAttivita(view.getInsegnamentoSelected());
+
+                if (ciclo.getInsegnamenti().size() <= 0) {
+                    view.toggleAttivitaButtons(false);
+                } else {
+                    view.toggleAttivitaButtons(true);
+                }
             }
         }
     }
@@ -247,7 +251,8 @@ public class AgendaController {
             cicloDAO.update(ciclo);
             cicloDAO.flush();
 
-            updateInsegnamenti();
+            //updateInsegnamenti();
+            updateView();
         }
     }
 
@@ -270,7 +275,8 @@ public class AgendaController {
 
                 ciclo.removeInsegnamento(insegnamento.getId());
 
-                updateInsegnamenti();
+//                updateInsegnamenti();
+                updateView();
             }
         }
     }
