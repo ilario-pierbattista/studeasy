@@ -3,11 +3,11 @@ package org.oop.controller;
 import org.oop.model.dao.TassaDAO;
 import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Tassa;
+import org.oop.model.entities.Utente;
 import org.oop.view.segreteria.FormTasse;
 import org.oop.view.segreteria.Tasse;
 
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthDesktopIconUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,6 +22,9 @@ public class TasseController {
         this.view = view;
         tassaDAO = new TassaDAO();
         utenteDAO = new UtenteDAO();
+        for(Tassa tassa : BaseController.getUtenteCorrente().getTasse()) {
+            view.addTassa(tassa);
+        }
         view.addAddButtonListener(new addTassaAction());
         view.addRemoveButtonListener(new eliminaTassaAction());
         view.addEditButtonListener(new editTassaAction());
@@ -46,13 +49,20 @@ public class TasseController {
     class submitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (form.isValid()){
+            if (form.isValid()) {
+                Utente utente = BaseController.getUtenteCorrente();
                 Tassa tassa = form.getNuovaTassa();
-                view.addTassa(tassa);
-                tassaDAO.persist(tassa);
+                if(utente.findTassa(tassa.getId()) != null) {
+                    tassaDAO.update(tassa);
+                    // Aggiornamento dei dati
+                    utente.removeTassa(tassa.getId());
+                } else {
+                    tassaDAO.persist(tassa);
+                }
+                utente.addTassa(tassa);
                 utenteDAO.update(BaseController.getUtenteCorrente());
                 utenteDAO.flush();
-
+                view.addTassa(tassa);
                 form.closeFrame();
             }
         }

@@ -78,8 +78,6 @@ public class AgendaController {
     public void updateView() {
         view.setListaCicli(agenda.getCicli());
         view.setInsegnamentiFromCiclo(view.getCicloSelected());
-        view.updateListaCicli();
-        view.updateListaInsegnamenti();
         if (view.getInsegnamentoSelected() != null) {
             updateAttivita(view.getInsegnamentoSelected());
         }
@@ -88,7 +86,6 @@ public class AgendaController {
         } else {
             view.toggleAttivitaButtons(true);
         }
-
     }
 
     public void updateAttivita(Insegnamento insegnamento) {
@@ -115,9 +112,8 @@ public class AgendaController {
     /**
      * @TODO: da rivedere meglio. Fidati Ila è meglio se non lo togli.
      */
-    public void updateInsegnamenti() {
+    private void updateInsegnamenti() {
         view.setInsegnamentiFromCiclo(view.getCicloSelected());
-        view.updateListaInsegnamenti();
     }
 
     /**
@@ -131,12 +127,12 @@ public class AgendaController {
             if (!lsm.isSelectionEmpty()) {
                 Ciclo ciclo = view.getCicloSelected();
                 view.setInsegnamentiFromCiclo(ciclo);
-                view.updateListaInsegnamenti();
                 view.getListaInsegnamentiTitle().setText("Insegnamenti di " + ciclo.getLabel());
                 view.getDurataCicloLabel().setText(ciclo.getInizio() + "/" + ciclo.getFine());
                 updateAttivita(view.getInsegnamentoSelected());
 
                 if (ciclo.getInsegnamenti().size() <= 0) {
+                    System.out.println("triggered");
                     view.toggleAttivitaButtons(false);
                 } else {
                     view.toggleAttivitaButtons(true);

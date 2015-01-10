@@ -20,6 +20,7 @@ public class FormTasse extends AbstractForm {
     private JButton submitButton;
     private JButton cancelButton;
     private JPanel panel;
+    private int idTassa;
 
     public FormTasse() {
         frame = new JFrame("Aggiungi tassa");
@@ -28,6 +29,7 @@ public class FormTasse extends AbstractForm {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        idTassa = 0;
     }
 
     /**
@@ -40,13 +42,13 @@ public class FormTasse extends AbstractForm {
         Tassa tassa = new Tassa();
         Double importo = Double.parseDouble((importoField.getText()).replace(",", "."));
 
-        tassa.setAnnoAccademico(Integer.parseInt(annoField.getText()))
+        tassa.setId(idTassa)
+                .setAnnoAccademico(Integer.parseInt(annoField.getText()))
                 .setImporto(importo)
                 .setScadenza((Date) scadenzaField.getValue())
                 .setPagata(findStatoTassa());
 
         return tassa;
-
     }
 
     /**
@@ -57,7 +59,14 @@ public class FormTasse extends AbstractForm {
         importoField.setText(String.valueOf(tassa.getImporto()));
         annoField.setText(String.valueOf(tassa.getAnnoAccademico()));
         scadenzaField.setText(Utils.dateToString(tassa.getScadenza(),0));
-
+        if(tassa.isPagata()) {
+            pagatoRadioButton.setSelected(true);
+            nonPagatoRadioButton.setSelected(false);
+        } else {
+            pagatoRadioButton.setEnabled(false);
+            nonPagatoRadioButton.setSelected(true);
+        }
+        idTassa = tassa.getId();
     }
 
     /**
@@ -94,7 +103,6 @@ public class FormTasse extends AbstractForm {
         } else {
             stato = false;
         }
-
         return stato;
     }
 
@@ -105,7 +113,6 @@ public class FormTasse extends AbstractForm {
         annoField = new JFormattedTextField(dateformatYear);
         importoField = new JFormattedTextField(pagamentoformat);
         scadenzaField = new JFormattedTextField(dateformat);
-
     }
 
     /**

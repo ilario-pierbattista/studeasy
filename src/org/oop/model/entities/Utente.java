@@ -87,6 +87,34 @@ public class Utente {
         return this;
     }
 
+    public Utente addTassa(Tassa tassa) {
+        tasse.add(tassa);
+        return this;
+    }
+
+    public Tassa findTassa(int id) {
+        Tassa tassa = null;
+        boolean found = false;
+        for (int i = 0; i < tasse.size() && !found; i++) {
+            if(id == tasse.get(i).getId()) {
+                found = true;
+                tassa = tasse.get(i);
+            }
+        }
+        return tassa;
+    }
+
+    public Utente removeTassa(int id) {
+        boolean found = false;
+        for (int i = 0; i < tasse.size() && !found; i++) {
+            if(tasse.get(i).getId() == id) {
+                found = true;
+                tasse.remove(id);
+            }
+        }
+        return this;
+    }
+
     public ArrayList<Iscrizione> getIscrizioni() {
         return iscrizioni;
     }

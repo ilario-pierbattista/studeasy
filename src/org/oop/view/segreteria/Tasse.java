@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public class Tasse {
     public JPanel tassepanel;
-    CustomTableModel model = new CustomTableModel("ID","Anno Accademico", "Importo", "Scadenza", "Stato");
+    CustomTableModel model = new CustomTableModel("Anno Accademico", "Importo", "Scadenza", "Stato", "ID");
     private JTable tabellaTasse;
     private JButton removeButton;
     private JButton editButton;
@@ -36,7 +36,7 @@ public class Tasse {
      */
     public void addTassa(Tassa tassa) {
 
-        Object[] riga = new Object[]{tassa.getId(), tassa.getAnnoAccademico(), tassa.getImporto(), Utils.dateToString(tassa.getScadenza(),0), tassa.isPagataToString()};
+        Object[] riga = new Object[]{tassa.getAnnoAccademico(), tassa.getImporto(), Utils.dateToString(tassa.getScadenza(),0), tassa.isPagataToString(), tassa.getId()};
         model.addRow(riga);
         tabellaTasse.getSelectedRow();
         removeButton.setEnabled(true);
