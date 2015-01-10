@@ -69,7 +69,6 @@ public class ProfiloView extends AbstractView {
     private void setupTableAspect() {
         //Imposta altezza righe
         librettoTable.setRowHeight(30);
-        setCellRenderers();
 
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -86,8 +85,6 @@ public class ProfiloView extends AbstractView {
         librettoTable.getColumnModel().getColumn(3).setPreferredWidth(40);
         librettoTable.getColumnModel().getColumn(4).setPreferredWidth(80);
         librettoTable.getColumnModel().getColumn(5).setPreferredWidth(40);
-
-
     }
 
     /**
@@ -118,6 +115,7 @@ public class ProfiloView extends AbstractView {
         Collections.sort(insegnamenti, new InsegnamentoComparator());
         // Pulizia della tabella
         model.clearData();
+        setCellRenderers();
         // Impostazione dei nuovi dati
         for (Insegnamento insegnamento : insegnamenti) {
             addElementTable(insegnamento);

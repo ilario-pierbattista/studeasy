@@ -89,37 +89,69 @@ public class ProfiloController {
         final int CONFERMA = 1;
         final int CONFERMA_TUTTI = 2;
         int rispostaUtente = -1;
-        Libretto libretto = BaseController.getUtenteCorrente().getLibretto();
-        ArrayList<Insegnamento> nuoviInsegnamenti = new ArrayList<Insegnamento>(20);
-        for (Insegnamento insegnamento : nuoviDati.getInsegnamentiOpzionali()) {
-            if (rispostaUtente == CONFERMA) {
+
+        ArrayList<Insegnamento> insegnamentiSalvati = BaseController.getUtenteCorrente()
+                .getLibretto().getInsegnamentiOpzionali();
+        ArrayList<Insegnamento> nuovaSelezione = nuoviDati.getInsegnamentiOpzionali();
+
+        ArrayList<Insegnamento> insegnamentiDaEliminare = diffArrayInsegnamenti(insegnamentiSalvati, nuovaSelezione);
+        ArrayList<Insegnamento> insegnamentiDaAggiungere = diffArrayInsegnamenti(nuovaSelezione, insegnamentiSalvati);
+
+        for (Insegnamento insegnamentoDaEliminare : insegnamentiDaEliminare) {
+            if(rispostaUtente == CONFERMA) {
                 rispostaUtente = -1;
             }
-            Insegnamento insRegistrato = libretto.findInsegnamentoByInsegnamentoOfferto(
-                    insegnamento.getInsegnamentoOfferto()
-            );
-            if (insRegistrato == null) {
-                // L'insegnamento non era stato aggiunto al piano di studi.
-                // Lo si aggiunge
-                nuoviInsegnamenti.add(insegnamento);
-            } else if (insRegistrato.esameSostenuto()) {
-                if (rispostaUtente != CONFERMA_TUTTI && rispostaUtente != ANNULLA) {
-                    rispostaUtente = showOptionDialog(insegnamento);
-                }
-                if (rispostaUtente == CONFERMA || rispostaUtente == CONFERMA_TUTTI) {
-                    nuoviInsegnamenti.add(insegnamento);
-                }
+            if(insegnamentoDaEliminare.esameSostenuto() &&
+                    rispostaUtente != CONFERMA_TUTTI &&
+                    rispostaUtente != ANNULLA) {
+                rispostaUtente = showOptionDialog(insegnamentoDaEliminare);
             }
         }
 
-        // Reimposto gli insegnamenti obbigatori
-        nuoviInsegnamenti.addAll(libretto.getInsegnamentiObbligatori());
-
-        if (rispostaUtente != ANNULLA) {
-            libretto.setInsegnamenti(nuoviInsegnamenti);
+        if(rispostaUtente != ANNULLA) {
             success = true;
+            boolean found;
+            // Eliminazione degli insegnamenti di troppo
+            for (Insegnamento daEliminare : insegnamentiDaEliminare) {
+                found = false;
+                for (int i = 0; i < insegnamentiSalvati.size() && !found; i++) {
+                    if(daEliminare.getInsegnamentoOfferto().getId() == insegnamentiSalvati.get(i)
+                            .getInsegnamentoOfferto().getId()) {
+                        found = true;
+                        insegnamentiSalvati.remove(i);
+                    }
+                }
+            }
+            // Aggiunta dei nuovi
+            insegnamentiSalvati.addAll(insegnamentiDaAggiungere);
+            // Reimpostazione degli insegnamenti obbligatori
+            insegnamentiSalvati.addAll(BaseController.getUtenteCorrente().getLibretto().getInsegnamentiObbligatori());
+            BaseController.getUtenteCorrente().getLibretto().setInsegnamenti(insegnamentiSalvati);
         }
         return success;
+    }
+
+    /**
+     * Calcola la differenza tra il primo e il secondo ArrayList di insegnamenti: restituisce
+     * tutti gli elementi del primo ArrayList che non sono presenti nel secondo
+     *
+     * @param a Primo ArrayList
+     * @param b Secondo ArrayList
+     * @return ArrayList differenza
+     */
+    private ArrayList<Insegnamento> diffArrayInsegnamenti(ArrayList<Insegnamento> a, ArrayList<Insegnamento> b) {
+        ArrayList<Insegnamento> result = new ArrayList<Insegnamento>(5);
+        boolean found;
+        for (int i = 0; i < a.size(); i++) {
+            found = false;
+            for (int j = 0; j < b.size() && !found; j++) {
+                found = a.get(i).getInsegnamentoOfferto().getId() == b.get(j).getInsegnamentoOfferto().getId();
+            }
+            if(!found) {
+                result.add(a.get(i));
+            }
+        }
+        return result;
     }
 
     private int showOptionDialog(Insegnamento insegnamento) {
@@ -145,20 +177,15 @@ public class ProfiloController {
     private void saveChanges() {
         Utente utente = BaseController.getUtenteCorrente();
         Utente utenteSalvato = utenteDAO.find(utente.getMatricola());
-        // Rimozione degli insegnamenti non più presenti
-        System.out.println("Insegnamenti salvati " + utenteSalvato.getLibretto().getInsegnamentiOpzionali().toString());
-        System.out.println("Insegnamenti nuovi " + utente.getLibretto().getInsegnamentiOpzionali().toString());
-        for (Insegnamento ins : utenteSalvato.getLibretto().getInsegnamentiOpzionali()) {
-            if (!utente.getLibretto().hasInsegnamentoOfferto(ins.getInsegnamentoOfferto())) {
-                System.out.println(ins);
-                insegnamentoDAO.remove(ins);
-            }
+        ArrayList<Insegnamento> insegnamentiNuovi = utente.getLibretto().getInsegnamenti();
+        ArrayList<Insegnamento> insegnamentiVecchi = utenteSalvato.getLibretto().getInsegnamenti();
+        ArrayList<Insegnamento> daEliminare = diffArrayInsegnamenti(insegnamentiVecchi, insegnamentiNuovi);
+        ArrayList<Insegnamento> daAggiungere = diffArrayInsegnamenti(insegnamentiNuovi, insegnamentiVecchi);
+        for (Insegnamento rem : daEliminare) {
+            insegnamentoDAO.remove(rem);
         }
-        // Salvataggio dei nuovi insegnamenti
-        for (Insegnamento ins : utente.getLibretto().getInsegnamenti()) {
-            if (ins.getId() == 0 || insegnamentoDAO.find(ins.getId()) == null) {
-                insegnamentoDAO.persist(ins);
-            }
+        for (Insegnamento add : daAggiungere) {
+            insegnamentoDAO.persist(add);
         }
         utenteDAO.update(utente);
         utenteDAO.flush();

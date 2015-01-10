@@ -55,8 +55,11 @@ public class FormInsegnamento extends AbstractForm {
 
     public void setInsegnamento(Insegnamento insegnamento) {
         this.insegnamento = insegnamento;
-        // @TODO sarebbe bello aggiungere il nome dell'insegnamento nel titolo
-        votoField.setValue(insegnamento.getVoto());
+        if (insegnamento.esameSostenuto()) {
+            votoField.setValue(insegnamento.getVoto());
+        } else {
+            votoField.setText("");
+        }
         dataField.setValue(insegnamento.getData());
         lodeCheckBox.setSelected(insegnamento.isLode());
     }
@@ -82,32 +85,5 @@ public class FormInsegnamento extends AbstractForm {
 
     public void addAnnullaButtonListener(ActionListener listener) {
         annullaButton.addActionListener(listener);
-    }
-
-
-    /* Getters */
-    public JFrame getFrame() {
-        return frame;
-    }
-
-
-    public JPanel getForminsegnamentopanel() {
-        return forminsegnamentopanel;
-    }
-
-    public JButton getAnnullaButton() {
-        return annullaButton;
-    }
-
-    public JButton getConfermaButton() {
-        return confermaButton;
-    }
-
-    public JFormattedTextField getDataField() {
-        return dataField;
-    }
-
-    public JFormattedTextField getVotoField() {
-        return votoField;
     }
 }

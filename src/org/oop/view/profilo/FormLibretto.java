@@ -123,8 +123,6 @@ public class FormLibretto extends AbstractForm {
                 copiaLibretto.addInsegnamento(insegnamento);
             }
         }
-        /** @TODO rimuovere */
-        System.out.println(copiaLibretto.getInsegnamentiOpzionali().toString());
     }
 
     /**
