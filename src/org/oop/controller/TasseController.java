@@ -1,10 +1,14 @@
 package org.oop.controller;
 
+import org.oop.model.dao.TassaDAO;
+import org.oop.model.dao.UtenteDAO;
+import org.oop.model.entities.Tassa;
 import org.oop.view.segreteria.FormTasse;
 import org.oop.view.segreteria.Tasse;
 import sun.jvm.hotspot.utilities.soql.JSJavaFactoryImpl;
 
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthDesktopIconUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,9 +16,13 @@ import java.awt.event.ActionListener;
 public class TasseController {
     private Tasse view;
     private FormTasse form;
+    private TassaDAO tassaDAO;
+    private UtenteDAO utenteDAO;
 
     public TasseController(Tasse view) {
         this.view = view;
+        tassaDAO = new TassaDAO();
+        utenteDAO = new UtenteDAO();
         view.addAddButtonListener(new addTassaAction());
         view.addRemoveButtonListener(new eliminaTassaAction());
         view.addEditButtonListener(new ConfermaTassaAction());
@@ -26,7 +34,6 @@ public class TasseController {
     class addTassaAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.addTassa(); //Va tolto
             form = new FormTasse();
             form.addSubmitButtonListener(new submitFormAction());
             form.addCancelButtonListener(new closeFormAction());
@@ -41,7 +48,13 @@ public class TasseController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (form.isValid()){
+                Tassa tassa = form.getNuovaTassa();
+                view.addTassa(tassa);
+                tassaDAO.persist(tassa);
+                utenteDAO.update(BaseController.getUtenteCorrente());
+                utenteDAO.flush();
 
+                form.closeFrame();
             }
         }
     }
@@ -62,7 +75,17 @@ public class TasseController {
     class eliminaTassaAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.eliminaTassa();
+            int id = view.getTassaSelected();
+            System.out.print(id);
+            if (id != -1) {
+                Tassa tassa = tassaDAO.find(id);
+                tassaDAO.remove(tassa);
+                tassaDAO.flush();
+
+                view.eliminaTassa();
+                view.updateTabella();
+            }
+
         }
     }
 

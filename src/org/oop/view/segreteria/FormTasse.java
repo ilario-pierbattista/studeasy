@@ -1,11 +1,12 @@
 package org.oop.view.segreteria;
 
 import org.oop.general.Validator;
+import org.oop.model.entities.Tassa;
 import org.oop.view.AbstractForm;
-import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 
 public class FormTasse extends AbstractForm {
@@ -29,6 +30,25 @@ public class FormTasse extends AbstractForm {
     }
 
     /**
+     * Metodo che prende i valori dei campi del form e li mette dentro un oggetto Tassa.
+     * Dopodichè ritorna tale oggetto
+     *
+     * @return Tassa
+     */
+    public Tassa getNuovaTassa() {
+        Tassa tassa = new Tassa();
+        Double importo = Double.parseDouble((importoField.getText()).replace(",", "."));
+
+        tassa.setAnnoAccademico(Integer.parseInt(annoField.getText()))
+                .setImporto(importo)
+                .setScadenza((Date) scadenzaField.getValue())
+                .setPagata(findStatoTassa());
+
+        return tassa;
+
+    }
+
+    /**
      * Metodo di appoggio che controlla che i campi del form siano stati compilati
      * correttamente
      *
@@ -48,6 +68,22 @@ public class FormTasse extends AbstractForm {
             flag = false;
         }
         return flag;
+    }
+
+    /**
+     * Restituisce lo stato della tassa
+     *
+     * @return
+     */
+    private boolean findStatoTassa() {
+        boolean stato;
+        if (pagatoRadioButton.isSelected()) {
+            stato = true;
+        } else {
+            stato = false;
+        }
+
+        return stato;
     }
 
     /**

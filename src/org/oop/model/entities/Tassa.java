@@ -50,8 +50,21 @@ public class Tassa {
         return pagata;
     }
 
+    public String isPagataToString() {
+        String stato;
+        if (pagata) {
+            stato = "Pagata";
+        } else {
+            stato = "Non pagata";
+        }
+
+        return stato;
+    }
+
     public Tassa setPagata(boolean pagata) {
         this.pagata = pagata;
         return this;
     }
+
+
 }

@@ -1,5 +1,7 @@
 package org.oop.view.segreteria;
 
+import org.oop.general.Utils;
+import org.oop.model.entities.Tassa;
 import org.oop.view.CustomTableModel;
 
 import javax.swing.*;
@@ -8,8 +10,7 @@ import java.awt.event.ActionListener;
 
 public class Tasse {
     public JPanel tassepanel;
-    CustomTableModel model = new CustomTableModel("Anno Accademico", "Importo", "Scadenza", "Stato");
-    int contarighe = 1;
+    CustomTableModel model = new CustomTableModel("ID","Anno Accademico", "Importo", "Scadenza", "Stato");
     private JTable tabellaTasse;
     private JButton removeButton;
     private JButton editButton;
@@ -33,12 +34,34 @@ public class Tasse {
     /**
      * Metodo per aggiungere una riga alla tabella
      */
-    public void addTassa() {
+    public void addTassa(Tassa tassa) {
 
-        Object[] appoggio = new Object[]{"Anno Accademico " + contarighe, "Corso " + contarighe, "Importo " + contarighe, "Stato" + contarighe};
-        model.addRow(appoggio);
-        contarighe++;
+        Object[] riga = new Object[]{tassa.getId(), tassa.getAnnoAccademico(), tassa.getImporto(), Utils.dateToString(tassa.getScadenza(),0), tassa.isPagataToString()};
+        model.addRow(riga);
+        tabellaTasse.getSelectedRow();
         removeButton.setEnabled(true);
+    }
+
+    public int getTassaSelected() {
+        int row = tabellaTasse.getSelectedRow();
+        int id;
+
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null,"Devi selezionare un tassa per eliminarla");
+            id = -1;
+        } else {
+            id = (Integer) model.getValueAt(row,0);
+        }
+
+        return id;
+    }
+
+
+    public void updateTabella() {
+        int size = model.getRowCount();
+        if (size == 0) {
+            removeButton.setEnabled(false);
+        }
     }
 
     /**
@@ -46,18 +69,11 @@ public class Tasse {
      */
     public void eliminaTassa() {
         int n = tabellaTasse.getSelectedRow();
-        if (tabellaTasse.getSelectedRow() == -1) {
-            System.out.println("Non hai selezionato nessun elemento da eliminare");
-            JOptionPane.showMessageDialog(tassepanel, "Selezionare un elemento per eliminarlo");
-        } else {
-            model.deleteRow(tabellaTasse.getSelectedRow());
-            n--;
-            tabellaTasse.changeSelection(n, 0, false, false);
-        }
-        int size = model.getRowCount();
-        if (size == 0) {
-            removeButton.setEnabled(false);
-        }
+
+        model.deleteRow(tabellaTasse.getSelectedRow());
+        n--;
+        tabellaTasse.changeSelection(n, 0, false, false);
+
     }
 
     /* Getters */
