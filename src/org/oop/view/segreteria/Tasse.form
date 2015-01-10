@@ -27,7 +27,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="62220" class="javax.swing.JTable" binding="tabellatasse">
+              <component id="62220" class="javax.swing.JTable" binding="tabellaTasse">
                 <constraints/>
                 <properties/>
               </component>

@@ -3,25 +3,31 @@ package org.oop.view.segreteria;
 import org.oop.view.CustomTableModel;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.event.ActionListener;
 
-/**
- * Created by MelvinMancini on 30/12/14.
- */
 public class Tasse {
     public JPanel tassepanel;
-    CustomTableModel model = new CustomTableModel("Anno Accademico", "Corso di Laurea", "Importo", "Stato");
+    CustomTableModel model = new CustomTableModel("Anno Accademico", "Importo", "Scadenza", "Stato");
     int contarighe = 1;
-    private JTable tabellatasse;
+    private JTable tabellaTasse;
     private JButton removeButton;
     private JButton editButton;
     private JButton addButton;
 
     public Tasse() {
         super();
-        tabellatasse.setModel(model);
+        tabellaTasse.setModel(model);
         removeButton.setEnabled(false);
-        tabellatasse.setRowHeight(30);
+
+        setupTableAspect();
+    }
+
+    /**
+     * Imposta le preferenze grafiche per la tabella
+     */
+    private void setupTableAspect() {
+        tabellaTasse.setRowHeight(30);
     }
 
     /**
@@ -39,14 +45,14 @@ public class Tasse {
      * Metodo per eliminare una riga dalla tabella
      */
     public void eliminaTassa() {
-        int n = tabellatasse.getSelectedRow();
-        if (tabellatasse.getSelectedRow() == -1) {
+        int n = tabellaTasse.getSelectedRow();
+        if (tabellaTasse.getSelectedRow() == -1) {
             System.out.println("Non hai selezionato nessun elemento da eliminare");
             JOptionPane.showMessageDialog(tassepanel, "Selezionare un elemento per eliminarlo");
         } else {
-            model.deleteRow(tabellatasse.getSelectedRow());
+            model.deleteRow(tabellaTasse.getSelectedRow());
             n--;
-            tabellatasse.changeSelection(n, 0, false, false);
+            tabellaTasse.changeSelection(n, 0, false, false);
         }
         int size = model.getRowCount();
         if (size == 0) {

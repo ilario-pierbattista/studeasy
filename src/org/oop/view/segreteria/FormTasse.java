@@ -1,12 +1,15 @@
 package org.oop.view.segreteria;
 
+import org.oop.general.Validator;
+import org.oop.view.AbstractView;
+
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 
-public class FormTasse {
+public class FormTasse extends AbstractView {
     private JFrame frame;
-
     private JTextField annoAccademicoField;
     private JTextField importoField;
     private JRadioButton pagatoRadioButton;
@@ -18,14 +21,39 @@ public class FormTasse {
     private JRadioButton magistraleRadioButton;
     private JRadioButton cicloUnicoRadioButton;
     private JPanel panel;
+    private JFormattedTextField annoField;
+    private JFormattedTextField scadenzaField;
 
     public FormTasse() {
         frame = new JFrame("Aggiungi tassa");
         frame.setContentPane(panel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    /**
+     * Metodo di appoggio che controlla che i campi del form siano stati compilati
+     * correttamente
+     *
+     * @return
+     */
+    public boolean isValid() {
+        boolean flag = false;
+
+
+        return flag;
+    }
+
+    /**
+     * Setta componenti GUI custom (rispetto all'editor visuale)
+     */
+    private void createUIComponents() {
+        annoAccademicoField = new JFormattedTextField(dateformatYear);
+        importoField = new JFormattedTextField(pagamentoformat);
+        scadenzaField = new JFormattedTextField(dateformat);
+
     }
 
     /**
@@ -84,4 +112,6 @@ public class FormTasse {
     public JRadioButton getCicloUnicoRadioButton() {
         return cicloUnicoRadioButton;
     }
+
+
 }
