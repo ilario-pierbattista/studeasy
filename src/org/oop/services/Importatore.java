@@ -39,24 +39,20 @@ public class Importatore {
         this(false);
     }
 
-    public void importaDati() {
+    public void importaDati() throws RisorsaNonTrovata {
         if (!DatabaseUtils.databaseExists() || overrideSchema) {
-            try {
-                // Creazione dello schema
-                DatabaseUtils.execSQLScript(SCHEMA_PATH);
-                // Lettura delle righe del file dei dati
-                records = Utils.readFileLines(DATA_PATH);
-                // Parsing dell'header del file csv
-                header = parseHeader();
-                // Parsing dei dati del file csv
-                data = parseData();
-                // Generazione degli oggetti da importare
-                corsi = generateObjectStructure();
-                // Salvataggio nel database
-                saveObjects();
-            } catch (RisorsaNonTrovata ee) {
-                ee.printStackTrace();
-            }
+            // Creazione dello schema
+            DatabaseUtils.execSQLScript(SCHEMA_PATH);
+            // Lettura delle righe del file dei dati
+            records = Utils.readFileLines(DATA_PATH);
+            // Parsing dell'header del file csv
+            header = parseHeader();
+            // Parsing dei dati del file csv
+            data = parseData();
+            // Generazione degli oggetti da importare
+            corsi = generateObjectStructure();
+            // Salvataggio nel database
+            saveObjects();
         }
     }
 
