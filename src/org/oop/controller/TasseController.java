@@ -2,7 +2,9 @@ package org.oop.controller;
 
 import org.oop.view.segreteria.FormTasse;
 import org.oop.view.segreteria.Tasse;
+import sun.jvm.hotspot.utilities.soql.JSJavaFactoryImpl;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -28,6 +30,7 @@ public class TasseController {
             form = new FormTasse();
             form.addSubmitButtonListener(new submitFormAction());
             form.addCancelButtonListener(new closeFormAction());
+            form.addPagamentoRadioButtonListener(new SetPagamentoTassaAction());
         }
     }
 
@@ -37,7 +40,9 @@ public class TasseController {
     class submitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //Submit form
+            if (form.isValid()){
+
+            }
         }
     }
 
@@ -68,6 +73,25 @@ public class TasseController {
         @Override
         public void actionPerformed(ActionEvent e) {
             //Modifica della tassa
+        }
+    }
+
+    class SetPagamentoTassaAction implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AbstractButton button = (AbstractButton) e.getSource();
+            manageRadioButton(button);
+        }
+
+        private void manageRadioButton(AbstractButton b) {
+            form.getPagatoRadioButton().setSelected(false);
+            form.getNonPagatoRadioButton().setSelected(false);
+
+            if (b.getText().equals("Pagato")) {
+                form.getPagatoRadioButton().setSelected(true);
+            } else {
+                form.getNonPagatoRadioButton().setSelected(true);
+            }
         }
     }
 }

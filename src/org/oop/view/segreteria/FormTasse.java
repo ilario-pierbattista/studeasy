@@ -10,19 +10,14 @@ import java.awt.event.ActionListener;
 
 public class FormTasse extends AbstractForm {
     private JFrame frame;
-    private JTextField annoAccademicoField;
-    private JTextField importoField;
+    private JFormattedTextField importoField;
+    private JFormattedTextField annoField;
+    private JFormattedTextField scadenzaField;
     private JRadioButton pagatoRadioButton;
     private JRadioButton nonPagatoRadioButton;
     private JButton submitButton;
     private JButton cancelButton;
-    private JList corsiList;
-    private JRadioButton triennaleRadioButton;
-    private JRadioButton magistraleRadioButton;
-    private JRadioButton cicloUnicoRadioButton;
     private JPanel panel;
-    private JFormattedTextField annoField;
-    private JFormattedTextField scadenzaField;
 
     public FormTasse() {
         frame = new JFrame("Aggiungi tassa");
@@ -40,9 +35,18 @@ public class FormTasse extends AbstractForm {
      * @return
      */
     public boolean isValid() {
-        boolean flag = false;
+        boolean flag = true;
 
-
+        if (Validator.isFormattedFieldEmpty(annoField,"Anno accademico")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(importoField,"Importo")) {
+            flag = false;
+        } else if (Validator.isFormattedFieldEmpty(scadenzaField,"Data di scadenza")) {
+            flag = false;
+        } else if (!pagatoRadioButton.isSelected() && !nonPagatoRadioButton.isSelected()) {
+            JOptionPane.showMessageDialog(null,"Devi selezionare lo 'Stato' della tassa");
+            flag = false;
+        }
         return flag;
     }
 
@@ -51,7 +55,7 @@ public class FormTasse extends AbstractForm {
     **/
 
     private void createUIComponents() {
-        annoAccademicoField = new JFormattedTextField(dateformatYear);
+        annoField = new JFormattedTextField(dateformatYear);
         importoField = new JFormattedTextField(pagamentoformat);
         scadenzaField = new JFormattedTextField(dateformat);
 
@@ -73,11 +77,12 @@ public class FormTasse extends AbstractForm {
         cancelButton.addActionListener(listener);
     }
 
-    /* Getters */
-    public JTextField getAnnoAccademicoField() {
-        return annoAccademicoField;
+    public void addPagamentoRadioButtonListener(ActionListener listener) {
+        pagatoRadioButton.addActionListener(listener);
+        nonPagatoRadioButton.addActionListener(listener);
     }
 
+    /* Getters */
     public JTextField getImportoField() {
         return importoField;
     }
@@ -98,19 +103,5 @@ public class FormTasse extends AbstractForm {
         return cancelButton;
     }
 
-    public JList getCorsiList() {
-        return corsiList;
-    }
 
-    public JRadioButton getTriennaleRadioButton() {
-        return triennaleRadioButton;
-    }
-
-    public JRadioButton getMagistraleRadioButton() {
-        return magistraleRadioButton;
-    }
-
-    public JRadioButton getCicloUnicoRadioButton() {
-        return cicloUnicoRadioButton;
-    }
 }

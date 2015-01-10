@@ -12,8 +12,8 @@ public abstract class AbstractView {
 
     public DateFormat hourformat = new SimpleDateFormat("HH:mm");
     public DateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
-    public DateFormat dateformatYear = new SimpleDateFormat("y");
-    public DecimalFormat pagamentoformat = new DecimalFormat("#####,##");
+    public DateFormat dateformatYear = new SimpleDateFormat("yyyy");
+    public DecimalFormat pagamentoformat = new DecimalFormat("###.##");
     public DecimalFormat dfMatricola = new DecimalFormat("#########");
     public DecimalFormat dfCAP = new DecimalFormat("#####");
     public DecimalFormat dfCFU = new DecimalFormat("###");
