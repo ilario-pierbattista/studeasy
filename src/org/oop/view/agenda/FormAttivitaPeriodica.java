@@ -34,6 +34,7 @@ public class FormAttivitaPeriodica extends AbstractFormAttivita {
         frame.setVisible(true);
 
         setListaDocenti(teacherBox);
+        setDocenteSelected(teacherBox, AgendaView.getInstance().getInsegnamentoSelected());
     }
 
     /**
