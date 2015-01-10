@@ -113,6 +113,14 @@ public class AgendaController {
     }
 
     /**
+     * @TODO: da rivedere meglio. Fidati Ila è meglio se non lo togli.
+     */
+    public void updateInsegnamenti() {
+        view.setInsegnamentiFromCiclo(view.getCicloSelected());
+        view.updateListaInsegnamenti();
+    }
+
+    /**
      * Action che aggiorna la lista degli insegnamenti in base al ciclo selezionato
      * dalla lista dei cicli
      */
@@ -251,8 +259,7 @@ public class AgendaController {
             cicloDAO.update(ciclo);
             cicloDAO.flush();
 
-            //updateInsegnamenti();
-            updateView();
+            updateInsegnamenti();
         }
     }
 
@@ -275,8 +282,7 @@ public class AgendaController {
 
                 ciclo.removeInsegnamento(insegnamento.getId());
 
-//                updateInsegnamenti();
-                updateView();
+                updateInsegnamenti();
             }
         }
     }
