@@ -21,6 +21,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
+/**
+ * Controller per la vista AgendaView
+ */
 public class AgendaController {
     private static AgendaController instance;
     private AgendaView view;
@@ -30,8 +33,12 @@ public class AgendaController {
     private Libretto libretto;
     private AttivitaController attivitaController;
 
+    /**
+     * Aggiunge i listeners alla vista
+     *
+     * @param view Vista
+     */
     public AgendaController(AgendaView view) {
-
         this.view = view;
         instance = this;
         attivitaController = new AttivitaController();
@@ -47,23 +54,36 @@ public class AgendaController {
         view.addProgettoButtonListener(new AddAttivitaAction());
         view.addCicloButtonListener(new AddCicloAction());
         view.addRemoveCicloButtonListener(new RemoveCicloAction());
-        view.addInsegnamentoButtonListener(new addInsegnamentoAction());
-        view.addRemoveInsegnamentoButtonListener(new removeInsegnamentoAction());
+        view.addInsegnamentoButtonListener(new AddInsegnamentoAction());
+        view.addRemoveInsegnamentoButtonListener(new RemoveInsegnamentoAction());
 
-        view.getCiclilist().getSelectionModel().addListSelectionListener(new listaCicliSelectionAction());
-        view.getInsegnamentiList().getSelectionModel().addListSelectionListener(new listaInsegnamentiSelectionAction());
+        view.getCiclilist().getSelectionModel().addListSelectionListener(new ListaCicliSelectionAction());
+        view.getInsegnamentiList().getSelectionModel().addListSelectionListener(new ListaInsegnamentiSelectionAction());
 
         updateView();
     }
 
+    /**
+     * Restituisce l'istanza attiva di AgendaController
+     *
+     * @return Istanza di AgendaController
+     */
     public static AgendaController getInstance() {
         return instance;
     }
 
+    /**
+     * Restituisce la vista legata al controller
+     *
+     * @return Vista AgendaView
+     */
     public AgendaView getView() {
         return view;
     }
 
+    /**
+     * Aggiorna i dati dell'utente
+     */
     public void refreshUtente() {
         UtenteDAO utenteDAO = new UtenteDAO();
         BaseController.setUtenteCorrente(utenteDAO.find(BaseController.getUtenteCorrente().getMatricola()));
@@ -73,7 +93,7 @@ public class AgendaController {
     }
 
     /**
-     * Metodo che passa il model alla vista e la mantiene aggiornata
+     * Passa il model alla vista e la mantiene aggiornata
      */
     public void updateView() {
         view.setListaCicli(agenda.getCicli());
@@ -88,6 +108,11 @@ public class AgendaController {
         }
     }
 
+    /**
+     * Aggiorna la vista delle attivit&agrave;
+     *
+     * @param insegnamento Insegnamento da cui caricare le attivit&agrave;
+     */
     public void updateAttivita(Insegnamento insegnamento) {
         if (insegnamento == null) { // se il ciclo non ha ancora nessun insegnamento
             view.setNoAttivita();
@@ -111,7 +136,7 @@ public class AgendaController {
     }
 
     /**
-     * Update delle attività in base alla selezione
+     * Update degli insegnamenti in base alla selezione del ciclo
      */
     private void updateInsegnamenti() {
         view.setInsegnamentiFromCiclo(view.getCicloSelected());
@@ -120,7 +145,7 @@ public class AgendaController {
     /**
      * Action che aggiorna la lista degli insegnamenti in base al ciclo selezionato dalla lista dei cicli
      */
-    class listaCicliSelectionAction implements ListSelectionListener {
+    class ListaCicliSelectionAction implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent e) {
             ListSelectionModel lsm = (ListSelectionModel) e.getSource();
 
@@ -223,12 +248,12 @@ public class AgendaController {
     /**
      * Action che apre la finestra per aggiungere un insegnamento ad un ciclo
      */
-    class addInsegnamentoAction implements ActionListener {
+    class AddInsegnamentoAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             modalAddInsegnamento = new ModalAddInsegnamento();
-            modalAddInsegnamento.addAnnullaButtonListener(new closeModalInsegnamento());
-            modalAddInsegnamento.addConfermaButtonListener(new submitModalInsegnamento());
+            modalAddInsegnamento.addAnnullaButtonListener(new CloseModalInsegnamento());
+            modalAddInsegnamento.addConfermaButtonListener(new SubmitModalInsegnamento());
 
             modalAddInsegnamento.setListaInsegnamenti(libretto.getInsegnamenti());
         }
@@ -237,7 +262,7 @@ public class AgendaController {
     /**
      * Action aggiunge l'insegnamento selezionato nel modal alla lista degli insegnamenti nella Agenda
      */
-    class submitModalInsegnamento implements ActionListener {
+    class SubmitModalInsegnamento implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             Insegnamento ins = modalAddInsegnamento.getInsegnamentoSelected();
@@ -259,7 +284,7 @@ public class AgendaController {
     /**
      * Action per rimuovere un insegnamento da un ciclo
      */
-    class removeInsegnamentoAction implements ActionListener {
+    class RemoveInsegnamentoAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             int index = view.getInsegnamentiList().getSelectedIndex();
@@ -283,7 +308,7 @@ public class AgendaController {
     /**
      * Action che mostra tutte le attività relative all'insegnamento selezionato dalla lista degli insegnamenti
      */
-    class listaInsegnamentiSelectionAction implements ListSelectionListener {
+    class ListaInsegnamentiSelectionAction implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
             ListSelectionModel lsm = (ListSelectionModel) e.getSource();
@@ -302,7 +327,7 @@ public class AgendaController {
     /**
      * Action per chiudere il modal di aggiunta di un insegnamento
      */
-    class closeModalInsegnamento implements ActionListener {
+    class CloseModalInsegnamento implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             modalAddInsegnamento.closeFrame();

@@ -11,6 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
+/**
+ * Gestisce il form per le tasse
+ */
 public class TasseController {
     private Tasse view;
     private FormTasse form;
@@ -24,27 +27,27 @@ public class TasseController {
         for (Tassa tassa : BaseController.getUtenteCorrente().getTasse()) {
             view.addTassa(tassa);
         }
-        view.addAddButtonListener(new addTassaAction());
-        view.addRemoveButtonListener(new eliminaTassaAction());
-        view.addEditButtonListener(new editTassaAction());
+        view.addAddButtonListener(new AddTassaAction());
+        view.addRemoveButtonListener(new EliminaTassaAction());
+        view.addEditButtonListener(new EditTassaAction());
     }
 
     /**
      * Action per aprire il form di aggiunta tassa
      */
-    class addTassaAction implements ActionListener {
+    class AddTassaAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             form = new FormTasse();
-            form.addSubmitButtonListener(new submitFormAction());
-            form.addCancelButtonListener(new closeFormAction());
+            form.addSubmitButtonListener(new SubmitFormAction());
+            form.addCancelButtonListener(new CloseFormAction());
         }
     }
 
     /**
      * Action per il submit del form
      */
-    class submitFormAction implements ActionListener {
+    class SubmitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (form.isValid()) {
@@ -69,7 +72,7 @@ public class TasseController {
     /**
      * Action per chiudere il form
      */
-    class closeFormAction implements ActionListener {
+    class CloseFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             form.close();
@@ -79,7 +82,7 @@ public class TasseController {
     /**
      * Action per eliminare una tassa dalla tabella
      */
-    class eliminaTassaAction implements ActionListener {
+    class EliminaTassaAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             int id = view.getTassaSelected();
@@ -98,15 +101,15 @@ public class TasseController {
     /**
      * Action per modificare una tassa
      */
-    class editTassaAction implements ActionListener {
+    class EditTassaAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             int id = view.getTassaSelected();
             if (id != -1) {
                 Tassa tassa = tassaDAO.find(id);
                 form = new FormTasse();
-                form.addSubmitButtonListener(new submitFormAction());
-                form.addCancelButtonListener(new closeFormAction());
+                form.addSubmitButtonListener(new SubmitFormAction());
+                form.addCancelButtonListener(new CloseFormAction());
                 form.fillForm(tassa);
             }
         }

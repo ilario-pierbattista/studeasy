@@ -13,6 +13,10 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.IOException;
 
+
+/**
+ * Gestisce la vista per la creazione di una richiesta di tesi
+ */
 public class TesiController {
 
     private FormTesi view;
@@ -25,6 +29,9 @@ public class TesiController {
         view.addFocusListenerMatricola(new FocusMatricola());
     }
 
+    /**
+     * Controlla la validità della matricola durante l'immissione
+     */
     class FocusMatricola implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
@@ -40,21 +47,14 @@ public class TesiController {
         }
     }
 
+    /**
+     * Gestisce il submit del form
+     */
     class SubmitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-           /* Date datanascita = (Date) view.getDataNascita().getValue();
-            String nome = view.getNome().getText();
-            String cognome = view.getCognome().getText();
-            String luogo = view.getLuogoNascita().getText();
-            String email = view.getEmail().getText();
-            String year = view.getAnnoCorso().getText();*/
-
             /* Se tutti i campi del form sono corretti crea e salva il PDF */
             if (view.isValid()) {
-
-                /*String name = stringToCapital(nome);
-                String surname = stringToCapital(cognome);*/
 
                 //Apre schermata di salvataggio e genera il pdf
                 JFileChooser c = new JFileChooser();
@@ -64,10 +64,6 @@ public class TesiController {
                     String fileName = c.getSelectedFile().getName();
 
                     try {
-                        /*
-                        PdfGenerator pdfGeneratorCreate = new PdfGenerator(System.getProperty("user.dir")
-                                .concat(File.separator.concat("template"))
-                                .concat(File.separator.concat("templateTesiPDF.pdf")), fileName);*/
                         PdfGenerator pdfGeneratorCreate = new PdfGenerator(Utils.getResourceAsInputStream("template/templateTesiPDF.pdf"), fileName);
                         pdfGeneratorCreate.generatePdfTesi(view, path);
                     } catch (IOException e1) {
@@ -83,6 +79,9 @@ public class TesiController {
         }
     }
 
+    /**
+     * Gestisce la chiusura del form
+     */
     class QuitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

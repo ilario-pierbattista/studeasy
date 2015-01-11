@@ -17,6 +17,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
+/**
+ * Controller per la gestione del profilo
+ */
 public class ProfiloController {
     private static ProfiloController instance;
     private ProfiloView view;
@@ -28,8 +31,8 @@ public class ProfiloController {
     public ProfiloController(ProfiloView view) {
         this.view = view;
 
-        view.modificaProfiloButtonListener(new registraFormAction());
-        view.modificaInsegnamentoButtonListener(new insegnamentoFormAction());
+        view.modificaProfiloButtonListener(new RegistraFormAction());
+        view.modificaInsegnamentoButtonListener(new InsegnamentoFormAction());
         view.modificaLibrettoButtonListener(new ModificaLibrettoAction());
         instance = this;
 
@@ -43,7 +46,7 @@ public class ProfiloController {
     /**
      * Ritorna l'istanza attiva di ProfiloController
      *
-     * @return
+     * @return Istanza di ProfiloController
      */
     public static ProfiloController getInstance() {
         return instance;
@@ -69,6 +72,9 @@ public class ProfiloController {
         view.setInfoLibretto(BaseController.getUtenteCorrente().getLibretto());
     }
 
+    /**
+     * Apre il form per la modifica del libretto
+     */
     private void apriFormLibretto() {
         formLibretto = new FormLibretto();
         formLibretto.setLibretto(BaseController.getUtenteCorrente().getLibretto());
@@ -80,7 +86,7 @@ public class ProfiloController {
     /**
      * Unisce i dati di una copia aggiornata del libretto con i dati gi&agrave; esistenti
      *
-     * @param nuoviDati
+     * @param nuoviDati Copia del libretto con nuovi insegnamenti, selezionati dal form
      * @return Successo nel merge dei dai.
      */
     private boolean mergeLibretto(Libretto nuoviDati) {
@@ -154,6 +160,13 @@ public class ProfiloController {
         return result;
     }
 
+    /**
+     * Mostra la finestra per confermare o annullare la scrittura dei nuovi insegnamenti che vanno in conflitto con i
+     * vecchi
+     *
+     * @param insegnamento Insegnamento in conflitto
+     * @return Risposta dell'utente
+     */
     private int showOptionDialog(Insegnamento insegnamento) {
         Object[] opzioni = {
                 "Annulla",
@@ -194,7 +207,7 @@ public class ProfiloController {
     /**
      * Apertura del form per la registrazione di un utente ed avvio del controller che la gestisce
      */
-    class registraFormAction implements ActionListener {
+    class RegistraFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             FormRegistrazione form = new FormRegistrazione();
@@ -207,14 +220,14 @@ public class ProfiloController {
     /**
      * Apre il form per la modifica delle informazioni riguardanti ad un insegnamento (voto e data di superamento)
      */
-    class insegnamentoFormAction implements ActionListener {
+    class InsegnamentoFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             Insegnamento insegnamento = view.getInsegnamentoSelezionato();
             formInsegnamento = new FormInsegnamento();
             formInsegnamento.setInsegnamento(insegnamento);
-            formInsegnamento.addAnnullaButtonListener(new closeFormInsegnamentoAction());
-            formInsegnamento.addConfermaButtonListener(new submitInsegnamentoFormAction());
+            formInsegnamento.addAnnullaButtonListener(new CloseFormInsegnamentoAction());
+            formInsegnamento.addConfermaButtonListener(new SubmitInsegnamentoFormAction());
             formInsegnamento.setVisible(true);
         }
     }
@@ -222,7 +235,7 @@ public class ProfiloController {
     /**
      * Gestione del submit del form per la modifica dei dati di un insegnamento
      */
-    class submitInsegnamentoFormAction implements ActionListener {
+    class SubmitInsegnamentoFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (formInsegnamento.isValid()) {
@@ -237,7 +250,7 @@ public class ProfiloController {
     /**
      * Chiusura del form per la modifica dei dati di un insegnamento
      */
-    class closeFormInsegnamentoAction implements ActionListener {
+    class CloseFormInsegnamentoAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             formInsegnamento.close();

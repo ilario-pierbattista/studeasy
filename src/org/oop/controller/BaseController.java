@@ -11,10 +11,17 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 
+/**
+ * Controller di base del programma
+ */
 public class BaseController {
     private static Mainframe view;
     private static Utente utenteCorrente;
 
+    /**
+     * Aggiunta del listener alla vista principale
+     * @param v Vista principale
+     */
     public BaseController(Mainframe v) {
         view = v;
 
@@ -49,6 +56,9 @@ public class BaseController {
         BaseController.utenteCorrente = utenteCorrente;
     }
 
+    /**
+     * Crea i controller principali, assegnandovi le relative viste
+     */
     public static void startController() {
         new AgendaController(view.agendaView);
         new ProfiloController(view.profiloView);

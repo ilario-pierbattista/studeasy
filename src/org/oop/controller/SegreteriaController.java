@@ -3,6 +3,9 @@ package org.oop.controller;
 import org.oop.view.segreteria.Segreteria;
 
 
+/**
+ * Gestisce la vista della segreteria
+ */
 public class SegreteriaController {
 
     public SegreteriaController(Segreteria view) {

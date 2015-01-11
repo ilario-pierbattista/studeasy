@@ -15,8 +15,12 @@ import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.IOException;
 
+
+/**
+ * Controller per gestire il form del tirocinio
+ */
 public class TirocinioController {
-    FormTirocinio view;
+    private FormTirocinio view;
 
     public TirocinioController(FormTirocinio view) {
 
@@ -29,7 +33,9 @@ public class TirocinioController {
         view.addFocusListenerCfu(new FocusCfu());
     }
 
-
+    /**
+     * Action per controllare la validità dei cfu durante l'immissione
+     */
     class FocusCfu implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
@@ -45,6 +51,9 @@ public class TirocinioController {
         }
     }
 
+    /**
+     * Action per controllare la validità della matricola durante l'immissione
+     */
     class FocusMatricola implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
@@ -60,6 +69,9 @@ public class TirocinioController {
         }
     }
 
+    /**
+     * Action per controllare la validità del cap durante l'immissione
+     */
     class FocusCap implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
@@ -75,27 +87,13 @@ public class TirocinioController {
         }
     }
 
+    /**
+     * Action per gestire il submit del form
+     */
     class SubmitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            JFormattedTextField datanascita = view.getDatanascita();
-            JFormattedTextField cap = view.getCap();
-            JFormattedTextField cfu = view.getCfu();
-            //int crediti = Integer.parseInt(cfu.getText());
-
-            String nome = view.getNome().getText();
-            String cognome = view.getCognome().getText();
-            String matricola = view.getMatricola().getText();
-            String luogonascita = view.getLuogonascita().getText();
-            String residenza = view.getResidenza().getText();
-            String provincia = view.getProvincia().getText();
-            String via = view.getVia().getText();
-            String codicefiscale = view.getCodicefiscale().getText();
-
             if (view.isValid()) {
-
-                String name = StringUtils.capitalize(nome);
-                String surname = StringUtils.capitalize(cognome);
                 //Apre schermata di salvataggio e genera il pdf
                 JFileChooser c = new JFileChooser();
                 int r = c.showSaveDialog(view.tirociniopanel);
@@ -103,10 +101,6 @@ public class TirocinioController {
                     String path = c.getCurrentDirectory().toString().replace("\\", "\\\\");
                     String fileName = c.getSelectedFile().getName();
                     try {
-                        /*
-                        PdfGenerator pdfGeneratorCreate = new PdfGenerator(System.getProperty("user.dir")
-                                .concat(File.separator.concat("template"))
-                                .concat(File.separator.concat("templateTirocinioPDF.pdf")), fileName); */
                         PdfGenerator pdfGeneratorCreate = new PdfGenerator(Utils.getResourceAsInputStream("template/templateTirocinioPDF.pdf"), fileName);
                         pdfGeneratorCreate.generatePdfTirocinio(view, path);
                     } catch (IOException e1) {
@@ -122,6 +116,9 @@ public class TirocinioController {
         }
     }
 
+    /**
+     * Action per gestire la chiusura del form
+     */
     class QuitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

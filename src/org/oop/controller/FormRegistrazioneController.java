@@ -20,6 +20,9 @@ import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
 
+/**
+ * Controller per il form di registrazione di un nuovo utente
+ */
 public class FormRegistrazioneController {
 
     private FormRegistrazione view;
@@ -29,15 +32,19 @@ public class FormRegistrazioneController {
     private InsegnamentoDAO insegnamentoDAO;
     private boolean primoAvvio;
 
+    /**
+     * Aggiunge i listeners alla vista
+     * @param view Form
+     */
     public FormRegistrazioneController(FormRegistrazione view) {
         corsoDAO = new CorsoDAO();
         utenteDAO = new UtenteDAO();
         insegnamentoDAO = new InsegnamentoDAO();
 
         this.view = view;
-        view.addSubmitFormButtonListener(new submitFormAction());
-        view.addQuitFormButtonListener(new quitFormAction());
-        view.addLivelloRadiusButtonsListener(new changeLivelloAction());
+        view.addSubmitFormButtonListener(new SubmitFormAction());
+        view.addQuitFormButtonListener(new QuitFormAction());
+        view.addLivelloRadiusButtonsListener(new ChangeLivelloAction());
         view.addFocusListenerMatricola(new FocusMatricola());
         utente = cercaUtente();
         if (!primoAvvio) {
@@ -106,7 +113,10 @@ public class FormRegistrazioneController {
         }
     }
 
-    class changeLivelloAction implements ActionListener {
+    /**
+     * Action per gestire il cambiamento del livello del corso di laurea nella vista
+     */
+    class ChangeLivelloAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             AbstractButton ab = (AbstractButton) e.getSource();
@@ -119,8 +129,8 @@ public class FormRegistrazioneController {
         /**
          * Restituisce il livello del corso di laurea dalla selezione
          *
-         * @param ab
-         * @return
+         * @param ab Pulsante premuto
+         * @return Intero identificativo del livello del corso di laurea
          */
         private int getLivelloLaureaFromSelection(AbstractButton ab) {
             int livello;
@@ -145,7 +155,7 @@ public class FormRegistrazioneController {
     /**
      * Action per annullare l'immissione del form
      */
-    class quitFormAction implements ActionListener {
+    class QuitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.frame.dispose();
@@ -155,7 +165,7 @@ public class FormRegistrazioneController {
     /**
      * Action per confermare l'immissione del form
      */
-    class submitFormAction implements ActionListener {
+    class SubmitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (view.isValid()) {
@@ -170,6 +180,9 @@ public class FormRegistrazioneController {
         }
     }
 
+    /**
+     * Action per convalidare la matricola durante l'immissione
+     */
     class FocusMatricola implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {

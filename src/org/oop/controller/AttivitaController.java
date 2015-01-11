@@ -2,7 +2,6 @@ package org.oop.controller;
 
 import org.oop.model.dao.AttivitaDAO;
 import org.oop.model.dao.CicloDAO;
-import org.oop.model.dao.InsegnamentoDAO;
 import org.oop.model.entities.*;
 import org.oop.view.agenda.*;
 
@@ -11,20 +10,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
+/**
+ * Controller per i form di aggiunta di un'attività
+ */
 public class AttivitaController {
     private FormAttivitaEvento formAttivitaEvento;
     private FormAttivitaPeriodica formAttivitaPeriodica;
     private FormEsame formEsame;
     private AttivitaDAO attivitaDAO;
     private CicloDAO cicloDAO;
-    private InsegnamentoDAO insegnamentoDAO;
 
     public AttivitaController() {
         attivitaDAO = new AttivitaDAO();
         cicloDAO = new CicloDAO();
-        insegnamentoDAO = new InsegnamentoDAO();
     }
 
+    /**
+     * Imposta i listeners alla vista
+     *
+     * @param attivitaView Form a cui impostare i listeners
+     */
     public void setListenersToView(AttivitaView attivitaView) {
         attivitaView.addEditButtonListener(new EditButtonAction());
         attivitaView.addDeleteButtonListener(new DeleteButtonAction());
@@ -69,7 +74,7 @@ public class AttivitaController {
     /**
      * Crea un form per la modifica o la creazione di un esame
      *
-     * @param esame
+     * @param esame Oggetto da cui estrarre i dati, se disponibile
      */
     private void createFormEsame(Esame esame) {
         formEsame = new FormEsame();
@@ -87,8 +92,8 @@ public class AttivitaController {
     /**
      * Crea un form per la modifica o la creazione dei un'attività periodica
      *
-     * @param attivitaPeriodica
-     * @param categoriaAttivita
+     * @param attivitaPeriodica Oggetto da cui estrarre i dati, se disponibile
+     * @param categoriaAttivita Categoria dell'attività
      */
     private void createFormAttivitaPeriodica(AttivitaPeriodica attivitaPeriodica, String categoriaAttivita) {
         formAttivitaPeriodica = new FormAttivitaPeriodica();
@@ -115,8 +120,8 @@ public class AttivitaController {
     /**
      * Crea un form per la creazione o la modifica di un'attività evento
      *
-     * @param attivitaEvento
-     * @param categoriaAttivita
+     * @param attivitaEvento    Oggetto da cui estrarre i dati, se disponibile
+     * @param categoriaAttivita Categoria dell'attività
      */
     public void createFormAttivitaEvento(AttivitaEvento attivitaEvento, String categoriaAttivita) {
         formAttivitaEvento = new FormAttivitaEvento();
@@ -140,7 +145,11 @@ public class AttivitaController {
         formAttivitaEvento.addCancelButtonListener(new CloseFormEventoAction());
     }
 
-
+    /**
+     * Salva l'attività creata nel database
+     *
+     * @param attivita Attività da salvare
+     */
     private void apply(Attivita attivita) {
         Ciclo ciclo = AgendaView.getInstance().getCicloSelected();
         Insegnamento insegnamento = AgendaView.getInstance().getInsegnamentoSelected();

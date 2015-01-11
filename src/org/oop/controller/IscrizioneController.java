@@ -1,7 +1,6 @@
 package org.oop.controller;
 
 import org.oop.model.dao.IscrizioneDAO;
-import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Iscrizione;
 import org.oop.view.segreteria.FormIscrizione;
 import org.oop.view.segreteria.IscrizioneView;
@@ -13,42 +12,43 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 
+/**
+ * Controller per gestire il form delle iscrizioni
+ */
 public class IscrizioneController {
     private IscrizioneView view;
     private FormIscrizione form;
     private IscrizioneDAO iscrizioneDAO;
-    private UtenteDAO utenteDAO;
 
     public IscrizioneController(IscrizioneView view) {
         this.view = view;
 
         iscrizioneDAO = new IscrizioneDAO();
-        utenteDAO = new UtenteDAO();
 
-        view.addAddButtonListener(new addIscrizioneAction());
-        view.addDeleteButtonListener(new deleteIscrizioneAction());
-        view.addEditButtonListener(new editIscrizioneAction());
+        view.addAddButtonListener(new AddIscrizioneAction());
+        view.addDeleteButtonListener(new DeleteIscrizioneAction());
+        view.addEditButtonListener(new EditIscrizioneAction());
 
         view.setIscrizioni(BaseController.getUtenteCorrente().getIscrizioni());
-        Segreteria.getInstance().getMaintabpane().addFocusListener(new customFocusListener());
+        Segreteria.getInstance().getMaintabpane().addFocusListener(new CustomFocusListener());
     }
 
     /**
      * Action per far partire il form di aggiunta
      */
-    class addIscrizioneAction implements ActionListener {
+    class AddIscrizioneAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             form = new FormIscrizione();
-            form.addSubmitButtonListener(new submitFormAction());
-            form.addCancelButtonListener(new closeFormAction());
+            form.addSubmitButtonListener(new SubmitFormAction());
+            form.addCancelButtonListener(new CloseFormAction());
         }
     }
 
     /**
      * Action per il submit del form di aggiunta di iscrizione
      */
-    class submitFormAction implements ActionListener {
+    class SubmitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (form.isValid()) {
@@ -71,7 +71,7 @@ public class IscrizioneController {
     /**
      * Action per chiudere il form
      */
-    class closeFormAction implements ActionListener {
+    class CloseFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             form.close();
@@ -81,7 +81,7 @@ public class IscrizioneController {
     /**
      * Action che elimina una riga dalla tabella delle iscrizioni
      */
-    class deleteIscrizioneAction implements ActionListener {
+    class DeleteIscrizioneAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             int id = view.getIscrizioneSelected();
@@ -100,7 +100,7 @@ public class IscrizioneController {
     /**
      * Action per modificare un'iscrizione
      */
-    class editIscrizioneAction implements ActionListener {
+    class EditIscrizioneAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             int id = view.getIscrizioneSelected();
@@ -108,13 +108,16 @@ public class IscrizioneController {
                 Iscrizione iscrizione = iscrizioneDAO.find(id);
                 form = new FormIscrizione();
                 form.fillForm(iscrizione);
-                form.addSubmitButtonListener(new submitFormAction());
-                form.addCancelButtonListener(new closeFormAction());
+                form.addSubmitButtonListener(new SubmitFormAction());
+                form.addCancelButtonListener(new CloseFormAction());
             }
         }
     }
 
-    class customFocusListener implements FocusListener {
+    /**
+     * Aggiornamento delle iscrizioni nella vista alla selezione della tab
+     */
+    class CustomFocusListener implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
             view.setIscrizioni(BaseController.getUtenteCorrente().getIscrizioni());

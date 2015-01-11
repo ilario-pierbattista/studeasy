@@ -16,9 +16,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+
+/**
+ * Controller per gestire il form per l'immatricolazione
+ */
 public class ImmatricolazioneController {
     private FormImmatricolazione view;
 
+    /**
+     * Imposta i listeners alla vista
+     * @param view Vista
+     */
     public ImmatricolazioneController(FormImmatricolazione view) {
         this.view = view;
 
@@ -28,7 +36,9 @@ public class ImmatricolazioneController {
         view.addFocusListenerMatricola(new FocusMatricola());
     }
 
-
+    /**
+     * Action per convalidare la matricola durante l'immissione
+     */
     class FocusMatricola implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
@@ -44,26 +54,14 @@ public class ImmatricolazioneController {
         }
     }
 
+    /**
+     * Action per gestire il submit del form
+     */
     class SubmitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Date datanascita = (Date) view.getDatanascita().getValue();
-
-            String codicefiscale = view.getCodicefiscale().getText();
-            String matricola = view.getMatricola().getText();
-            //il voto delle superiori si assume in centesimi
-//            int voto = Integer.parseInt(view.getVoto().getText());
-
-            String anno = view.getAnnoConseguimento1().getText();
-            String nome = view.getNome().getText();
-            String cognome = view.getCognome().getText();
-            String luogonascita = view.getLuogonascita().getText();
-            String diploma = view.getDiploma().getText();
 
             if (view.isValid()) {
-
-                String name = StringUtils.capitalize(nome);
-                String surname = StringUtils.capitalize(cognome);
                 //Apre schermata di salvataggio e genera il pdf
                 JFileChooser c = new JFileChooser();
                 int r = c.showSaveDialog(view.immatricolazionepanel);
@@ -72,12 +70,7 @@ public class ImmatricolazioneController {
                     String fileName = c.getSelectedFile().getName();
 
                     try {
-                        /*
-                        PdfGenerator pdfGeneratorCreate = new PdfGenerator(System.getProperty("user.dir")
-                                .concat(File.separator.concat("template"))
-                                .concat(File.separator.concat("templateImmatricolazionePDF.pdf")), fileName); */
                         PdfGenerator pdfGeneratorCreate = new PdfGenerator(Utils.getResourceAsInputStream("template/templateImmatricolazionePDF.pdf"), fileName);
-
                         pdfGeneratorCreate.generatePdfImmatricolazione(view, path);
                     } catch (IOException e1) {
                         e1.printStackTrace();
@@ -92,6 +85,9 @@ public class ImmatricolazioneController {
         }
     }
 
+    /**
+     * Action per gestire l'annullamento del form
+     */
     class QuitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
