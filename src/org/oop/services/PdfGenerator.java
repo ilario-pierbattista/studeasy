@@ -10,6 +10,7 @@ import org.oop.view.segreteria.FormTirocinio;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 
 /**
@@ -17,14 +18,14 @@ import java.io.IOException;
  * template dei documenti e salvando il risultato in un file di destinazione.
  */
 public class PdfGenerator {
-    private String template;
+    private InputStream template;
     private String nomeFile;
 
     /**
      * @param nomeTemplate Nome del template da utilizzare
      * @param nome         Nome del file di destinazione
      */
-    public PdfGenerator(String nomeTemplate, String nome) {
+    public PdfGenerator(InputStream nomeTemplate, String nome) {
         //template contiene la path della cartella template
         template = nomeTemplate;
         nomeFile = nome;

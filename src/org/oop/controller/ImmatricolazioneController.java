@@ -2,6 +2,7 @@ package org.oop.controller;
 
 import com.lowagie.text.DocumentException;
 import org.apache.commons.lang3.StringUtils;
+import org.oop.general.Utils;
 import org.oop.general.Validator;
 import org.oop.services.PdfGenerator;
 import org.oop.view.segreteria.FormImmatricolazione;
@@ -71,9 +72,12 @@ public class ImmatricolazioneController {
                     String fileName = c.getSelectedFile().getName();
 
                     try {
+                        /*
                         PdfGenerator pdfGeneratorCreate = new PdfGenerator(System.getProperty("user.dir")
                                 .concat(File.separator.concat("template"))
-                                .concat(File.separator.concat("templateImmatricolazionePDF.pdf")), fileName);
+                                .concat(File.separator.concat("templateImmatricolazionePDF.pdf")), fileName); */
+                        PdfGenerator pdfGeneratorCreate = new PdfGenerator(Utils.getResourceAsInputStream("template/templateImmatricolazionePDF.pdf"), fileName);
+
                         pdfGeneratorCreate.generatePdfImmatricolazione(view, path);
                     } catch (IOException e1) {
                         e1.printStackTrace();

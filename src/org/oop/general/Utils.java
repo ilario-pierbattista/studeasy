@@ -159,4 +159,13 @@ public class Utils {
         }
         return time;
     }
+
+    /**
+     * 
+     * @param relativePath
+     * @return
+     */
+    public static InputStream getResourceAsInputStream(String relativePath) {
+        return Utils.class.getClassLoader().getResourceAsStream(relativePath);
+    }
 }
