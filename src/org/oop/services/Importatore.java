@@ -61,7 +61,7 @@ public class Importatore {
     /**
      * Prende la prima riga del file csv (che contiene il nome dei campi)
      *
-     * @return
+     * @return ArrayList di Stringhe con i nomi dei campi
      */
     private ArrayList<String> parseHeader() {
         ArrayList<String> header = parseLine(records.get(0));
@@ -73,7 +73,7 @@ public class Importatore {
      * Organizza i dati nel file in un ArrayList di oggetti Map<String,String>, in cui il valore di ogni campo viene
      * associato con il nome del campo stesso
      *
-     * @return
+     * @return ArrayList di oggetti Map<String,String>, risultato del parsing
      */
     private ArrayList<Map<String, String>> parseData() {
         ArrayList<Map<String, String>> data = new ArrayList<Map<String, String>>(10);
