@@ -1,6 +1,8 @@
 package org.oop.general;
 
 
+import org.oop.model.entities.Corso;
+
 import javax.swing.*;
 import java.time.LocalTime;
 import java.util.Date;
@@ -12,9 +14,9 @@ public class Validator {
     /**
      * Metodo che restituisce true se il numero dei caratteri della stringa passata è uguale al parametro int cifreMax.
      *
-     * @param s
-     * @param cifreMax
-     * @return
+     * @param s        Stringa da controllare
+     * @param cifreMax Cifre massime ammesse
+     * @return True se la stringa è valida, false altrimenti
      */
     public static boolean controlloCifre(String s, int cifreMax) {
         boolean flag;
@@ -30,14 +32,17 @@ public class Validator {
 
 
     /**
-     * Controlla che il numero dei CFU sia maggiore di 120 per conseguire il tirocinio. Ritorna true se i CFU sono
-     * maggiori di 120
+     * Controlla che il numero dei CFU sia maggiore di 120 per conseguire il tirocinio, nel caso in cui l'utente sia
+     * iscritto ad un corso di laurea triennale.
+     *
+     * @param cfu   Cfu da controllare
+     * @param corso Corso di laurea dell'utente
+     * @return True se sono a sufficienza per chiedere il tirocinio, false altrimenti
      */
-    public static boolean controlloNumeroCFU(double cfu) {
-
+    public static boolean controlloNumeroCFU(double cfu, Corso corso) {
         boolean flag;
-        if (cfu < 120) {
-            JOptionPane.showMessageDialog(null, "Il numero dei CFU non è abbastanza elevato per conseguire il tirocinio");
+        if (cfu < 120 && corso.getLivello() == Corso.TRIENNALE) {
+            JOptionPane.showMessageDialog(null, "Il numero dei CFU non è abbastanza elevato per fare richiesta di tirocinio");
             flag = false;
         } else {
             flag = true;
@@ -49,8 +54,8 @@ public class Validator {
     /**
      * Controlla che il codice fiscale passato sia scritto in maniera corretta
      *
-     * @param s
-     * @return
+     * @param s Stringa da controllare
+     * @return True se è valida, False altrimenti
      */
     public static boolean inputCodiceFiscaleControl(String s) {
         Pattern p = Pattern.compile("[a-zA-Z]{6}\\d\\d[a-zA-Z]\\d\\d[a-zA-Z]\\d\\d\\d[a-zA-Z]");
@@ -63,8 +68,10 @@ public class Validator {
 
     /**
      * Controlla che la stringa passata sia un anno. Ritorna true se la stringa è compasta da soli 4 numeri.
+     *
+     * @param s Stringa da controllare
+     * @return True se valida, False altrimenti
      */
-
     public static boolean inputYearControl(String s) {
         //controllo se nella stringa s ci sono solo 4 numeri fra 0 e 9
         Pattern p = Pattern.compile("[0-9]{4}");
@@ -79,8 +86,8 @@ public class Validator {
      * Controlla che la variabile di tipo int sia compresa tra 60 e 100 (estremi inclusi). ritorna true se il valore è
      * compreso tra 60 e 100.
      *
-     * @param voto
-     * @return
+     * @param voto Voto da controllare
+     * @return True se è valido, False altrimenti
      */
     public static boolean inputVotoDiploma(double voto) {
         boolean flag;
@@ -94,8 +101,11 @@ public class Validator {
     }
 
     /**
-     * controlla che la stringa passata sia di due lettere (Provincia). Ritorna true se la stringa è composta di sole
+     * Controlla che la stringa passata sia di due lettere (Provincia). Ritorna true se la stringa è composta di sole
      * due lettere.
+     *
+     * @param s Stringa da controllare
+     * @return True se è valida, False altrimenti
      */
     public static boolean inputProvinciaControl(String s) {
         Pattern p = Pattern.compile("[a-zA-Z]{2}");
@@ -109,6 +119,10 @@ public class Validator {
 
     /**
      * Controlla che nella stringa passata ci siano solo lettere. Ritorna true se la stringa è formata da sole lettere.
+     *
+     * @param s         Stringa da controllare
+     * @param fieldName Nome del campo
+     * @return True se il contenuto è valido, False altrimenti
      */
     public static boolean inputSentenceControl(String s, String fieldName) {
         Pattern p = Pattern.compile("[a-zA-Z ,\']+");
@@ -123,7 +137,7 @@ public class Validator {
      * Controlla che una stringa sia una email valida
      *
      * @param str Indirizzo email
-     * @return
+     * @return True se l'indirizzo è valido, False altrimenti
      */
     public static boolean email(String str) {
         Pattern p = Pattern.compile("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}");
@@ -139,7 +153,7 @@ public class Validator {
      *
      * @param field     JTextfield
      * @param fieldName Nome del campo
-     * @return
+     * @return True se il campo è vuoto, False altrimenti
      */
     public static boolean isTextFieldEmpty(JTextField field, String fieldName) {
         boolean flag;
@@ -159,7 +173,7 @@ public class Validator {
      *
      * @param field     JFormattedTextField
      * @param fieldName Nome del campo
-     * @return
+     * @return True se il campo è vuoto, False altrimenti
      */
     public static boolean isFormattedFieldEmpty(JFormattedTextField field, String fieldName) {
         boolean flag;
@@ -179,7 +193,7 @@ public class Validator {
      *
      * @param field     JFormattedTextField
      * @param fieldName Nome del campo
-     * @return
+     * @return True se il campo è vuoto, False altrimenti
      */
     public static boolean isComboBoxEmpty(JComboBox field, String fieldName) {
         boolean flag;
@@ -199,7 +213,7 @@ public class Validator {
      *
      * @param start Data inizio
      * @param end   Data fine
-     * @return
+     * @return True se la data d'inizio è antecedente a quella di fine, false altrimenti
      */
     public static boolean isDateGreater(Date start, Date end) {
         boolean flag;
@@ -218,9 +232,9 @@ public class Validator {
      * valido se l'orario di inizio è precedente all'orario di fine. Precondizione: begin ed end devono essere impostati
      * per accettare stringhe del formato HH:mm, dove HH sono le ore e mm i minuti
      *
-     * @param begin
-     * @param end
-     * @return
+     * @param begin Campo con l'ora d'inizio
+     * @param end   Campo con l'ora di fine
+     * @return True se l'ora d'inizio è antecedente a quella di fine, False altrimenti
      */
     public static boolean checkTimeJFormattedText(JFormattedTextField begin, JFormattedTextField end) {
         Date oraInizio = (Date) begin.getValue();

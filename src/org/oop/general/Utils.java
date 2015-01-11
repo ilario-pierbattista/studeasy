@@ -1,6 +1,5 @@
 package org.oop.general;
 
-
 import org.oop.general.exceptions.RisorsaNonTrovata;
 
 import java.io.BufferedReader;
@@ -14,8 +13,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Utils {
 
+public class Utils {
 
     /**
      * Racchiude una stringa tra apici singoli

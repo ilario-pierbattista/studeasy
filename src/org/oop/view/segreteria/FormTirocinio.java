@@ -1,5 +1,6 @@
 package org.oop.view.segreteria;
 
+import org.oop.controller.BaseController;
 import org.oop.general.Validator;
 import org.oop.model.entities.Utente;
 import org.oop.view.AbstractForm;
@@ -64,7 +65,7 @@ public class FormTirocinio extends AbstractForm {
             flag = false;
         } else if (Validator.isFormattedFieldEmpty(codicefiscale, "Codice Fiscale") || !Validator.inputCodiceFiscaleControl(codicefiscale.getText())) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(cfu, "CFU") || !Validator.controlloNumeroCFU(Double.parseDouble(cfu.getText()))) {
+        } else if (Validator.isFormattedFieldEmpty(cfu, "CFU") || !Validator.controlloNumeroCFU(Double.parseDouble(cfu.getText()), BaseController.getUtenteCorrente().getLibretto().getCorso())) {
             flag = false;
         } else {
             flag = true;
