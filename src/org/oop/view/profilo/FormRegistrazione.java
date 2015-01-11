@@ -129,9 +129,8 @@ public class FormRegistrazione extends AbstractForm {
         matricola.addFocusListener(listener);
     }
 
-    /**
-     * GETTER @TODO ottimizzarli, togliere quelli che non servono
-     */
+    /* Getters */
+
     public JTextField getNome() {
         return nome;
     }
@@ -142,10 +141,6 @@ public class FormRegistrazione extends AbstractForm {
 
     public JButton getSubmit() {
         return Submit;
-    }
-
-    public JButton getQuit() {
-        return Quit;
     }
 
     public JTextField getMatricola() {

@@ -17,6 +17,7 @@ public class Mainframe {
 
     public Mainframe() {
         frame.setContentPane(mainpanel);
+        /** @TODO impostare azione custom alla chiusura */
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 650);
         frame.setLocationRelativeTo(null);

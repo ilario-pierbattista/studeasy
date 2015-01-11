@@ -16,8 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Questa classe si occupa dell'importazione dei dati. Nel dettaglio: 1) Importa lo schema 2) Legge i dati dal file e
- * crea gli oggetti con la mappatura corretta 3) Salva gli oggetti nel database
+ * Si occupa dell'importazione dei dati
  */
 public class Importatore {
     private boolean overrideSchema;
@@ -28,14 +27,20 @@ public class Importatore {
     private ArrayList<Map<String, String>> data;
     private ArrayList<Corso> corsi;
 
+    /**
+     * Crea un'istanza di Importatore
+     *
+     * @param overrideSchema True per sovrascrivere il database, False altrimenti
+     */
     public Importatore(boolean overrideSchema) {
         this.overrideSchema = overrideSchema;
     }
 
-    public Importatore() {
-        this(false);
-    }
-
+    /**
+     * Crea il database ed importa i dati
+     *
+     * @throws RisorsaNonTrovata
+     */
     public void importaDati() throws RisorsaNonTrovata {
         if (!DatabaseUtils.databaseExists() || overrideSchema) {
             // Creazione dello schema
@@ -54,7 +59,7 @@ public class Importatore {
     }
 
     /**
-     * Prende l'header del file csv
+     * Prende la prima riga del file csv (che contiene il nome dei campi)
      *
      * @return
      */
@@ -65,12 +70,11 @@ public class Importatore {
     }
 
     /**
-     * Parsa i dati dal file csv
+     * Organizza i dati nel file in un ArrayList di oggetti Map<String,String>, in cui il valore di ogni campo viene
+     * associato con il nome del campo stesso
      *
      * @return
      */
-
-    //file csv = file scritto per importare o esportare una tabella
     private ArrayList<Map<String, String>> parseData() {
         ArrayList<Map<String, String>> data = new ArrayList<Map<String, String>>(10);
         for (String line : records) {
@@ -91,9 +95,10 @@ public class Importatore {
     }
 
     /**
-     * Genera gli oggetti entities da salvare nel database
+     * Creazione degli oggetti Corso, completi dei relativi oggetti InsegnamentoOfferto, a loro volta completi dei
+     * relativi oggetti Docente.
      *
-     * @return
+     * @return ArrayList di oggetti Corso
      */
     private ArrayList<Corso> generateObjectStructure() {
         ArrayList<Corso> corsi = new ArrayList<Corso>(16);
@@ -132,6 +137,9 @@ public class Importatore {
         return corsi;
     }
 
+    /**
+     * Salvataggio della struttura di oggetti nel database
+     */
     private void saveObjects() {
         CorsoDAO corsoDAO = new CorsoDAO();
         InsegnamentoOffertoDAO insegnamentoOffertoDAO = new InsegnamentoOffertoDAO();
@@ -150,7 +158,6 @@ public class Importatore {
             }
             corsoDAO.persist(corso);
 
-            /* @TODO Sono messaggi random, valutare se lasciarli */
             i++;
             System.out.println("Corsi importati " + i + " su " + corsi.size());
         }
@@ -158,7 +165,10 @@ public class Importatore {
     }
 
     /**
-     * Lettura dell'header del file csv
+     * Lettura di una riga del file e generazione delle associazioni tra il nome del campo e il valore del campo
+     *
+     * @param line Riga del file
+     * @return Mappa chiave-valore con i dati della riga
      */
     private ArrayList<String> parseLine(String line) {
         String parts[] = line.split(",");
@@ -173,10 +183,10 @@ public class Importatore {
     }
 
     /**
-     * Crea un oggetto corso da una riga di dati
+     * Crea un oggetto Corso da un oggetto da una Mappa di dati
      *
-     * @param row
-     * @return
+     * @param row Mappa
+     * @return Corso
      */
     private Corso createCorsoFromRow(Map<String, String> row) {
         Corso corso = new Corso();
@@ -188,10 +198,10 @@ public class Importatore {
     }
 
     /**
-     * Crea un oggetto insegnamento offerto da una riga di dati
+     * Crea un oggetto InsegnamentoOfferto da un oggetto da una Mappa di dati
      *
-     * @param row
-     * @return
+     * @param row Mappa
+     * @return InsegnamentoOfferto
      */
     private InsegnamentoOfferto createInsegnamentoFromRow(Map<String, String> row) {
         InsegnamentoOfferto insegnamentoOfferto = new InsegnamentoOfferto();
@@ -204,10 +214,10 @@ public class Importatore {
     }
 
     /**
-     * Crea un oggetto docente da una riga di dati
+     * Crea un oggetto Docente da un oggetto da una Mappa di dati
      *
-     * @param row
-     * @return
+     * @param row Mappa
+     * @return Docente
      */
     private Docente createDocenteFromRow(Map<String, String> row) {
         Docente docente = new Docente();
@@ -239,7 +249,7 @@ public class Importatore {
     /**
      * Aggiunge ulteriori insegnamenti all'offerta, per far quadrare il conto dei cfu
      *
-     * @param corso
+     * @param corso Oggetto Corso a cui aggiungere gli insegnamenti mancanti
      */
     private void fixEsamiMancanti(Corso corso) {
         InsegnamentoOfferto inglese = new InsegnamentoOfferto();

@@ -111,7 +111,7 @@ public class AgendaController {
     }
 
     /**
-     * @TODO: da rivedere meglio. Fidati Ila è meglio se non lo togli.
+     * Update delle attività in base alla selezione
      */
     private void updateInsegnamenti() {
         view.setInsegnamentiFromCiclo(view.getCicloSelected());
