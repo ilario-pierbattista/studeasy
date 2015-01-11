@@ -23,7 +23,6 @@ public class TesiController {
         view.insSubmitFormButtonListener(new SubmitFormAction());
         view.setInfoUtente(BaseController.getUtenteCorrente());
         view.addFocusListenerMatricola(new FocusMatricola());
-        System.out.println(TesiController.class.getProtectionDomain().getCodeSource().getLocation().getPath());
     }
 
     class FocusMatricola implements FocusListener {

@@ -20,18 +20,18 @@ public class Utils {
     /**
      * Racchiude una stringa tra apici singoli
      *
-     * @param string
-     * @return
+     * @param string Stringa
+     * @return Stringa tra apici
      */
     public static String singleQuotesToString(String string) {
         return "'".concat(string).concat("'");
     }
 
     /**
-     * Sostituisce i caratteri speciali in una stringa in sequenze escape adeguate per una chiamata sql
+     * Sostituisce i caratteri speciali in una stringa in sequenze escape adeguate per un'istruzione sql
      *
-     * @param string
-     * @return
+     * @param string Stringa da modificare
+     * @return Stringa con caratteri speciali sostituiti
      */
     public static String escapeSql(String string) {
         return string.replaceAll("'", "''");
@@ -40,9 +40,9 @@ public class Utils {
     /**
      * Incolla le parti di un ArrayList di stringhe
      *
-     * @param parts
-     * @param glue
-     * @return
+     * @param parts Parti da incollare
+     * @param glue  Collante
+     * @return Stringa risultante
      */
     public static String stringJoin(ArrayList<String> parts, String glue) {
         StringBuilder sb = new StringBuilder();
@@ -55,15 +55,15 @@ public class Utils {
     }
 
     /**
-     * Scrive la stringa passata come parametro con la lettera maiuscola Legge le righe di un file
+     * Legge le righe di un file
      *
-     * @param path
-     * @return
+     * @param path Percorso relativo della risorsa
+     * @return ArrayList di stringhe lette, una per riga del file
      * @throws RisorsaNonTrovata
      */
     public static ArrayList<String> readFileLines(String path) throws RisorsaNonTrovata {
         ArrayList<String> records = new ArrayList<String>(10);
-        InputStream is = Utils.class.getClassLoader().getResourceAsStream(path);
+        InputStream is = getResourceAsInputStream(path);
         if (is == null) {
             throw new RisorsaNonTrovata(path);
         }
@@ -80,12 +80,12 @@ public class Utils {
     }
 
     /**
-     * Cerca nell'array
+     * Cerca nell'ArrayList
      *
-     * @param ago
-     * @param pagliaio
-     * @param <T>
-     * @return
+     * @param ago      Oggetto da cercare
+     * @param pagliaio ArrayList in cui cercare
+     * @param <T>      Classe degli oggetti trattati
+     * @return Oggetto cercato, oppure null;
      */
     public static <T> T arraySearch(T ago, ArrayList<T> pagliaio) {
         boolean found = false;
@@ -125,6 +125,12 @@ public class Utils {
         return df.format(date);
     }
 
+    /**
+     * Converte un oggetto Date in un oggetto LocalTime
+     *
+     * @param date Oggetto da convertire
+     * @return Oggetto LocalTime risultante
+     */
     public static LocalTime dateToLocaltime(Date date) {
         DateFormat df = new SimpleDateFormat("HH:mm:ss");
         String st = df.format(date);
@@ -132,6 +138,12 @@ public class Utils {
         return LocalTime.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
     }
 
+    /**
+     * Converte un oggetto LocalTime in un oggetto Date
+     *
+     * @param localTime Oggetto LocalTime da convertire
+     * @return Oggeto Date risultante
+     */
     public static Date localtimeToDate(LocalTime localTime) {
         DateFormat df = new SimpleDateFormat("dd-MM-YYYY HH:mm");
         Date date = null;
@@ -143,6 +155,13 @@ public class Utils {
         return date;
     }
 
+    /**
+     * Converte una stringa che rappresenta un orario in un oggetto Localtime
+     *
+     * @param localTime Stringa nel formato HH:mm:ss[:nnnnnn]. HH sono le ore, mm i minuti, ss i secondi e le cifre nnnn
+     *                  esprimono le frazioni di secondo
+     * @return Oggetto LocalTime risultante
+     */
     public static LocalTime parseLocalTime(String localTime) {
         String parts[] = localTime.split(":");
         LocalTime time = null;
@@ -161,9 +180,10 @@ public class Utils {
     }
 
     /**
-     * 
-     * @param relativePath
-     * @return
+     * Crea un oggetto InputStream per una risorsa
+     *
+     * @param relativePath Path relativa della risorsa
+     * @return Oggetto InputStream creato
      */
     public static InputStream getResourceAsInputStream(String relativePath) {
         return Utils.class.getClassLoader().getResourceAsStream(relativePath);

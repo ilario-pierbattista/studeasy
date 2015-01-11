@@ -5,6 +5,8 @@ import org.oop.view.profilo.ProfiloView;
 import org.oop.view.segreteria.Segreteria;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowListener;
 
 
 public class Mainframe {
@@ -17,8 +19,6 @@ public class Mainframe {
 
     public Mainframe() {
         frame.setContentPane(mainpanel);
-        /** @TODO impostare azione custom alla chiusura */
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 650);
         frame.setLocationRelativeTo(null);
 
@@ -40,5 +40,9 @@ public class Mainframe {
 
     public void setSelectedTab(int index) {
         maintabpane.setSelectedIndex(index);
+    }
+
+    public void addWindowListener(WindowListener w) {
+        frame.addWindowListener(w);
     }
 }

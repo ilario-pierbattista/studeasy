@@ -1,10 +1,13 @@
 package org.oop.controller;
 
+import org.oop.db.DatabaseManager;
 import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Utente;
 import org.oop.view.Mainframe;
 import org.oop.view.profilo.FormRegistrazione;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 
@@ -14,6 +17,16 @@ public class BaseController {
 
     public BaseController(Mainframe v) {
         view = v;
+
+        // Chiusura della connessione con il database all'uscita
+        v.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                DatabaseManager db = DatabaseManager.getInstance();
+                db.closeConnection();
+                super.windowClosing(e);
+            }
+        });
 
         UtenteDAO utenteDAO = new UtenteDAO();
         ArrayList<Utente> utenti = utenteDAO.findAll();
