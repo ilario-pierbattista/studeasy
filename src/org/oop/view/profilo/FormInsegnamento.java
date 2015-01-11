@@ -54,11 +54,7 @@ public class FormInsegnamento extends AbstractForm {
 
     public void setInsegnamento(Insegnamento insegnamento) {
         this.insegnamento = insegnamento;
-        if (insegnamento.esameSostenuto()) {
-            votoField.setValue(insegnamento.getVoto());
-        } else {
-            votoField.setText("");
-        }
+        votoField.setValue(insegnamento.getVoto());
         dataField.setValue(insegnamento.getData());
         lodeCheckBox.setSelected(insegnamento.isLode());
     }
