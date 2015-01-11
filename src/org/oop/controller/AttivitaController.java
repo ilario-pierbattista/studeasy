@@ -38,8 +38,8 @@ public class AttivitaController {
     }
 
     /**
-     * Metodo per aprire il form corretto in base al bottone cliccato.
-     * Setta anche i listeners necessari per il funzionamento.
+     * Metodo per aprire il form corretto in base al bottone cliccato. Setta anche i listeners necessari per il
+     * funzionamento.
      */
     public void openForm(String newActivityType) {
         if (newActivityType.equals(Attivita.PROGETTO) || newActivityType.equals(Attivita.SEMINARIO)) {
@@ -52,8 +52,8 @@ public class AttivitaController {
     }
 
     /**
-     * Metodo per aprire il form corretto di modifica in base all'attivita cliccata.
-     * Setta anche i listeners necessari per il funzionamento.
+     * Metodo per aprire il form corretto di modifica in base all'attivita cliccata. Setta anche i listeners necessari
+     * per il funzionamento.
      */
     public void openFormToModify(Attivita attivita) {
         String categoria = attivita.getCategoria();
@@ -250,7 +250,6 @@ public class AttivitaController {
                 formEsame.getLaboratorioRadioButton().setSelected(true);
             }
         }
-
     }
 
     /**

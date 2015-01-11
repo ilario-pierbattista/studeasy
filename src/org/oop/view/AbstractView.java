@@ -39,6 +39,4 @@ public abstract class AbstractView {
     public void setVisible(boolean visible) {
         frame.setVisible(visible);
     }
-
-
 }

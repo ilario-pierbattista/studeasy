@@ -28,8 +28,8 @@ public class FormIscrizione extends AbstractForm {
     }
 
     /**
-     * Metodo che prende i valori dei campi del form e li mette dentro un oggetto Iscrizione.
-     * Dopodichè ritorna tale oggetto
+     * Metodo che prende i valori dei campi del form e li mette dentro un oggetto Iscrizione. Dopodichè ritorna tale
+     * oggetto
      *
      * @return Iscrizione
      */

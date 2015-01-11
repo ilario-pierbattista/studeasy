@@ -139,9 +139,8 @@ public class AgendaView extends AbstractView {
     }
 
     /**
-     * Metodo che crea la lista di insegnamenti per il ciclo che gli si passa.
-     * Indipendentemente dal fatto che il ciclo abbia già insegnamenti associati o meno,
-     * ricrea il model della lista.
+     * Metodo che crea la lista di insegnamenti per il ciclo che gli si passa. Indipendentemente dal fatto che il ciclo
+     * abbia già insegnamenti associati o meno, ricrea il model della lista.
      *
      * @param ciclo Ciclo
      */

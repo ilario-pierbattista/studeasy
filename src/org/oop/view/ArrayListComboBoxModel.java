@@ -28,5 +28,4 @@ public class ArrayListComboBoxModel<T> extends AbstractListModel<T> implements C
     public T getElementAt(int i) {
         return anArrayList.get(i);
     }
-
 }

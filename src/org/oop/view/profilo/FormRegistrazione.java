@@ -73,8 +73,7 @@ public class FormRegistrazione extends AbstractForm {
     }
 
     /**
-     * Convalida gli attributi del form ed apre una finestra d'errore
-     * nel caso qualcosa non vada bene
+     * Convalida gli attributi del form ed apre una finestra d'errore nel caso qualcosa non vada bene
      *
      * @return
      */

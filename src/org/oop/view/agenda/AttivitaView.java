@@ -66,5 +66,4 @@ public class AttivitaView extends AbstractView {
     public JButton getDeleteButton() {
         return deleteButton;
     }
-
 }

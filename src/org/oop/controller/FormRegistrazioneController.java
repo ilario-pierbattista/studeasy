@@ -48,11 +48,9 @@ public class FormRegistrazioneController {
     }
 
     /**
-     * Ricerca nel database se esiste già un utente registrato.
-     * Nel caso esistesse già un utente registrato, imposta il form
-     * per la modifica dei dati.
-     * Nel caso in cui non esistesse alcun utente registrato, imposta
-     * il form per una nuova registrazione.
+     * Ricerca nel database se esiste già un utente registrato. Nel caso esistesse già un utente registrato, imposta il
+     * form per la modifica dei dati. Nel caso in cui non esistesse alcun utente registrato, imposta il form per una
+     * nuova registrazione.
      *
      * @return Utente trovato oppure utente nuovo
      */
@@ -68,10 +66,9 @@ public class FormRegistrazioneController {
     }
 
     /**
-     * Crea od aggiorna un utente. Vi sono 4 casi:
-     * 1) L'utente non esiste. Viene creato.
-     * 2) L'utente ha un corso di laurea diverso. Bisogna reinserire anche gli insegnamenti.
-     * 3) L'utente esiste e differisce solo per alcune informazioni. Viene aggiornato.
+     * Crea od aggiorna un utente. Vi sono 4 casi: 1) L'utente non esiste. Viene creato. 2) L'utente ha un corso di
+     * laurea diverso. Bisogna reinserire anche gli insegnamenti. 3) L'utente esiste e differisce solo per alcune
+     * informazioni. Viene aggiornato.
      *
      * @param nuoviDati Nuovi dati dell'utente
      */

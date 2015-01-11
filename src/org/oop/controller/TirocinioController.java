@@ -41,7 +41,6 @@ public class TirocinioController {
                 JOptionPane.showMessageDialog(null, "Il numero dei CFU deve essere almeno 120 per conseguire il Tirocinio.");
                 view.getCfu().setText(" ");
             }
-
         }
     }
 
@@ -112,12 +111,10 @@ public class TirocinioController {
                     } catch (DocumentException e1) {
                         e1.printStackTrace();
                     }
-
                 }
                 if (r == JFileChooser.CANCEL_OPTION) {
                     //chiudi finestra
                 }
-
             }
         }
     }

@@ -13,9 +13,8 @@ import java.io.IOException;
 
 
 /**
- * PdfGenerator si occupa di creare i file pdf, estrapolando i dati
- * dalle viste contenenti i form, inserirli nei template dei documenti
- * e salvando il risultato in un file di destinazione.
+ * PdfGenerator si occupa di creare i file pdf, estrapolando i dati dalle viste contenenti i form, inserirli nei
+ * template dei documenti e salvando il risultato in un file di destinazione.
  */
 public class PdfGenerator {
     private String template;
@@ -23,7 +22,7 @@ public class PdfGenerator {
 
     /**
      * @param nomeTemplate Nome del template da utilizzare
-     * @param nome Nome del file di destinazione
+     * @param nome         Nome del file di destinazione
      */
     public PdfGenerator(String nomeTemplate, String nome) {
         //template contiene la path della cartella template
@@ -128,8 +127,9 @@ public class PdfGenerator {
         stamper.getAcroFields().setField("codiceFiscale", immatricolazioneView.getCodicefiscale().getText());
         stamper.getAcroFields().setField("tipologiaScuolaSuperiore", immatricolazioneView.getDiploma().getText());
         stamper.getAcroFields().setField("voto", immatricolazioneView.getVoto().getText());
-        stamper.getAcroFields().setField("anno1", immatricolazioneView.getAnnoConseguimento1().getText());
-        stamper.getAcroFields().setField("anno2", immatricolazioneView.getAnnoConseguimento2().getText());
+        String primaParteAnnoScolastico = immatricolazioneView.getAnnoConseguimento1().getText();
+        stamper.getAcroFields().setField("anno1", primaParteAnnoScolastico);
+        stamper.getAcroFields().setField("anno2", Integer.toString(Integer.parseInt(primaParteAnnoScolastico) + 1));
 
         pdfTemplate.close();
         stamper.close();
@@ -159,6 +159,12 @@ public class PdfGenerator {
      */
     private String getEstensione(String path) {
         String[] parti = path.split(".");
-        return parti[parti.length - 1];
+        String estensione;
+        if (parti.length > 0) {
+            estensione = parti[parti.length - 1];
+        } else {
+            estensione = path;
+        }
+        return estensione;
     }
 }

@@ -95,8 +95,7 @@ public class FormLibretto extends AbstractForm {
     }
 
     /**
-     * Imposta il testo del conteggio dei cfu selezionati sul totale previsto
-     * del corso di laurea
+     * Imposta il testo del conteggio dei cfu selezionati sul totale previsto del corso di laurea
      */
     private void setCfuLabel() {
         cfuLabel.setText(Integer.toString(copiaLibretto.calcolaCFUPrevisti())
@@ -126,8 +125,7 @@ public class FormLibretto extends AbstractForm {
     }
 
     /**
-     * Ottiene un ArrayList di Insegnamenti in base agli indici di questi ultimi
-     * nella lista
+     * Ottiene un ArrayList di Insegnamenti in base agli indici di questi ultimi nella lista
      *
      * @param indices Indici degli Insegnamenti
      * @return Oggetti Insegnamento

@@ -28,8 +28,7 @@ public class Utils {
     }
 
     /**
-     * Sostituisce i caratteri speciali in una stringa in sequenze escape
-     * adeguate per una chiamata sql
+     * Sostituisce i caratteri speciali in una stringa in sequenze escape adeguate per una chiamata sql
      *
      * @param string
      * @return
@@ -56,8 +55,7 @@ public class Utils {
     }
 
     /**
-     * Scrive la stringa passata come parametro con la lettera maiuscola
-     * Legge le righe di un file
+     * Scrive la stringa passata come parametro con la lettera maiuscola Legge le righe di un file
      *
      * @param path
      * @return
@@ -165,9 +163,8 @@ public class Utils {
     /**
      * @param number Giorno a numero
      * @return Giorno a lettere
-     * @TODO Lasciare questo o l'altro in AttivitaPeriodica
-     * Converte il numero (tra 1 e 7) che gli si passa nel corrispondente giorno secondo la logica
-     * di java.utils.Calendar
+     * @TODO Lasciare questo o l'altro in AttivitaPeriodica Converte il numero (tra 1 e 7) che gli si passa nel
+     * corrispondente giorno secondo la logica di java.utils.Calendar
      */
     public static String intToStringDate(int number) {
         String giorno = "not valid";

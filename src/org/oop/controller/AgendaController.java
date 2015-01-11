@@ -91,7 +91,9 @@ public class AgendaController {
     public void updateAttivita(Insegnamento insegnamento) {
         if (insegnamento == null) { // se il ciclo non ha ancora nessun insegnamento
             view.setNoAttivita();
+            view.toggleAttivitaButtons(false);
         } else {
+            view.toggleAttivitaButtons(true);
             ArrayList<Attivita> listaAttivita = insegnamento.getAttivita();
             view.getActivitiespanel().removeAll();
             Mainframe.refreshView();
@@ -106,7 +108,6 @@ public class AgendaController {
                 }
             }
         }
-
     }
 
     /**
@@ -117,8 +118,7 @@ public class AgendaController {
     }
 
     /**
-     * Action che aggiorna la lista degli insegnamenti in base al ciclo selezionato
-     * dalla lista dei cicli
+     * Action che aggiorna la lista degli insegnamenti in base al ciclo selezionato dalla lista dei cicli
      */
     class listaCicliSelectionAction implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent e) {
@@ -132,7 +132,6 @@ public class AgendaController {
                 updateAttivita(view.getInsegnamentoSelected());
 
                 if (ciclo.getInsegnamenti().size() <= 0) {
-                    System.out.println("triggered");
                     view.toggleAttivitaButtons(false);
                 } else {
                     view.toggleAttivitaButtons(true);
@@ -209,7 +208,6 @@ public class AgendaController {
                 updateView();
             }
         }
-
     }
 
     /**
@@ -237,8 +235,7 @@ public class AgendaController {
     }
 
     /**
-     * Action aggiunge l'insegnamento selezionato nel modal alla lista degli insegnamenti
-     * nella Agenda
+     * Action aggiunge l'insegnamento selezionato nel modal alla lista degli insegnamenti nella Agenda
      */
     class submitModalInsegnamento implements ActionListener {
         @Override
@@ -284,8 +281,7 @@ public class AgendaController {
     }
 
     /**
-     * Action che mostra tutte le attività relative all'insegnamento selezionato
-     * dalla lista degli insegnamenti
+     * Action che mostra tutte le attività relative all'insegnamento selezionato dalla lista degli insegnamenti
      */
     class listaInsegnamentiSelectionAction implements ListSelectionListener {
         @Override

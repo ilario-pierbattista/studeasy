@@ -37,9 +37,7 @@ public class TesiController {
                 JOptionPane.showMessageDialog(null, "La matricola deve essere di 7 cifre");
                 view.getMatricola().setText(" ");
             }
-
         }
-
     }
 
     class SubmitFormAction implements ActionListener {
@@ -75,7 +73,6 @@ public class TesiController {
                     } catch (DocumentException e1) {
                         e1.printStackTrace();
                     }
-
                 }
                 if (r == JFileChooser.CANCEL_OPTION) {
                     //chiudi finestra

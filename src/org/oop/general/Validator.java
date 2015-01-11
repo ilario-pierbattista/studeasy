@@ -16,7 +16,6 @@ public class Validator {
      * @param cifreMax
      * @return
      */
-
     public static boolean controlloCifre(String s, int cifreMax) {
         boolean flag;
         int counter;
@@ -31,10 +30,9 @@ public class Validator {
 
 
     /**
-     * Controlla che il numero dei CFU sia maggiore di 120 per conseguire il tirocinio.
-     * Ritorna true se i CFU sono maggiori di 120
+     * Controlla che il numero dei CFU sia maggiore di 120 per conseguire il tirocinio. Ritorna true se i CFU sono
+     * maggiori di 120
      */
-
     public static boolean controlloNumeroCFU(double cfu) {
 
         boolean flag;
@@ -64,28 +62,7 @@ public class Validator {
     }
 
     /**
-     * Controlla che l'anno di fine sia maggiore di quello di inizio.
-     * Ritorna true se l'anno di fine è meggiore di quello di inizio.
-     *
-     * @param anno1
-     * @param anno2
-     * @return
-     */
-
-    public static boolean controlloAnno(double anno1, double anno2) {
-        boolean flag;
-        if (anno1 < anno2) {
-            flag = true;
-        } else {
-            JOptionPane.showMessageDialog(null, "La data di fine deve essere maggiore di quella di inizio.");
-            flag = false;
-        }
-        return flag;
-    }
-
-    /**
-     * Controlla che la stringa passata sia un anno.
-     * Ritorna true se la stringa è compasta da soli 4 numeri.
+     * Controlla che la stringa passata sia un anno. Ritorna true se la stringa è compasta da soli 4 numeri.
      */
 
     public static boolean inputYearControl(String s) {
@@ -99,8 +76,8 @@ public class Validator {
     }
 
     /**
-     * Controlla che la variabile di tipo int sia compresa tra 60 e 100 (estremi inclusi).
-     * ritorna true se il valore è compreso tra 60 e 100.
+     * Controlla che la variabile di tipo int sia compresa tra 60 e 100 (estremi inclusi). ritorna true se il valore è
+     * compreso tra 60 e 100.
      *
      * @param voto
      * @return
@@ -116,10 +93,9 @@ public class Validator {
         return flag;
     }
 
-
     /**
-     * controlla che la stringa passata sia di due lettere (Provincia).
-     * Ritorna true se la stringa è composta di sole due lettere.
+     * controlla che la stringa passata sia di due lettere (Provincia). Ritorna true se la stringa è composta di sole
+     * due lettere.
      */
     public static boolean inputProvinciaControl(String s) {
         Pattern p = Pattern.compile("[a-zA-Z]{2}");
@@ -132,34 +108,13 @@ public class Validator {
 
 
     /**
-     * Controlla che nella stringa passata ci siano solo lettere.
-     * Ritorna true se la stringa è formata da sole lettere.
+     * Controlla che nella stringa passata ci siano solo lettere. Ritorna true se la stringa è formata da sole lettere.
      */
-
     public static boolean inputSentenceControl(String s, String fieldName) {
-        Pattern p = Pattern.compile("[a-zA-Z ]+");
+        Pattern p = Pattern.compile("[a-zA-Z ,\']+");
         Matcher m = p.matcher(s);
         if (!m.matches()) {
             JOptionPane.showMessageDialog(null, "Il campo \"" + fieldName + "\" deve essere di sole lettere");
-        }
-        return m.matches();
-    }
-
-
-
-    /* La funzione inputMatricolaControl(String s) è inutilizzata. Si mantiene per evitare errori in fase di lavoro */
-
-    /**
-     * Controlla che la matricola sia scritta in modo corretto:
-     * di soli numeri. Se è corretta ritorna true.
-     */
-
-    public static boolean inputMatricolaControl(String s) {
-        Pattern p = Pattern.compile("\\d+");
-        Matcher m = p.matcher(s);
-        if (!m.matches()) {
-            JOptionPane.showMessageDialog(null, "Il campo 'Matricola' deve essere di soli numeri");
-
         }
         return m.matches();
     }
@@ -259,10 +214,9 @@ public class Validator {
     }
 
     /**
-     * Controlla il contenuto di due oggetti JFormattedTextField per l'immissione di un orario. Il
-     * loro contenuto è valido se l'orario di inizio è precedente all'orario di fine.
-     * Precondizione: begin ed end devono essere impostati per accettare stringhe del formato HH:mm,
-     * dove HH sono le ore e mm i minuti
+     * Controlla il contenuto di due oggetti JFormattedTextField per l'immissione di un orario. Il loro contenuto è
+     * valido se l'orario di inizio è precedente all'orario di fine. Precondizione: begin ed end devono essere impostati
+     * per accettare stringhe del formato HH:mm, dove HH sono le ore e mm i minuti
      *
      * @param begin
      * @param end
@@ -294,5 +248,4 @@ public class Validator {
         }
         return flag;
     }
-
 }

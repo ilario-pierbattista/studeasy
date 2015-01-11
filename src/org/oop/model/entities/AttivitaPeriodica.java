@@ -6,8 +6,7 @@ import java.util.Calendar;
 public class AttivitaPeriodica extends Attivita {
 
     /**
-     * Rappresenta un giorno della settimana. Assume uno dei valori possibili per
-     * DAY_OF_WEEK di java.util.Calendar
+     * Rappresenta un giorno della settimana. Assume uno dei valori possibili per DAY_OF_WEEK di java.util.Calendar
      */
     private int giorno;
 

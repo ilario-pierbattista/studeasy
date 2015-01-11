@@ -7,8 +7,7 @@ import java.sql.*;
 import java.time.LocalTime;
 
 /**
- * Incapsula l'accesso alla connessione, mettendo a disposizione
- * i metodi necessari per effettuare chiamate al database
+ * Incapsula l'accesso alla connessione, mettendo a disposizione i metodi necessari per effettuare chiamate al database
  */
 public class DatabaseManager {
 
@@ -60,9 +59,8 @@ public class DatabaseManager {
     }
 
     /**
-     * Sostituisce, in uno statement parametrico, i parametri con i rispettivi valori
-     * Pre Condizione: uno statement parametrico è del tipo "SELECT * FROM table WHERE id = :id"
-     * dove il parametro da sostituire è ":id"
+     * Sostituisce, in uno statement parametrico, i parametri con i rispettivi valori Pre Condizione: uno statement
+     * parametrico è del tipo "SELECT * FROM table WHERE id = :id" dove il parametro da sostituire è ":id"
      *
      * @param params Map chiave-valore di nomi di parametri e valore
      * @return

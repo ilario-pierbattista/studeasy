@@ -35,8 +35,7 @@ public class FormTasse extends AbstractForm {
     }
 
     /**
-     * Metodo che prende i valori dei campi del form e li mette dentro un oggetto Tassa.
-     * Dopodichè ritorna tale oggetto
+     * Metodo che prende i valori dei campi del form e li mette dentro un oggetto Tassa. Dopodichè ritorna tale oggetto
      *
      * @return Tassa
      */
@@ -73,8 +72,7 @@ public class FormTasse extends AbstractForm {
     }
 
     /**
-     * Metodo di appoggio che controlla che i campi del form siano stati compilati
-     * correttamente
+     * Metodo di appoggio che controlla che i campi del form siano stati compilati correttamente
      *
      * @return
      */

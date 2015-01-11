@@ -98,24 +98,24 @@ public class ProfiloController {
         ArrayList<Insegnamento> insegnamentiDaAggiungere = diffArrayInsegnamenti(nuovaSelezione, insegnamentiSalvati);
 
         for (Insegnamento insegnamentoDaEliminare : insegnamentiDaEliminare) {
-            if(rispostaUtente == CONFERMA) {
+            if (rispostaUtente == CONFERMA) {
                 rispostaUtente = -1;
             }
-            if(insegnamentoDaEliminare.esameSostenuto() &&
+            if (insegnamentoDaEliminare.esameSostenuto() &&
                     rispostaUtente != CONFERMA_TUTTI &&
                     rispostaUtente != ANNULLA) {
                 rispostaUtente = showOptionDialog(insegnamentoDaEliminare);
             }
         }
 
-        if(rispostaUtente != ANNULLA) {
+        if (rispostaUtente != ANNULLA) {
             success = true;
             boolean found;
             // Eliminazione degli insegnamenti di troppo
             for (Insegnamento daEliminare : insegnamentiDaEliminare) {
                 found = false;
                 for (int i = 0; i < insegnamentiSalvati.size() && !found; i++) {
-                    if(daEliminare.getInsegnamentoOfferto().getId() == insegnamentiSalvati.get(i)
+                    if (daEliminare.getInsegnamentoOfferto().getId() == insegnamentiSalvati.get(i)
                             .getInsegnamentoOfferto().getId()) {
                         found = true;
                         insegnamentiSalvati.remove(i);
@@ -132,8 +132,8 @@ public class ProfiloController {
     }
 
     /**
-     * Calcola la differenza tra il primo e il secondo ArrayList di insegnamenti: restituisce
-     * tutti gli elementi del primo ArrayList che non sono presenti nel secondo
+     * Calcola la differenza tra il primo e il secondo ArrayList di insegnamenti: restituisce tutti gli elementi del
+     * primo ArrayList che non sono presenti nel secondo
      *
      * @param a Primo ArrayList
      * @param b Secondo ArrayList
@@ -147,7 +147,7 @@ public class ProfiloController {
             for (int j = 0; j < b.size() && !found; j++) {
                 found = a.get(i).getInsegnamentoOfferto().getId() == b.get(j).getInsegnamentoOfferto().getId();
             }
-            if(!found) {
+            if (!found) {
                 result.add(a.get(i));
             }
         }
@@ -205,8 +205,7 @@ public class ProfiloController {
     }
 
     /**
-     * Apre il form per la modifica delle informazioni riguardanti ad un insegnamento
-     * (voto e data di superamento)
+     * Apre il form per la modifica delle informazioni riguardanti ad un insegnamento (voto e data di superamento)
      */
     class insegnamentoFormAction implements ActionListener {
         @Override
@@ -266,8 +265,7 @@ public class ProfiloController {
     }
 
     /**
-     * Gestisce il salvataggio delle informazioni reperibili dal form
-     * per la modifica del libretto
+     * Gestisce il salvataggio delle informazioni reperibili dal form per la modifica del libretto
      */
     class SubmitModificaLibrettoAction implements ActionListener {
         @Override

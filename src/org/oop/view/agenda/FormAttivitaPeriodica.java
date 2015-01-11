@@ -103,8 +103,7 @@ public class FormAttivitaPeriodica extends AbstractFormAttivita {
     }
 
     /**
-     * Metodo di appoggio che controlla che i campi del form siano stati compilati
-     * correttamente
+     * Metodo di appoggio che controlla che i campi del form siano stati compilati correttamente
      *
      * @return
      */
@@ -127,8 +126,7 @@ public class FormAttivitaPeriodica extends AbstractFormAttivita {
     }
 
     /**
-     * Imposta i campi del form con i parametri dell'attivita passata. Serve se si vuole modificare
-     * un'attivita
+     * Imposta i campi del form con i parametri dell'attivita passata. Serve se si vuole modificare un'attivita
      *
      * @param attivita
      */

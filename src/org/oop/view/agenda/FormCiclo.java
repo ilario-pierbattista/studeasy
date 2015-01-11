@@ -28,8 +28,7 @@ public class FormCiclo extends AbstractView {
     }
 
     /**
-     * Metodo che prende i valori dei campi del form e li mette dentro un oggetto Ciclo.
-     * Dopodichè ritorna tale oggetto
+     * Metodo che prende i valori dei campi del form e li mette dentro un oggetto Ciclo. Dopodichè ritorna tale oggetto
      *
      * @return
      */
@@ -41,12 +40,10 @@ public class FormCiclo extends AbstractView {
                 .setFine((Date) cicloEndField.getValue());
 
         return ciclo;
-
     }
 
     /**
-     * Metodo di appoggio che controlla che i campi del form siano stati compilati
-     * correttamente
+     * Metodo di appoggio che controlla che i campi del form siano stati compilati correttamente
      *
      * @return
      */
@@ -111,5 +108,4 @@ public class FormCiclo extends AbstractView {
     public void addCancelButtonListener(ActionListener listener) {
         cancelButton.addActionListener(listener);
     }
-
 }

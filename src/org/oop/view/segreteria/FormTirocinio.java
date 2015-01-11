@@ -37,8 +37,7 @@ public class FormTirocinio extends AbstractForm {
     private JFormattedTextField cfu;
 
     /**
-     * Metodo di appoggio che controlla che i campi del form siano stati compilati
-     * correttamente
+     * Metodo di appoggio che controlla che i campi del form siano stati compilati correttamente
      *
      * @return
      */

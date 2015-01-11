@@ -28,9 +28,8 @@ public class Insegnamento {
     }
 
     /**
-     * Ritorna l'anno accademico durante il quale si è sostenuto l'esame.
-     * L'anno accademico si presume che cominci da Ottobre, quando la sessione
-     * estiva di recupero si è conclusa.
+     * Ritorna l'anno accademico durante il quale si è sostenuto l'esame. L'anno accademico si presume che cominci da
+     * Ottobre, quando la sessione estiva di recupero si è conclusa.
      *
      * @return
      */

@@ -43,8 +43,7 @@ public abstract class AbstractDAO<T> {
     public abstract void remove(T entity);
 
     /**
-     * Genera un ArrayList di entità a partire dal un oggetto
-     * ResultSet di un query
+     * Genera un ArrayList di entità a partire dal un oggetto ResultSet di un query
      *
      * @param rs Risultato di una query
      * @return Array di entità
@@ -67,8 +66,7 @@ public abstract class AbstractDAO<T> {
     protected abstract T generaEntita(ResultSet rs);
 
     /**
-     * Rende effettive le azioni di insert, update e delete
-     * effettuate e chiude la connessione
+     * Rende effettive le azioni di insert, update e delete effettuate e chiude la connessione
      */
     public void flush() {
         db.commit();

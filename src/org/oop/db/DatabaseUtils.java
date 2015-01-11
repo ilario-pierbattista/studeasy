@@ -140,8 +140,7 @@ public class DatabaseUtils {
     }
 
     /**
-     * Crea, da un oggetto java.util.Date, una stringa adatta
-     * ad una chiamata SQL
+     * Crea, da un oggetto java.util.Date, una stringa adatta ad una chiamata SQL
      *
      * @param date
      * @return

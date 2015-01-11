@@ -39,8 +39,7 @@ public class FormTesi extends AbstractView {
     }
 
     /**
-     * Metodo di appoggio che controlla che i campi del form siano stati compilati
-     * correttamente
+     * Metodo di appoggio che controlla che i campi del form siano stati compilati correttamente
      *
      * @return
      */

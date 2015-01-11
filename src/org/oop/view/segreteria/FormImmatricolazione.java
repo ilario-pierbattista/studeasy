@@ -32,8 +32,6 @@ public class FormImmatricolazione extends AbstractForm {
     private JFormattedTextField diploma;
     private JFormattedTextField provincia;
     private JLabel provinciaLabel;
-    private JFormattedTextField annoConseguimento2;
-    private JLabel annoConseguimento2Label;
 
     public FormImmatricolazione() {
         super();
@@ -46,8 +44,7 @@ public class FormImmatricolazione extends AbstractForm {
     }
 
     /**
-     * Metodo di appoggio che controlla che i campi del form siano stati compilati
-     * correttamente
+     * Metodo di appoggio che controlla che i campi del form siano stati compilati correttamente
      *
      * @return
      */
@@ -72,14 +69,11 @@ public class FormImmatricolazione extends AbstractForm {
             flag = false;
         } else if (Validator.isFormattedFieldEmpty(voto, "Voto") || !(Validator.inputVotoDiploma(Integer.parseInt(voto.getText())))) {
             flag = false;
-        } else if (Validator.isFormattedFieldEmpty(annoConseguimento1, "Anno di conseguimento") || Validator.isFormattedFieldEmpty(annoConseguimento2, "Anno di conseguimento")) {
-            flag = false;
-        } else if (!Validator.controlloAnno(Integer.parseInt(annoConseguimento1.getText()), Integer.parseInt(annoConseguimento2.getText()))) {
+        } else if (Validator.isFormattedFieldEmpty(annoConseguimento1, "Anno di conseguimento")) {
             flag = false;
         } else {
             flag = true;
         }
-
 
         return flag;
     }
@@ -88,7 +82,6 @@ public class FormImmatricolazione extends AbstractForm {
         datanascita = new JFormattedTextField(dateformat);
         matricola = new JFormattedTextField(dfMatricola);
         annoConseguimento1 = new JFormattedTextField(dateformatYear);
-        annoConseguimento2 = new JFormattedTextField(dateformatYear);
         voto = new JFormattedTextField(dfVoto);
     }
 
@@ -130,10 +123,6 @@ public class FormImmatricolazione extends AbstractForm {
 
     public JFormattedTextField getAnnoConseguimento1() {
         return annoConseguimento1;
-    }
-
-    public JFormattedTextField getAnnoConseguimento2() {
-        return annoConseguimento2;
     }
 
     public JFormattedTextField getNome() {

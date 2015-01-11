@@ -16,11 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Questa classe si occupa dell'importazione dei dati.
- * Nel dettaglio:
- * 1) Importa lo schema
- * 2) Legge i dati dal file e crea gli oggetti con la mappatura corretta
- * 3) Salva gli oggetti nel database
+ * Questa classe si occupa dell'importazione dei dati. Nel dettaglio: 1) Importa lo schema 2) Legge i dati dal file e
+ * crea gli oggetti con la mappatura corretta 3) Salva gli oggetti nel database
  */
 public class Importatore {
     private boolean overrideSchema;
@@ -221,9 +218,8 @@ public class Importatore {
     }
 
     /**
-     * Calcola i cfu totali di un corso di laurea.
-     * In generale non è molto accurato, ma per la realtà di nostro interesse
-     * va più che bene.
+     * Calcola i cfu totali di un corso di laurea. In generale non è molto accurato, ma per la realtà di nostro
+     * interesse va più che bene.
      *
      * @param livello Livello del corso di laurea.
      * @return Cfu totali per conseguire la laurea.
@@ -241,8 +237,7 @@ public class Importatore {
     }
 
     /**
-     * Aggiunge ulteriori insegnamenti all'offerta, per far quadrare
-     * il conto dei cfu
+     * Aggiunge ulteriori insegnamenti all'offerta, per far quadrare il conto dei cfu
      *
      * @param corso
      */
