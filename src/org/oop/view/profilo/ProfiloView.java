@@ -108,7 +108,7 @@ public class ProfiloView extends AbstractView {
     /**
      * Imposta le informazioni sugli insegnamenti
      *
-     * @param libretto
+     * @param libretto Oggetto Libretto da cui prendere gli insegnamenti
      */
     public void setInfoLibretto(Libretto libretto) {
         ArrayList<Insegnamento> insegnamenti = libretto.getInsegnamenti();
@@ -138,6 +138,11 @@ public class ProfiloView extends AbstractView {
         model.addRow(row);
     }
 
+    /**
+     * Ritorna l'istanza dell'insegnamento selezionato
+     *
+     * @return Oggetto Insegnamento
+     */
     public Insegnamento getInsegnamentoSelezionato() {
         int riga = librettoTable.getSelectedRow();
         int id = (Integer) model.getValueAt(riga, 6);
@@ -188,13 +193,8 @@ public class ProfiloView extends AbstractView {
         modificaLibrettoButton.addActionListener(l);
     }
 
-    /* Getters */
-    public JButton getAggiungiform() {
-        return modificaProfiloButton;
-    }
-
     /**
-     * Comparator
+     * Comparatore personalizzato per gli oggetti Insegnamento
      */
     private class InsegnamentoComparator implements Comparator<Insegnamento> {
         @Override

@@ -5,7 +5,8 @@ import javax.swing.table.DefaultTableModel;
 import java.util.Vector;
 
 
-/* TODO Ci sono molti metodi sovrascritti. È necessario?
+/**
+ * Model personalizzato per le tabelle JTable
  */
 public class CustomTableModel extends DefaultTableModel {
 

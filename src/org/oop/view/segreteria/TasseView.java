@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class Tasse {
+public class TasseView {
     public JPanel tassepanel;
     private CustomTableModel model;
     private JTable tabellaTasse;
@@ -16,7 +16,7 @@ public class Tasse {
     private JButton editButton;
     private JButton addButton;
 
-    public Tasse() {
+    public TasseView() {
         super();
         model = new CustomTableModel("Anno Accademico", "Importo", "Scadenza", "Stato");
         tabellaTasse.setModel(model);

@@ -11,7 +11,7 @@ public class ModalAddInsegnamento {
     public static JFrame frame = new JFrame("Aggiungi insegnamento");
     private JButton confermaButton;
     private JButton annullaButton;
-    private JList listInsegnamenti;
+    private JList<Insegnamento> listInsegnamenti;
     private JPanel contentPane;
 
     public ModalAddInsegnamento() {
@@ -49,20 +49,7 @@ public class ModalAddInsegnamento {
     public Insegnamento getInsegnamentoSelected() {
         int index = listInsegnamenti.getSelectedIndex();
 
-        return (Insegnamento) listInsegnamenti.getModel().getElementAt(index);
-    }
-
-    /* Getters */
-    public JButton getConfermaButton() {
-        return confermaButton;
-    }
-
-    public JButton getAnnullaButton() {
-        return annullaButton;
-    }
-
-    public JList getListInsegnamenti() {
-        return listInsegnamenti;
+        return listInsegnamenti.getModel().getElementAt(index);
     }
 
     /* Listeners setters */

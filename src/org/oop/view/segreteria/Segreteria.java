@@ -13,7 +13,7 @@ public class Segreteria extends AbstractView {
     private IscrizioneView iscrizioneView;
     private FormTirocinio tirocinio;
     private FormTesi tesi;
-    private Tasse tasse;
+    private TasseView tasseView;
 
     public Segreteria() {
         super();
@@ -21,14 +21,14 @@ public class Segreteria extends AbstractView {
         immatricolazione = new FormImmatricolazione();
         tirocinio = new FormTirocinio();
         tesi = new FormTesi();
-        tasse = new Tasse();
+        tasseView = new TasseView();
         iscrizioneView = new IscrizioneView();
 
         maintabpane.addTab("Immatricolazione", immatricolazione.immatricolazionepanel);
         maintabpane.addTab("Iscrizione", iscrizioneView.iscrizionepanel);
         maintabpane.addTab("Tirocinio", tirocinio.tirociniopanel);
         maintabpane.addTab("Tesi", tesi.tesipanel);
-        maintabpane.addTab("Tasse", tasse.tassepanel);
+        maintabpane.addTab("Tasse", tasseView.tassepanel);
     }
 
     public static Segreteria getInstance() {
@@ -47,8 +47,8 @@ public class Segreteria extends AbstractView {
         return tesi;
     }
 
-    public Tasse getTasse() {
-        return tasse;
+    public TasseView getTasseView() {
+        return tasseView;
     }
 
     public IscrizioneView getIscrizioneView() {

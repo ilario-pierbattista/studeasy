@@ -40,7 +40,7 @@ public class FormAttivitaPeriodica extends AbstractFormAttivita {
     /**
      * Metodo che prende i valori dei campi del form e li mette dentro un oggetto AttivitaPeriodica
      *
-     * @return
+     * @return Nuovo oggetto AttivitaPeriodica
      */
     public AttivitaPeriodica getNuovaAttivita() {
         AttivitaPeriodica attivita = new AttivitaPeriodica();
@@ -59,10 +59,10 @@ public class FormAttivitaPeriodica extends AbstractFormAttivita {
     }
 
     /**
-     * Converte il giorno scritto a lettere nel formato elaborato da java.util.calendar
+     * Converte il giorno scritto a lettere nel formato elaborato da java.util.Calendar
      *
-     * @param giorno
-     * @return
+     * @param giorno Stringa con il nome del giorno
+     * @return Intero che rappresenta il giorno
      */
     private int convertDayToInt(String giorno) {
         int valore = Calendar.MONDAY;
@@ -82,12 +82,8 @@ public class FormAttivitaPeriodica extends AbstractFormAttivita {
         return valore;
     }
 
-    /**
-     * Ritorna il ruolo del docente in base all'elemento selezionato nella Combobox
-     *
-     * @return
-     */
-    private String getRuoloDocente() {
+    @Override
+    protected String getRuoloDocente() {
         String ruolo;
         String e = ruoloDocenteBox.getSelectedItem().toString();
 
@@ -102,11 +98,7 @@ public class FormAttivitaPeriodica extends AbstractFormAttivita {
         return ruolo;
     }
 
-    /**
-     * Metodo di appoggio che controlla che i campi del form siano stati compilati correttamente
-     *
-     * @return
-     */
+    @Override
     public boolean isValid() {
         boolean flag = true;
 
@@ -128,7 +120,7 @@ public class FormAttivitaPeriodica extends AbstractFormAttivita {
     /**
      * Imposta i campi del form con i parametri dell'attivita passata. Serve se si vuole modificare un'attivita
      *
-     * @param attivita
+     * @param attivita AttivitaPeriodica con cui riempire il form
      */
     public void fillForm(AttivitaPeriodica attivita) {
         teacherBox.setSelectedItem(attivita.getDocente());

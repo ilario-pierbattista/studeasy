@@ -37,17 +37,18 @@ public class FormImmatricolazione extends AbstractForm {
         super();
     }
 
+    /**
+     * Imposta le informazioni dell'utente
+     *
+     * @param utente Utente corrente
+     */
     public void setInfoUtente(Utente utente) {
         nome.setValue(utente.getNome());
         cognome.setValue(utente.getCognome());
         matricola.setValue(utente.getMatricola());
     }
 
-    /**
-     * Metodo di appoggio che controlla che i campi del form siano stati compilati correttamente
-     *
-     * @return
-     */
+    @Override
     public boolean isValid() {
         boolean flag;
 
@@ -85,6 +86,7 @@ public class FormImmatricolazione extends AbstractForm {
         voto = new JFormattedTextField(dfVoto);
     }
 
+    /* Listeners */
     public void insSubmitFormButtonListener(ActionListener l) {
         submit.addActionListener(l);
     }
@@ -97,12 +99,9 @@ public class FormImmatricolazione extends AbstractForm {
         matricola.addFocusListener(listener);
     }
 
+    /* Getters */
     public JFormattedTextField getMatricola() {
         return matricola;
-    }
-
-    public void setMatricola(JFormattedTextField matricola) {
-        this.matricola = matricola;
     }
 
     public JFormattedTextField getProvincia() {
@@ -129,31 +128,15 @@ public class FormImmatricolazione extends AbstractForm {
         return nome;
     }
 
-    public void setNome(JFormattedTextField nome) {
-        this.nome = nome;
-    }
-
     public JFormattedTextField getCognome() {
         return cognome;
-    }
-
-    public void setCognome(JFormattedTextField cognome) {
-        this.cognome = cognome;
     }
 
     public JFormattedTextField getLuogonascita() {
         return luogonascita;
     }
 
-    public void setLuogonascita(JFormattedTextField luogonascita) {
-        this.luogonascita = luogonascita;
-    }
-
     public JFormattedTextField getDiploma() {
         return diploma;
-    }
-
-    public void setDiploma(JFormattedTextField diploma) {
-        this.diploma = diploma;
     }
 }

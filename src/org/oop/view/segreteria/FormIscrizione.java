@@ -58,7 +58,7 @@ public class FormIscrizione extends AbstractForm {
     /**
      * Metodo che riempe i campi del form con i valori dell'Iscrizione che gli si è passata
      *
-     * @param iscrizione
+     * @param iscrizione Iscrizione da cui prendere i dati
      */
     public void fillForm(Iscrizione iscrizione) {
         idIscrizione = iscrizione.getId();
@@ -81,18 +81,5 @@ public class FormIscrizione extends AbstractForm {
 
     public void addCancelButtonListener(ActionListener listener) {
         cancelButton.addActionListener(listener);
-    }
-
-    /* Getters */
-    public JTextField getAnnoAccademicoField() {
-        return annoAccademicoField;
-    }
-
-    public JButton getSubmitButton() {
-        return submitButton;
-    }
-
-    public JButton getCancelButton() {
-        return cancelButton;
     }
 }

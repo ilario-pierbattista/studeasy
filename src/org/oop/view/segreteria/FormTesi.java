@@ -2,13 +2,14 @@ package org.oop.view.segreteria;
 
 import org.oop.general.Validator;
 import org.oop.model.entities.Utente;
+import org.oop.view.AbstractForm;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
 
-public class FormTesi extends AbstractView {
+public class FormTesi extends AbstractForm {
     public JPanel tesipanel;
     private JButton submit;
     private JButton quit;
@@ -31,6 +32,10 @@ public class FormTesi extends AbstractView {
     private JFormattedTextField matricola;
     private JFormattedTextField email;
 
+    /**
+     * Imposta le informazioni dell'utente
+     * @param utente Utente corrente
+     */
     public void setInfoUtente(Utente utente) {
         nome.setValue(utente.getNome());
         cognome.setValue(utente.getCognome());
@@ -38,11 +43,7 @@ public class FormTesi extends AbstractView {
         matricola.setValue(utente.getMatricola());
     }
 
-    /**
-     * Metodo di appoggio che controlla che i campi del form siano stati compilati correttamente
-     *
-     * @return
-     */
+    @Override
     public boolean isValid() {
         boolean flag;
 
@@ -93,48 +94,24 @@ public class FormTesi extends AbstractView {
         return nome;
     }
 
-    public void setNome(JFormattedTextField nome) {
-        this.nome = nome;
-    }
-
     public JFormattedTextField getCognome() {
         return cognome;
-    }
-
-    public void setCognome(JFormattedTextField cognome) {
-        this.cognome = cognome;
     }
 
     public JFormattedTextField getDataNascita() {
         return dataNascita;
     }
 
-    public void setDataNascita(JFormattedTextField dataNascita) {
-        this.dataNascita = dataNascita;
-    }
-
     public JFormattedTextField getLuogoNascita() {
         return luogoNascita;
-    }
-
-    public void setLuogoNascita(JFormattedTextField luogoNascita) {
-        this.luogoNascita = luogoNascita;
     }
 
     public JFormattedTextField getAnnoCorso() {
         return annoCorso;
     }
 
-    public void setAnnoCorso(JFormattedTextField annoCorso) {
-        this.annoCorso = annoCorso;
-    }
-
     public JFormattedTextField getProfRelatore() {
         return profRelatore;
-    }
-
-    public void setProfRelatore(JFormattedTextField profRelatore) {
-        this.profRelatore = profRelatore;
     }
 
     public JFormattedTextField getTitoloTesi() {

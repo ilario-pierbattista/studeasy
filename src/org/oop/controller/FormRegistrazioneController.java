@@ -158,7 +158,7 @@ public class FormRegistrazioneController {
     class QuitFormAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.frame.dispose();
+            view.close();
         }
     }
 
@@ -174,7 +174,7 @@ public class FormRegistrazioneController {
                 if (primoAvvio) {
                     BaseController.startController();
                 }
-                view.frame.dispose();
+                view.close();
                 Mainframe.setVisible(true);
             }
         }

@@ -4,6 +4,10 @@ package org.oop.view;
 import javax.swing.*;
 import java.util.ArrayList;
 
+/**
+ * Model personalizzato per un oggetto JComboBox
+ * @param <T> Classe degli oggetti da gestire
+ */
 public class ArrayListComboBoxModel<T> extends AbstractListModel<T> implements ComboBoxModel<T> {
     private Object selectedItem;
 

@@ -1,6 +1,7 @@
 package org.oop.view.agenda;
 
 import org.oop.model.dao.DocenteDAO;
+import org.oop.model.entities.Attivita;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Docente;
 import org.oop.model.entities.Insegnamento;
@@ -17,6 +18,13 @@ import java.util.Date;
 abstract class AbstractFormAttivita extends AbstractForm {
 
     protected int idAttivita = 0;
+
+    /**
+     * Ritorna il ruolo del docente in base all'elemento selezionato nella Combobox
+     *
+     * @return Ruolo del docente
+     */
+    protected abstract String getRuoloDocente();
 
     /**
      * Imposta la lista dei docenti

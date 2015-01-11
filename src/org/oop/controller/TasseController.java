@@ -5,7 +5,7 @@ import org.oop.model.dao.UtenteDAO;
 import org.oop.model.entities.Tassa;
 import org.oop.model.entities.Utente;
 import org.oop.view.segreteria.FormTasse;
-import org.oop.view.segreteria.Tasse;
+import org.oop.view.segreteria.TasseView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,12 +15,12 @@ import java.awt.event.ActionListener;
  * Gestisce il form per le tasse
  */
 public class TasseController {
-    private Tasse view;
+    private TasseView view;
     private FormTasse form;
     private TassaDAO tassaDAO;
     private UtenteDAO utenteDAO;
 
-    public TasseController(Tasse view) {
+    public TasseController(TasseView view) {
         this.view = view;
         tassaDAO = new TassaDAO();
         utenteDAO = new UtenteDAO();

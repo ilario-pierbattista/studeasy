@@ -26,11 +26,7 @@ public class FormInsegnamento extends AbstractForm {
         frame.setVisible(true);
     }
 
-    /**
-     * Metodo di appoggio che controlla che i campi del form siano stati compilati correttamente
-     *
-     * @return
-     */
+    @Override
     public boolean isValid() {
         boolean flag = true;
 
@@ -52,6 +48,10 @@ public class FormInsegnamento extends AbstractForm {
         return flag;
     }
 
+    /**
+     * Imposta i dati dall'oggetto Insegnamento
+     * @param insegnamento Oggetto Insegnamento
+     */
     public void setInsegnamento(Insegnamento insegnamento) {
         this.insegnamento = insegnamento;
         votoField.setValue(insegnamento.getVoto());
@@ -59,6 +59,10 @@ public class FormInsegnamento extends AbstractForm {
         lodeCheckBox.setSelected(insegnamento.isLode());
     }
 
+    /**
+     * Aggiorna l'oggetto insegnamento con i dati del form
+     * @return Oggetto Insegnamento
+     */
     public Insegnamento salvaInsegnamento() {
         insegnamento.setVoto((Integer) votoField.getValue());
         insegnamento.setData((Date) dataField.getValue());

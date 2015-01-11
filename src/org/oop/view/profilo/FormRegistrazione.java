@@ -62,7 +62,7 @@ public class FormRegistrazione extends AbstractForm {
     /**
      * Imposta la lista dei corsi opzionabili
      *
-     * @param corsi
+     * @param corsi ArrayList di corsi da poter selezionare
      */
     public void setCorsiList(ArrayList<Corso> corsi) {
         corsiList.setEnabled(true);
@@ -72,11 +72,7 @@ public class FormRegistrazione extends AbstractForm {
         }
     }
 
-    /**
-     * Convalida gli attributi del form ed apre una finestra d'errore nel caso qualcosa non vada bene
-     *
-     * @return
-     */
+    @Override
     public boolean isValid() {
         boolean valid = true;
 
@@ -98,7 +94,7 @@ public class FormRegistrazione extends AbstractForm {
     /**
      * Restituisce un oggetto utente dai campi del form
      *
-     * @return
+     * @return Oggetto Utente
      */
     public Utente getUtente() {
         Utente utente = new Utente();

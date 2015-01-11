@@ -65,7 +65,7 @@ public class AgendaView extends AbstractView {
     /**
      * Metodo che ritorna l'istanza della vista
      *
-     * @return
+     * @return Istanza attiva di AgendaView
      */
     public static AgendaView getInstance() {
         return instance;
@@ -74,7 +74,7 @@ public class AgendaView extends AbstractView {
     /**
      * Metodo che aggiunge ogni Ciclo dell'Arraylist che gli si passa alla lista dei cicli
      *
-     * @param list
+     * @param list ArrayList di oggetti Ciclo
      */
     public void setListaCicli(ArrayList<Ciclo> list) {
         int selected = ciclilist.getSelectedIndex();

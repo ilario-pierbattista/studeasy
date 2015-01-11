@@ -57,13 +57,4 @@ public class AttivitaView extends AbstractView {
     public void addDeleteButtonListener(ActionListener listener) {
         deleteButton.addActionListener(listener);
     }
-
-    /* Getters */
-    public JButton getEditbutton() {
-        return editbutton;
-    }
-
-    public JButton getDeleteButton() {
-        return deleteButton;
-    }
 }

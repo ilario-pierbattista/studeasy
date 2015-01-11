@@ -42,7 +42,7 @@ public class FormAttivitaEvento extends AbstractFormAttivita {
     /**
      * Metodo che prende i valori dei campi del form e li mette dentro un oggetto AttivitaEvento
      *
-     * @return
+     * @return Nuovo oggetto AttivitaEvento
      */
     public AttivitaEvento getNuovaAttivita() {
         AttivitaEvento attivita = new AttivitaEvento();
@@ -60,12 +60,8 @@ public class FormAttivitaEvento extends AbstractFormAttivita {
         return attivita;
     }
 
-    /**
-     * Ritorna il ruolo del docente in base all'elemento selezionato nella Combobox
-     *
-     * @return
-     */
-    private String getRuoloDocente() {
+    @Override
+    protected String getRuoloDocente() {
         String ruolo;
         String e = ruoloDocenteBox.getSelectedItem().toString();
 
@@ -80,12 +76,7 @@ public class FormAttivitaEvento extends AbstractFormAttivita {
         return ruolo;
     }
 
-
-    /**
-     * Metodo di appoggio che controlla che i campi del form siano stati compilati correttamente
-     *
-     * @return
-     */
+    @Override
     public boolean isValid() {
         boolean flag = true;
 
@@ -109,7 +100,7 @@ public class FormAttivitaEvento extends AbstractFormAttivita {
     /**
      * Imposta i campi del form con i parametri dell'attivita passata. Serve se si vuole modificare un'attivita
      *
-     * @param attivita
+     * @param attivita Oggetto AttivitaEvento con cui riempire il form
      */
     public void fillForm(AttivitaEvento attivita) {
         teacherBox.setSelectedItem(attivita.getDocente());
@@ -158,7 +149,6 @@ public class FormAttivitaEvento extends AbstractFormAttivita {
 
 
     /* Setters */
-
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }

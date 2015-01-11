@@ -6,7 +6,7 @@ public abstract class AbstractForm extends AbstractView {
     /**
      * Verifica il contenuto dei campi del form e ne conferma la validità
      *
-     * @return
+     * @return True se valido, False altrimenti
      */
     public abstract boolean isValid();
 

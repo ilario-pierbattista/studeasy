@@ -2,6 +2,7 @@ package org.oop.view.agenda;
 
 import org.oop.general.Validator;
 import org.oop.model.entities.Ciclo;
+import org.oop.view.AbstractForm;
 import org.oop.view.AbstractView;
 
 import javax.swing.*;
@@ -9,8 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 
 
-public class FormCiclo extends AbstractView {
-    public static JFrame frame = new JFrame("Crea nuovo ciclo");
+public class FormCiclo extends AbstractForm {
 
     private JPanel panel1;
     private JTextField ciclonamefield;
@@ -20,6 +20,7 @@ public class FormCiclo extends AbstractView {
     private JButton cancelButton;
 
     public FormCiclo() {
+        frame = new JFrame("Crea nuovo ciclo");
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
@@ -30,7 +31,7 @@ public class FormCiclo extends AbstractView {
     /**
      * Metodo che prende i valori dei campi del form e li mette dentro un oggetto Ciclo. Dopodichè ritorna tale oggetto
      *
-     * @return
+     * @return Nuovo oggetto Ciclo
      */
     public Ciclo getNuovoCiclo() {
         Ciclo ciclo = new Ciclo();
@@ -42,11 +43,7 @@ public class FormCiclo extends AbstractView {
         return ciclo;
     }
 
-    /**
-     * Metodo di appoggio che controlla che i campi del form siano stati compilati correttamente
-     *
-     * @return
-     */
+    @Override
     public boolean isValid() {
         boolean flag = false;
         Date start = (Date) cicloStartField.getValue();
@@ -82,22 +79,6 @@ public class FormCiclo extends AbstractView {
     /* Getters */
     public JButton getSubmitButton() {
         return submitButton;
-    }
-
-    public JButton getCancelButton() {
-        return cancelButton;
-    }
-
-    public JFormattedTextField getCicloEndField() {
-        return cicloEndField;
-    }
-
-    public JFormattedTextField getCicloStartField() {
-        return cicloStartField;
-    }
-
-    public JTextField getCiclonamefield() {
-        return ciclonamefield;
     }
 
     /* Listeners setters */

@@ -8,17 +8,16 @@ import java.text.SimpleDateFormat;
 
 public abstract class AbstractView {
 
-    public DateFormat hourformat = new SimpleDateFormat("HH:mm");
-    public DateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
-    public DateFormat dateformatYear = new SimpleDateFormat("yyyy");
-    public DecimalFormat pagamentoformat = new DecimalFormat("###.##");
-    public DecimalFormat dfMatricola = new DecimalFormat("#########");
-    public DecimalFormat dfCAP = new DecimalFormat("#####");
-    public DecimalFormat dfCFU = new DecimalFormat("###");
-    public DecimalFormat dfVoto = new DecimalFormat("#########");
+    protected DateFormat hourformat = new SimpleDateFormat("HH:mm");
+    protected DateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
+    protected DateFormat dateformatYear = new SimpleDateFormat("yyyy");
+    protected DecimalFormat pagamentoformat = new DecimalFormat("###.##");
+    protected DecimalFormat dfMatricola = new DecimalFormat("#########");
+    protected DecimalFormat dfCAP = new DecimalFormat("#####");
+    protected DecimalFormat dfCFU = new DecimalFormat("###");
+    protected DecimalFormat dfVoto = new DecimalFormat("#########");
 
-    public JFrame frame;
-
+    protected JFrame frame;
 
     public AbstractView() {
         dfMatricola.setMaximumIntegerDigits(7);

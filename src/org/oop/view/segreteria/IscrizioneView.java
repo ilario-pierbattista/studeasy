@@ -28,6 +28,10 @@ public class IscrizioneView {
         tabellaiscrizione.setRowHeight(30);
     }
 
+    /**
+     * Imposta i dati dalle iscrizioni
+     * @param iscrizioni ArrayList di oggetti Iscrizione
+     */
     public void setIscrizioni(ArrayList<Iscrizione> iscrizioni) {
         model = new CustomTableModel("Anno", "Anno Accademico", "Esami Superati", "CFU");
         tabellaiscrizione.setModel(model);
@@ -104,6 +108,9 @@ public class IscrizioneView {
         addButton.addActionListener(listener);
     }
 
+    /**
+     * Comparatore personalizzato per gli oggetti Iscrizione
+     */
     private class IscrizioniComparator implements Comparator<Iscrizione> {
         @Override
         public int compare(Iscrizione o1, Iscrizione o2) {

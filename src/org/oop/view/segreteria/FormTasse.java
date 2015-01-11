@@ -55,7 +55,7 @@ public class FormTasse extends AbstractForm {
     /**
      * Metodo che riempe i campi del form con i valori della Tassa che gli si è passata
      *
-     * @param tassa
+     * @param tassa Tassa da cui prendere i dati
      */
     public void fillForm(Tassa tassa) {
         importoField.setText(String.valueOf(tassa.getImporto()));
@@ -71,11 +71,7 @@ public class FormTasse extends AbstractForm {
         idTassa = tassa.getId();
     }
 
-    /**
-     * Metodo di appoggio che controlla che i campi del form siano stati compilati correttamente
-     *
-     * @return
-     */
+    @Override
     public boolean isValid() {
         boolean flag = true;
 
@@ -95,7 +91,7 @@ public class FormTasse extends AbstractForm {
     /**
      * Restituisce lo stato della tassa
      *
-     * @return
+     * @return True se la tassa è stata pagata, False altrimenti
      */
     private boolean isTassaPagata() {
         return pagatoRadioButton.isSelected();
@@ -117,27 +113,6 @@ public class FormTasse extends AbstractForm {
 
     public void addCancelButtonListener(ActionListener listener) {
         cancelButton.addActionListener(listener);
-    }
-
-    /* Getters */
-    public JTextField getImportoField() {
-        return importoField;
-    }
-
-    public JRadioButton getPagatoRadioButton() {
-        return pagatoRadioButton;
-    }
-
-    public JRadioButton getNonPagatoRadioButton() {
-        return nonPagatoRadioButton;
-    }
-
-    public JButton getSubmitButton() {
-        return submitButton;
-    }
-
-    public JButton getCancelButton() {
-        return cancelButton;
     }
 
     /**

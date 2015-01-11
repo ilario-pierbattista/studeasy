@@ -69,7 +69,7 @@ public class FormLibretto extends AbstractForm {
     /**
      * Ritorna il libretto con i dati aggiornati
      *
-     * @return
+     * @return Oggetto Libretto
      */
     public Libretto getNuovoLibretto() {
         return copiaLibretto;

@@ -12,7 +12,7 @@ public class SegreteriaController {
         new ImmatricolazioneController(view.getImmatricolazione());
         new TirocinioController(view.getTirocinio());
         new TesiController(view.getTesi());
-        new TasseController(view.getTasse());
+        new TasseController(view.getTasseView());
         new IscrizioneController(view.getIscrizioneView());
     }
 }
