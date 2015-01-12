@@ -105,6 +105,11 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
         entity.setId(0);
     }
 
+    /**
+     * Imposta l'utente per il ciclo
+     *
+     * @param utente Oggetto utente
+     */
     public void setUtente(Utente utente) {
         ArrayList<Integer> idCicli = new ArrayList<Integer>(2);
         if (!utente.getAgenda().getCicli().isEmpty()) {
@@ -122,6 +127,12 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
         }
     }
 
+    /**
+     * Prende dal database tutti gli oggetti Insegnamento collegati al ciclo
+     *
+     * @param ciclo Oggetto ciclo
+     * @return ArrayList di oggetti Insegnamento
+     */
     private ArrayList<Insegnamento> getInsegnamentiCiclo(Ciclo ciclo) {
         InsegnamentoDAO insegnamentoDAO = new InsegnamentoDAO();
         ArrayList<Insegnamento> insegnamenti = new ArrayList<Insegnamento>(1);
@@ -151,6 +162,13 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
         return insegnamenti;
     }
 
+    /**
+     * Prende tutte le attività collegate all'insegnamento e al ciclo
+     *
+     * @param ciclo        Oggetto Ciclo
+     * @param insegnamento Oggetto Insegnamento
+     * @return ArrayList di oggetti Attivita
+     */
     private ArrayList<Attivita> getAttivitaPerInsegnamentoCiclo(Ciclo ciclo, Insegnamento insegnamento) {
         AttivitaDAO attivitaDAO = new AttivitaDAO();
         SQLParameters parameters = new SQLParameters();
@@ -159,6 +177,11 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
         return attivitaDAO.findBy(parameters);
     }
 
+    /**
+     * Aggiorna la relazione tra il ciclo e l'insegnamento
+     *
+     * @param ciclo Oggetto Ciclo
+     */
     private void updateInsegnamentiRelationship(Ciclo ciclo) {
         db.createSqlStatement("DELETE FROM iu_ciclo WHERE ciclo = :ciclo")
                 .setParameters(new SQLParameters().add("ciclo", ciclo.getId()))
@@ -174,6 +197,11 @@ public class CicloDAO extends AbstractDAO<Ciclo> {
         }
     }
 
+    /**
+     * Aggiorna la relazione tra il ciclo, l'insegnamento e l'attività
+     *
+     * @param ciclo Oggetto ciclo
+     */
     private void updateAttivitaRelationship(Ciclo ciclo) {
         SQLParameters parameters = new SQLParameters();
         parameters.add("ciclo", ciclo.getId());

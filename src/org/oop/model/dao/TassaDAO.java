@@ -104,6 +104,10 @@ public class TassaDAO extends AbstractDAO<Tassa> {
         entity.setId(0);
     }
 
+    /**
+     * Imposta l'utente per la tassa
+     * @param utente Oggetto utente
+     */
     public void setUtente(Utente utente) {
         ArrayList<Integer> ids = new ArrayList<Integer>(3);
         SQLParameters parameters = new SQLParameters();

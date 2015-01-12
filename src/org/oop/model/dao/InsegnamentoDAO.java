@@ -104,7 +104,8 @@ public class InsegnamentoDAO extends AbstractDAO<Insegnamento> {
     }
 
     /**
-     * @TODO qui ci dovrebbe essere un bug
+     * Imposta l'utente per l'insegnamento
+     * @param utente Oggetto Utente
      */
     public void setUtente(Utente utente) {
         if (!utente.getLibretto().getInsegnamenti().isEmpty()) {

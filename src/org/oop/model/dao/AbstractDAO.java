@@ -8,6 +8,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
+/**
+ * Classe che definisce i metodi che una classe DAO deve implementare.
+ * <p/>
+ * DAO sta per Data Access Object. Implementa tutta la logica per la lettura e la scrittura sul database per una classe
+ * entità.
+ *
+ * @param <T> Classe entità per cui si implementa il DAO.
+ */
 public abstract class AbstractDAO<T> {
     protected DatabaseManager db;
 
@@ -16,7 +25,7 @@ public abstract class AbstractDAO<T> {
     }
 
     /**
-     * Cerca un'entit&agrave; attraverso la sua chiave primaria
+     * Cerca un'entit&agrave; attraverso la sua chiave primaria.
      *
      * @param id Chiave primaria
      * @return Istanza dell'entit&agrave; se presente oppure null
@@ -24,22 +33,41 @@ public abstract class AbstractDAO<T> {
     public abstract T find(int id);
 
     /**
-     * Cerca tutte le entit&agrave; presenti nel database
+     * Cerca tutte le entit&agrave; presenti nel database.
      *
      * @return ArrayList di entit&agrave;
      */
     public abstract ArrayList<T> findAll();
 
-
     /**
-     * @TODO Commentare
+     * Cerca le entità a partire dai parametri.
+     *
+     * @param params Oggetto SQLParameters
+     * @return ArrayList di oggetti entità
+     * @see org.oop.db.SQLParameters
      */
     public abstract ArrayList<T> findBy(SQLParameters params);
 
+    /**
+     * Inserisce i dati di un'entità nel database. Imposta, al momento della creazione, l'attributo identificativo
+     * univoco dell'entità.
+     *
+     * @param entity Oggetto entità da inserire
+     */
     public abstract void persist(T entity);
 
+    /**
+     * Aggiorna i dati di un'entità nel database
+     *
+     * @param entity Oggetto entità da aggiornare
+     */
     public abstract void update(T entity);
 
+    /**
+     * Rimuove un'entità dal database
+     *
+     * @param entity Oggetto entità da rimuovere
+     */
     public abstract void remove(T entity);
 
     /**
@@ -61,8 +89,21 @@ public abstract class AbstractDAO<T> {
         return entita;
     }
 
+    /**
+     * Genera, da un oggetto entità, un oggetto SQLParameters i cui parametri sono gli attributi dell'entità con
+     * corrispondenza nel database.
+     *
+     * @param e Oggetto entità
+     * @return Oggetto SQLParameters generato
+     */
     protected abstract SQLParameters generaSQLParams(T e);
 
+    /**
+     * Genera, a partire dal ResultSet di una query, l'oggetto entità che
+     *
+     * @param rs Oggetto ResultSet
+     * @return Oggetto entità.
+     */
     protected abstract T generaEntita(ResultSet rs);
 
     /**
@@ -72,6 +113,9 @@ public abstract class AbstractDAO<T> {
         db.commit();
     }
 
+    /**
+     * Annulla le azioni effettuate sul database tornando allo stato dell'ultima commit
+     */
     public void undo() {
         db.rollback();
     }

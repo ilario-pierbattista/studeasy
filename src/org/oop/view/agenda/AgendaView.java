@@ -2,14 +2,14 @@ package org.oop.view.agenda;
 
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Insegnamento;
-import org.oop.view.AbstractView;
+import org.oop.view.View;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class AgendaView extends AbstractView {
+public class AgendaView extends View {
     private static AgendaView instance;
     public JPanel agendapanel;
 

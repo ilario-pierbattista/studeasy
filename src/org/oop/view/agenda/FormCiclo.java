@@ -3,7 +3,6 @@ package org.oop.view.agenda;
 import org.oop.general.Validator;
 import org.oop.model.entities.Ciclo;
 import org.oop.view.AbstractForm;
-import org.oop.view.AbstractView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;

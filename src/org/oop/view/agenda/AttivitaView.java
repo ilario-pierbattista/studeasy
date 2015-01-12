@@ -6,13 +6,13 @@ import org.oop.model.entities.Attivita;
 import org.oop.model.entities.AttivitaEvento;
 import org.oop.model.entities.AttivitaPeriodica;
 import org.oop.model.entities.Esame;
-import org.oop.view.AbstractView;
+import org.oop.view.View;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
 
-public class AttivitaView extends AbstractView {
+public class AttivitaView extends View {
     public JPanel activitypanel;
     private JLabel activityname;
     private JLabel teacher;

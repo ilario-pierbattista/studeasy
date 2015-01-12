@@ -1,11 +1,11 @@
 package org.oop.view.segreteria;
 
-import org.oop.view.AbstractView;
+import org.oop.view.View;
 
 import javax.swing.*;
 
 
-public class Segreteria extends AbstractView {
+public class Segreteria extends View {
     private static Segreteria instance;
     public JPanel segreteriapanel;
     private JTabbedPane maintabpane;

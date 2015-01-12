@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 
-public abstract class AbstractView {
+public class View {
 
     protected DateFormat hourformat = new SimpleDateFormat("HH:mm");
     protected DateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
@@ -19,7 +19,7 @@ public abstract class AbstractView {
 
     protected JFrame frame;
 
-    public AbstractView() {
+    public View() {
         dfMatricola.setMaximumIntegerDigits(7);
         dfMatricola.setMinimumIntegerDigits(7);
         dfCAP.setMaximumIntegerDigits(5);
@@ -33,7 +33,7 @@ public abstract class AbstractView {
     /**
      * Imposta la visibilità del frame
      *
-     * @param visible
+     * @param visible True per rendere visibile il frame, False altrimenti
      */
     public void setVisible(boolean visible) {
         frame.setVisible(visible);

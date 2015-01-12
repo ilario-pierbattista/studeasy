@@ -5,7 +5,7 @@ import org.oop.model.Libretto;
 import org.oop.model.entities.Corso;
 import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.Utente;
-import org.oop.view.AbstractView;
+import org.oop.view.View;
 import org.oop.view.CustomTableModel;
 
 import javax.swing.*;
@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 
-public class ProfiloView extends AbstractView {
+public class ProfiloView extends View {
     public JPanel profiloPanel;
     private JPanel sidebarPanel;
     private JSplitPane splitpane;
