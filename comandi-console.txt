@@ -8,8 +8,8 @@ Pushare una modifica
     git commit -m "Messaggio sensato"
     git push origin master
 
-Quando dopo una commit si impanica la shell e ti chiede di scrivere un commento dal quale non si riesce ad usire digitare:
-    :q!
+Uscire da vim
+    :wq
 
 Cancellare la cache di git:
     git rm -r --cached .
