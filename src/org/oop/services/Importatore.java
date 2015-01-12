@@ -165,10 +165,11 @@ public class Importatore {
     }
 
     /**
-     * Lettura di una riga del file e generazione delle associazioni tra il nome del campo e il valore del campo
+     * Lettura di una riga file e generazione di un ArrayList di stringhe contenenti i valori dei campi (che nel file
+     * sono sperati da stringhe)
      *
      * @param line Riga del file
-     * @return Mappa chiave-valore con i dati della riga
+     * @return ArrayList di stringhe con i valori
      */
     private ArrayList<String> parseLine(String line) {
         String parts[] = line.split(",");
