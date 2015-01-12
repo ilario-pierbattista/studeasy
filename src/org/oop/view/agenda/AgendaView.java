@@ -145,10 +145,10 @@ public class AgendaView extends View {
      * @param ciclo Ciclo
      */
     public void setInsegnamentiFromCiclo(Ciclo ciclo) {
+        DefaultListModel<Insegnamento> model = new DefaultListModel<Insegnamento>();
         if (ciclo != null) { //ciclo è null solo se non esiste neanche un ciclo. Guarda getCicloSelected
             int selected = insegnamentiList.getSelectedIndex();
             ArrayList<Insegnamento> listaInsegnamenti = ciclo.getInsegnamenti();
-            DefaultListModel<Insegnamento> model = new DefaultListModel<Insegnamento>();
             for (Insegnamento ins : listaInsegnamenti) {
                 model.addElement(ins);
             }
@@ -170,6 +170,9 @@ public class AgendaView extends View {
                     insegnamentiList.ensureIndexIsVisible(selected);
                 }
             }
+        } else {
+            // Impostando il model vuoto si cancella la lista dei cicli
+            insegnamentiList.setModel(model);
         }
     }
 

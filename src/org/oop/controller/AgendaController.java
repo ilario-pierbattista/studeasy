@@ -224,12 +224,10 @@ public class AgendaController {
             if (index == -1) { //Se non è selezionato niente
                 JOptionPane.showMessageDialog(null, "Seleziona un ciclo per eliminarlo!");
             } else {
+                agenda.removeCiclo(ciclo);
                 CicloDAO cicloDAO = new CicloDAO();
                 cicloDAO.remove(ciclo);
                 cicloDAO.flush();
-
-                agenda.removeCiclo(ciclo);
-
                 updateView();
             }
         }
