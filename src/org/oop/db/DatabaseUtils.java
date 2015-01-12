@@ -12,10 +12,30 @@ import java.util.ArrayList;
 public class DatabaseUtils {
 
     /**
-     * Questa roba deve essere documentata alla perfezione
+     * Genera una porzione di istruzione SQL che costrituisce un insieme di condizioni generate a partire da un oggetto
+     * SQLParameters.
+     * <p/>
+     * Questa porzione di istruzione è pensata per essere concatenata ad una qualsiasi istruzione SQL dopo la parola
+     * chiave "WHERE".
+     * <p/>
+     * Ogni elemento di SQLParameters viene convertito in una condizione, ognuna delle quali deve essere soddisfatta
+     * (vengono legate dall'operatore logico AND).
+     * <p/>
+     * Nel caso in cui ad una chiave sia associato un ArrayList di n valori, vengono generate n condizioni, almeno una
+     * delle quali deve essere soddisfatta (vengono legate dall'operatore logico OR).
+     * <p/>
+     * Esempio: se l'oggetto SQLParameters ha la struttura* <code> "chiave1"->valore1; "chiave2"-> [ valore2_1,
+     * valore2_2 ] </code>, il risultato di sarà della forma: <code>"chiave1 = :chiave1 AND (chiave2_1 = :chiave2_1 OR
+     * chiave2_2 = :valore2_2)"</code> e l'oggetto SQLParameters sarà modificato assumendo una struttura di questo tipo:
+     * <code>"chiave1"->valore1; "chiave2_1"->valore2_1; "chiave2_2"->valore2_2</code>.
      *
-     * @param parameters
-     * @return
+     * * Consultare SQLParameters per informazioni sulla notazione
+     *
+     * @param parameters Oggetto SQLParameters
+     * @return Stringa con le condizioni parametriche generate
+     *
+     * @see org.oop.db.SQLParameters
+     * @see org.oop.db.DatabaseManager#setParameters
      */
     public static String generateCondition(SQLParameters parameters) {
         ArrayList<String> condizioniAnd = new ArrayList<String>(3);
@@ -42,7 +62,7 @@ public class DatabaseUtils {
         for (String chiave : chiaviDaEliminare) {
             parameters.remove(chiave);
         }
-        parameters.merge(parametriAusiliari);
+        parameters.union(parametriAusiliari);
 
         return Utils.stringJoin(condizioniAnd, " AND ");
     }
@@ -50,7 +70,7 @@ public class DatabaseUtils {
     /**
      * Controlla l'esistenza di uno specifico database
      *
-     * @return
+     * @return True se il database esiste, False altrimenti
      */
     public static boolean databaseExists() {
         boolean exists = false;
@@ -142,8 +162,8 @@ public class DatabaseUtils {
     /**
      * Crea, da un oggetto java.util.Date, una stringa adatta ad una chiamata SQL
      *
-     * @param date
-     * @return
+     * @param date Data
+     * @return Stringa che rappresenta la data nel formato adatto per essere inserita in un'istruzione SQL
      */
     protected static String getDateStringForSQL(java.util.Date date) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");

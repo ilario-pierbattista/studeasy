@@ -32,6 +32,7 @@ public class BaseController {
                 DatabaseManager db = DatabaseManager.getInstance();
                 db.closeConnection();
                 super.windowClosing(e);
+                System.exit(0);
             }
         });
 

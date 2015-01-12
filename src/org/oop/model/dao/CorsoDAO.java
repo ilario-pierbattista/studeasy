@@ -58,7 +58,7 @@ public class CorsoDAO extends AbstractDAO<Corso> {
         idInsegnamenti.add("id", ids);
         db.createSqlStatement("UPDATE insegnamento SET corso = :id_corso WHERE ".concat(DatabaseUtils.generateCondition(idInsegnamenti)));
         sqlParameters.add("id_corso", id)
-                .merge(idInsegnamenti);
+                .union(idInsegnamenti);
         db.setParameters(sqlParameters)
                 .executeUpdate();
     }

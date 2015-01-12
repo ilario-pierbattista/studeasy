@@ -7,7 +7,8 @@ import java.sql.*;
 import java.time.LocalTime;
 
 /**
- * Incapsula l'accesso alla connessione, mettendo a disposizione i metodi necessari per effettuare chiamate al database
+ * Incapsula l'accesso alla connessione con il database, mettendo a disposizione i metodi necessari per effettuare
+ * chiamate al db
  */
 public class DatabaseManager {
 
@@ -20,7 +21,7 @@ public class DatabaseManager {
      * Configurazione del manager
      */
     public DatabaseManager() {
-        //il metodo getInstance() restituisce l'unica istanza della classe a cui è riferito
+        // il metodo getInstance() restituisce l'unica istanza della classe a cui è riferito
         config = DatabaseConfig.getInstance();
         instance = this;
     }
@@ -40,8 +41,8 @@ public class DatabaseManager {
     /**
      * Imposta il contenuto dello statement SQL da inviare al server
      *
-     * @param sql
-     * @return
+     * @param sql Istruzione SQL
+     * @return Istanza di DatabaseManager
      */
     //lo statement è una sorta di connessione che si occupa di inviare le istruzioni al database(?)
     public DatabaseManager createSqlStatement(String sql) {
@@ -52,18 +53,28 @@ public class DatabaseManager {
     /**
      * Rende accessibile dall'esterno uno statement SQL
      *
-     * @return
+     * @return Ultima istruzione SQL immessa
      */
     public String getSqlStatement() {
         return sql;
     }
 
     /**
-     * Sostituisce, in uno statement parametrico, i parametri con i rispettivi valori Pre Condizione: uno statement
-     * parametrico è del tipo "SELECT * FROM table WHERE id = :id" dove il parametro da sostituire è ":id"
+     * Sostituisce, in uno statement parametrico, i parametri con i rispettivi valori.
+     * <p/>
+     * Per statement parametrico si intende un'istruzione sql con dei placeholder nei punti dove andrebbero dei valori.
+     * Ogni placeholder &egrave; identificato dai due punti (":") che lo precedono, ad esempio ":id".
+     * <p/>
+     * Il metodo sostituisce quei placeholder con i relativi valori definiti nell'oggetto SQLParameters. Ad ogni chiave
+     * dell'oggetto SQLParameters, verr&agrave; cercato il relativo placeholder con lo stesso nome, quindi quest'ultimo
+     * verr&agrave; sostituito con il relativo valore. Ad esempio, per un elemento* "id"->3 di SQLParameters, si
+     * cercher&agrave; il placeholder ":id", sostituendolo con "3".
+     * <p/>
+     * * Consultare SQLParameters per informazioni sulla notazione
      *
-     * @param params Map chiave-valore di nomi di parametri e valore
-     * @return
+     * @param params Oggetto SQLParameters con i parametri da sostituire
+     * @return Istanza di DatabaseManager
+     * @see SQLParameters
      */
     public DatabaseManager setParameters(SQLParameters params) {
         String replace = null, regex;
@@ -100,9 +111,11 @@ public class DatabaseManager {
     }
 
     /**
-     * Esegue una query e ritorna il risultato
+     * Ritorna l'oggetto ResultSet associato all'esecuzione dei una query a partire dall'istruzione sql impostata con
+     * createSqlStatement
      *
-     * @return
+     * @return Oggetto ResultSet collegato alla query
+     * @see #createSqlStatement
      */
     public ResultSet getResult() {
         ResultSet rs = null;
@@ -114,15 +127,17 @@ public class DatabaseManager {
             statement.closeOnCompletion();
             rs = statement.executeQuery(sql);
         } catch (SQLException ee) {
+            System.out.println(sql);
             ee.printStackTrace();
         }
         return rs;
     }
 
     /**
-     * Esegue un comando DML
+     * Esegue un'istruzione DML impostata con createSqlStatement
      *
-     * @return
+     * @return Chiave autogenerata dal dbms in caso di nuovo inserimento
+     * @see #createSqlStatement
      */
     public int executeUpdate() {
         int auto_generated_key = 0;
@@ -146,7 +161,7 @@ public class DatabaseManager {
     }
 
     /**
-     * Chiude la connessione e le risorse aperte con il database
+     * Chiude la connessione con il database
      */
     public void closeConnection() {
         try {
@@ -174,7 +189,6 @@ public class DatabaseManager {
     /**
      * Esegue il rollback
      */
-    //torna indietro all'ultimo salvataggio
     public void rollback() {
         try {
             connection.rollback();
@@ -186,9 +200,9 @@ public class DatabaseManager {
     }
 
     /**
-     * Apre la connessione con il database permettendo di specificare lo stato di Auto-Commit
+     * Apre la connessione con il database specificando lo stato di Auto-Commit
      *
-     * @param autoCommit
+     * @param autoCommit True per abilitare l'autocommit, False altrimenti
      * @throws SQLException
      */
     private void openConnection(boolean autoCommit) throws SQLException {
