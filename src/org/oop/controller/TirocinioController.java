@@ -1,7 +1,6 @@
 package org.oop.controller;
 
 import com.lowagie.text.DocumentException;
-import org.apache.commons.lang3.StringUtils;
 import org.oop.general.Utils;
 import org.oop.general.Validator;
 import org.oop.services.PdfGenerator;
@@ -12,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.io.File;
 import java.io.IOException;
 
 

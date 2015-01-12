@@ -20,6 +20,7 @@ public class BaseController {
 
     /**
      * Aggiunta del listener alla vista principale
+     *
      * @param v Vista principale
      */
     public BaseController(Mainframe v) {

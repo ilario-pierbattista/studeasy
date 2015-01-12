@@ -6,6 +6,12 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
+
+/**
+ * La classe rappresenta un insegnamento opzionato dall'utente.
+ *
+ * @see org.oop.model.entities.InsegnamentoOfferto
+ */
 public class Insegnamento {
     private int id;
     private InsegnamentoOfferto insegnamentoOfferto;
@@ -15,6 +21,8 @@ public class Insegnamento {
     private ArrayList<Attivita> attivita;
 
     public Insegnamento() {
+        id = 0;
+        voto = 0;
         attivita = new ArrayList<Attivita>(3);
     }
 
@@ -23,6 +31,11 @@ public class Insegnamento {
         this.insegnamentoOfferto = insegnamentoOfferto;
     }
 
+    /**
+     * Verifica che l'esame per l'insegnamento sia stato sostenuto
+     *
+     * @return True se l'esame è stato sostenuto, False altrimenti
+     */
     public boolean esameSostenuto() {
         return voto != 0;
     }
@@ -31,7 +44,7 @@ public class Insegnamento {
      * Ritorna l'anno accademico durante il quale si è sostenuto l'esame. L'anno accademico si presume che cominci da
      * Ottobre, quando la sessione estiva di recupero si è conclusa.
      *
-     * @return
+     * @return Anno accademico in cui è stato sostenuto l'esame per l'insegnamento
      */
     public int getAnnoAccademico() {
         int annoAccademico = 0;
@@ -108,6 +121,7 @@ public class Insegnamento {
         return this;
     }
 
+    @Override
     public String toString() {
         return insegnamentoOfferto.toString();
     }

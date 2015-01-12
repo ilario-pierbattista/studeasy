@@ -50,6 +50,7 @@ public class FormInsegnamento extends AbstractForm {
 
     /**
      * Imposta i dati dall'oggetto Insegnamento
+     *
      * @param insegnamento Oggetto Insegnamento
      */
     public void setInsegnamento(Insegnamento insegnamento) {
@@ -61,6 +62,7 @@ public class FormInsegnamento extends AbstractForm {
 
     /**
      * Aggiorna l'oggetto insegnamento con i dati del form
+     *
      * @return Oggetto Insegnamento
      */
     public Insegnamento salvaInsegnamento() {

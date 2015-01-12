@@ -3,8 +3,14 @@ package org.oop.model.entities;
 import java.util.ArrayList;
 
 
+/**
+ * Classe che rappresenta un corso di laurea
+ */
 public class Corso {
 
+    /**
+     * Valori assumibili dall'attributo livello
+     */
     public static final int TRIENNALE = 1;
     public static final int MAGISTRALE = 2;
     public static final int CICLO_UNICO = 0;
@@ -16,26 +22,16 @@ public class Corso {
     private ArrayList<InsegnamentoOfferto> insegnamentiOfferti;
 
 
-    public Corso(int id, String nome, int livello, int totaleCfu, ArrayList<InsegnamentoOfferto> insegnamentiOfferti) {
-        this.id = id;
-        this.nome = nome;
-        this.livello = livello;
-        this.totaleCfu = totaleCfu;
-        this.insegnamentiOfferti = insegnamentiOfferti;
-    }
-
-    /**
-     * Costruttore base
-     */
     public Corso() {
+        id = 0;
         insegnamentiOfferti = new ArrayList<InsegnamentoOfferto>(20);
     }
 
     /**
-     * Il metodo getInsegnamentiObbligatori restituisce un ArrayList i cui elementi sono oggetti della Classe
-     * InsegnamentoOfferto con il valore dell'attributo opzionale a false, quindi sono insegnamenti obbligatori.
+     * Restituisce un ArrayList i cui elementi sono oggetti della classe InsegnamentoOfferto con il valore
+     * dell'attributo opzionale a false, quindi sono insegnamenti obbligatori.
      *
-     * @return
+     * @return Arraylist di oggetti InsegnamentoOfferto obbligatori
      */
     public ArrayList<InsegnamentoOfferto> getInsegnamentiObbligatori() {
         ArrayList<InsegnamentoOfferto> insegnamentiObbligatori = new ArrayList<InsegnamentoOfferto>(10);
@@ -48,10 +44,10 @@ public class Corso {
     }
 
     /**
-     * Il metodo getInsegnamentiObbligatori restituisce un ArrayList i cui elementi sono oggetti della Classe
-     * InsegnamentoOfferto con il valore dell'attributo opzionale a true, quindi sono insegnamenti opzionali.
+     * Restituisce un ArrayList i cui elementi sono oggetti della classe InsegnamentoOfferto con il valore
+     * dell'attributo opzionale a true, quindi sono insegnamenti opzionali.
      *
-     * @return
+     * @return ArrayList di oggetti InsegnamentoOfferto opzionali
      */
     public ArrayList<InsegnamentoOfferto> getInsegnamentiOpzionali() {
         ArrayList<InsegnamentoOfferto> insegnamentiOpzionali = new ArrayList<InsegnamentoOfferto>(10);
@@ -90,6 +86,11 @@ public class Corso {
         return this;
     }
 
+    /**
+     * Ritorna il nome del livello del corso di laurea in base alla convenzione utilizzata
+     *
+     * @return "Triennale", "Magistrale" o "Ciclo Unico"
+     */
     public String getNomeLivello() {
         String nome;
         if (livello == TRIENNALE) {
@@ -123,14 +124,6 @@ public class Corso {
     public Corso addInsegnamentoOfferto(InsegnamentoOfferto insegnamentoOfferto) {
         insegnamentiOfferti.add(insegnamentoOfferto);
         return this;
-    }
-
-    public boolean hasInsegnamentoOfferto(InsegnamentoOfferto insegnamentoOfferto) {
-        boolean found = false;
-        for (int i = 0; i < insegnamentiOfferti.size() && !found; i++) {
-            found = insegnamentiOfferti.get(i).equals(insegnamentoOfferto);
-        }
-        return found;
     }
 
     @Override

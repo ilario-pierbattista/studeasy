@@ -28,12 +28,11 @@ public class DatabaseUtils {
      * valore2_2 ] </code>, il risultato di sarà della forma: <code>"chiave1 = :chiave1 AND (chiave2_1 = :chiave2_1 OR
      * chiave2_2 = :valore2_2)"</code> e l'oggetto SQLParameters sarà modificato assumendo una struttura di questo tipo:
      * <code>"chiave1"->valore1; "chiave2_1"->valore2_1; "chiave2_2"->valore2_2</code>.
-     *
+     * <p/>
      * * Consultare SQLParameters per informazioni sulla notazione
      *
      * @param parameters Oggetto SQLParameters
      * @return Stringa con le condizioni parametriche generate
-     *
      * @see org.oop.db.SQLParameters
      * @see org.oop.db.DatabaseManager#setParameters
      */

@@ -5,6 +5,10 @@ import org.oop.model.entities.Ciclo;
 
 import java.util.ArrayList;
 
+
+/**
+ * Rappresenta un'agenda
+ */
 public class Agenda {
     ArrayList<Ciclo> cicli;
 
@@ -35,18 +39,5 @@ public class Agenda {
             }
         }
         return this;
-    }
-
-    public Ciclo findCiclo(int idciclo) {
-        boolean found = false;
-        Ciclo c = new Ciclo();
-        for (int i = 0; i < cicli.size() && !found; i++) {
-            if (idciclo == cicli.get(i).getId()) {
-                found = true;
-                c = cicli.get(i);
-            }
-        }
-
-        return c;
     }
 }

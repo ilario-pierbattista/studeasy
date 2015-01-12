@@ -3,12 +3,20 @@ package org.oop.model.entities;
 
 import java.util.Date;
 
+
+/**
+ * Rappresenta i dati riguardanti una tassa d'iscrizione
+ */
 public class Tassa {
     private int id;
     private int annoAccademico;
     private double importo;
     private Date scadenza;
     private boolean pagata;
+
+    public Tassa() {
+        id = 0;
+    }
 
     public int getId() {
         return id;
@@ -55,6 +63,11 @@ public class Tassa {
         return this;
     }
 
+    /**
+     * Restituisce una stringa che traduce l'attributo pagata
+     *
+     * @return "Pagata" o "Non pagata"
+     */
     public String isPagataToString() {
         String stato;
         if (pagata) {

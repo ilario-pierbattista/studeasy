@@ -1,11 +1,18 @@
 package org.oop.model.entities;
 
 
+/**
+ * Rappresenta i dati riguardanti un'iscrizione
+ */
 public class Iscrizione {
     private int id;
     private int anno;
     private int annoAccademico;
     private Utente utente;
+
+    public Iscrizione() {
+        id = 0;
+    }
 
     public int getId() {
         return id;

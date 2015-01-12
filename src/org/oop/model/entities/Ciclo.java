@@ -4,25 +4,21 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
+/**
+ * Classe che descrive un ciclo. Un ciclo è un lasso temporale di durata arbitraria costituito da una lista di
+ * insegnamenti. È affine al concetto di semestre dal punto di vista organizzativo, ma più flessibile riguardo la
+ * durata.
+ */
 public class Ciclo {
 
-    /* Dichiarazione degli attributi */
     private int id;
     private String label;
     private Date inizio;
     private Date fine;
     private ArrayList<Insegnamento> insegnamenti;
 
-    /* Metodo Costruttore */
-    public Ciclo(String label, Date inizio, Date fine, ArrayList<Insegnamento> insegnamenti) {
-        this.label = label;
-        this.inizio = inizio;
-        this.fine = fine;
-        this.insegnamenti = insegnamenti;
-    }
-
-    //il seguente è il costruttore che inizializza i dati di deafult
     public Ciclo() {
+        id = 0;
         insegnamenti = new ArrayList<Insegnamento>(1);
     }
 

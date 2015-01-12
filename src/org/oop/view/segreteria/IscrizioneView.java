@@ -30,6 +30,7 @@ public class IscrizioneView {
 
     /**
      * Imposta i dati dalle iscrizioni
+     *
      * @param iscrizioni ArrayList di oggetti Iscrizione
      */
     public void setIscrizioni(ArrayList<Iscrizione> iscrizioni) {

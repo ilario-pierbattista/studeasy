@@ -6,6 +6,9 @@ import org.oop.model.Libretto;
 import java.util.ArrayList;
 
 
+/**
+ * Classe che descrive un utente del software
+ */
 public class Utente {
 
     private int matricola;
@@ -18,6 +21,7 @@ public class Utente {
     private ArrayList<Iscrizione> iscrizioni;
 
     public Utente() {
+        matricola = 0;
         libretto = new Libretto();
         agenda = new Agenda();
         tasse = new ArrayList<Tassa>(3);

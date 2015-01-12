@@ -2,6 +2,10 @@ package org.oop.model.entities;
 
 import java.time.LocalTime;
 
+
+/**
+ * La classe descrive un'attività.
+ */
 public class Attivita {
     /**
      * Valori assumibili dall'attributo categoria
@@ -24,26 +28,12 @@ public class Attivita {
     private LocalTime oraInizio;
     private LocalTime oraFine;
     private Docente docente;
-    //da decidere se i seguenti attributi saranno o meno stringhe
     private String ruoloDocente;
     private String categoria;
 
-
-    //per il costruttore è stato usato il this per evitare confusione nella lettura del codice dato l'elevato numero di parametri
-    public Attivita(String aula, LocalTime oraInizio, LocalTime oraFine, Docente docente, String ruoloDocente, String categoria) {
-        this.luogo = aula;
-        this.oraInizio = oraInizio;
-        this.oraFine = oraFine;
-        this.docente = docente;
-        this.ruoloDocente = ruoloDocente;
-        this.categoria = categoria;
-    }
-
-
-    //il seguente è il costruttore che inizializza i dati di deafult
     public Attivita() {
+        id = 0;
     }
-
 
     public int getId() {
         return id;

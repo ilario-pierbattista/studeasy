@@ -1,5 +1,9 @@
 package org.oop.model.entities;
 
+
+/**
+ * Classe che rappresenta un docente
+ */
 public class Docente {
 
     private int id;
@@ -7,17 +11,8 @@ public class Docente {
     private String cognome;
     private String email;
 
-
-    public Docente(int id, String nome, String cognome, String email) {
-        this.id = id;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.email = email;
-    }
-
-
-    //il seguente è il costruttore che inizializza i dati di deafult
     public Docente() {
+        id = 0;
     }
 
 

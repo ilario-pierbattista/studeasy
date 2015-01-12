@@ -34,6 +34,7 @@ public class FormRegistrazioneController {
 
     /**
      * Aggiunge i listeners alla vista
+     *
      * @param view Form
      */
     public FormRegistrazioneController(FormRegistrazione view) {

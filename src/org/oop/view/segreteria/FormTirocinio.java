@@ -71,6 +71,7 @@ public class FormTirocinio extends AbstractForm {
 
     /**
      * Imposta le informazioni dell'utente
+     *
      * @param utente Utente corrente
      */
     public void setInfoUtente(Utente utente) {

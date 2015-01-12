@@ -5,7 +5,6 @@ import org.oop.view.profilo.ProfiloView;
 import org.oop.view.segreteria.Segreteria;
 
 import javax.swing.*;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowListener;
 
 

@@ -1,5 +1,11 @@
 package org.oop.model.entities;
 
+
+/**
+ * Rappresenta l'insegnamento offerto dal corso di laurea.
+ *
+ * @see org.oop.model.entities.Insegnamento
+ */
 public class InsegnamentoOfferto {
 
     private int id;
@@ -10,18 +16,8 @@ public class InsegnamentoOfferto {
     private boolean opzionale;
     private Docente docente;
 
-    //il seguente è il costruttore che inizializza i dati di deafult
     public InsegnamentoOfferto() {
-    }
-
-    //i nomi dei parametri sono stati scritti in inglese per evitare di usare il this
-    public InsegnamentoOfferto(String name, int credits, int year, int semester, boolean optional, Docente teacher) {
-        nome = name;
-        cfu = credits;
-        anno = year;
-        semestre = semester;
-        opzionale = optional;
-        docente = teacher;
+        id = 0;
     }
 
     public int getId() {

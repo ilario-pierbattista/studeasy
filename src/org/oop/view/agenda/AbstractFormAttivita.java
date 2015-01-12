@@ -1,7 +1,6 @@
 package org.oop.view.agenda;
 
 import org.oop.model.dao.DocenteDAO;
-import org.oop.model.entities.Attivita;
 import org.oop.model.entities.Ciclo;
 import org.oop.model.entities.Docente;
 import org.oop.model.entities.Insegnamento;

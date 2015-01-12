@@ -8,6 +8,10 @@ import org.oop.model.entities.InsegnamentoOfferto;
 
 import java.util.ArrayList;
 
+
+/**
+ * Rappresenta i dati di un libretto. Fa anche le veci del piano di studi.
+ */
 public class Libretto {
     ArrayList<Insegnamento> insegnamenti;
     private Corso corso;
@@ -31,6 +35,11 @@ public class Libretto {
         return cfu;
     }
 
+    /**
+     * Calcola i cfu previsti in base agli insegnamenti opzionati
+     *
+     * @return Cfu previsti
+     */
     public int calcolaCFUPrevisti() {
         int cfu = 0;
         for (Insegnamento insegnamento : insegnamenti) {
@@ -42,7 +51,7 @@ public class Libretto {
     /**
      * Calcola la media aritmetica dei voti degli esami sostenuti
      *
-     * @return
+     * @return Media aritmetica degli insegnamenti superati
      */
     public double calcolaMediaAritmetica() {
         int count = 0;
@@ -59,7 +68,7 @@ public class Libretto {
     /**
      * Calcola la media ponderata dei voti degli esami sostenuti
      *
-     * @return
+     * @return Media ponderata
      */
     public double calcolaMediaPonderata() {
         int cfu = 0;
@@ -73,6 +82,12 @@ public class Libretto {
         return Utils.round(sommaPesata / cfu, 2);
     }
 
+    /**
+     * Calcola il numero di insegnamenti superati in un anno accademico
+     *
+     * @param annoAccademico Anno accademico
+     * @return Numero di esami superati
+     */
     public int calcolaEsamiSuperatiPerAnnoAccademico(int annoAccademico) {
         int counter = 0;
         for (Insegnamento insegnamento : insegnamenti) {
@@ -83,6 +98,12 @@ public class Libretto {
         return counter;
     }
 
+    /**
+     * Calcola la somma dei CFU conseguiti in uno specifico anno accademico
+     *
+     * @param annoAccademico Anno accademico
+     * @return CFU conseguiti
+     */
     public int calcolaCFUConseguitiPerAnnoAccademico(int annoAccademico) {
         int cfu = 0;
         for (Insegnamento insegnamento : insegnamenti) {
@@ -114,7 +135,7 @@ public class Libretto {
     /**
      * Ritorna solamente gli insegnamenti opzionali
      *
-     * @return
+     * @return Insegnamenti opzionali
      */
     public ArrayList<Insegnamento> getInsegnamentiOpzionali() {
         ArrayList<Insegnamento> opzionali = new ArrayList<Insegnamento>(5);
@@ -129,7 +150,7 @@ public class Libretto {
     /**
      * Ritorna gli insegnamenti obbligatori
      *
-     * @return
+     * @return Insegnamenti obbligatori
      */
     public ArrayList<Insegnamento> getInsegnamentiObbligatori() {
         ArrayList<Insegnamento> obbligatori = new ArrayList<Insegnamento>(15);
@@ -152,17 +173,5 @@ public class Libretto {
             found = insegnamenti.get(i).getInsegnamentoOfferto().getId() == insegnamentoOfferto.getId();
         }
         return found;
-    }
-
-    public Insegnamento findInsegnamentoByInsegnamentoOfferto(InsegnamentoOfferto insegnamentoOfferto) {
-        boolean found = false;
-        Insegnamento insegnamento = null;
-        for (int i = 0; i < insegnamenti.size() && !found; i++) {
-            if (insegnamenti.get(i).getInsegnamentoOfferto().getId() == insegnamentoOfferto.getId()) {
-                found = true;
-                insegnamento = insegnamenti.get(i);
-            }
-        }
-        return insegnamento;
     }
 }

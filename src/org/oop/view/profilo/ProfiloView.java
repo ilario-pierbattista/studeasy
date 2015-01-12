@@ -5,8 +5,8 @@ import org.oop.model.Libretto;
 import org.oop.model.entities.Corso;
 import org.oop.model.entities.Insegnamento;
 import org.oop.model.entities.Utente;
-import org.oop.view.View;
 import org.oop.view.CustomTableModel;
+import org.oop.view.View;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
