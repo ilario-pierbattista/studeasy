@@ -25,8 +25,8 @@ public class DatabaseUtils {
      * delle quali deve essere soddisfatta (vengono legate dall'operatore logico OR).
      * <p/>
      * Esempio: se l'oggetto SQLParameters ha la struttura* <code> "chiave1"->valore1; "chiave2"-> [ valore2_1,
-     * valore2_2 ] </code>, il risultato di sarà della forma: <code>"chiave1 = :chiave1 AND (chiave2_1 = :chiave2_1 OR
-     * chiave2_2 = :valore2_2)"</code> e l'oggetto SQLParameters sarà modificato assumendo una struttura di questo tipo:
+     * valore2_2 ] </code>, il risultato di sarà della forma: <code>"chiave1 = :chiave1 AND (chiave2 = :chiave2_1 OR
+     * chiave2 = :chiave2_2)"</code> e l'oggetto SQLParameters sarà modificato assumendo una struttura di questo tipo:
      * <code>"chiave1"->valore1; "chiave2_1"->valore2_1; "chiave2_2"->valore2_2</code>.
      * <p/>
      * * Consultare SQLParameters per informazioni sulla notazione
