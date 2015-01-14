@@ -8,7 +8,7 @@ Pushare una modifica
     git commit -m "Messaggio sensato"
     git push origin master
 
-Uscire da vim
+Uscire da vim dopo aver scritto un messaggio per il Merge
     :wq
 
 Cancellare la cache di git:
