@@ -62,7 +62,7 @@ public class PdfGenerator {
 
         pdfTemplate.close();
         stamper.close();
-        pdfTemplate.close();
+        fileOutputStream.close();
     }
 
     /**
@@ -97,7 +97,7 @@ public class PdfGenerator {
 
         pdfTemplate.close();
         stamper.close();
-        pdfTemplate.close();
+        fileOutputStream.close();
     }
 
     /**
@@ -134,7 +134,7 @@ public class PdfGenerator {
 
         pdfTemplate.close();
         stamper.close();
-        pdfTemplate.close();
+        fileOutputStream.close();
     }
 
     /**

@@ -40,7 +40,6 @@ public class ImmatricolazioneController {
     class FocusMatricola implements FocusListener {
         @Override
         public void focusGained(FocusEvent e) {
-
         }
 
         @Override

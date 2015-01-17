@@ -135,6 +135,7 @@ public class Corso {
 
         if (livello != corso.livello) return false;
         if (totaleCfu != corso.totaleCfu) return false;
+        //l'operatore "?", se la prima condizione è vera, esegue la prima istruzione, altrimenti la seconda
         if (nome != null ? !nome.equals(corso.nome) : corso.nome != null) return false;
 
         return true;
