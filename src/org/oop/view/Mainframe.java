@@ -7,7 +7,9 @@ import org.oop.view.segreteria.Segreteria;
 import javax.swing.*;
 import java.awt.event.WindowListener;
 
-
+/**
+ * Classe Mainframe
+ */
 public class Mainframe {
     final static JFrame frame = new JFrame("Studeasy");
     public AgendaView agendaView;
